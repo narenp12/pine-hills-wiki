@@ -78,6 +78,7 @@ def gen_season(year, d, all_teams):
     teams = d.get("teams") or []
     draft = d.get("draft") or {}
     weeks = d.get("weeks", {})
+    playoffs = d.get("playoffs", {}) or {}
 
     # post-draft rosters = weeks["1"]["rosters"], end-of = last week with rosters
     post = weeks.get("1", {}).get("rosters", {})
@@ -140,10 +141,59 @@ year: {year}
     except Exception:  # noqa: BLE001
         md += "| _TBD_ | _TBD_ | _TBD_ | 0–0 | 0 | 0 | — |\n"
 
-    md += "\n## Playoff Bracket\n\n```mermaid\nflowchart LR\n"
-    md += "    S1[Seed 1] --> W1\n    S4[Seed 4] --> W1\n"
-    md += "    S2[Seed 2] --> W2\n    S3[Seed 3] --> W2\n"
-    md += "    W1 --> Champ[🏆 Champion]\n    W2 --> Champ\n```\n\n"
+    # ---- Playoff bracket (data-driven from Yahoo matchups) ----
+    po_weeks = playoffs.get("weeks", {}) if isinstance(playoffs, dict) else {}
+    if po_weeks:
+        md += "\n## Playoff Bracket\n\n```mermaid\nflowchart TD\n"
+        # assign node ids per (week, matchup index)
+        winner_nodes = []
+        for wk in sorted(po_weeks, key=int):
+            mus = po_weeks[wk]
+            if not isinstance(mus, list):
+                continue
+            for i, mu in enumerate(mus):
+                teams = mu.get("teams", []) if isinstance(mu, dict) else []
+                nid = f"w{wk}m{i}"
+                labels = []
+                for t in teams:
+                    nm = t.get("name", "Unknown")
+                    sc = t.get("score")
+                    mark = "🏆" if t.get("is_winner") else ""
+                    labels.append(f"{nm} ({sc}) {mark}".strip())
+                node_text = " vs ".join(labels) if labels else f"Matchup {i+1}"
+                md += f"    {nid}[\"{node_text}\"]\n"
+                # track winner for chaining to next round
+                for t in teams:
+                    if t.get("is_winner"):
+                        winner_nodes.append((wk, nid, t.get("name", "Unknown")))
+        # chain winners forward: a winner of week N feeds an implicit next round.
+        # Simple linear chaining: connect each winner node to the next week's first node.
+        prev = None
+        for wk, nid, _ in sorted(set((w, n, nm) for w, n, nm in winner_nodes), key=lambda x: int(x[0])):
+            if prev:
+                md += f"    {prev} --> {nid}\n"
+            prev = nid
+        md += "```\n\n"
+        # Also a plain-text weekly results table (renders even if mermaid is off)
+        md += "### Playoff Results by Week\n\n"
+        for wk in sorted(po_weeks, key=int):
+            mus = po_weeks[wk]
+            if not isinstance(mus, list):
+                continue
+            md += f"**Week {wk}**\n\n| Matchup | Team | Score | Winner |\n|---------|------|-------|--------|\n"
+            for mi, mu in enumerate(mus, 1):
+                teams = mu.get("teams", []) if isinstance(mu, dict) else []
+                for t in teams:
+                    nm = t.get("name", "Unknown")
+                    sc = t.get("score", "—")
+                    w = "✅" if t.get("is_winner") else ""
+                    md += f"| {mi} | {nm} | {sc} | {w} |\n"
+            md += "\n"
+    else:
+        md += "\n## Playoff Bracket\n\n```mermaid\nflowchart LR\n"
+        md += "    S1[Seed 1] --> W1\n    S4[Seed 4] --> W1\n"
+        md += "    S2[Seed 2] --> W2\n    S3[Seed 3] --> W2\n"
+        md += "    W1 --> Champ[🏆 Champion]\n    W2 --> Champ\n```\n\n"
 
     md += "## Team Rosters\n\n"
     md += "| Team | Post-Draft Roster | End-of-Season Roster |\n|------|-------------------|----------------------|\n"

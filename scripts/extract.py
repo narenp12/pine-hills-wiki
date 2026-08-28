@@ -26,7 +26,7 @@ CONTENT = ROOT / "content"
 ENV_FILE = ROOT / ".env"
 
 # ---- league config (edit these) -----------------------------------------
-LEAGUE_ID = os.getenv("YAHOO_LEAGUE_ID", "YOUR_LEAGUE_ID")
+LEAGUE_ID = os.getenv("YAHOO_LEAGUE_ID", "447010")
 GAME_CODE = "nfl"
 # Yahoo "game id" per season. NFL game ids are stable per year; the query
 # helper can resolve them, but providing the CURRENT season's game_id lets
@@ -101,7 +101,65 @@ def extract_season(q, season):
                 break
         data["weeks"][str(week)] = wk
 
+    # ---- Playoffs: pull matchups for the typical playoff window (weeks 14-17) ----
+    # Each matchup carries teams, scores, and the winner — enough to draw a real bracket.
+    data["playoffs"] = {"weeks": {}}
+    for week in range(14, 18):
+        m = _serialize(safe(q.get_league_matchups_by_week, gk, week))
+        if m:
+            # normalize to a list of matchups, each with two teams + scores + winner
+            matchups = _extract_matchups(m)
+            if matchups:
+                data["playoffs"]["weeks"][str(week)] = matchups
+
     return data
+
+
+def _extract_matchups(m):
+    """Normalize a yfpy matchups response (any shape) into a list of:
+    {'teams': [{'name', 'score', 'is_winner'}, ...]}.
+    Returns [] if nothing parseable."""
+    out = []
+    # navigate common nesting
+    if isinstance(m, dict):
+        for key in ("matchups", "matchup", "games", "game"):
+            if key in m and isinstance(m[key], (list, dict)):
+                m = m[key]
+                break
+    if isinstance(m, dict):
+        # maybe a single matchup
+        m = [m]
+    if not isinstance(m, list):
+        return out
+    for mu in m:
+        if not isinstance(mu, dict):
+            continue
+        teams = mu.get("teams", mu.get("team", []))
+        if isinstance(teams, dict):
+            teams = [teams]
+        if not isinstance(teams, list):
+            continue
+        row = {"teams": []}
+        for t in teams:
+            if not isinstance(t, dict):
+                continue
+            name = t.get("name", t.get("team_name", t.get("team_key", "Unknown")))
+            # score may be nested under 'team_points' or 'points'
+            score = None
+            if "team_points" in t:
+                tp = t["team_points"]
+                score = tp.get("total") if isinstance(tp, dict) else tp
+            score = t.get("points", t.get("score", score))
+            row["teams"].append(
+                {
+                    "name": name,
+                    "score": score,
+                    "is_winner": bool(t.get("is_winner", t.get("winner", False))),
+                }
+            )
+        if row["teams"]:
+            out.append(row)
+    return out
 
 
 def _team_list(teams):
