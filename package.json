@@ -6,10 +6,10 @@
   "type": "module",
   "author": "Pine Hills FF League",
   "license": "MIT",
-  "homepage": "https://github.com/yourusername/pine-hills-wiki",
+  "homepage": "https://github.com/narenp12/pine-hills-wiki",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/pine-hills-wiki.git"
+    "url": "https://github.com/narenp12/pine-hills-wiki.git"
   },
   "scripts": {
     "quartz": "./quartz/bootstrap-cli.mjs",

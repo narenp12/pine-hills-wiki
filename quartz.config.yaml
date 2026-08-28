@@ -6,9 +6,7 @@ configuration:
   enablePopovers: true
   analytics: null
   locale: en-US
-  baseUrl: yourusername.github.io
-  # If your repo is published at github.com/user/repo, set baseUrl: yourusername.github.io
-  # and the site will be served from /repo/. Update basePath below accordingly.
+  baseUrl: narenp12.github.io
   basePath: /pine-hills-wiki
   ignorePatterns:
     - private
@@ -169,7 +167,7 @@ plugins:
     enabled: true
     options:
       links:
-        GitHub: https://github.com/yourusername/pine-hills-wiki
+        GitHub: https://github.com/narenp12/pine-hills-wiki
         "Yahoo League": https://football.fantasysports.yahoo.com/f1/LEAGUE_ID
     layout:
       position: footer
