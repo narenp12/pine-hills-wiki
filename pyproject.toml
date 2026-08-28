@@ -1,0 +1,14 @@
+[project]
+name = "pine-hills-wiki"
+version = "1.0.0"
+description = "Wikipedia-style history of the Pine Hills fantasy football league (Quartz + GitHub Pages)"
+requires-python = ">=3.11"
+# NOTE: yfpy is the *original* extraction path but requires a Yahoo developer API
+# key, which was denied. The working path is Fantasy Helper (fantasyhelper.net) —
+# a FREE, no-key export of Yahoo league data (Teams/Matchups/Transactions/Rosters)
+# as CSV/JSON. The adapter scripts/import_export.py maps those exports into the
+# canonical raw/<year>.json that scripts/generate.py consumes. No third-party
+# Python deps are needed for the working path (stdlib only).
+dependencies = [
+    "yfpy>=1.2.0",
+]
