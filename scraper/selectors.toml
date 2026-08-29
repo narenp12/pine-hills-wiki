@@ -1,0 +1,64 @@
+# Selector configuration for the Pine Hills FF Yahoo scraper.
+#
+# These are STARTING GUESSES. Yahoo's DOM is JS-rendered and I can't see it
+# from here, so the first real run with --dump will write the actual HTML and
+# we tune these against the real markup. Edit freely; no recompile needed
+# (the binary reads this file at runtime).
+#
+# Each entry is a CSS selector. Selectors are tried in order; the first that
+# matches is used. Leave a value empty ("") to disable that extraction.
+
+[league]
+# The base URL template. {id} = league id, {season} = year.
+url_template = "https://football.fantasysports.yahoo.com/f1/{id}/{season}"
+
+# If past seasons are split into separate league ids (history NOT linked in
+# Yahoo Settings), list them here keyed by season. Leave empty to use the
+# single `id` for all seasons.
+# 2016 = "123456"
+# 2017 = "234567"
+
+[standings]
+# Final standings table.
+table = "table.table-data, table.Standings, div.standings table"
+# Column header -> our canonical field (matched case-insensitively).
+team_col   = "team, name, teamname"
+owner_col  = "manager, owner"
+wins_col   = "wins, w"
+losses_col = "losses, l"
+pf_col     = "points for, pf, pointsfor"
+pa_col     = "points against, pa"
+rank_col   = "rank, finish"
+
+[draft]
+table    = "table#draft, table.Draft, table.draftresults"
+pick_col = "pick, overall"
+round_col = "round, rd"
+team_col = "team, name"
+player_col = "player, name"
+pos_col  = "position, pos"
+
+[matchups]
+# Weekly matchups (used for playoff bracket, weeks >= playoff_week).
+table = "table#matchups, table.Matchups, table.matchups, div.matchups table"
+week_col = "week, wk"
+team_col = "team, teamname"
+opp_col  = "opponent, team2"
+score_col = "points, pf, score"
+opp_score_col = "opponent points, opp points, points2"
+win_col = "result, win"
+
+[roster]
+# Per-week roster snapshot. Post-draft = week 1; end-of-season = final week.
+table = "table#rosters, table.Roster, table.roster, div.roster table"
+week_col = "week, wk"
+team_col = "team, teamname"
+player_col = "player, name"
+pos_col = "position, pos"
+
+[opts]
+# Weeks at/after this are treated as playoff weeks.
+playoff_week = 14
+# Final week to pull for end-of-season roster (Yahoo FF regular season = 14,
+# but playoff leagues run to 16-18). We take the highest week present.
+final_week = 18
