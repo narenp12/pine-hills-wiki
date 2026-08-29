@@ -28,6 +28,41 @@ use crate::Cli;
 const CONNECT_TIMEOUT: Duration = Duration::from_secs(30);
 const PAGE_TIMEOUT: Duration = Duration::from_secs(60);
 
+/// Resolve a Chrome CDP endpoint to its WebSocket debugger URL.
+///
+/// Accepts either a `ws://`/`wss://` URL directly, or the HTTP debugger
+/// endpoint (e.g. `http://127.0.0.1:9222`) — for the HTTP form we fetch
+/// `/json/version` and read `webSocketDebuggerUrl`, which is what
+/// `chromiumoxide::Browser::connect` actually requires.
+async fn resolve_ws_endpoint(endpoint: &str) -> Result<String> {
+    if endpoint.starts_with("ws://") || endpoint.starts_with("wss://") {
+        return Ok(endpoint.to_string());
+    }
+    let base = endpoint.trim_end_matches('/');
+    let version_url = format!("{base}/json/version");
+    let client = reqwest::Client::builder()
+        .timeout(CONNECT_TIMEOUT)
+        .build()
+        .context("failed to build HTTP client for CDP endpoint resolution")?;
+    let resp = client
+        .get(&version_url)
+        .send()
+        .await
+        .map_err(|e| anyhow::anyhow!("could not reach Chrome HTTP debugger at {version_url}: {e}"))?;
+    let v: serde_json::Value = resp
+        .json()
+        .await
+        .map_err(|e| anyhow::anyhow!("invalid /json/version response from Chrome: {e}"))?;
+    v.get("webSocketDebuggerUrl")
+        .and_then(|s| s.as_str())
+        .map(|s| s.to_string())
+        .ok_or_else(|| {
+            anyhow::anyhow!(
+                "/json/version did not contain webSocketDebuggerUrl — is --remote-debugging-port set on this Chrome?"
+            )
+        })
+}
+
 /// Launch or connect to a browser and return a handle to drive pages.
 ///
 /// The CDP event-loop handler is spawned in a task. A non-fatal handler error
@@ -37,14 +72,18 @@ const PAGE_TIMEOUT: Duration = Duration::from_secs(60);
 pub async fn connect_browser(cli: &Cli) -> Result<Browser> {
     // Mode 1: attach to an already-running Chrome via CDP.
     if let Some(endpoint) = &cli.connect {
-        println!(">> connecting to Chrome at {endpoint}");
+        // chromiumoxide::Browser::connect needs the WebSocket debugger URL
+        // (ws://...). The user may pass either that or the plain HTTP debugger
+        // endpoint (http://127.0.0.1:9222); resolve the latter via /json/version.
+        let ws = resolve_ws_endpoint(endpoint).await?;
+        println!(">> connecting to Chrome at {ws}");
         let (browser, handler) = tokio::time::timeout(
             CONNECT_TIMEOUT,
-            Browser::connect(endpoint.clone()),
+            Browser::connect(ws),
         )
         .await
-        .map_err(|_| anyhow::anyhow!("timed out connecting to Chrome at {endpoint} after {CONNECT_TIMEOUT:?}"))?
-        .map_err(|e| anyhow::anyhow!("failed to connect to Chrome at {endpoint}: {e}"))?;
+        .map_err(|_| anyhow::anyhow!("timed out connecting to Chrome after {CONNECT_TIMEOUT:?}"))?
+        .map_err(|e| anyhow::anyhow!("failed to connect to Chrome: {e}"))?;
         spawn_handler(handler);
         return Ok(browser);
     }
