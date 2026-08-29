@@ -8,30 +8,44 @@
 //!
 //! If neither is given we launch a fresh ephemeral Chromium (you'd need to log
 //! in interactively the first time; not recommended for Yahoo).
+//!
+//! Resource hygiene: every page opened by `fetch_page` is closed before it
+//! returns, and `connect_browser` is always paired with `close` via a `finally`
+//! guard in `main`, so neither Chrome tabs nor the browser process leak.
 
 use anyhow::{Context, Result};
 use chromiumoxide::browser::{Browser, BrowserConfig};
+use chromiumoxide::Page;
 use futures::StreamExt;
 use std::path::PathBuf;
 use std::time::Duration;
 
 use crate::Cli;
 
+/// Hard ceiling for connecting/launching and for individual page fetches, so a
+/// missing Chrome binary or a closed debug port fails fast instead of hanging
+/// the whole run forever.
+const CONNECT_TIMEOUT: Duration = Duration::from_secs(30);
+const PAGE_TIMEOUT: Duration = Duration::from_secs(60);
+
 /// Launch or connect to a browser and return a handle to drive pages.
+///
+/// The CDP event-loop handler is spawned in a task. A non-fatal handler error
+/// (e.g. an `UnknownError` for a single command) is logged and skipped with
+/// `continue` — breaking out would kill the browser's event loop and make every
+/// subsequent CDP call (new_page/content/close) hang.
 pub async fn connect_browser(cli: &Cli) -> Result<Browser> {
     // Mode 1: attach to an already-running Chrome via CDP.
     if let Some(endpoint) = &cli.connect {
         println!(">> connecting to Chrome at {endpoint}");
-        let (browser, mut handler) = Browser::connect(endpoint.clone())
-            .await
-            .map_err(|e| anyhow::anyhow!("failed to connect to Chrome at {endpoint}: {e}"))?;
-        tokio::spawn(async move {
-            while let Some(h) = handler.next().await {
-                if h.is_err() {
-                    break;
-                }
-            }
-        });
+        let (browser, handler) = tokio::time::timeout(
+            CONNECT_TIMEOUT,
+            Browser::connect(endpoint.clone()),
+        )
+        .await
+        .map_err(|_| anyhow::anyhow!("timed out connecting to Chrome at {endpoint} after {CONNECT_TIMEOUT:?}"))?
+        .map_err(|e| anyhow::anyhow!("failed to connect to Chrome at {endpoint}: {e}"))?;
+        spawn_handler(handler);
         return Ok(browser);
     }
 
@@ -49,21 +63,40 @@ pub async fn connect_browser(cli: &Cli) -> Result<Browser> {
         builder = builder.no_sandbox(); // typical for automation on Linux/macOS
     }
 
-    println!(">> launching Chromium (persistent session: {})", cli.user_data_dir.is_some());
-    let (browser, mut handler) = Browser::launch(builder.build().map_err(|e| anyhow::anyhow!(e))?)
-        .await
-        .context("failed to launch Chromium")?;
-    tokio::spawn(async move {
-        while let Some(h) = handler.next().await {
-            if h.is_err() {
-                break;
-            }
-        }
-    });
+    println!(
+        ">> launching Chromium (persistent session: {})",
+        cli.user_data_dir.is_some()
+    );
+    let (browser, handler) = tokio::time::timeout(
+        CONNECT_TIMEOUT,
+        Browser::launch(builder.build().map_err(|e| anyhow::anyhow!(e))?),
+    )
+    .await
+    .map_err(|_| {
+        anyhow::anyhow!("timed out launching Chromium after {CONNECT_TIMEOUT:?}; is the Chrome binary present?")
+    })?
+    .context("failed to launch Chromium")?;
+    spawn_handler(handler);
     Ok(browser)
 }
 
+/// Drive the CDP event-loop handler to completion; tolerate non-fatal errors.
+fn spawn_handler(mut handler: chromiumoxide::Handler) {
+    tokio::spawn(async move {
+        while let Some(event) = handler.next().await {
+            if let Err(e) = event {
+                eprintln!("   (cdp handler) non-fatal error: {e}");
+                // Continue: a single bad event must not kill the event loop,
+                // or every later CDP command would hang.
+            }
+        }
+    });
+}
+
 /// Open a page, navigate, wait for JS render, return the rendered HTML.
+///
+/// The page is explicitly closed before returning so tabs don't accumulate
+/// across the (up to 40) dataset/season fetches.
 pub async fn fetch_page(
     browser: &Browser,
     url: &str,
@@ -75,7 +108,9 @@ pub async fn fetch_page(
     // can hang. Instead let the page settle, then poll until the rendered
     // body has actual content (Yahoo is JS-heavy, so the initial HTML shell
     // is near-empty until scripts run).
-    let page = browser.new_page(url).await?;
+    let page = tokio::time::timeout(PAGE_TIMEOUT, browser.new_page(url))
+        .await
+        .map_err(|_| anyhow::anyhow!("timed out opening {url} after {PAGE_TIMEOUT:?}"))??;
     let html = wait_for_content(&page).await?;
 
     if let Some(dir) = dump {
@@ -84,12 +119,16 @@ pub async fn fetch_page(
         std::fs::write(&path, &html)?;
         println!("   dumped -> {}", path.display());
     }
+
+    // Close the tab now so we don't leak it; ignore a close error (the content
+    // we need is already captured).
+    let _ = tokio::time::timeout(PAGE_TIMEOUT, page.close()).await;
     Ok(html)
 }
 
 /// Poll the page until its serialized HTML is non-trivial (JS has rendered),
 /// with a hard timeout so we never hang forever on a blank/blocked page.
-async fn wait_for_content(page: &chromiumoxide::Page) -> Result<String> {
+async fn wait_for_content(page: &Page) -> Result<String> {
     let deadline = tokio::time::Instant::now() + Duration::from_secs(30);
     loop {
         let html = page.content().await?;
@@ -102,7 +141,7 @@ async fn wait_for_content(page: &chromiumoxide::Page) -> Result<String> {
     }
 }
 
-/// Convenience: close the browser (needs &mut).
+/// Convenience: close the browser (needs &mut). Safe to call once.
 pub async fn close(browser: &mut Browser) -> Result<()> {
     browser.close().await?;
     Ok(())

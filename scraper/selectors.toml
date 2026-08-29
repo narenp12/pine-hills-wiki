@@ -50,11 +50,17 @@ win_col = "result, win"
 
 [roster]
 # Per-week roster snapshot. Post-draft = week 1; end-of-season = final week.
+# NOTE: Yahoo's /rosters page is a week-DROPDOWN (the rendered table has NO
+# `week` column) — when no week column is detected, extract_rosters buckets
+# every row under `final_week` (see [opts]). To get a real post-draft snapshot,
+# either point the roster URL at a draft-week view (when history is linked) or
+# supply a week-labeled roster export. The generator reads weeks["1"] and the
+# highest non-empty week for the two snapshots.
 table = "table#rosters, table.Roster, table.roster, div.roster table"
 week_col = "week, wk"
 team_col = "team, teamname"
 player_col = "player, name"
-pos_col = "position, pos"
+pos_col  = "position, pos"
 
 [opts]
 # Weeks at/after this are treated as playoff weeks.

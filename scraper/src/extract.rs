@@ -16,12 +16,22 @@ fn norm(s: &str) -> String {
     s.trim().to_lowercase().replace([' ', '-'], "_")
 }
 
-/// Try each candidate CSS selector until one matches a table.
+/// Try each candidate CSS selector, then return the matching table with the
+/// MOST body rows. Yahoo pages often contain small legend/summary tables that
+/// also match a loose selector; the real data table is the one with rows.
 fn find_table<'a>(document: &'a Html, candidates: &[String]) -> Option<scraper::ElementRef<'a>> {
-    candidates.iter().find_map(|sel| {
-        let s = Selector::parse(sel).ok()?;
-        document.select(&s).next()
-    })
+    let mut best: Option<(usize, scraper::ElementRef<'a>)> = None;
+    for sel in candidates {
+        if let Ok(s) = Selector::parse(sel) {
+            for table in document.select(&s) {
+                let n = table.select(&Selector::parse("tbody tr, tr").unwrap()).count();
+                if best.as_ref().map(|(c, _)| n > *c).unwrap_or(true) {
+                    best = Some((n, table));
+                }
+            }
+        }
+    }
+    best.map(|(_, t)| t)
 }
 
 /// Map header text -> canonical field, given the candidate column lists.
@@ -65,10 +75,32 @@ fn cells(row: &scraper::ElementRef) -> Vec<String> {
 }
 
 fn parse_f64(v: &str) -> f64 {
-    v.replace(',', "").parse().unwrap_or(0.0)
+    let v = v.trim();
+    if v.is_empty() {
+        return 0.0;
+    }
+    match v.replace(',', "").parse() {
+        Ok(n) => n,
+        Err(_) => {
+            // Non-numeric cell (e.g. "—", "TBD", "—"). Coercing to 0 silently
+            // corrupts the data, so warn instead of failing silently.
+            eprintln!("   ! non-numeric score cell {v:?}, defaulting to 0.0");
+            0.0
+        }
+    }
 }
 fn parse_i64(v: &str) -> i64 {
-    v.replace(',', "").parse().unwrap_or(0)
+    let v = v.trim();
+    if v.is_empty() {
+        return 0;
+    }
+    match v.replace(',', "").parse() {
+        Ok(n) => n,
+        Err(_) => {
+            eprintln!("   ! non-numeric integer cell {v:?}, defaulting to 0");
+            0
+        }
+    }
 }
 fn parse_bool(v: &str) -> bool {
     let s = v.trim().to_lowercase();
@@ -208,7 +240,19 @@ pub fn extract_matchups(html: &str, cfg: &TableCfg, playoff_week: u32) -> BTreeM
 }
 
 /// Extract per-week rosters from HTML -> week -> team -> players.
-pub fn extract_rosters(html: &str, cfg: &TableCfg) -> BTreeMap<String, BTreeMap<String, Roster>> {
+///
+/// `final_week` is used as the fallback week label. Yahoo's /rosters page is a
+/// week-dropdown (the displayed table has no `week` column), so when we can't
+/// detect a week column every row is bucketed under `final_week` (the
+/// end-of-season snapshot). The post-draft snapshot is taken from `weeks["1"]`
+/// by the generator, which requires a week-labeled roster source or a separate
+/// draft-day roster page — callers should prefer a week-scoped roster URL when
+/// Yahoo history is linked.
+pub fn extract_rosters(
+    html: &str,
+    cfg: &TableCfg,
+    final_week: u32,
+) -> BTreeMap<String, BTreeMap<String, Roster>> {
     let doc = Html::parse_document(html);
     let table = match find_table(&doc, &cfg.table.split(',').map(|s| s.trim().to_string()).collect::<Vec<_>>()) {
         Some(t) => t,
@@ -223,16 +267,18 @@ pub fn extract_rosters(html: &str, cfg: &TableCfg) -> BTreeMap<String, BTreeMap<
     }
     let headers = cells(&rows[0]);
     let hmap = header_map(&headers, cfg);
+    let has_week_col = hmap.iter().any(|h| h.as_deref() == Some("week"));
+    let fallback_week = final_week.to_string();
     let mut out: BTreeMap<String, BTreeMap<String, Roster>> = BTreeMap::new();
     for r in &rows[1..] {
         let c = cells(r);
         let get = |field: &str| -> String {
             hmap.iter().position(|h| h.as_deref() == Some(field)).and_then(|i| c.get(i)).cloned().unwrap_or_default()
         };
-        let week = get("week");
+        let week = if has_week_col { get("week") } else { fallback_week.clone() };
         let team = get("team");
         let player = get("player");
-        if week.is_empty() || team.is_empty() || player.is_empty() {
+        if team.is_empty() || player.is_empty() {
             continue;
         }
         out.entry(week)
@@ -252,7 +298,7 @@ pub fn self_test(fixture: &std::path::Path, sel: &crate::selectors::Selectors) -
     let teams = extract_standings(&html, &sel.standings);
     let picks = extract_draft(&html, &sel.draft);
     let mus = extract_matchups(&html, &sel.matchups, sel.opts.playoff_week);
-    let ros = extract_rosters(&html, &sel.roster);
+    let ros = extract_rosters(&html, &sel.roster, sel.opts.final_week);
     println!("self-test on {}:", fixture.display());
     println!("  standings rows : {}", teams.len());
     println!("  draft picks    : {}", picks.len());
