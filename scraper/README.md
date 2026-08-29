@@ -33,6 +33,16 @@ Quit Chrome, then relaunch it from Terminal with the debug port:
   --user-data-dir=$HOME/.phf-chrome
 ```
 
+**Option A2 — Microsoft Edge (Chromium-based, same DevTools Protocol; already
+installed on this machine).** Log into Yahoo in Edge, then relaunch with the
+debug port:
+
+```bash
+/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge \
+  --remote-debugging-port=9222 \
+  --user-data-dir=$HOME/.phf-edge
+```
+
 **Option B — Playwright's Chromium (managed, headless-capable).**
 The browser is *not* installed by default. Install it, then launch the binary:
 
@@ -42,9 +52,9 @@ CHROME=$(ls -d ~/Library/Caches/ms-playwright/chromium-*/chrome-mac/ChromeForTes
 "$CHROME" --remote-debugging-port=9222 --user-data-dir=$HOME/.phf-chrome
 ```
 
-Either way, a Chrome window opens. Go to
+Either way, a Chrome/Edge window opens. Go to
 `https://football.fantasysports.yahoo.com/f1/447010` and **log in**. Keep that
-Chrome running for the whole scrape — the scraper drives it over port 9222,
+browser running for the whole scrape — the scraper drives it over port 9222,
 which is how it reuses your session.
 
 > Linux path for Option B: `chromium-*/chrome-linux/chrome`.

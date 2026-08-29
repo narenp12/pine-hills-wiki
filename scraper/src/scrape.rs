@@ -152,6 +152,22 @@ pub async fn fetch_page(
         .map_err(|_| anyhow::anyhow!("timed out opening {url} after {PAGE_TIMEOUT:?}"))??;
     let html = wait_for_content(&page).await?;
 
+    if is_login_wall(&html) {
+        // Don't silently dump a login page and write empty data. Bail loudly so
+        // the user knows to log into Yahoo in this browser profile first.
+        if let Some(dir) = dump {
+            std::fs::create_dir_all(dir)?;
+            let path = dir.join(format!("{tag}.html"));
+            std::fs::write(&path, &html)?;
+            println!("   dumped -> {}", path.display());
+        }
+        let _ = tokio::time::timeout(PAGE_TIMEOUT, page.close()).await;
+        anyhow::bail!(
+            "login wall at {url}: the page is Yahoo's sign-in page, not league data. \
+             Log into Yahoo in this browser profile, then re-run the scraper."
+        );
+    }
+
     if let Some(dir) = dump {
         std::fs::create_dir_all(dir)?;
         let path = dir.join(format!("{tag}.html"));
@@ -163,6 +179,17 @@ pub async fn fetch_page(
     // we need is already captured).
     let _ = tokio::time::timeout(PAGE_TIMEOUT, page.close()).await;
     Ok(html)
+}
+
+/// Heuristic: did we get Yahoo's sign-in page instead of league content?
+/// Yahoo serves a tiny auth shell with a "<title>Login - Sign in to Yahoo</title>"
+/// and a login form when the session cookie is missing/expired.
+fn is_login_wall(html: &str) -> bool {
+    let lower = html.to_lowercase();
+    lower.contains("<title>login - sign in to yahoo")
+        || (lower.contains("sign in to yahoo") && lower.contains("login"))
+        || lower.contains("guce.yahoo.com")
+        || lower.contains("consent.yahoo.com")
 }
 
 /// Poll the page until its serialized HTML is non-trivial (JS has rendered),
