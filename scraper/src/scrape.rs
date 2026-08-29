@@ -1,11 +1,10 @@
 //! Browser connection + page fetching over the Chrome DevTools Protocol.
 //!
 //! Two modes (both reuse YOUR logged-in session — no Yahoo key, no 2FA toggle):
-//!   * --user-data-dir <path>  : launch Chrome with a persistent profile dir.
-//!   * --connect <url>          : attach to a Chrome you started with
-//!                               --remote-debugging-port=9222 (recommended:
-//!                               you log in once in that Chrome, then point the
-//!                               scraper at it).
+//! * `--user-data-dir <path>`: launch Chrome with a persistent profile dir.
+//! * `--connect <url>`: attach to a Chrome you started with
+//!   `--remote-debugging-port=9222` (recommended: you log in once in that
+//!   Chrome, then point the scraper at it).
 //!
 //! If neither is given we launch a fresh ephemeral Chromium (you'd need to log
 //! in interactively the first time; not recommended for Yahoo).
@@ -71,12 +70,13 @@ pub async fn fetch_page(
     dump: &Option<PathBuf>,
     tag: &str,
 ) -> Result<String> {
+    // `new_page(url)` already performs the initial navigation, so calling
+    // `wait_for_navigation()` afterwards races an already-completed load and
+    // can hang. Instead let the page settle, then poll until the rendered
+    // body has actual content (Yahoo is JS-heavy, so the initial HTML shell
+    // is near-empty until scripts run).
     let page = browser.new_page(url).await?;
-    // Yahoo is JS-heavy; wait for navigation + a render delay.
-    let _ = page.wait_for_navigation().await;
-    tokio::time::sleep(Duration::from_secs(3)).await;
-
-    let html = page.content().await?;
+    let html = wait_for_content(&page).await?;
 
     if let Some(dir) = dump {
         std::fs::create_dir_all(dir)?;
@@ -85,6 +85,21 @@ pub async fn fetch_page(
         println!("   dumped -> {}", path.display());
     }
     Ok(html)
+}
+
+/// Poll the page until its serialized HTML is non-trivial (JS has rendered),
+/// with a hard timeout so we never hang forever on a blank/blocked page.
+async fn wait_for_content(page: &chromiumoxide::Page) -> Result<String> {
+    let deadline = tokio::time::Instant::now() + Duration::from_secs(30);
+    loop {
+        let html = page.content().await?;
+        // A real Yahoo page has a <body> with substantial markup; the pre-render
+        // shell is tiny. 4000 bytes is a safe floor for "something rendered".
+        if html.len() > 4000 || tokio::time::Instant::now() >= deadline {
+            return Ok(html);
+        }
+        tokio::time::sleep(Duration::from_millis(500)).await;
+    }
 }
 
 /// Convenience: close the browser (needs &mut).

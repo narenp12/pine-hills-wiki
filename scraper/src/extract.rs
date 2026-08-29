@@ -18,14 +18,10 @@ fn norm(s: &str) -> String {
 
 /// Try each candidate CSS selector until one matches a table.
 fn find_table<'a>(document: &'a Html, candidates: &[String]) -> Option<scraper::ElementRef<'a>> {
-    for sel in candidates {
-        if let Ok(s) = Selector::parse(sel) {
-            if let Some(el) = document.select(&s).next() {
-                return Some(el);
-            }
-        }
-    }
-    None
+    candidates.iter().find_map(|sel| {
+        let s = Selector::parse(sel).ok()?;
+        document.select(&s).next()
+    })
 }
 
 /// Map header text -> canonical field, given the candidate column lists.

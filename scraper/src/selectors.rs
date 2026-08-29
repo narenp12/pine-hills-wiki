@@ -55,6 +55,7 @@ pub struct OptsCfg {
     #[serde(default = "default_playoff_week")]
     pub playoff_week: u32,
     #[serde(default = "default_final_week")]
+    #[allow(dead_code)] // reserved: end-of-season roster week once real /rosters page is validated
     pub final_week: u32,
 }
 
@@ -75,16 +76,6 @@ pub struct Selectors {
     pub roster: TableCfg,
     #[serde(default)]
     pub opts: OptsCfg,
-}
-
-impl Selectors {
-    /// Split a comma-separated selector list into candidate selectors.
-    pub fn table_selectors(&self, raw: &str) -> Vec<String> {
-        raw.split(',')
-            .map(|s| s.trim().to_string())
-            .filter(|s| !s.is_empty())
-            .collect()
-    }
 }
 
 pub fn load(path: &Path) -> Result<Selectors> {
