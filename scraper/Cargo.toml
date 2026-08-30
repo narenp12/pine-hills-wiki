@@ -18,6 +18,10 @@ futures = "0.3"
 # Serialization for the canonical model + emit.
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+# Structured logging (replaces ad-hoc eprintln! warnings). `-v`/RUST_LOG gives
+# verbosity control; warnings stay distinct from stdout progress output.
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # Ergonomic errors + CLI parsing.
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }

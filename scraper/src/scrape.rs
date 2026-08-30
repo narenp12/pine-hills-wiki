@@ -19,6 +19,7 @@ use chromiumoxide::browser::{Browser, BrowserConfig};
 use futures::StreamExt;
 use std::path::PathBuf;
 use std::time::Duration;
+use tracing::warn;
 
 use crate::Cli;
 
@@ -123,7 +124,7 @@ fn spawn_handler(mut handler: chromiumoxide::Handler) {
     tokio::spawn(async move {
         while let Some(event) = handler.next().await {
             if let Err(e) = event {
-                eprintln!("   (cdp handler) non-fatal error: {e}");
+                warn!(error = %e, "non-fatal CDP handler error");
                 // Continue: a single bad event must not kill the event loop,
                 // or every later CDP command would hang.
             }

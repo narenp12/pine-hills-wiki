@@ -22,8 +22,11 @@ pub struct Cli {
     #[arg(long, default_value = "447010")]
     pub league_id: String,
 
-    /// Seasons to scrape, e.g. 2016,2017,2024 or 2016-2025.
-    #[arg(long, default_value = "2016-2025")]
+    /// Seasons to scrape, e.g. 2018,2019,2024 or 2018-2025.
+    /// Default is every season this league actually has (2018-2025); seasons
+    /// 2016/2017 never existed for this league, so the default omits them to
+    /// avoid fetching dead URLs.
+    #[arg(long, default_value = "2018-2025")]
     pub seasons: String,
 
     /// Where to write raw/<year>.json (default repo root raw/).
@@ -58,21 +61,38 @@ pub struct Cli {
     #[arg(long)]
     pub self_test: Option<PathBuf>,
 
+    /// Verbose: emit parser warnings/diagnostics (selector misses, non-numeric
+    /// cells). Off by default so clean progress output isn't cluttered. Env
+    /// override: RUST_LOG=warn also works.
+    #[arg(short, long)]
+    pub verbose: bool,
+
     /// Build raw/<year>.json from existing `capture_season.py` innerText dumps in
     /// this directory (no browser needed). Files: <dir>/<year>-<league>-<view>.innerText.txt
     #[arg(long)]
     pub from_dump: Option<PathBuf>,
 
-    /// Which datasets to extract.
+    /// Which datasets to extract. Standings+Draft are proven; Matchups+Roster are
+    /// EXPERIMENTAL (unvalidated SPA selectors — may yield empty/mis-attributed data).
     #[arg(long, value_enum, default_values_t = vec![Dataset::Standings, Dataset::Draft, Dataset::Matchups, Dataset::Roster])]
     pub datasets: Vec<Dataset>,
 }
 
 /// Dataset selection (CLI-facing).
+///
+/// `Standings` and `Draft` are the proven, fully-tested surfaces (validated
+/// against real captures). `Matchups` and `Roster` are EXPERIMENTAL: their
+/// Yahoo pages are SPA-routed (only reachable by in-app nav clicks, not direct
+/// URLs) and their selectors are unvalidated guesses, so they may emit empty or
+/// mis-attributed data. Prefer `--from-dump` with the `capture_season.py` innerText
+/// captures for anything you intend to publish.
 #[derive(Copy, Clone, PartialEq, Eq, ValueEnum)]
 pub enum Dataset {
     Standings,
     Draft,
+    /// EXPERIMENTAL — SPA-only page, unvalidated selectors. May produce empty data.
     Matchups,
+    /// EXPERIMENTAL — /rosters is a week-dropdown with no week column; every row
+    /// buckets under `final_week` and is not a real per-week snapshot.
     Roster,
 }

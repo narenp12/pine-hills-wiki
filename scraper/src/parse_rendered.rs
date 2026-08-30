@@ -139,7 +139,11 @@ fn parse_standings_row(line: &str, league_id: &str) -> Option<Team> {
 
 /// Strip the Unicode control / private-use characters Yahoo injects into rendered
 /// team names (bidi marks, and the `\u{e0xx}` private-use glyphs used for icons).
-fn clean_name(s: &str) -> String {
+///
+/// Public so the HTML-based `extract` path can reuse the exact same sanitizer as
+/// the innerText parser — otherwise the two surfaces drift and the wiki renders
+/// mojibake from one but not the other.
+pub fn clean_name(s: &str) -> String {
     s.trim()
         .chars()
         .filter(|c| {

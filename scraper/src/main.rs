@@ -71,6 +71,22 @@ fn build_from_dump(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors)
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
+    // Structured logging: only emit warnings/diagnostics when -v is passed (or
+    // RUST_LOG is set). Keeps the default run's progress output clean.
+    let env = tracing_subscriber::EnvFilter::try_from_default_env()
+        .unwrap_or_else(|_| {
+            if cli.verbose {
+                tracing_subscriber::EnvFilter::new("warn")
+            } else {
+                tracing_subscriber::EnvFilter::new("off")
+            }
+        });
+    tracing_subscriber::fmt()
+        .with_writer(std::io::stderr)
+        .with_env_filter(env)
+        .with_target(false)
+        .init();
+
     let sel = selectors::load(&cli.selectors)?;
 
     // Offline parser validation (no Yahoo, no browser).

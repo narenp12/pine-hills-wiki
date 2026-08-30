@@ -8,8 +8,10 @@
 use anyhow::Result;
 use scraper::{Html, Selector};
 use std::collections::BTreeMap;
+use tracing::warn;
 
 use crate::model::*;
+use crate::parse_rendered::clean_name;
 use crate::selectors::TableCfg;
 
 fn norm(s: &str) -> String {
@@ -19,6 +21,9 @@ fn norm(s: &str) -> String {
 /// Try each candidate CSS selector, then return the matching table with the
 /// MOST body rows. Yahoo pages often contain small legend/summary tables that
 /// also match a loose selector; the real data table is the one with rows.
+///
+/// Shared by every `extract_*` function so the four surfaces can't drift in how
+/// they pick the target table.
 fn find_table<'a>(document: &'a Html, candidates: &[String]) -> Option<scraper::ElementRef<'a>> {
     let mut best: Option<(usize, scraper::ElementRef<'a>)> = None;
     for sel in candidates {
@@ -34,6 +39,32 @@ fn find_table<'a>(document: &'a Html, candidates: &[String]) -> Option<scraper::
         }
     }
     best.map(|(_, t)| t)
+}
+
+/// Resolve the configured `table` selector list, splitting on commas.
+fn table_selectors(cfg: &TableCfg) -> Vec<String> {
+    cfg.table
+        .split(',')
+        .map(|s| s.trim().to_string())
+        .filter(|s| !s.is_empty())
+        .collect()
+}
+
+/// Locate the data table described by `cfg`, or warn and return `None`. Centralizes
+/// the "no table matched" branch that every `extract_*` previously duplicated.
+fn select_best_table<'a>(
+    document: &'a Html,
+    cfg: &TableCfg,
+    label: &str,
+) -> Option<scraper::ElementRef<'a>> {
+    let sels = table_selectors(cfg);
+    match find_table(document, &sels) {
+        Some(t) => Some(t),
+        None => {
+            warn!(label, selectors = ?cfg.table, "no table matched selectors");
+            None
+        }
+    }
 }
 
 /// Map header text -> canonical field, given the candidate column lists.
@@ -74,30 +105,81 @@ fn cells(row: &scraper::ElementRef) -> Vec<String> {
         .collect()
 }
 
-fn parse_f64(v: &str) -> f64 {
+/// Return true only if `v` is a canonical US-formatted number: an integer part
+/// with commas every 3 digits (and never after a decimal point), at most one
+/// decimal point. This REJECTS ambiguous locale forms like "1.800,50"
+/// (decimal-comma) or "12,34.56" (bad grouping) that would otherwise parse as
+/// ~1.8 / 1234.56 and silently corrupt the value, while accepting "1,800.50",
+/// "1800", "1800.5", etc.
+fn is_valid_us_number(v: &str) -> bool {
+    // At most one decimal point.
+    let mut parts = v.splitn(2, '.');
+    let int_part = match parts.next() {
+        Some(s) => s,
+        None => return false,
+    };
+    let frac_part = parts.next(); // None = no decimal; Some("") = trailing dot (invalid)
+    if frac_part.is_some_and(|f| f.is_empty()) {
+        return false;
+    }
+    if frac_part.is_some_and(|f| !f.bytes().all(|b| b.is_ascii_digit())) {
+        return false;
+    }
+    // Integer part: optional comma groups. Split on ','. The first group may be
+    // 1-3 digits; every later group must be exactly 3.
+    let groups: Vec<&str> = int_part.split(',').collect();
+    if groups.len() == 1 {
+        return !groups[0].is_empty() && groups[0].bytes().all(|b| b.is_ascii_digit());
+    }
+    // Multiple groups: leading group 1-3 digits, rest exactly 3.
+    let first = groups[0];
+    if first.is_empty() || first.len() > 3 || !first.bytes().all(|b| b.is_ascii_digit()) {
+        return false;
+    }
+    groups[1..]
+        .iter()
+        .all(|g| g.len() == 3 && g.bytes().all(|b| b.is_ascii_digit()))
+}
+
+pub fn parse_f64(v: &str) -> f64 {
     let v = v.trim();
     if v.is_empty() {
+        return 0.0;
+    }
+    // Validate canonical US formatting BEFORE parsing: this rejects
+    // locale-formatted numbers (e.g. "1.800,50") that would otherwise parse as
+    // ~1.8 and silently corrupt the value.
+    if !is_valid_us_number(v) {
+        warn!(
+            value = v,
+            "non-numeric / locale-formatted score cell, defaulting to 0.0"
+        );
         return 0.0;
     }
     match v.replace(',', "").parse() {
         Ok(n) => n,
         Err(_) => {
-            // Non-numeric cell (e.g. "—", "TBD", "—"). Coercing to 0 silently
-            // corrupts the data, so warn instead of failing silently.
-            eprintln!("   ! non-numeric score cell {v:?}, defaulting to 0.0");
+            warn!(value = v, "non-numeric score cell, defaulting to 0.0");
             0.0
         }
     }
 }
-fn parse_i64(v: &str) -> i64 {
+pub fn parse_i64(v: &str) -> i64 {
     let v = v.trim();
     if v.is_empty() {
+        return 0;
+    }
+    if !is_valid_us_number(v) {
+        warn!(
+            value = v,
+            "non-numeric / locale-formatted integer cell, defaulting to 0"
+        );
         return 0;
     }
     match v.replace(',', "").parse() {
         Ok(n) => n,
         Err(_) => {
-            eprintln!("   ! non-numeric integer cell {v:?}, defaulting to 0");
+            warn!(value = v, "non-numeric integer cell, defaulting to 0");
             0
         }
     }
@@ -110,18 +192,9 @@ fn parse_bool(v: &str) -> bool {
 /// Extract standings/teams from HTML.
 pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
     let doc = Html::parse_document(html);
-    let table = match find_table(
-        &doc,
-        &cfg.table
-            .split(',')
-            .map(|s| s.trim().to_string())
-            .collect::<Vec<_>>(),
-    ) {
+    let table = match select_best_table(&doc, cfg, "standings") {
         Some(t) => t,
-        None => {
-            eprintln!("   ! standings: no table matched selectors {:?}", cfg.table);
-            return Vec::new();
-        }
+        None => return Vec::new(),
     };
     let rows: Vec<_> = table.select(&Selector::parse("tr").unwrap()).collect();
     if rows.len() < 2 {
@@ -142,7 +215,7 @@ pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
                 .cloned()
                 .unwrap_or_default()
         };
-        let name = get("team");
+        let name = clean_name(&get("team"));
         if name.is_empty() {
             continue;
         }
@@ -163,18 +236,9 @@ pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
 /// Extract draft picks from HTML.
 pub fn extract_draft(html: &str, cfg: &TableCfg) -> Vec<DraftPick> {
     let doc = Html::parse_document(html);
-    let table = match find_table(
-        &doc,
-        &cfg.table
-            .split(',')
-            .map(|s| s.trim().to_string())
-            .collect::<Vec<_>>(),
-    ) {
+    let table = match select_best_table(&doc, cfg, "draft") {
         Some(t) => t,
-        None => {
-            eprintln!("   ! draft: no table matched selectors {:?}", cfg.table);
-            return Vec::new();
-        }
+        None => return Vec::new(),
     };
     let rows: Vec<_> = table.select(&Selector::parse("tr").unwrap()).collect();
     if rows.len() < 2 {
@@ -199,7 +263,7 @@ pub fn extract_draft(html: &str, cfg: &TableCfg) -> Vec<DraftPick> {
         out.push(DraftPick {
             pick: parse_i64(&get("pick")),
             round: parse_i64(&get("round")),
-            team: get("team"),
+            team: clean_name(&get("team")),
             player,
             position: get("pos"),
         });
@@ -214,18 +278,9 @@ pub fn extract_matchups(
     playoff_week: u32,
 ) -> BTreeMap<String, Vec<Matchup>> {
     let doc = Html::parse_document(html);
-    let table = match find_table(
-        &doc,
-        &cfg.table
-            .split(',')
-            .map(|s| s.trim().to_string())
-            .collect::<Vec<_>>(),
-    ) {
+    let table = match select_best_table(&doc, cfg, "matchups") {
         Some(t) => t,
-        None => {
-            eprintln!("   ! matchups: no table matched selectors {:?}", cfg.table);
-            return BTreeMap::new();
-        }
+        None => return BTreeMap::new(),
     };
     let rows: Vec<_> = table.select(&Selector::parse("tr").unwrap()).collect();
     if rows.len() < 2 {
@@ -251,8 +306,8 @@ pub fn extract_matchups(
         if wk < playoff_week {
             continue;
         }
-        let tname = get("team");
-        let opp = get("opp");
+        let tname = clean_name(&get("team"));
+        let opp = clean_name(&get("opp"));
         if tname.is_empty() {
             continue;
         }
@@ -296,18 +351,9 @@ pub fn extract_rosters(
     final_week: u32,
 ) -> BTreeMap<String, BTreeMap<String, Roster>> {
     let doc = Html::parse_document(html);
-    let table = match find_table(
-        &doc,
-        &cfg.table
-            .split(',')
-            .map(|s| s.trim().to_string())
-            .collect::<Vec<_>>(),
-    ) {
+    let table = match select_best_table(&doc, cfg, "roster") {
         Some(t) => t,
-        None => {
-            eprintln!("   ! roster: no table matched selectors {:?}", cfg.table);
-            return BTreeMap::new();
-        }
+        None => return BTreeMap::new(),
     };
     let rows: Vec<_> = table.select(&Selector::parse("tr").unwrap()).collect();
     if rows.len() < 2 {
