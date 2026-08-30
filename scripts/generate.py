@@ -10,17 +10,18 @@ Design principle — NEVER FABRICATE:
   * The regular-season #1 is NOT assumed to be the champion (this is a playoff
     league). Champion is a bible-only field.
 
-Builds / rewrites:
-  src/content/docs/seasons/<year>-season.md     (standings, playoffs stub, awards)
-  src/content/docs/teams/<slug>.md              (franchise page + season log)
-  src/content/docs/records/index.md             (all-time + single-season leaders)
-  src/content/docs/teams/index.md               (franchise table)
-  src/content/docs/seasons/index.md             (champions-by-year table)
-  src/content/docs/index.md                     (root champions table)
-  src/content/docs/champions.md                 (NBA-style "List of champions")
-  src/content/docs/playoffs.md                  (NBA-style "Playoffs / Finals")
+Builds / rewrites (into WIKI_CONTENT_DIR, default zensical/.stage, which
+zensical/transform.py turns into zensical/docs):
+  seasons/<year>-season.md     (standings, playoffs stub, awards)
+  teams/<slug>.md              (franchise page + season log)
+  records/index.md             (all-time + single-season leaders)
+  teams/index.md               (franchise table)
+  seasons/index.md             (champions-by-year table)
+  index.md                     (root champions table)
+  champions.md                 (NBA-style "List of champions")
+  playoffs.md                  (NBA-style "Playoffs / Finals")
 
-Run:  python scripts/generate.py
+Run:  python scripts/generate.py   (or with WIKI_CONTENT_DIR set)
 """
 
 import json
@@ -48,12 +49,12 @@ except ImportError:  # CI may run without PyYAML installed
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
-# Allow callers (e.g. the Zensical pipeline) to redirect generated Markdown to a
-# different content directory without editing this file. Defaults to the
-# Starlight content tree so existing `npm run build` is unchanged. Resolved to
-# an absolute path so downstream relative_to() calls are stable.
+# Allow callers to redirect generated Markdown to a different content directory
+# via WIKI_CONTENT_DIR. Defaults to the Zensical staging tree (consumed by
+# zensical/transform.py -> zensical/docs). Resolved to an absolute path so
+# downstream relative_to() calls are stable.
 _content_env = os.environ.get("WIKI_CONTENT_DIR")
-CONTENT = Path(_content_env).resolve() if _content_env else ROOT / "src" / "content" / "docs"
+CONTENT = Path(_content_env).resolve() if _content_env else ROOT / "zensical" / ".stage"
 BIBLE_PATH = RAW / "bible.yaml"
 
 TBD = "_TBD_"
