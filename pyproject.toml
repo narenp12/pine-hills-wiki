@@ -12,3 +12,8 @@ requires-python = ">=3.11"
 dependencies = [
     "yfpy>=1.2.0",
 ]
+
+[dependency-groups]
+dev = [
+    "zensical>=0.0.57",
+]

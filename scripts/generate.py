@@ -24,6 +24,7 @@ Run:  python scripts/generate.py
 """
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -35,7 +36,12 @@ except ImportError:  # CI may run without PyYAML installed
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
-CONTENT = ROOT / "src" / "content" / "docs"
+# Allow callers (e.g. the Zensical pipeline) to redirect generated Markdown to a
+# different content directory without editing this file. Defaults to the
+# Starlight content tree so existing `npm run build` is unchanged. Resolved to
+# an absolute path so downstream relative_to() calls are stable.
+_content_env = os.environ.get("WIKI_CONTENT_DIR")
+CONTENT = Path(_content_env).resolve() if _content_env else ROOT / "src" / "content" / "docs"
 BIBLE_PATH = RAW / "bible.yaml"
 
 TBD = "_TBD_"
