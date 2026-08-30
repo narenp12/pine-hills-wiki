@@ -1,0 +1,21 @@
+---
+/**
+ * Header override for the Wikipedia skin.
+ * Delegates to Starlight's default Header (so the search box, theme switcher,
+ * social icons, and language select all keep working) and wraps it in a
+ * Wikipedia-style top bar. The visual treatment (serif title, bottom rule,
+ * panel colours) lives in src/styles/wikipedia.css.
+ */
+import Default from '@astrojs/starlight/components/Header.astro';
+---
+
+<div class="wiki-header">
+  <Default />
+</div>
+
+<style>
+  .wiki-header {
+    border-bottom: 1px solid var(--wiki-border, #a2a9b1);
+    background: #fff;
+  }
+</style>

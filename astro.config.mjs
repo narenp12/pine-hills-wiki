@@ -18,6 +18,10 @@ export default defineConfig({
       title: 'Pine Hills Fantasy Football League',
       description: 'The collaborative history of the Pine Hills Fantasy Football League, established 2016.',
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/narenp12/pine-hills-wiki' }],
+      customCss: ['./src/styles/wikipedia.css'],
+      components: {
+        Header: './src/components/Header.astro',
+      },
       sidebar: [
         { label: 'Home', link: '/' },
         { label: 'Seasons', items: [{ autogenerate: { directory: 'seasons' } }] },
