@@ -36,8 +36,16 @@ fn sample_season() -> Season {
         "15".to_string(),
         vec![Matchup {
             teams: vec![
-                MatchTeam { name: "Example FC".into(), score: 100.0, is_winner: true },
-                MatchTeam { name: "Rivals".into(), score: 98.2, is_winner: false },
+                MatchTeam {
+                    name: "Example FC".into(),
+                    score: 100.0,
+                    is_winner: true,
+                },
+                MatchTeam {
+                    name: "Rivals".into(),
+                    score: 98.2,
+                    is_winner: false,
+                },
             ],
         }],
     );
@@ -47,10 +55,18 @@ fn sample_season() -> Season {
     ros.insert(
         "Example FC".to_string(),
         Roster {
-            players: vec![RosterPlayer { name: "Christian McCaffrey".into(), position: "RB".into() }],
+            players: vec![RosterPlayer {
+                name: "Christian McCaffrey".into(),
+                position: "RB".into(),
+            }],
         },
     );
-    weeks.insert("1".to_string(), Week { rosters: ros.clone() });
+    weeks.insert(
+        "1".to_string(),
+        Week {
+            rosters: ros.clone(),
+        },
+    );
     weeks.insert("18".to_string(), Week { rosters: ros });
     season.weeks = weeks;
     season
@@ -91,8 +107,54 @@ fn emitted_json_matches_generator_contract() {
 
     // weeks.<n>.rosters keyed by team -> {players:[{name,position}]}
     let r1 = &v["weeks"]["1"]["rosters"]["Example FC"]["players"];
-    assert!(r1.is_array(), "weeks.1.rosters.Example FC.players must be a list");
+    assert!(
+        r1.is_array(),
+        "weeks.1.rosters.Example FC.players must be a list"
+    );
     assert_eq!(r1[0]["name"], "Christian McCaffrey");
     assert_eq!(r1[0]["position"], "RB");
     assert!(v["weeks"]["18"]["rosters"]["Example FC"]["players"].is_array());
+}
+
+/// REGRESSION: the sample above is hand-built, so it could not catch that the REAL
+/// `from_dump_dir` pipeline left `standings.teams` EMPTY while filling `teams.teams`.
+/// generate.py renders the "Final Standings" table from `standings.teams`, so every
+/// season page shipped with an empty table despite the JSON holding full records.
+/// This exercises the actual assembly path end-to-end against a committed fixture.
+#[test]
+fn from_dump_dir_populates_standings_for_the_generator() {
+    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("tests")
+        .join("fixtures");
+    let season = phf_scraper::extract::from_dump_dir(&dir, 2024, "489811").expect("assemble 2024");
+
+    assert_eq!(
+        season.teams.teams.len(),
+        12,
+        "teams.teams populated (12 teams)"
+    );
+    assert_eq!(
+        season.standings.teams.len(),
+        12,
+        "standings.teams MUST be populated — generate.py reads it for the standings table"
+    );
+
+    // Both views must agree, and standings must be ordered by rank so the
+    // generator's positional numbering (enumerate) matches Yahoo's real rank.
+    let ranks: Vec<i64> = season.standings.teams.iter().map(|t| t.rank).collect();
+    let mut sorted = ranks.clone();
+    sorted.sort();
+    assert_eq!(
+        ranks, sorted,
+        "standings.teams sorted by rank, got {ranks:?}"
+    );
+
+    let json = serde_json::to_value(&season).expect("serialize");
+    let st = &json["standings"]["teams"];
+    assert_eq!(st[0]["rank"], 1, "first standings row is rank 1");
+    assert_eq!(st[0]["name"], "Stroud Boys", "2024 rank 1 = Stroud Boys");
+    assert!(
+        st[0]["points_for"].as_f64().unwrap() > 0.0,
+        "standings rows carry real points"
+    );
 }

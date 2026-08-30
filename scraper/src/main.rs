@@ -15,7 +15,7 @@ use anyhow::Result;
 use clap::Parser;
 
 use phf_scraper::model::Season;
-use phf_scraper::{extract, scrape, selectors, Cli, Dataset};
+use phf_scraper::{Cli, Dataset, extract, scrape, selectors};
 
 fn parse_seasons(s: &str) -> Vec<u32> {
     let mut out = Vec::new();
@@ -37,10 +37,15 @@ fn parse_seasons(s: &str) -> Vec<u32> {
 /// Build every requested season's raw/<year>.json from capture_season.py dumps.
 fn build_from_dump(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors) -> Result<()> {
     let seasons = parse_seasons(&cli.seasons);
-    println!(">> building {} seasons from dumps in {}", seasons.len(), dir.display());
+    println!(
+        ">> building {} seasons from dumps in {}",
+        seasons.len(),
+        dir.display()
+    );
     std::fs::create_dir_all(&cli.out)?;
     for year in seasons {
-        let lid = sel.league
+        let lid = sel
+            .league
             .season_ids
             .get(&year.to_string())
             .cloned()
@@ -87,12 +92,17 @@ async fn main() -> Result<()> {
     // fetch (or any error) can't orphan the Chrome child process.
     let run_result = async {
         for year in seasons {
-            let lid = sel.league
+            let lid = sel
+                .league
                 .season_ids
                 .get(&year.to_string())
                 .cloned()
                 .unwrap_or_else(|| cli.league_id.clone());
-            let base = sel.league.url_template.replace("{id}", &lid).replace("{season}", &year.to_string());
+            let base = sel
+                .league
+                .url_template
+                .replace("{id}", &lid)
+                .replace("{season}", &year.to_string());
 
             let want = |d: Dataset| cli.datasets.contains(&d);
 
@@ -104,7 +114,9 @@ async fn main() -> Result<()> {
             // Standings / teams
             if want(Dataset::Standings) {
                 let url = format!("{base}/standings");
-                let html = scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-standings")).await?;
+                let html =
+                    scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-standings"))
+                        .await?;
                 let teams = extract::extract_standings(&html, &sel.standings);
                 season.standings.teams = teams.clone();
                 season.teams.teams = teams;
@@ -114,7 +126,8 @@ async fn main() -> Result<()> {
             // Draft
             if want(Dataset::Draft) {
                 let url = format!("{base}/draftresults");
-                let html = scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-draft")).await?;
+                let html =
+                    scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-draft")).await?;
                 season.draft.draft_results = extract::extract_draft(&html, &sel.draft);
                 println!("   draft: {} picks", season.draft.draft_results.len());
             }
@@ -122,9 +135,15 @@ async fn main() -> Result<()> {
             // Matchups (playoff weeks)
             if want(Dataset::Matchups) {
                 let url = format!("{base}/matchups");
-                let html = scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-matchups")).await?;
-                season.playoffs.weeks = extract::extract_matchups(&html, &sel.matchups, sel.opts.playoff_week);
-                println!("   matchup weeks: {:?}", season.playoffs.weeks.keys().collect::<Vec<_>>());
+                let html =
+                    scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-matchups"))
+                        .await?;
+                season.playoffs.weeks =
+                    extract::extract_matchups(&html, &sel.matchups, sel.opts.playoff_week);
+                println!(
+                    "   matchup weeks: {:?}",
+                    season.playoffs.weeks.keys().collect::<Vec<_>>()
+                );
             }
 
             // Rosters (post-draft = week 1, end-of-season = final week). Yahoo's
@@ -132,13 +151,18 @@ async fn main() -> Result<()> {
             // fallback week label when no `week` column is present.
             if want(Dataset::Roster) {
                 let url = format!("{base}/rosters");
-                let html = scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-rosters")).await?;
+                let html =
+                    scrape::fetch_page(&browser, &url, &cli.dump, &format!("{year}-rosters"))
+                        .await?;
                 let ros = extract::extract_rosters(&html, &sel.roster, sel.opts.final_week);
                 // distribute into weeks[1] (post-draft placeholder) and weeks[final_week]
                 for (wk, teams) in ros {
                     season.weeks.entry(wk).or_default().rosters = teams;
                 }
-                println!("   roster weeks: {:?}", season.weeks.keys().collect::<Vec<_>>());
+                println!(
+                    "   roster weeks: {:?}",
+                    season.weeks.keys().collect::<Vec<_>>()
+                );
             }
 
             // Emit canonical JSON

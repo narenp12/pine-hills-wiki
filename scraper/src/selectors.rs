@@ -55,12 +55,17 @@ pub struct OptsCfg {
     #[serde(default = "default_playoff_week")]
     pub playoff_week: u32,
     #[serde(default = "default_final_week")]
-    #[allow(dead_code)] // reserved: end-of-season roster week once real /rosters page is validated
+    #[allow(dead_code)]
+    // reserved: end-of-season roster week once real /rosters page is validated
     pub final_week: u32,
 }
 
-fn default_playoff_week() -> u32 { 14 }
-fn default_final_week() -> u32 { 18 }
+fn default_playoff_week() -> u32 {
+    14
+}
+fn default_final_week() -> u32 {
+    18
+}
 
 #[derive(Debug, Deserialize, Default)]
 pub struct Selectors {

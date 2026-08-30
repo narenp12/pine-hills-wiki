@@ -14,8 +14,8 @@
 //! guard in `main`, so neither Chrome tabs nor the browser process leak.
 
 use anyhow::{Context, Result};
-use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::Page;
+use chromiumoxide::browser::{Browser, BrowserConfig};
 use futures::StreamExt;
 use std::path::PathBuf;
 use std::time::Duration;
@@ -44,11 +44,9 @@ async fn resolve_ws_endpoint(endpoint: &str) -> Result<String> {
         .timeout(CONNECT_TIMEOUT)
         .build()
         .context("failed to build HTTP client for CDP endpoint resolution")?;
-    let resp = client
-        .get(&version_url)
-        .send()
-        .await
-        .map_err(|e| anyhow::anyhow!("could not reach Chrome HTTP debugger at {version_url}: {e}"))?;
+    let resp = client.get(&version_url).send().await.map_err(|e| {
+        anyhow::anyhow!("could not reach Chrome HTTP debugger at {version_url}: {e}")
+    })?;
     let v: serde_json::Value = resp
         .json()
         .await
@@ -77,13 +75,12 @@ pub async fn connect_browser(cli: &Cli) -> Result<Browser> {
         // endpoint (http://127.0.0.1:9222); resolve the latter via /json/version.
         let ws = resolve_ws_endpoint(endpoint).await?;
         println!(">> connecting to Chrome at {ws}");
-        let (browser, handler) = tokio::time::timeout(
-            CONNECT_TIMEOUT,
-            Browser::connect(ws),
-        )
-        .await
-        .map_err(|_| anyhow::anyhow!("timed out connecting to Chrome after {CONNECT_TIMEOUT:?}"))?
-        .map_err(|e| anyhow::anyhow!("failed to connect to Chrome: {e}"))?;
+        let (browser, handler) = tokio::time::timeout(CONNECT_TIMEOUT, Browser::connect(ws))
+            .await
+            .map_err(|_| {
+                anyhow::anyhow!("timed out connecting to Chrome after {CONNECT_TIMEOUT:?}")
+            })?
+            .map_err(|e| anyhow::anyhow!("failed to connect to Chrome: {e}"))?;
         spawn_handler(handler);
         return Ok(browser);
     }
@@ -112,7 +109,9 @@ pub async fn connect_browser(cli: &Cli) -> Result<Browser> {
     )
     .await
     .map_err(|_| {
-        anyhow::anyhow!("timed out launching Chromium after {CONNECT_TIMEOUT:?}; is the Chrome binary present?")
+        anyhow::anyhow!(
+            "timed out launching Chromium after {CONNECT_TIMEOUT:?}; is the Chrome binary present?"
+        )
     })?
     .context("failed to launch Chromium")?;
     spawn_handler(handler);

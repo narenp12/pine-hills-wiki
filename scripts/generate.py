@@ -137,7 +137,11 @@ year: {year}
             st = st.get("standings", st)
         team_list = st.get("teams", []) if isinstance(st, dict) else []
         for i, t in enumerate(team_list, 1):
-            md += f"| {i} | {t.get('name','?')} | {t.get('owner','?')} | {t.get('wins',0)}–{t.get('losses',0)} | {t.get('points_for','?')} | {t.get('points_against','?')} | {i if i<=4 else '—'} |\n"
+            # Show Yahoo's REAL final rank, not the row position. Yahoo can rank two
+            # teams equally (2020 has two rank-7 teams), so positional numbering
+            # misreported a team's finish.
+            rank = t.get("rank") or i
+            md += f"| {rank} | {t.get('name','?')} | {t.get('owner','?')} | {t.get('wins',0)}–{t.get('losses',0)} | {t.get('points_for','?')} | {t.get('points_against','?')} | {i if i<=4 else '—'} |\n"
     except Exception:  # noqa: BLE001
         md += "| _TBD_ | _TBD_ | _TBD_ | 0–0 | 0 | 0 | — |\n"
 

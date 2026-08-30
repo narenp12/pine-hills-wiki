@@ -13,7 +13,10 @@ use std::path::PathBuf;
 
 /// Shared CLI definition (used by the binary and the lib's browser glue).
 #[derive(Parser)]
-#[command(name = "phf-scraper", about = "Scrape Pine Hills Yahoo FF history -> raw/<year>.json")]
+#[command(
+    name = "phf-scraper",
+    about = "Scrape Pine Hills Yahoo FF history -> raw/<year>.json"
+)]
 pub struct Cli {
     /// League id (default 447010).
     #[arg(long, default_value = "447010")]

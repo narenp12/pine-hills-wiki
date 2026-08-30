@@ -1,11 +1,11 @@
 ---
-title: "2025 Season"
-description: "Pine Hills Fantasy Football League — 2025 season."
-season: 2025
-year: 2025
+title: "2022 Season"
+description: "Pine Hills Fantasy Football League — 2022 season."
+season: 2022
+year: 2022
 ---
 
-# 🏈 2025 Season
+# 🏈 2022 Season
 
 **Champion:** Jeremy's Neat Team
 **Runner-Up:** _TBD_
@@ -18,18 +18,16 @@ year: 2025
 
 | Rank | Team | Owner | W–L | PF | PA | Playoff Seed |
 |------|------|-------|-----|----|----|--------------|
-| 1 | Jeremy's Neat Team |  | 8–6 | 1526.46 | 1552.74 | 1 |
-| 2 | Big black big back |  | 7–7 | 1603.4 | 1557.16 | 2 |
-| 3 | Roger That |  | 10–4 | 1751.42 | 1564.38 | 3 |
-| 4 | Save Me | Naren | 7–7 | 1657.02 | 1648.02 | 4 |
-| 5 | Indiana Jones |  | 8–6 | 1594.84 | 1458.2 | — |
-| 6 | Sharman’s Scorpions |  | 8–6 | 1692.32 | 1697.14 | — |
-| 7 | varun’s victorious team |  | 9–5 | 1719.92 | 1559.16 | — |
-| 8 | Kaushal's Potatoes |  | 7–7 | 1551.74 | 1552.56 | — |
-| 9 | Super Squirrels |  | 6–8 | 1470.88 | 1490.06 | — |
-| 10 | Jayesh's Great Team |  | 6–8 | 1363.52 | 1470.56 | — |
-| 11 | Michael's Marvelous Team |  | 5–9 | 1694.9 | 1555.26 | — |
-| 12 | Stroud Boys |  | 3–11 | 1151.54 | 1672.72 | — |
+| 1 | Jeremy's Neat Team |  | 7–7 | 1788.44 | 1695.46 | 1 |
+| 2 | Michael's Marvelous Team |  | 5–9 | 1628.34 | 1801.56 | 2 |
+| 3 | L takes only |  | 8–6 | 1648.82 | 1680.0 | 3 |
+| 4 | Roger That |  | 10–4 | 1920.2 | 1619.5 | 4 |
+| 5 | Anish's Awesome Team |  | 6–8 | 1620.38 | 1764.36 | — |
+| 6 | Super Squirrels |  | 8–6 | 1686.1 | 1566.4 | — |
+| 7 | Sharman’s Scorpions |  | 11–3 | 1768.56 | 1535.26 | — |
+| 8 | Hill We Go… Again (feat Kyler) | Naren | 8–6 | 1794.4 | 1730.54 | — |
+| 9 | Tanmay's Hospital |  | 5–9 | 1460.74 | 1688.02 | — |
+| 10 | varun’s victorious team |  | 2–12 | 1510.86 | 1745.74 | — |
 
 ## Playoff Bracket
 
@@ -64,4 +62,4 @@ _TBD — add the defining moments._
 
 ## Related
 
-- [[Seasons]] · [[2025 Draft]] · [[Teams]] · [[Records]] · [[Lore]]
+- [[Seasons]] · [[2022 Draft]] · [[Teams]] · [[Records]] · [[Lore]]

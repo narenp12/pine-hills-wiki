@@ -1,3 +1,20 @@
 public
 node_modules
 .quartz-cache
+.venv
+
+# Rust scraper build artifacts + captured page fixtures are not ours to format
+scraper/target
+scraper/dump
+scraper/dump_all
+scraper/tests/fixtures
+scraper/tests/fixture.html
+scraper/.venv-sniff
+scraper/Cargo.lock
+
+# Generated wiki Markdown + extracted data (produced by scripts/generate.py)
+content/draft
+content/seasons
+content/teams
+content/rosters
+raw

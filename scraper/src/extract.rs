@@ -24,7 +24,9 @@ fn find_table<'a>(document: &'a Html, candidates: &[String]) -> Option<scraper::
     for sel in candidates {
         if let Ok(s) = Selector::parse(sel) {
             for table in document.select(&s) {
-                let n = table.select(&Selector::parse("tbody tr, tr").unwrap()).count();
+                let n = table
+                    .select(&Selector::parse("tbody tr, tr").unwrap())
+                    .count();
                 if best.as_ref().map(|(c, _)| n > *c).unwrap_or(true) {
                     best = Some((n, table));
                 }
@@ -60,9 +62,7 @@ fn header_map(headers: &[String], cfg: &TableCfg) -> Vec<Option<String>> {
             let nh = norm(h);
             fields
                 .iter()
-                .find(|(_, cand)| {
-                    cand.split(',').any(|c| norm(c) == nh)
-                })
+                .find(|(_, cand)| cand.split(',').any(|c| norm(c) == nh))
                 .map(|(field, _)| field.to_string())
         })
         .collect()
@@ -110,7 +110,13 @@ fn parse_bool(v: &str) -> bool {
 /// Extract standings/teams from HTML.
 pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
     let doc = Html::parse_document(html);
-    let table = match find_table(&doc, &cfg.table.split(',').map(|s| s.trim().to_string()).collect::<Vec<_>>()) {
+    let table = match find_table(
+        &doc,
+        &cfg.table
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .collect::<Vec<_>>(),
+    ) {
         Some(t) => t,
         None => {
             eprintln!("   ! standings: no table matched selectors {:?}", cfg.table);
@@ -157,7 +163,13 @@ pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
 /// Extract draft picks from HTML.
 pub fn extract_draft(html: &str, cfg: &TableCfg) -> Vec<DraftPick> {
     let doc = Html::parse_document(html);
-    let table = match find_table(&doc, &cfg.table.split(',').map(|s| s.trim().to_string()).collect::<Vec<_>>()) {
+    let table = match find_table(
+        &doc,
+        &cfg.table
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .collect::<Vec<_>>(),
+    ) {
         Some(t) => t,
         None => {
             eprintln!("   ! draft: no table matched selectors {:?}", cfg.table);
@@ -174,7 +186,11 @@ pub fn extract_draft(html: &str, cfg: &TableCfg) -> Vec<DraftPick> {
     for r in &rows[1..] {
         let c = cells(r);
         let get = |field: &str| -> String {
-            hmap.iter().position(|h| h.as_deref() == Some(field)).and_then(|i| c.get(i)).cloned().unwrap_or_default()
+            hmap.iter()
+                .position(|h| h.as_deref() == Some(field))
+                .and_then(|i| c.get(i))
+                .cloned()
+                .unwrap_or_default()
         };
         let player = get("player");
         if player.is_empty() {
@@ -192,9 +208,19 @@ pub fn extract_draft(html: &str, cfg: &TableCfg) -> Vec<DraftPick> {
 }
 
 /// Extract weekly matchups from HTML -> playoff weeks (>= playoff_week).
-pub fn extract_matchups(html: &str, cfg: &TableCfg, playoff_week: u32) -> BTreeMap<String, Vec<Matchup>> {
+pub fn extract_matchups(
+    html: &str,
+    cfg: &TableCfg,
+    playoff_week: u32,
+) -> BTreeMap<String, Vec<Matchup>> {
     let doc = Html::parse_document(html);
-    let table = match find_table(&doc, &cfg.table.split(',').map(|s| s.trim().to_string()).collect::<Vec<_>>()) {
+    let table = match find_table(
+        &doc,
+        &cfg.table
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .collect::<Vec<_>>(),
+    ) {
         Some(t) => t,
         None => {
             eprintln!("   ! matchups: no table matched selectors {:?}", cfg.table);
@@ -211,7 +237,11 @@ pub fn extract_matchups(html: &str, cfg: &TableCfg, playoff_week: u32) -> BTreeM
     for r in &rows[1..] {
         let c = cells(r);
         let get = |field: &str| -> String {
-            hmap.iter().position(|h| h.as_deref() == Some(field)).and_then(|i| c.get(i)).cloned().unwrap_or_default()
+            hmap.iter()
+                .position(|h| h.as_deref() == Some(field))
+                .and_then(|i| c.get(i))
+                .cloned()
+                .unwrap_or_default()
         };
         let week = get("week");
         if week.is_empty() {
@@ -227,11 +257,23 @@ pub fn extract_matchups(html: &str, cfg: &TableCfg, playoff_week: u32) -> BTreeM
             continue;
         }
         let teams = if opp.is_empty() {
-            vec![MatchTeam { name: tname, score: parse_f64(&get("score")), is_winner: parse_bool(&get("win")) }]
+            vec![MatchTeam {
+                name: tname,
+                score: parse_f64(&get("score")),
+                is_winner: parse_bool(&get("win")),
+            }]
         } else {
             vec![
-                MatchTeam { name: tname, score: parse_f64(&get("score")), is_winner: parse_bool(&get("win")) },
-                MatchTeam { name: opp, score: parse_f64(&get("opp_score")), is_winner: !parse_bool(&get("win")) },
+                MatchTeam {
+                    name: tname,
+                    score: parse_f64(&get("score")),
+                    is_winner: parse_bool(&get("win")),
+                },
+                MatchTeam {
+                    name: opp,
+                    score: parse_f64(&get("opp_score")),
+                    is_winner: !parse_bool(&get("win")),
+                },
             ]
         };
         weeks.entry(week).or_default().push(Matchup { teams });
@@ -254,7 +296,13 @@ pub fn extract_rosters(
     final_week: u32,
 ) -> BTreeMap<String, BTreeMap<String, Roster>> {
     let doc = Html::parse_document(html);
-    let table = match find_table(&doc, &cfg.table.split(',').map(|s| s.trim().to_string()).collect::<Vec<_>>()) {
+    let table = match find_table(
+        &doc,
+        &cfg.table
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .collect::<Vec<_>>(),
+    ) {
         Some(t) => t,
         None => {
             eprintln!("   ! roster: no table matched selectors {:?}", cfg.table);
@@ -273,9 +321,17 @@ pub fn extract_rosters(
     for r in &rows[1..] {
         let c = cells(r);
         let get = |field: &str| -> String {
-            hmap.iter().position(|h| h.as_deref() == Some(field)).and_then(|i| c.get(i)).cloned().unwrap_or_default()
+            hmap.iter()
+                .position(|h| h.as_deref() == Some(field))
+                .and_then(|i| c.get(i))
+                .cloned()
+                .unwrap_or_default()
         };
-        let week = if has_week_col { get("week") } else { fallback_week.clone() };
+        let week = if has_week_col {
+            get("week")
+        } else {
+            fallback_week.clone()
+        };
         let team = get("team");
         let player = get("player");
         if team.is_empty() || player.is_empty() {
@@ -286,7 +342,10 @@ pub fn extract_rosters(
             .entry(team)
             .or_default()
             .players
-            .push(RosterPlayer { name: player, position: get("pos") });
+            .push(RosterPlayer {
+                name: player,
+                position: get("pos"),
+            });
     }
     out
 }
@@ -315,13 +374,16 @@ pub fn self_test(fixture: &std::path::Path, sel: &crate::selectors::Selectors) -
 /// The standings file carries rank/W-L/PF/PA for all 12 teams; draft carries picks;
 /// matchups header supplies the manager/owner for the viewed team (best-effort).
 pub fn from_dump_dir(dir: &std::path::Path, season: u32, league_id: &str) -> Result<Season> {
-    use crate::parse_rendered::{parse_draft, parse_matchups_header, parse_standings};
+    use crate::parse_rendered::{parse_draft_with_teams, parse_matchups_header, parse_standings};
     let read = |suffix: &str| -> String {
         let p = dir.join(format!("{}-{}-{}.innerText.txt", season, league_id, suffix));
         std::fs::read_to_string(&p).unwrap_or_default()
     };
     let (mut s, _lid) = parse_standings(&read("standings"), season, league_id);
-    s.draft = parse_draft(&read("draftresults"), season, league_id);
+    // The draft page renders team labels TRUNCATED ("Sharman’s ..."); resolve them
+    // against the full standings names so picks attribute to real teams.
+    let full_names: Vec<String> = s.teams.teams.iter().map(|t| t.name.clone()).collect();
+    s.draft = parse_draft_with_teams(&read("draftresults"), season, league_id, &full_names);
     let mtext = read("matchups");
     if !mtext.is_empty() {
         let ms = parse_matchups_header(&mtext, season, league_id);
@@ -334,5 +396,11 @@ pub fn from_dump_dir(dir: &std::path::Path, season: u32, league_id: &str) -> Res
             }
         }
     }
+    // generate.py renders the "Final Standings" table from `standings.teams` and
+    // numbers rows positionally, so it must be populated AND ordered by rank —
+    // leaving it empty (while only filling `teams.teams`) shipped season pages
+    // with an empty standings table.
+    s.teams.teams.sort_by_key(|t| t.rank);
+    s.standings = s.teams.clone();
     Ok(s)
 }
