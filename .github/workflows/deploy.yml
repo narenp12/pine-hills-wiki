@@ -24,31 +24,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: 24
+          python-version: "3.12"
 
-      - name: Cache npm
-        uses: actions/cache@v5
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Install Python deps
+        run: pip install -r requirements.txt pyyaml
 
-      - run: npm install
+      - name: Install Zensical
+        run: pip install zensical
 
-      - name: Build permalink map
-        run: node scripts/wikilink-map.mjs
-
-      - name: Build Astro
-        run: npm run build
+      - name: Build Zensical site
+        run: python zensical/build.mjs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: zensical/site
 
   deploy:
     needs: build
