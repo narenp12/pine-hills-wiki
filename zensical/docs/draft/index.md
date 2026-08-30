@@ -22,9 +22,9 @@ The annual rite. Every pick, every reach, every steal. Each draft page lists the
 
 ## What a Draft Page Includes
 
-- **Full pick-by-pick board** — round, overall pick, team, player, position.
-- **Reach / Steal flags** — picks that aged well or badly.
-- **Link to post-draft rosters** — see each team's [Roster Template](#) post-draft roster.
-- **Notable storylines** — the auto-drafter, the guy who fell, the panic pick.
+- **Full pick-by-pick board** - round, overall pick, team, player, position.
+- **Reach / Steal flags** - picks that aged well or badly.
+- **Link to post-draft rosters** - see each team's [Roster Template](#) post-draft roster.
+- **Notable storylines** - the auto-drafter, the guy who fell, the panic pick.
 
 > Documenting a draft? Use the [Draft Template](#).

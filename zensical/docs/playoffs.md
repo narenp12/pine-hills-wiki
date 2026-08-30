@@ -9,7 +9,7 @@ The Pine Hills Fantasy Football League postseason. The top four teams by regular
 
 ## Format
 
-- **Qualifiers:** top 4 regular-season teams (seeds 1–4).
+- **Qualifiers:** top 4 regular-season teams (seeds 1-4).
 - **Champion:** determined by the playoff bracket, not regular-season standing.
 - **Consolation (Toilet Bowl):** contested by non-qualifiers.
 

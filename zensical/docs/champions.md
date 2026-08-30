@@ -22,7 +22,7 @@ The complete list of Pine Hills Fantasy Football League champions, year by year.
 
 | Team | Titles | Years |
 |------|--------|-------|
-| _TBD_ | 0 | — |
+| _TBD_ | 0 | - |
 
 ## Related
 

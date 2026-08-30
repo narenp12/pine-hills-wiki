@@ -1,0 +1,285 @@
+/* Pine Hills Wiki — Zensical "modern" variant theme.
+   Token-driven, dual-scheme. Pine-green single accent, neutral ink chrome,
+   champion gold reserved as a semantic highlight only. Serif body + sans chrome. */
+
+/* ---------------------------------------------------------------------------
+   LIGHT SCHEME (default)
+--------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] {
+  --md-hue: 150;
+
+  --md-default-bg-color: #fbfbfa;          /* off-white, never pure #fff */
+  --md-default-bg-color--light: #f1f2ee;
+  --md-default-bg-color--lighter: #e9eae5;
+  --md-default-fg-color: #1b1f1a;          /* warm near-black ink */
+  --md-default-fg-color--light: #5b625b;
+  --md-default-fg-color--lighter: #8b918b;
+
+  --md-primary-fg-color: #1b1f1a;
+  --md-primary-fg-color--light: #5b625b;
+  --md-primary-fg-color--dark: #0e110d;
+  --md-primary-bg-color: #fbfbfa;
+  --md-primary-bg-color--light: #f1f2ee;
+
+  --md-accent-fg-color: #15633d;          /* pine green, AA on off-white */
+  --md-accent-fg-color--light: #2b8a59;
+  --md-accent-bg-color: #fbfbfa;
+
+  --md-typeset-a-color: #15633d;
+  --md-typeset-mark-color: #15633d22;
+  --md-typeset-table-color: #d9dbd5;
+  --md-typeset-table-color--light: #e9eae5;
+
+  --wiki-border: #d9dbd5;
+  --wiki-panel: #f1f2ee;
+  --wiki-panel-2: #e6e7e3;
+  --wiki-gold: #a67c00;                    /* champion highlight only */
+  --wiki-ink: #1b1f1a;
+  --wiki-muted: #5b625b;
+
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------------------
+   DARK SCHEME (slate)
+--------------------------------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-hue: 150;
+
+  --md-default-bg-color: #16181a;         /* off-black, never pure #000 */
+  --md-default-bg-color--light: #1f2321;
+  --md-default-bg-color--lighter: #2a2e2c;
+  --md-default-fg-color: #e6e9e6;
+  --md-default-fg-color--light: #9aa39a;
+  --md-default-fg-color--lighter: #6f766f;
+
+  --md-primary-fg-color: #e6e9e6;
+  --md-primary-fg-color--light: #9aa39a;
+  --md-primary-fg-color--dark: #e6e9e6;
+  --md-primary-bg-color: #16181a;
+  --md-primary-bg-color--light: #1f2321;
+
+  --md-accent-fg-color: #57c98a;         /* lighter pine for dark bg, AA */
+  --md-accent-fg-color--light: #8fe0b3;
+  --md-accent-bg-color: #16181a;
+
+  --md-typeset-a-color: #57c98a;
+  --md-typeset-mark-color: #57c98a22;
+  --md-typeset-table-color: #2f3431;
+  --md-typeset-table-color--light: #2a2e2c;
+
+  --wiki-border: #2f3431;
+  --wiki-panel: #1f2321;
+  --wiki-panel-2: #2a2e2c;
+  --wiki-gold: #d4af37;
+  --wiki-ink: #e6e9e6;
+  --wiki-muted: #9aa39a;
+
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   TYPOGRAPHY: serif body + sans chrome/headings
+--------------------------------------------------------------------------- */
+.md-typeset {
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+/* Body text = serif for the encyclopedia editorial read. */
+.md-typeset p,
+.md-typeset li,
+.md-typeset dd,
+.md-typeset blockquote,
+.md-typeset table {
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+/* Chrome + headings = clean sans (system stack, no extra network font). */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6,
+.md-header,
+.md-tabs,
+.md-nav,
+.md-nav__title,
+.md-footer,
+.md-footer-meta,
+.md-search__input,
+.md-source,
+.md-banner,
+.md-top,
+.md-typeset .md-button,
+.md-typeset th {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Wikipedia-style section divider hairline, using the theme border token. */
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 600;
+  border-bottom: 1px solid var(--wiki-border);
+  padding-bottom: 0.25em;
+}
+.md-typeset h1 { font-size: 1.9rem; }
+.md-typeset h2 { font-size: 1.45rem; }
+
+/* ---------------------------------------------------------------------------
+   LINKS / ACCENT
+--------------------------------------------------------------------------- */
+.md-typeset a,
+.md-typeset a:visited { color: var(--md-typeset-a-color); }
+.md-typeset a:hover { color: var(--md-accent-fg-color--light); }
+.md-nav__link--active,
+.md-nav__link--active .md-nav__icon {
+  color: var(--md-accent-fg-color) !important;
+}
+.md-tabs__link--active { color: var(--md-accent-fg-color); }
+
+/* ---------------------------------------------------------------------------
+   HERO (editorial split) — replaces the old blue-gradient tx-hero
+--------------------------------------------------------------------------- */
+.md-content .ph-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin: -1.5rem -1.5rem 2rem;
+  padding: 2.4rem 1.5rem;
+  background: var(--wiki-panel);
+  border: 1px solid var(--wiki-border);
+  border-radius: 6px;
+}
+.md-content .ph-hero__lead h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.1rem;
+  line-height: 1.1;
+  border: 0;
+  color: var(--wiki-ink);
+}
+.md-content .ph-hero__lead p {
+  margin: 0 0 1.2rem;
+  max-width: 38rem;
+  color: var(--wiki-muted);
+  font-size: 1.02rem;
+}
+.md-content .ph-hero__lead .md-button {
+  margin: 0.25rem 0.5rem 0.25rem 0;
+}
+.md-content .ph-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.md-content .ph-hero__stats .stat {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--wiki-border);
+  border-radius: 6px;
+  padding: 0.9rem 0.8rem;
+  text-align: center;
+}
+.md-content .ph-hero__stats .stat .num {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--md-accent-fg-color);
+  line-height: 1.1;
+}
+.md-content .ph-hero__stats .stat .cap {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wiki-muted);
+}
+
+@media screen and (max-width: 768px) {
+  .md-content .ph-hero { grid-template-columns: 1fr; }
+  .md-content .ph-hero__lead h1 { font-size: 1.7rem; }
+}
+
+/* ---------------------------------------------------------------------------
+   INFOBOX (right-rail, Wikipedia-style; injected by transform.py)
+--------------------------------------------------------------------------- */
+.md-typeset .infobox {
+  float: right;
+  clear: right;
+  margin: 0.4rem 0 1rem 1.5rem;
+  width: 20rem;
+  max-width: 90%;
+  border: 1px solid var(--wiki-border);
+  background: var(--wiki-panel);
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.72rem;
+}
+.md-typeset .infobox .infobox-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.02em;
+  padding: 0.55rem 0.6rem;
+  background: var(--wiki-panel-2);
+  border-bottom: 1px solid var(--wiki-border);
+  border-top: 3px solid var(--md-accent-fg-color);
+  color: var(--wiki-ink);
+}
+.md-typeset .infobox .infobox-row {
+  display: flex;
+  border-top: 1px solid var(--wiki-border);
+}
+.md-typeset .infobox .infobox-row > .label {
+  flex: 0 0 38%;
+  font-weight: 700;
+  padding: 0.35rem 0.5rem;
+  border-right: 1px solid var(--wiki-border);
+  color: var(--wiki-ink);
+}
+.md-typeset .infobox .infobox-row > .value {
+  flex: 1 1 auto;
+  padding: 0.35rem 0.5rem;
+  color: var(--md-default-fg-color);
+}
+
+/* ---------------------------------------------------------------------------
+   TABLES (bordered, zebra, sortable) — Wikipedia formatting preserved
+--------------------------------------------------------------------------- */
+.md-typeset table:not([class]) {
+  border: 1px solid var(--wiki-border);
+  border-collapse: collapse;
+  font-size: 0.74rem;
+}
+.md-typeset table:not([class]) th {
+  background: var(--wiki-panel-2);
+  border: 1px solid var(--wiki-border);
+  text-align: left;
+  font-weight: 700;
+  color: var(--wiki-ink);
+}
+.md-typeset table:not([class]) td {
+  border: 1px solid var(--wiki-border);
+  color: var(--md-default-fg-color);
+}
+.md-typeset table:not([class]) tr:nth-child(even) td {
+  background: var(--wiki-panel);
+}
+
+/* Champion gold highlight (semantic only). */
+.md-typeset .champion { color: var(--wiki-gold); font-weight: 700; }
+.md-typeset table:not([class]) tr.champion-row > td {
+  background: color-mix(in srgb, var(--wiki-gold) 14%, var(--md-default-bg-color));
+}
+
+/* ---------------------------------------------------------------------------
+   MISC
+--------------------------------------------------------------------------- */
+.md-typeset .admonition.info { border-left: 4px solid var(--md-accent-fg-color); }
+
+/* Honor reduced motion (no infinite loops are used, but be safe). */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

@@ -11,7 +11,7 @@ The ledger of greatness and shame. Standings-driven records are computed automat
 
 | Owner / Team | Titles | Years |
 |--------------|--------|-------|
-| _TBD_ | 0 | — |
+| _TBD_ | 0 | - |
 
 ## Single-Season Records
 
@@ -34,7 +34,7 @@ The ledger of greatness and shame. Standings-driven records are computed automat
 
 ## 🍗 The "Poultry Controversy" Board
 
-A hall of fame for the league's most infamous moments — bad beats, vetoed trades, and questionable lineup decisions.
+A hall of fame for the league's most infamous moments - bad beats, vetoed trades, and questionable lineup decisions.
 
 | Year | Incident | Accused |
 |------|----------|---------|

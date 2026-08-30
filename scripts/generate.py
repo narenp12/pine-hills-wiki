@@ -29,6 +29,18 @@ import re
 import sys
 from pathlib import Path
 
+# Normalize dashes in generated Markdown. Em-dash (—) and en-dash (–) are banned
+# by the site's anti-slop style guide (they read as AI tells and break copy
+# lint). Collapse both to a plain ASCII hyphen so generated content stays clean
+# regardless of which template string introduces them.
+_DASHES = {"—": "-", "–": "-"}
+_DASH_RE = re.compile("|".join(re.escape(k) for k in _DASHES))
+
+
+def dash_normalize(text: str) -> str:
+    """Replace em/en-dashes with ASCII hyphen in generated Markdown."""
+    return _DASH_RE.sub(lambda m: _DASHES[m.group(0)], text)
+
 try:
     import yaml
 except ImportError:  # CI may run without PyYAML installed
@@ -670,7 +682,7 @@ def main():
         d = seasons[year]
         # season page
         sp = CONTENT / "seasons" / f"{year}-season.md"
-        sp.write_text(gen_season(year, d, bible, aggregates))
+        sp.write_text(dash_normalize(gen_season(year, d, bible, aggregates)))
         print(f"  wrote {sp.relative_to(ROOT)}")
 
         # team pages data
@@ -698,46 +710,48 @@ def main():
                     )
         dp = CONTENT / "draft" / f"{year}-draft.md"
         dp.write_text(
-            f"---\ntitle: \"{year} Draft\"\ndescription: \"Pine Hills FF {year} draft board.\"\n---\n\n"
-            f"# 🎯 {year} Draft\n\n" + "\n".join(dlines) +
-            f"\n\n## Related\n\n- {wikilink('Draft History')} · {wikilink(f'{year} Season')}\n"
+            dash_normalize(
+                f"---\ntitle: \"{year} Draft\"\ndescription: \"Pine Hills FF {year} draft board.\"\n---\n\n"
+                f"# 🎯 {year} Draft\n\n" + "\n".join(dlines) +
+                f"\n\n## Related\n\n- {wikilink('Draft History')} · {wikilink(f'{year} Season')}\n"
+            )
         )
         print(f"  wrote {dp.relative_to(ROOT)}")
 
     # team pages
     for name, ydata in team_years.items():
         tp = CONTENT / "teams" / f"{slug(name)}.md"
-        tp.write_text(gen_team_page(name, ydata, bible, aggregates))
+        tp.write_text(dash_normalize(gen_team_page(name, ydata, bible, aggregates)))
         print(f"  wrote {tp.relative_to(ROOT)}")
 
     all_years = sorted(seasons.keys())
 
     # records index
     rp = CONTENT / "records" / "index.md"
-    rp.write_text(gen_records_index(seasons, aggregates, bible))
+    rp.write_text(dash_normalize(gen_records_index(seasons, aggregates, bible)))
     print(f"  wrote {rp.relative_to(ROOT)}")
 
     # teams index
     tip = CONTENT / "teams" / "index.md"
-    tip.write_text(gen_teams_index(aggregates, bible))
+    tip.write_text(dash_normalize(gen_teams_index(aggregates, bible)))
     print(f"  wrote {tip.relative_to(ROOT)}")
 
     # seasons index
     sip = CONTENT / "seasons" / "index.md"
-    sip.write_text(gen_seasons_index(all_years, bible))
+    sip.write_text(dash_normalize(gen_seasons_index(all_years, bible)))
     print(f"  wrote {sip.relative_to(ROOT)}")
 
     # draft index (scoped to real years — avoids broken links to 2016/2017)
     dip = CONTENT / "draft" / "index.md"
-    dip.write_text(gen_draft_index(all_years, bible))
+    dip.write_text(dash_normalize(gen_draft_index(all_years, bible)))
     print(f"  wrote {dip.relative_to(ROOT)}")
 
     # champions + playoffs (NBA-style)
     cp = CONTENT / "champions.md"
-    cp.write_text(gen_champions_page(all_years, bible))
+    cp.write_text(dash_normalize(gen_champions_page(all_years, bible)))
     print(f"  wrote {cp.relative_to(ROOT)}")
     pp = CONTENT / "playoffs.md"
-    pp.write_text(gen_playoffs_page(all_years, bible))
+    pp.write_text(dash_normalize(gen_playoffs_page(all_years, bible)))
     print(f"  wrote {pp.relative_to(ROOT)}")
 
     # root index — rewrite only the champions table, bounded by markers
@@ -770,7 +784,7 @@ def main():
                     out.extend(rows)
                     out.append("")
                 out.append(line)
-        root.write_text("\n".join(out) + "\n")
+        root.write_text(dash_normalize("\n".join(out) + "\n"))
         print(f"  updated {root.relative_to(ROOT)} (champions table)")
 
     print("Done generating Markdown.")

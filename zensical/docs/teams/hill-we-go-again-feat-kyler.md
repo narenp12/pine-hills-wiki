@@ -9,9 +9,9 @@ description: "Franchise history for Hill We Go… Again (feat Kyler) in the Pine
 <div class="infobox-row"><div class="label">Owner</div><div class="value">_TBD_</div></div>
 <div class="infobox-row"><div class="label">Joined</div><div class="value">_TBD_</div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
-<div class="infobox-row"><div class="label">All-Time</div><div class="value">8–6 (57.1%)</div></div>
+<div class="infobox-row"><div class="label">All-Time</div><div class="value">8-6 (57.1%)</div></div>
 <div class="infobox-row"><div class="label">Points For/Ag.</div><div class="value">1794.40 / 1730.54</div></div>
-<div class="infobox-row"><div class="label">Championships</div><div class="value">_TBD_ _(playoff titles — record in `raw/bible.yaml`)_</div></div>
+<div class="infobox-row"><div class="label">Championships</div><div class="value">_TBD_ _(playoff titles - record in `raw/bible.yaml`)_</div></div>
 </div>
 
 
@@ -22,24 +22,24 @@ description: "Franchise history for Hill We Go… Again (feat Kyler) in the Pine
 
 ## Franchise Summary
 
-- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Championships:** _TBD_ _(playoff titles - record in `raw/bible.yaml`)_
 - **Regular-Season 1-Seeds:** 0
 - **Runner-Up Finishes (regular season):** 0
 - **Playoff Appearances:** 0 / 1 seasons
-- **All-Time Record:** 8–6 (57.1%)
+- **All-Time Record:** 8-6 (57.1%)
 - **All-Time Points For / Against:** 1794.40 / 1730.54
 
 ## Season Log
 
-| Year | W–L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
+| Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2022 | 8–6 | 8 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
+| 2022 | 8-6 | 8 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
 
 ## Rivalries
 
 | Opponent | H2H Record | Notable Meeting |
 |----------|-----------|-----------------|
-| _TBD_ | _TBD_–_TBD_ | _TBD_ |
+| _TBD_ | _TBD_-_TBD_ | _TBD_ |
 
 ## Signature Moments
 

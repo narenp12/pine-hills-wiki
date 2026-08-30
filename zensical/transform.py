@@ -17,6 +17,15 @@ import os
 import re
 from pathlib import Path
 
+# Em-dash (—) and en-dash (–) are banned by the site style guide (AI-tell lint).
+# Collapse generated/transformed Markdown dashes to a plain ASCII hyphen.
+_DASHES = {"—": "-", "–": "-"}
+_DASH_RE = re.compile("|".join(re.escape(k) for k in _DASHES))
+
+
+def dash_normalize(text: str) -> str:
+    return _DASH_RE.sub(lambda m: _DASHES[m.group(0)], text)
+
 REPO = Path(__file__).resolve().parent.parent
 STAGE = REPO / "zensical" / ".stage"   # raw generated Markdown (gitignored)
 DST = REPO / "zensical" / "docs"        # final Zensical sources
@@ -144,7 +153,7 @@ def main() -> None:
         if rel == "index.md" and dst.exists():
             out = inject_champions_table(dst.read_text(), out)
         dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_text(out)
+        dst.write_text(dash_normalize(out))
         count += 1
     print(f"[transform] wrote {count} pages -> {DST}")
     print("[transform] NOTE: zensical/docs/stylesheets and zensical/docs/javascripts "

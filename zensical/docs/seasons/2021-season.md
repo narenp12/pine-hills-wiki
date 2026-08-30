@@ -1,6 +1,6 @@
 ---
 title: "2021 Season"
-description: "Pine Hills Fantasy Football League — 2021 season."
+description: "Pine Hills Fantasy Football League - 2021 season."
 season: 2021
 year: 2021
 ---
@@ -16,18 +16,18 @@ year: 2021
 
 > Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
 
-| Rank | Team | Owner | W–L | PF | PA | Playoff Seed |
+| Rank | Team | Owner | W-L | PF | PA | Playoff Seed |
 |------|------|-------|-----|----|----|--------------|
-| 1 | varun’s victorious team | _TBD_ | 6–8 | 1807.58 | 1799.58 | 1 |
-| 2 | Super Squirrels | _TBD_ | 11–3 | 1980.66 | 1752.36 | 2 |
-| 3 | Roger That | _TBD_ | 7–7 | 1680.32 | 1643.08 | 3 |
-| 4 | Tanmay's Top-Notch Team | _TBD_ | 8–6 | 1785.16 | 1642.12 | 4 |
-| 5 | The Herbs | _TBD_ | 6–8 | 1772.12 | 1688.02 | — |
-| 6 | most likely injured | _TBD_ | 6–8 | 1686.7 | 1794.56 | — |
-| 7 | The Johnson and Johnson team | _TBD_ | 8–6 | 1727.72 | 1760.48 | — |
-| 8 | Sharman’s Scorpions | _TBD_ | 8–6 | 1691.44 | 1778.26 | — |
-| 9 | Anish's Awesome Team | _TBD_ | 6–8 | 1629.4 | 1731.14 | — |
-| 10 | Michael's Marvelous Team | _TBD_ | 4–10 | 1607.88 | 1779.38 | — |
+| 1 | varun’s victorious team | _TBD_ | 6-8 | 1807.58 | 1799.58 | 1 |
+| 2 | Super Squirrels | _TBD_ | 11-3 | 1980.66 | 1752.36 | 2 |
+| 3 | Roger That | _TBD_ | 7-7 | 1680.32 | 1643.08 | 3 |
+| 4 | Tanmay's Top-Notch Team | _TBD_ | 8-6 | 1785.16 | 1642.12 | 4 |
+| 5 | The Herbs | _TBD_ | 6-8 | 1772.12 | 1688.02 | - |
+| 6 | most likely injured | _TBD_ | 6-8 | 1686.7 | 1794.56 | - |
+| 7 | The Johnson and Johnson team | _TBD_ | 8-6 | 1727.72 | 1760.48 | - |
+| 8 | Sharman’s Scorpions | _TBD_ | 8-6 | 1691.44 | 1778.26 | - |
+| 9 | Anish's Awesome Team | _TBD_ | 6-8 | 1629.4 | 1731.14 | - |
+| 10 | Michael's Marvelous Team | _TBD_ | 4-10 | 1607.88 | 1779.38 | - |
 
 ## Playoff Bracket
 
@@ -59,7 +59,7 @@ flowchart LR
 
 ## The Story of the Year
 
-_TBD — add the defining moments._
+_TBD - add the defining moments._
 
 ## Related
 

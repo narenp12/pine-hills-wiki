@@ -16,7 +16,7 @@ dev_addr = "localhost:7860"
 
 # Custom CSS / JS are TOP-LEVEL [project] keys (not under [project.theme]).
 extra_css = [
-  "stylesheets/wikipedia-v2.css",
+  "stylesheets/zensical.css",
 ]
 extra_javascript = [
   "https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js",
@@ -24,34 +24,38 @@ extra_javascript = [
 ]
 
 [project.theme]
-variant = "classic"
+variant = "modern"
 features = [
   "navigation.instant",
   "navigation.instant.prefetch",
   "navigation.instant.progress",
+  "navigation.tabs",
   "navigation.sections",
-  "navigation.indexes",
   "navigation.top",
   "navigation.footer",
+  "navigation.indexes",
   "toc.follow",
   "search.highlight",
-  "content.code.annotate",
   "content.code.copy",
   "content.tooltips",
   "content.footnote.tooltips",
+  "announce.dismiss",
+  "header.autohide",
 ]
+font.text = "Source Serif 4"
+font.code = "JetBrains Mono"
 
 [[project.theme.palette]]
 scheme = "default"
 primary = "custom"
-accent = "blue"
+accent = "custom"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
 scheme = "slate"
 primary = "custom"
-accent = "blue"
+accent = "custom"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 
