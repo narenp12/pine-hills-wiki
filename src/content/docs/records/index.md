@@ -5,7 +5,7 @@ description: All-time records, single-season feats, and dubious achievements of 
 
 # 📊 Records
 
-The ledger of greatness and shame. Updated as seasons conclude.
+The ledger of greatness and shame. Standings-driven records are computed automatically from captured Yahoo data; playoff-era records (championships, awards) are recorded in the league bible (`raw/bible.yaml`).
 
 ## All-Time Championships
 
@@ -17,19 +17,19 @@ The ledger of greatness and shame. Updated as seasons conclude.
 
 | Record | Holder | Value | Year |
 |--------|--------|-------|------|
-| Most Points For (season) | _TBD_ | _TBD_ | _TBD_ |
+| Most Points For (season) | Super Squirrels | 1980.66 | 2021 |
 | Fewest Points For (season) | _TBD_ | _TBD_ | _TBD_ |
 | Highest Single-Week Score | _TBD_ | _TBD_ | _TBD_ |
 | Lowest Single-Week Score | _TBD_ | _TBD_ | _TBD_ |
-| Best Regular-Season Record | _TBD_ | _TBD_ | _TBD_ |
+| Best Regular-Season Record | Sharman’s Scorpions | 81.8% | 2018 |
 | Worst Regular-Season Record | _TBD_ | _TBD_ | _TBD_ |
 
 ## Career Records
 
 | Record | Holder | Value |
 |--------|--------|-------|
-| Most Career Wins | _TBD_ | _TBD_ |
-| Most Playoff Appearances | _TBD_ | _TBD_ |
+| Most Career Wins | Super Squirrels | 62 |
+| Most Playoff Appearances | Roger That | 4 |
 | Longest Win Streak | _TBD_ | _TBD_ |
 
 ## 🍗 The "Poultry Controversy" Board
@@ -42,4 +42,4 @@ A hall of fame for the league's most infamous moments — bad beats, vetoed trad
 
 ## Related
 
-- [[Seasons]] · [[Teams]] · [[Draft History]] · [[Lore]]
+- [[Seasons]] · [[Teams]] · [[Draft History]] · [[Lore]] · [[Champions]]

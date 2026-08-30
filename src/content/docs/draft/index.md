@@ -19,14 +19,12 @@ The annual rite. Every pick, every reach, every steal. Each draft page lists the
 | 2020 | [[2020 Draft]] | _TBD_ |
 | 2019 | [[2019 Draft]] | _TBD_ |
 | 2018 | [[2018 Draft]] | _TBD_ |
-| 2017 | [[2017 Draft]] | _TBD_ |
-| 2016 | [[2016 Draft]] | _TBD_ |
 
 ## What a Draft Page Includes
 
 - **Full pick-by-pick board** — round, overall pick, team, player, position.
 - **Reach / Steal flags** — picks that aged well or badly.
-- **Link to post-draft rosters** — see each team's [[Roster Template|post-draft roster]].
+- **Link to post-draft rosters** — see each team's [[Roster Template]] post-draft roster.
 - **Notable storylines** — the auto-drafter, the guy who fell, the panic pick.
 
 > Documenting a draft? Use the [[Draft Template]].

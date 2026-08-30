@@ -28,6 +28,8 @@ export default defineConfig({
         { label: 'Seasons', items: [{ autogenerate: { directory: 'seasons' } }] },
         { label: 'Teams', items: [{ autogenerate: { directory: 'teams' } }] },
         { label: 'Records', link: '/records/' },
+        { label: 'Champions', link: '/champions/' },
+        { label: 'Playoffs', link: '/playoffs/' },
         { label: 'Draft History', items: [{ autogenerate: { directory: 'draft' } }] },
         { label: 'Lore', link: '/lore/' },
       ],

@@ -1,9 +1,9 @@
 ---
-title: "most likely injured"
-description: "Franchise history for most likely injured in the Pine Hills Fantasy Football League."
+title: "CHOPSTIX"
+description: "Franchise history for CHOPSTIX in the Pine Hills Fantasy Football League."
 ---
 
-# 🏈 most likely injured
+# 🏈 CHOPSTIX
 
 **Owner:** _TBD_
 **Joined:** _TBD_
@@ -14,15 +14,16 @@ description: "Franchise history for most likely injured in the Pine Hills Fantas
 - **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
 - **Regular-Season 1-Seeds:** 0
 - **Runner-Up Finishes (regular season):** 0
-- **Playoff Appearances:** 0 / 1 seasons
-- **All-Time Record:** 6–8 (42.9%)
-- **All-Time Points For / Against:** 1686.70 / 1794.56
+- **Playoff Appearances:** 1 / 2 seasons
+- **All-Time Record:** 7–19 (26.9%)
+- **All-Time Points For / Against:** 2806.00 / 3372.64
 
 ## Season Log
 
 | Year | W–L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2021 | 6–8 | 6 | No | [[2021 most-likely-injured Post-Draft|Post-Draft]] | [[2021 most-likely-injured End-of-Season|End-of-Season]] | _TBD_ |
+| 2019 | 5–8 | 7 | No | [[2019 chopstix Post-Draft|Post-Draft]] | [[2019 chopstix End-of-Season|End-of-Season]] | _TBD_ |
+| 2020 | 2–11 | 4 | Yes | [[2020 chopstix Post-Draft|Post-Draft]] | [[2020 chopstix End-of-Season|End-of-Season]] | _TBD_ |
 
 ## Rivalries
 

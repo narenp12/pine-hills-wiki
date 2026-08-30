@@ -5,16 +5,18 @@ description: "Franchise history for BBigg MACKS in the Pine Hills Fantasy Footba
 
 # 🏈 BBigg MACKS
 
-**Owner:** Naren
+**Owner:** _TBD_
 **Joined:** _TBD_
 **Status:** Active
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** 0
+- **Runner-Up Finishes (regular season):** 1
+- **Playoff Appearances:** 1 / 1 seasons
+- **All-Time Record:** 11–3 (78.6%)
+- **All-Time Points For / Against:** 1874.16 / 1444.54
 
 ## Season Log
 

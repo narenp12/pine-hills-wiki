@@ -5,21 +5,24 @@ description: "Franchise history for Jayesh's Great Team in the Pine Hills Fantas
 
 # 🏈 Jayesh's Great Team
 
-**Owner:** 
+**Owner:** _TBD_
 **Joined:** _TBD_
 **Status:** Active
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** 0
+- **Runner-Up Finishes (regular season):** 1
+- **Playoff Appearances:** 1 / 2 seasons
+- **All-Time Record:** 12–16 (42.9%)
+- **All-Time Points For / Against:** 2784.60 / 3129.46
 
 ## Season Log
 
 | Year | W–L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
+| 2024 | 6–8 | 2 | Yes | [[2024 jayesh-s-great-team Post-Draft|Post-Draft]] | [[2024 jayesh-s-great-team End-of-Season|End-of-Season]] | _TBD_ |
 | 2025 | 6–8 | 10 | No | [[2025 jayesh-s-great-team Post-Draft|Post-Draft]] | [[2025 jayesh-s-great-team End-of-Season|End-of-Season]] | _TBD_ |
 
 ## Rivalries

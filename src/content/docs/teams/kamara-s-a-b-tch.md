@@ -5,16 +5,18 @@ description: "Franchise history for Kamara’s a b*tch in the Pine Hills Fantasy
 
 # 🏈 Kamara’s a b*tch
 
-**Owner:** Naren
+**Owner:** _TBD_
 **Joined:** _TBD_
 **Status:** Active
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** 0
+- **Runner-Up Finishes (regular season):** 0
+- **Playoff Appearances:** 0 / 1 seasons
+- **All-Time Record:** 11–3 (78.6%)
+- **All-Time Points For / Against:** 1749.22 / 1589.04
 
 ## Season Log
 

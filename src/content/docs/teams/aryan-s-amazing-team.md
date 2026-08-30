@@ -5,16 +5,18 @@ description: "Franchise history for Aryan's Amazing Team in the Pine Hills Fanta
 
 # 🏈 Aryan's Amazing Team
 
-**Owner:** 
+**Owner:** _TBD_
 **Joined:** _TBD_
 **Status:** Active
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** 0
+- **Runner-Up Finishes (regular season):** 0
+- **Playoff Appearances:** 0 / 1 seasons
+- **All-Time Record:** 6–7 (46.2%)
+- **All-Time Points For / Against:** 1538.10 / 1652.80
 
 ## Season Log
 

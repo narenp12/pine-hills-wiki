@@ -7,25 +7,27 @@ year: 2018
 
 # 🏈 2018 Season
 
-**Champion:** Curry’s legit team
+**Champion:** _TBD_
 **Runner-Up:** _TBD_
 **Regular Season Top Seed:** _TBD_
 **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
 
-> Auto-generated from Yahoo. Edit `_TBD_` fields and add narrative.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
 
 | Rank | Team | Owner | W–L | PF | PA | Playoff Seed |
 |------|------|-------|-----|----|----|--------------|
-| 1 | Curry’s legit team |  | 4–7 | 1406.78 | 1614.6 | 1 |
-| 2 | Anish's Awesome Team |  | 3–7 | 1523.54 | 1590.72 | 2 |
-| 3 | D4rthSi Dragons | Naren | 8–3 | 1736.5 | 1545.16 | 3 |
-| 4 | Sharman’s Scorpions |  | 9–2 | 1754.04 | 1523.54 | 4 |
-| 5 | Roger That |  | 4–6 | 1632.38 | 1703.34 | — |
-| 6 | Super Squirrels |  | 4–7 | 1450.44 | 1526.32 | — |
+| 1 | Curry’s legit team | _TBD_ | 4–7 | 1406.78 | 1614.6 | 1 |
+| 2 | Anish's Awesome Team | _TBD_ | 3–7 | 1523.54 | 1590.72 | 2 |
+| 3 | D4rthSi Dragons | _TBD_ | 8–3 | 1736.5 | 1545.16 | 3 |
+| 4 | Sharman’s Scorpions | _TBD_ | 9–2 | 1754.04 | 1523.54 | 4 |
+| 5 | Roger That | _TBD_ | 4–6 | 1632.38 | 1703.34 | — |
+| 6 | Super Squirrels | _TBD_ | 4–7 | 1450.44 | 1526.32 | — |
 
 ## Playoff Bracket
+
+> Playoff results are recorded in the league bible. Add `champions: { 2018: { champion: ..., runner_up: ... } }` to `raw/bible.yaml` to populate this section.
 
 ```mermaid
 flowchart LR
@@ -42,7 +44,6 @@ flowchart LR
 | Team | Post-Draft Roster | End-of-Season Roster |
 |------|-------------------|----------------------|
 
-
 ## Awards
 
 - 🏆 **League Champion:** _TBD_
@@ -58,4 +59,4 @@ _TBD — add the defining moments._
 
 ## Related
 
-- [[Seasons]] · [[2018 Draft]] · [[Teams]] · [[Records]] · [[Lore]]
+- [[Seasons]] · [[2018 Draft]] · [[Teams]] · [[Records]] · [[Lore]] · [[Playoffs]]

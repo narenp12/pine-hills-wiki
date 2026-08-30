@@ -11,10 +11,12 @@ description: "Franchise history for Save Me in the Pine Hills Fantasy Football L
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** _TBD_ _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** 0
+- **Runner-Up Finishes (regular season):** 0
+- **Playoff Appearances:** 1 / 1 seasons
+- **All-Time Record:** 7–7 (50.0%)
+- **All-Time Points For / Against:** 1657.02 / 1648.02
 
 ## Season Log
 

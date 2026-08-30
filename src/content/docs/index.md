@@ -13,8 +13,7 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 
 ## 🏆 Champions by Year
 
-| Year | Champion | Runner-Up | Regular Season Top Seed |
-|------|----------|-----------|-------------------------|
+<!-- champions-table:start -->
 | 2025 | _TBD_ | _TBD_ | _TBD_ |
 | 2024 | _TBD_ | _TBD_ | _TBD_ |
 | 2023 | _TBD_ | _TBD_ | _TBD_ |
@@ -23,8 +22,7 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 | 2020 | _TBD_ | _TBD_ | _TBD_ |
 | 2019 | _TBD_ | _TBD_ | _TBD_ |
 | 2018 | _TBD_ | _TBD_ | _TBD_ |
-| 2017 | _TBD_ | _TBD_ | _TBD_ |
-| 2016 | _TBD_ | _TBD_ | _TBD_ |
+<!-- champions-table:end -->
 
 ## 📚 Explore the Wiki
 

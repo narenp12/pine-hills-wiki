@@ -1,27 +1,49 @@
 """
-Generate Quartz Markdown wiki pages from raw/ JSON (produced by extract.py).
+Generate Wikipedia-style Markdown wiki pages for the Pine Hills Fantasy
+Football League from raw/ JSON (produced by extract.py) plus a hand-maintained
+raw/bible.yaml of human-only facts.
 
-Builds:
-  content/seasons/<year>-season.md        season page w/ standings, playoffs, rosters
-  content/rosters/<year>/<team>-post-draft.md
-  content/rosters/<year>/<team>-end-of-season.md
-  content/teams/<team>.md                 franchise page w/ season log + roster links
-  content/records/index.md                (recomputed aggregate)
-  content/draft/<year>-draft.md           pick-by-pick
+Design principle — NEVER FABRICATE:
+  * Facts derivable from captured Yahoo data (standings + draft) are computed.
+  * Facts that are NOT in the data (owners, champions, playoff results, lore)
+    come ONLY from raw/bible.yaml. If absent there, the page shows "_TBD_".
+  * The regular-season #1 is NOT assumed to be the champion (this is a playoff
+    league). Champion is a bible-only field.
+
+Builds / rewrites:
+  src/content/docs/seasons/<year>-season.md     (standings, playoffs stub, awards)
+  src/content/docs/teams/<slug>.md              (franchise page + season log)
+  src/content/docs/records/index.md             (all-time + single-season leaders)
+  src/content/docs/teams/index.md               (franchise table)
+  src/content/docs/seasons/index.md             (champions-by-year table)
+  src/content/docs/index.md                     (root champions table)
+  src/content/docs/champions.md                 (NBA-style "List of champions")
+  src/content/docs/playoffs.md                  (NBA-style "Playoffs / Finals")
 
 Run:  python scripts/generate.py
 """
 
 import json
 import re
+import sys
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError:  # CI may run without PyYAML installed
+    yaml = None
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
 CONTENT = ROOT / "src" / "content" / "docs"
+BIBLE_PATH = RAW / "bible.yaml"
+
+TBD = "_TBD_"
 
 
-# ---------- helpers -------------------------------------------------------
+# --------------------------------------------------------------------------- #
+# helpers
+# --------------------------------------------------------------------------- #
 def slug(s: str) -> str:
     s = re.sub(r"[^a-zA-Z0-9]+", "-", s.lower()).strip("-")
     return s or "team"
@@ -30,6 +52,8 @@ def slug(s: str) -> str:
 def load_raw():
     seasons = {}
     for f in sorted(RAW.glob("*.json")):
+        if f.name == "bible.yaml":
+            continue
         try:
             d = json.loads(f.read_text())
             seasons[int(d["season"])] = d
@@ -38,75 +62,168 @@ def load_raw():
     return seasons
 
 
+def load_bible():
+    if not BIBLE_PATH.exists():
+        return {}
+    if yaml is None:
+        print(
+            "  ! PyYAML not installed — skipping league bible "
+            "(owners/champions will be _TBD_). Install pyyaml for full data.",
+            file=sys.stderr,
+        )
+        return {}
+    return yaml.safe_load(BIBLE_PATH.read_text()) or {}
+
+
 def wikilink(title: str, label=None) -> str:
     return f"[[{title}]]" if label is None else f"[[{title}|{label}]]"
 
 
-# ---------- sections ------------------------------------------------------
-def roster_block(team_name, owner, snapshot, roster_data):
-    """Render a starter/bench table from yfpy roster data (best effort)."""
-    lines = [
-        f"**Team:** {team_name}",
-        f"**Owner:** {owner}",
-        f"**Snapshot:** {snapshot}",
-        "",
-        "| Position | Player | Notes |",
-        "|----------|--------|-------|",
-    ]
-    players = []
-    if isinstance(roster_data, dict):
-        players = roster_data.get("players", roster_data.get("roster", []))
-    if isinstance(players, dict):
-        players = players.get("players", [])
-    if not isinstance(players, list):
-        players = []
-    for p in players:
-        if isinstance(p, dict):
-            name = p.get("name", p.get("player_name", p.get("full_name", "Unknown")))
-            pos = p.get("position", p.get("display_position", "—"))
-            line = f"| {pos} | {name} | _TBD_ |"
-        else:
-            line = f"| — | {p} | _TBD_ |"
-        lines.append(line)
-    if not players:
-        lines.append("| — | _No data pulled_ | — |")
-    return "\n".join(lines)
+def standings_teams(d):
+    st = d.get("standings", {}) or {}
+    st = st.get("standings", st) if isinstance(st, dict) else st
+    tl = st.get("teams", []) if isinstance(st, dict) else []
+    return tl
 
 
-def gen_season(year, d, all_teams):
-    standings = d.get("standings") or {}
-    teams = d.get("teams") or []
-    draft = d.get("draft") or {}
-    weeks = d.get("weeks", {})
-    playoffs = d.get("playoffs", {}) or {}
+# --------------------------------------------------------------------------- #
+# aggregate: cross-year franchise stats (data-derivable only)
+# --------------------------------------------------------------------------- #
+def build_aggregates(seasons):
+    """Return {canonical_name: stats}. Stats are purely data-derived."""
+    # alias map: every known name -> canonical
+    bible = load_bible()
+    aliases = bible.get("aliases", {}) or {}
+    name2canon = {}
+    for canon, names in (aliases or {}).items():
+        name2canon[canon] = canon
+        for n in names:
+            name2canon[n] = canon
 
-    # post-draft rosters = weeks["1"]["rosters"], end-of = last week with rosters
-    post = weeks.get("1", {}).get("rosters", {})
-    end = {}
-    for wk in ("18", "17", "16", "15"):
-        if wk in weeks and weeks[wk].get("rosters"):
-            end = weeks[wk]["rosters"]
-            break
+    franchises = {}  # canon -> dict
 
-    roster_rows = []
-    for tk in post.keys() | end.keys():
-        tname = all_teams.get(tk, {}).get("name", tk)
-        owner = all_teams.get(tk, {}).get("owner", "Unknown")
-        pd_link = wikilink(f"{year} {slug(tname)} Post-Draft", "Post-Draft")
-        eo_link = wikilink(f"{year} {slug(tname)} End-of-Season", "End-of-Season")
-        roster_rows.append(f"| {tname} | {pd_link} | {eo_link} |")
+    for year in sorted(seasons):
+        d = seasons[year]
+        for t in standings_teams(d):
+            name = t.get("name", "Unknown")
+            canon = name2canon.get(name, name)
+            f = franchises.setdefault(
+                canon,
+                {
+                    "names": set(),
+                    "years": [],
+                    "wins": 0,
+                    "losses": 0,
+                    "pf": 0.0,
+                    "pa": 0.0,
+                    "playoff_appears": 0,
+                    "seasons_count": 0,
+                    "best_pf_season": (0.0, year),
+                    "worst_pf_season": (1e9, year),
+                    "best_wpct_season": (0.0, year, 0, 0),
+                    "finishes": [],  # (rank, year)
+                },
+            )
+            f["names"].add(name)
+            f["years"].append(year)
+            f["seasons_count"] += 1
+            w = int(t.get("wins", 0))
+            l = int(t.get("losses", 0))
+            pf = float(t.get("points_for", 0) or 0)
+            pa = float(t.get("points_against", 0) or 0)
+            f["wins"] += w
+            f["losses"] += l
+            f["pf"] += pf
+            f["pa"] += pa
+            rank = int(t.get("rank", 99))
+            f["finishes"].append((rank, year))
+            # playoff seed = top 4 (Yahoo rank 1..4)
+            if rank <= 4:
+                f["playoff_appears"] += 1
+            # best/worst single-season PF
+            if pf > f["best_pf_season"][0]:
+                f["best_pf_season"] = (pf, year)
+            if 0 < pf < f["worst_pf_season"][0]:
+                f["worst_pf_season"] = (pf, year)
+            gp = w + l
+            pct = (w / gp) if gp else 0.0
+            if pct > f["best_wpct_season"][0]:
+                f["best_wpct_season"] = (pct, year, w, l)
 
-    champ = "TBD"
-    try:
-        # standings structure varies; best effort
-        s = standings
-        if isinstance(s, dict):
-            s = s.get("standings", s)
-        if isinstance(s, dict) and "teams" in s:
-            first = s["teams"][0]
-            champ = first.get("name", champ)
-    except Exception:  # noqa: BLE001
-        pass
+    # finalize
+    out = {}
+    for canon, f in franchises.items():
+        gp = f["wins"] + f["losses"]
+        out[canon] = {
+            "names": sorted(f["names"]),
+            "years": sorted(f["years"]),
+            "seasons_count": f["seasons_count"],
+            "wins": f["wins"],
+            "losses": f["losses"],
+            "gp": gp,
+            "wpct": (f["wins"] / gp) if gp else 0.0,
+            "pf": round(f["pf"], 2),
+            "pa": round(f["pa"], 2),
+            "playoff_appears": f["playoff_appears"],
+            "best_pf_season": f["best_pf_season"],
+            "worst_pf_season": f["worst_pf_season"],
+            "best_wpct_season": f["best_wpct_season"],
+            "finishes": sorted(f["finishes"]),
+        }
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# bible accessors
+# --------------------------------------------------------------------------- #
+def get_owners(bible):
+    return bible.get("owners", {}) or {}
+
+
+def get_champions(bible):
+    return bible.get("champions", {}) or {}
+
+
+def champ_year(bible, year):
+    """Return the champion dict for a year, tolerant of str/int keys.
+    bibles use integer years; be defensive about string keys too."""
+    champs = get_champions(bible)
+    return champs.get(int(year), champs.get(str(year), {})) or {}
+
+
+def champ_fields(bible, year):
+    """Return (champion, runner_up, top_seed, toilet_winner) for a year,
+    defaulting each missing field to TBD."""
+    c = champ_year(bible, year)
+    return (
+        c.get("champion") or TBD,
+        c.get("runner_up") or TBD,
+        c.get("top_seed") or TBD,
+        c.get("toilet_winner") or TBD,
+    )
+
+
+# --------------------------------------------------------------------------- #
+# page generators
+# --------------------------------------------------------------------------- #
+def gen_season(year, d, bible, aggregates):
+    teams = standings_teams(d)
+    owners = get_owners(bible)
+    champ, runner, top_seed, toilet = champ_fields(bible, year)
+
+    rows = []
+    for i, t in enumerate(sorted(teams, key=lambda x: int(x.get("rank", 99))), 1):
+        rank = int(t.get("rank", i))
+        name = t.get("name", "?")
+        owner = owners.get(name, "") or TBD
+        w = t.get("wins", 0)
+        l = t.get("losses", 0)
+        pf = t.get("points_for", "?")
+        pa = t.get("points_against", "?")
+        seed = i if i <= 4 else "—"
+        rows.append(
+            f"| {rank} | {name} | {owner} | {w}–{l} | {pf} | {pa} | {seed} |"
+        )
 
     md = f"""---
 title: "{year} Season"
@@ -118,126 +235,84 @@ year: {year}
 # 🏈 {year} Season
 
 **Champion:** {champ}
-**Runner-Up:** _TBD_
-**Regular Season Top Seed:** _TBD_
-**Toilet Bowl Winner:** _TBD_
+**Runner-Up:** {runner}
+**Regular Season Top Seed:** {top_seed}
+**Toilet Bowl Winner:** {toilet}
 
 ## Final Standings
 
-> Auto-generated from Yahoo. Edit `_TBD_` fields and add narrative.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
 
 | Rank | Team | Owner | W–L | PF | PA | Playoff Seed |
 |------|------|-------|-----|----|----|--------------|
-"""
+{chr(10).join(rows)}
 
-    # standings table rows
-    try:
-        st = standings
-        if isinstance(st, dict):
-            st = st.get("standings", st)
-        team_list = st.get("teams", []) if isinstance(st, dict) else []
-        for i, t in enumerate(team_list, 1):
-            # Show Yahoo's REAL final rank, not the row position. Yahoo can rank two
-            # teams equally (2020 has two rank-7 teams), so positional numbering
-            # misreported a team's finish.
-            rank = t.get("rank") or i
-            md += f"| {rank} | {t.get('name','?')} | {t.get('owner','?')} | {t.get('wins',0)}–{t.get('losses',0)} | {t.get('points_for','?')} | {t.get('points_against','?')} | {i if i<=4 else '—'} |\n"
-    except Exception:  # noqa: BLE001
-        md += "| _TBD_ | _TBD_ | _TBD_ | 0–0 | 0 | 0 | — |\n"
+## Playoff Bracket
 
-    # ---- Playoff bracket (data-driven from Yahoo matchups) ----
-    po_weeks = playoffs.get("weeks", {}) if isinstance(playoffs, dict) else {}
-    if po_weeks:
-        md += "\n## Playoff Bracket\n\n```mermaid\nflowchart TD\n"
-        # assign node ids per (week, matchup index)
-        winner_nodes = []
-        for wk in sorted(po_weeks, key=int):
-            mus = po_weeks[wk]
-            if not isinstance(mus, list):
-                continue
-            for i, mu in enumerate(mus):
-                teams = mu.get("teams", []) if isinstance(mu, dict) else []
-                nid = f"w{wk}m{i}"
-                labels = []
-                for t in teams:
-                    nm = t.get("name", "Unknown")
-                    sc = t.get("score")
-                    mark = "🏆" if t.get("is_winner") else ""
-                    labels.append(f"{nm} ({sc}) {mark}".strip())
-                node_text = " vs ".join(labels) if labels else f"Matchup {i+1}"
-                md += f"    {nid}[\"{node_text}\"]\n"
-                # track winner for chaining to next round
-                for t in teams:
-                    if t.get("is_winner"):
-                        winner_nodes.append((wk, nid, t.get("name", "Unknown")))
-        # chain winners forward: a winner of week N feeds an implicit next round.
-        # Simple linear chaining: connect each winner node to the next week's first node.
-        prev = None
-        for wk, nid, _ in sorted(set((w, n, nm) for w, n, nm in winner_nodes), key=lambda x: int(x[0])):
-            if prev:
-                md += f"    {prev} --> {nid}\n"
-            prev = nid
-        md += "```\n\n"
-        # Also a plain-text weekly results table (renders even if mermaid is off)
-        md += "### Playoff Results by Week\n\n"
-        for wk in sorted(po_weeks, key=int):
-            mus = po_weeks[wk]
-            if not isinstance(mus, list):
-                continue
-            md += f"**Week {wk}**\n\n| Matchup | Team | Score | Winner |\n|---------|------|-------|--------|\n"
-            for mi, mu in enumerate(mus, 1):
-                teams = mu.get("teams", []) if isinstance(mu, dict) else []
-                for t in teams:
-                    nm = t.get("name", "Unknown")
-                    sc = t.get("score", "—")
-                    w = "✅" if t.get("is_winner") else ""
-                    md += f"| {mi} | {nm} | {sc} | {w} |\n"
-            md += "\n"
-    else:
-        md += "\n## Playoff Bracket\n\n```mermaid\nflowchart LR\n"
-        md += "    S1[Seed 1] --> W1\n    S4[Seed 4] --> W1\n"
-        md += "    S2[Seed 2] --> W2\n    S3[Seed 3] --> W2\n"
-        md += "    W1 --> Champ[🏆 Champion]\n    W2 --> Champ\n```\n\n"
+> Playoff results are recorded in the league bible. Add `champions: {{ {year}: {{ champion: ..., runner_up: ... }} }}` to `raw/bible.yaml` to populate this section.
 
-    md += "## Team Rosters\n\n"
-    md += "| Team | Post-Draft Roster | End-of-Season Roster |\n|------|-------------------|----------------------|\n"
-    md += "\n".join(roster_rows) + "\n\n"
+```mermaid
+flowchart LR
+    S1[Seed 1] --> W1
+    S4[Seed 4] --> W1
+    S2[Seed 2] --> W2
+    S3[Seed 3] --> W2
+    W1 --> Champ[🏆 Champion]
+    W2 --> Champ
+```
 
-    md += "## Awards\n\n"
-    md += "- 🏆 **League Champion:** _TBD_\n- 💥 **Highest Single-Week Score:** _TBD_\n"
-    md += "- 📉 **Lowest Single-Week Score:** _TBD_\n- 🔥 **Biggest Bust:** _TBD_\n"
-    md += "- 🎯 **Best Draft Pick:** _TBD_\n- 🍗 **\"Poultry Controversy\" Nominee:** _TBD_\n\n"
+## Team Rosters
 
-    md += "## The Story of the Year\n\n_TBD — add the defining moments._\n\n"
-    md += f"## Related\n\n- {wikilink('Seasons')} · {wikilink(f'{year} Draft')} · {wikilink('Teams')} · {wikilink('Records')} · {wikilink('Lore')}\n"
-    return md
+| Team | Post-Draft Roster | End-of-Season Roster |
+|------|-------------------|----------------------|
 
+## Awards
 
-def gen_roster_page(year, team_key, team_name, owner, snapshot, roster_data):
-    body = roster_block(team_name, owner, snapshot, roster_data)
-    return f"""---
-title: "{year} {team_name} — {snapshot} Roster"
-description: "{year} {team_name} {snapshot.lower()} roster."
----
+- 🏆 **League Champion:** {champ}
+- 💥 **Highest Single-Week Score:** {TBD}
+- 📉 **Lowest Single-Week Score:** {TBD}
+- 🔥 **Biggest Bust:** {TBD}
+- 🎯 **Best Draft Pick:** {TBD}
+- 🍗 **"Poultry Controversy" Nominee:** {TBD}
 
-# 📋 {year} {team_name} — {snapshot} Roster
+## The Story of the Year
 
-{body}
+_TBD — add the defining moments._
 
 ## Related
 
-- {wikilink(f'{year} Season')} · {wikilink(team_name)} · {wikilink('Roster Template')}
+- {wikilink('Seasons')} · {wikilink(f'{year} Draft')} · {wikilink('Teams')} · {wikilink('Records')} · {wikilink('Lore')} · {wikilink('Playoffs')}
 """
+    return md
 
 
-def gen_team_page(team_key, info, season_log):
-    name = info.get("name", team_key)
-    owner = info.get("owner", "Unknown")
+def gen_team_page(name, years_data, bible, aggregates):
+    """years_data: list of (year, w, l, rank, playoff_seed_bool, owner)."""
+    owners = get_owners(bible)
+    notes = (bible.get("franchise_notes", {}) or {}).get(name, {})
+    joined = notes.get("joined", TBD) if isinstance(notes, dict) else TBD
+    status = notes.get("status", "Active") if isinstance(notes, dict) else "Active"
+    owner = owners.get(name, "") or TBD
+
+    agg = aggregates.get(name)
+    if agg:
+        titles = sum(1 for (r, y) in agg["finishes"] if r == 1)  # regular-season #1 (not champion)
+        runner_ups = sum(1 for (r, y) in agg["finishes"] if r == 2)
+        pf_str = f"{agg['pf']:.2f}"
+        pa_str = f"{agg['pa']:.2f}"
+        wpct = f"{agg['wpct']*100:.1f}%"
+    else:
+        titles = runner_ups = 0
+        pf_str = pa_str = wpct = TBD
+
     rows = []
-    for year, (w, l, finish, po) in season_log.items():
+    for (year, w, l, rank, po, owner_o) in sorted(years_data, key=lambda x: x[0]):
         pd = wikilink(f"{year} {slug(name)} Post-Draft", "Post-Draft")
         eo = wikilink(f"{year} {slug(name)} End-of-Season", "End-of-Season")
-        rows.append(f"| {year} | {w}–{l} | {finish} | {po} | {pd} | {eo} | _TBD_ |")
+        rows.append(
+            f"| {year} | {w}–{l} | {rank} | {'Yes' if po else 'No'} | {pd} | {eo} | {TBD} |"
+        )
+
     md = f"""---
 title: "{name}"
 description: "Franchise history for {name} in the Pine Hills Fantasy Football League."
@@ -246,27 +321,29 @@ description: "Franchise history for {name} in the Pine Hills Fantasy Football Le
 # 🏈 {name}
 
 **Owner:** {owner}
-**Joined:** _TBD_
-**Status:** Active
+**Joined:** {joined}
+**Status:** {status}
 
 ## Franchise Summary
 
-- **Championships:** _TBD_
-- **Runner-Up Finishes:** _TBD_
-- **Playoff Appearances:** _TBD_
-- **All-Time Record:** _TBD_
+- **Championships:** {TBD} _(playoff titles — record in `raw/bible.yaml`)_
+- **Regular-Season 1-Seeds:** {titles}
+- **Runner-Up Finishes (regular season):** {runner_ups}
+- **Playoff Appearances:** {agg['playoff_appears'] if agg else TBD} / {agg['seasons_count'] if agg else TBD} seasons
+- **All-Time Record:** {agg['wins'] if agg else TBD}–{agg['losses'] if agg else TBD} ({wpct})
+- **All-Time Points For / Against:** {pf_str} / {pa_str}
 
 ## Season Log
 
 | Year | W–L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-{"".join(rows)}
+{chr(10).join(rows)}
 
 ## Rivalries
 
 | Opponent | H2H Record | Notable Meeting |
 |----------|-----------|-----------------|
-| _TBD_ | _TBD_–_TBD_ | _TBD_ |
+| {TBD} | {TBD}–{TBD} | {TBD} |
 
 ## Signature Moments
 
@@ -279,70 +356,334 @@ _TBD._
     return md
 
 
+def gen_records_index(seasons, aggregates, bible):
+    champs = get_champions(bible)
+    # all-time championship tally (from bible only)
+    title_holders = {}
+    for yr, c in champs.items():
+        if isinstance(c, dict) and c.get("champion"):
+            title_holders.setdefault(c["champion"], []).append(yr)
+
+    champ_rows = []
+    if title_holders:
+        for team, yrs in sorted(title_holders.items(), key=lambda x: -len(x[1])):
+            champ_rows.append(
+                f"| {team} | {len(yrs)} | {', '.join(str(y) for y in sorted(yrs))} |"
+            )
+    else:
+        champ_rows.append(f"| {TBD} | 0 | — |")
+
+    # single-season PF leaders (data-derived) — build the full list first
+    pf_sorted = sorted(aggregates.items(), key=lambda x: -x[1]["best_pf_season"][0])
+    pf_all = []
+    for canon, a in pf_sorted:
+        pf, yr = a["best_pf_season"]
+        pf_all.append(f"| Most Points For (season) | {canon} | {pf:.2f} | {yr} |")
+    # pad to a stable length so downstream indexing into pf_all[0] is safe
+    while len(pf_all) < 6:
+        pf_all.append(f"| _TBD_ | _TBD_ | _TBD_ | _TBD_ |")
+    pf_rows = pf_all
+
+    # career leaders
+    by_wins = sorted(aggregates.items(), key=lambda x: -x[1]["wins"])[:1]
+    by_po = sorted(aggregates.items(), key=lambda x: -x[1]["playoff_appears"])[:1]
+    by_streak = sorted(aggregates.items(), key=lambda x: -x[1]["best_wpct_season"][0])[:1]
+
+    md = f"""---
+title: Records
+description: All-time records, single-season feats, and dubious achievements of the Pine Hills Fantasy Football League.
+---
+
+# 📊 Records
+
+The ledger of greatness and shame. Standings-driven records are computed automatically from captured Yahoo data; playoff-era records (championships, awards) are recorded in the league bible (`raw/bible.yaml`).
+
+## All-Time Championships
+
+| Owner / Team | Titles | Years |
+|--------------|--------|-------|
+{chr(10).join(champ_rows)}
+
+## Single-Season Records
+
+| Record | Holder | Value | Year |
+|--------|--------|-------|------|
+{pf_rows[0]}
+| Fewest Points For (season) | {TBD} | {TBD} | {TBD} |
+| Highest Single-Week Score | {TBD} | {TBD} | {TBD} |
+| Lowest Single-Week Score | {TBD} | {TBD} | {TBD} |
+| Best Regular-Season Record | {by_streak[0][0] if by_streak else TBD} | {f"{by_streak[0][1]['best_wpct_season'][0]*100:.1f}%" if by_streak else TBD} | {by_streak[0][1]['best_wpct_season'][1] if by_streak else TBD} |
+| Worst Regular-Season Record | {TBD} | {TBD} | {TBD} |
+
+## Career Records
+
+| Record | Holder | Value |
+|--------|--------|-------|
+| Most Career Wins | {by_wins[0][0] if by_wins else TBD} | {by_wins[0][1]['wins'] if by_wins else TBD} |
+| Most Playoff Appearances | {by_po[0][0] if by_po else TBD} | {by_po[0][1]['playoff_appears'] if by_po else TBD} |
+| Longest Win Streak | {TBD} | {TBD} |
+
+## 🍗 The "Poultry Controversy" Board
+
+A hall of fame for the league's most infamous moments — bad beats, vetoed trades, and questionable lineup decisions.
+
+| Year | Incident | Accused |
+|------|----------|---------|
+| {TBD} | {TBD} | {TBD} |
+
+## Related
+
+- {wikilink('Seasons')} · {wikilink('Teams')} · {wikilink('Draft History')} · {wikilink('Lore')} · {wikilink('Champions')}
+"""
+    return md
+
+
+def gen_teams_index(aggregates, bible):
+    owners = get_owners(bible)
+    champs = get_champions(bible)
+    title_holders = {}
+    for yr, c in champs.items():
+        if isinstance(c, dict) and c.get("champion"):
+            title_holders.setdefault(c["champion"], 0)
+            title_holders[c["champion"]] += 1
+
+    rows = []
+    for canon, a in sorted(aggregates.items(), key=lambda x: x[0].lower()):
+        # pick a representative name (prefer the one that appears latest)
+        rep = a["names"][-1]
+        owner = owners.get(rep, "") or TBD
+        yr_range = f"{a['years'][0]}–"
+        titles = title_holders.get(rep, 0)
+        link = wikilink(rep)
+        rows.append(f"| {rep} | {owner} | {yr_range} | {titles} | {link} |")
+
+    md = f"""---
+title: Teams
+description: Franchise histories and owners of the Pine Hills Fantasy Football League.
+---
+
+# 👥 Teams
+
+Every franchise in Pine Hills history. Each team page tracks the owner, season-by-season results, championships, and head-to-head records. Standings-derived stats are computed automatically; owners and titles come from the league bible.
+
+## Active & Historical Franchises
+
+| Team | Owner | Seasons | Titles | Page |
+|------|-------|---------|--------|------|
+{chr(10).join(rows)}
+
+## Team Pages Should Include
+
+- **Owner & tenure** — who runs it, what years.
+- **Championships** — years won, runner-up finishes.
+- **Season log** — W–L and finish per year.
+- **Rivalries** — head-to-head record vs. nemesis teams.
+- **Signature moments** — the trade that defined them, the meltdown, the heater.
+
+> Building a new team page? Start from {wikilink('Team Template')}.
+"""
+    return md
+
+
+def gen_seasons_index(champs_years, bible):
+    rows = []
+    for yr in sorted(champs_years, reverse=True):
+        champ = champ_year(bible, yr).get("champion") or TBD
+        rows.append(f"| {yr} | {champ} | {TBD} | {wikilink(f'{yr} Season')} |")
+    # include 2016/2017 placeholders if referenced
+    md = f"""---
+title: Seasons
+description: Year-by-year history of the Pine Hills Fantasy Football League.
+---
+
+# 📅 Seasons
+
+Every completed season of the Pine Hills Fantasy Football League. Click a year for the full breakdown — standings, playoff bracket, draft, awards, and the story of the year.
+
+## Season Index
+
+| Year | Champion | Notable Story | Page |
+|------|----------|---------------|------|
+{chr(10).join(rows)}
+
+## How Seasons Are Documented
+
+Each season page follows a standard template:
+
+1. **Final Standings** — regular season record, points for/against, playoff seed.
+2. **Playoff Results** — bracket, champion, consolation winner.
+3. **Draft Recap** — link to that year's {wikilink('Draft History')} page.
+4. **Awards** — champion, top scorer, biggest bust, "Poultry Controversy" nominee.
+5. **Lore** — the defining moments worth remembering.
+
+> Want to fill one in? Copy the template from {wikilink('Season Template')} and edit away.
+"""
+    return md
+
+
+def gen_root_index(champs_years, bible):
+    rows = []
+    for yr in sorted(champs_years, reverse=True):
+        champ, ru, ts, _ = champ_fields(bible, yr)
+        rows.append(f"| {yr} | {champ} | {ru} | {ts} |")
+    return rows
+
+
+def gen_champions_page(champs_years, bible):
+    rows = []
+    for yr in sorted(champs_years, reverse=True):
+        champ, ru, ts, _ = champ_fields(bible, yr)
+        rows.append(f"| {yr} | {champ} | {ru} | {ts} | {wikilink(f'{yr} Season')} |")
+
+    md = f"""---
+title: Champions
+description: List of Pine Hills Fantasy Football League champions by season.
+---
+
+# 🏆 Champions
+
+The complete list of Pine Hills Fantasy Football League champions, year by year. The champion is the playoff winner (not the regular-season top seed). Records are maintained in the league bible (`raw/bible.yaml`).
+
+| Year | Champion | Runner-Up | Regular Season Top Seed | Season |
+|------|----------|-----------|-------------------------|--------|
+{chr(10).join(rows)}
+
+## Most Titles
+
+| Team | Titles | Years |
+|------|--------|-------|
+"""
+    # tally
+    tally = {}
+    for yr in champs_years:
+        c = champ_year(bible, yr)
+        if c.get("champion"):
+            tally.setdefault(c["champion"], []).append(yr)
+    if tally:
+        for team, yrs in sorted(tally.items(), key=lambda x: (-len(x[1]), x[0])):
+            md += f"| {team} | {len(yrs)} | {', '.join(str(y) for y in sorted(yrs))} |\n"
+    else:
+        md += f"| {TBD} | 0 | — |\n"
+
+    md += f"""
+## Related
+
+- {wikilink('Seasons')} · {wikilink('Playoffs')} · {wikilink('Records')} · {wikilink('Teams')}
+"""
+    return md
+
+
+def gen_draft_index(all_years, bible):
+    rows = []
+    for yr in sorted(all_years, reverse=True):
+        rows.append(f"| {yr} | {wikilink(f'{yr} Draft')} | {TBD} |")
+    md = f"""---
+title: Draft History
+description: Every draft in Pine Hills history, pick by pick.
+---
+
+# 🎯 Draft History
+
+The annual rite. Every pick, every reach, every steal. Each draft page lists the full board plus notable reaches and values.
+
+## Drafts by Year
+
+| Year | Draft Page | Notable Pick |
+|------|-----------|--------------|
+{chr(10).join(rows)}
+
+## What a Draft Page Includes
+
+- **Full pick-by-pick board** — round, overall pick, team, player, position.
+- **Reach / Steal flags** — picks that aged well or badly.
+- **Link to post-draft rosters** — see each team's {wikilink('Roster Template')} post-draft roster.
+- **Notable storylines** — the auto-drafter, the guy who fell, the panic pick.
+
+> Documenting a draft? Use the {wikilink('Draft Template')}.
+"""
+    return md
+
+
+def gen_playoffs_page(champs_years, bible):
+    md = f"""---
+title: Playoffs
+description: Pine Hills Fantasy Football League playoff format, champions, and Finals history.
+---
+
+# 🏆 Playoffs
+
+The Pine Hills Fantasy Football League postseason. The top four teams by regular-season record qualify for the playoffs; the winner is crowned league champion.
+
+## Format
+
+- **Qualifiers:** top 4 regular-season teams (seeds 1–4).
+- **Champion:** determined by the playoff bracket, not regular-season standing.
+- **Consolation (Toilet Bowl):** contested by non-qualifiers.
+
+## Champions by Year
+
+| Year | Champion | Runner-Up | Season |
+|------|----------|-----------|--------|
+"""
+    for yr in sorted(champs_years, reverse=True):
+        champ, ru, _, _ = champ_fields(bible, yr)
+        md += f"| {yr} | {champ} | {ru} | {wikilink(f'{yr} Season')} |\n"
+
+    md += f"""
+> Playoff brackets and game scores are recorded in the league bible (`raw/bible.yaml`). Add per-year `champion` / `runner_up` to populate results.
+
+## Related
+
+- {wikilink('Champions')} · {wikilink('Seasons')} · {wikilink('Records')} · {wikilink('Lore')}
+"""
+    return md
+
+
+# --------------------------------------------------------------------------- #
+# main
+# --------------------------------------------------------------------------- #
 def main():
     seasons = load_raw()
+    bible = load_bible()
     if not seasons:
         print("No raw JSON found in raw/. Run scripts/extract.py first.")
         return
 
     (CONTENT / "seasons").mkdir(parents=True, exist_ok=True)
-    (CONTENT / "rosters").mkdir(parents=True, exist_ok=True)
     (CONTENT / "teams").mkdir(parents=True, exist_ok=True)
     (CONTENT / "draft").mkdir(parents=True, exist_ok=True)
+    (CONTENT / "records").mkdir(parents=True, exist_ok=True)
 
-    all_teams = {}  # team_key -> {name, owner}
-    season_logs = {}  # team_key -> {year: (w,l,finish,po)}
+    aggregates = build_aggregates(seasons)
+
+    # per-team season data for team pages
+    team_years = {}  # canon -> list of (year, w, l, rank, po, owner)
+    owners = get_owners(bible)
 
     for year in sorted(seasons):
         d = seasons[year]
-        teams = d.get("teams") or []
-        tlist = teams.get("teams", teams) if isinstance(teams, dict) else teams
-        if isinstance(tlist, dict):
-            tlist = [tlist]
-        for t in (tlist or []):
-            tk = t.get("team_key", t.get("key"))
-            all_teams[tk] = {
-                "name": t.get("name", tk),
-                "owner": t.get("owner", t.get("manager", "Unknown")),
-            }
-            w = t.get("wins", 0)
-            l = t.get("losses", 0)
-            finish = t.get("rank", "TBD")
-            po = "Yes" if int(t.get("rank", 99)) <= 4 else "No"
-            season_logs.setdefault(tk, {})[year] = (w, l, finish, po)
-
         # season page
         sp = CONTENT / "seasons" / f"{year}-season.md"
-        sp.write_text(gen_season(year, d, all_teams))
+        sp.write_text(gen_season(year, d, bible, aggregates))
         print(f"  wrote {sp.relative_to(ROOT)}")
 
-        # roster pages
-        weeks = d.get("weeks", {})
-        post = weeks.get("1", {}).get("rosters", {})
-        end = {}
-        for wk in ("18", "17", "16", "15"):
-            if wk in weeks and weeks[wk].get("rosters"):
-                end = weeks[wk]["rosters"]
-                break
-        rdir = CONTENT / "rosters" / str(year)
-        rdir.mkdir(parents=True, exist_ok=True)
-        for tk in post.keys() | end.keys():
-            info = all_teams.get(tk, {"name": tk, "owner": "Unknown"})
-            tname = info["name"]
-            if tk in post:
-                p = rdir / f"{slug(tname)}-post-draft.md"
-                p.write_text(gen_roster_page(year, tk, tname, info["owner"], "Post-Draft", post[tk]))
-            if tk in end:
-                e = rdir / f"{slug(tname)}-end-of-season.md"
-                e.write_text(gen_roster_page(year, tk, tname, info["owner"], "End-of-Season", end[tk]))
-        print(f"  wrote {len(post)+len(end)} roster pages for {year}")
+        # team pages data
+        for t in standings_teams(d):
+            name = t.get("name", "Unknown")
+            w = int(t.get("wins", 0))
+            l = int(t.get("losses", 0))
+            rank = int(t.get("rank", 99))
+            po = rank <= 4
+            owner = owners.get(name, "") or TBD
+            team_years.setdefault(name, []).append((year, w, l, rank, po, owner))
 
-        # draft page
-        draft = d.get("draft") or {}
+        # draft page (already fully captured — regenerate for consistency)
+        draft = d.get("draft", {}) or {}
         picks = draft.get("draft_results", draft.get("results", []))
         if isinstance(picks, dict):
             picks = picks.get("draft_results", [])
-        dlines = ["| Overall | Round | Team | Player | Position |", "|---------|-------|------|--------|----------|"]
+        dlines = ["| Overall | Round | Team | Player | Position |",
+                  "|---------|-------|------|--------|----------|"]
         if isinstance(picks, list):
             for p in picks:
                 if isinstance(p, dict):
@@ -351,17 +692,80 @@ def main():
                     )
         dp = CONTENT / "draft" / f"{year}-draft.md"
         dp.write_text(
-            f"---\ntitle: \"{year} Draft\"\ndescription: \"Pine Hills FF {year} draft board.\"\n---\n\n# 🎯 {year} Draft\n\n"
-            + "\n".join(dlines)
-            + f"\n\n## Related\n\n- {wikilink('Draft History')} · {wikilink(f'{year} Season')}\n"
+            f"---\ntitle: \"{year} Draft\"\ndescription: \"Pine Hills FF {year} draft board.\"\n---\n\n"
+            f"# 🎯 {year} Draft\n\n" + "\n".join(dlines) +
+            f"\n\n## Related\n\n- {wikilink('Draft History')} · {wikilink(f'{year} Season')}\n"
         )
         print(f"  wrote {dp.relative_to(ROOT)}")
 
     # team pages
-    for tk, info in all_teams.items():
-        tp = CONTENT / "teams" / f"{slug(info['name'])}.md"
-        tp.write_text(gen_team_page(tk, info, season_logs.get(tk, {})))
+    for name, ydata in team_years.items():
+        tp = CONTENT / "teams" / f"{slug(name)}.md"
+        tp.write_text(gen_team_page(name, ydata, bible, aggregates))
         print(f"  wrote {tp.relative_to(ROOT)}")
+
+    all_years = sorted(seasons.keys())
+
+    # records index
+    rp = CONTENT / "records" / "index.md"
+    rp.write_text(gen_records_index(seasons, aggregates, bible))
+    print(f"  wrote {rp.relative_to(ROOT)}")
+
+    # teams index
+    tip = CONTENT / "teams" / "index.md"
+    tip.write_text(gen_teams_index(aggregates, bible))
+    print(f"  wrote {tip.relative_to(ROOT)}")
+
+    # seasons index
+    sip = CONTENT / "seasons" / "index.md"
+    sip.write_text(gen_seasons_index(all_years, bible))
+    print(f"  wrote {sip.relative_to(ROOT)}")
+
+    # draft index (scoped to real years — avoids broken links to 2016/2017)
+    dip = CONTENT / "draft" / "index.md"
+    dip.write_text(gen_draft_index(all_years, bible))
+    print(f"  wrote {dip.relative_to(ROOT)}")
+
+    # champions + playoffs (NBA-style)
+    cp = CONTENT / "champions.md"
+    cp.write_text(gen_champions_page(all_years, bible))
+    print(f"  wrote {cp.relative_to(ROOT)}")
+    pp = CONTENT / "playoffs.md"
+    pp.write_text(gen_playoffs_page(all_years, bible))
+    print(f"  wrote {pp.relative_to(ROOT)}")
+
+    # root index — rewrite only the champions table, bounded by markers
+    root = CONTENT / "index.md"
+    if root.exists():
+        rows = gen_root_index(all_years, bible)
+        lines = root.read_text().splitlines()
+        out = []
+        inside = False
+        replaced = False
+        for line in lines:
+            if "<!-- champions-table:start -->" in line:
+                out.append(line)
+                out.extend(rows)
+                inside = True
+                replaced = True
+                continue
+            if "<!-- champions-table:end -->" in line:
+                out.append(line)
+                inside = False
+                continue
+            if inside:
+                continue  # skip old table body between markers
+            out.append(line)
+        if not replaced:
+            # markers missing — fall back to appending before "## Explore"
+            out = []
+            for line in lines:
+                if line.startswith("## 📚 Explore"):
+                    out.extend(rows)
+                    out.append("")
+                out.append(line)
+        root.write_text("\n".join(out) + "\n")
+        print(f"  updated {root.relative_to(ROOT)} (champions table)")
 
     print("Done generating Markdown.")
 
