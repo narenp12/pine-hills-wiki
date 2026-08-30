@@ -4,16 +4,6 @@ description: Franchise histories and owners of the Pine Hills Fantasy Football L
 ---
 
 # 👥 Teams
-<div class="infobox">
-  <div class="infobox-title">👥 Teams</div>
-<div class="infobox-row"><div class="label">Owner</div><div class="value">_TBD_</div></div>
-<div class="infobox-row"><div class="label">Joined</div><div class="value">_TBD_</div></div>
-<div class="infobox-row"><div class="label">Status</div><div class="value">_TBD_</div></div>
-<div class="infobox-row"><div class="label">All-Time</div><div class="value">_TBD_</div></div>
-<div class="infobox-row"><div class="label">Points For/Ag.</div><div class="value">_TBD_</div></div>
-</div>
-
-
 
 Every franchise in Pine Hills history. Each team page tracks the owner, season-by-season results, championships, and head-to-head records. Standings-derived stats are computed automatically; owners and titles come from the league bible.
 

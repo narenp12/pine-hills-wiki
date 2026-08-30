@@ -86,9 +86,11 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
         return f"[{display}]({rel})"
 
     out = WIKILINK_RE.sub(repl, text)
-    # Team franchise pages: promote the "Franchie Summary" fields into a
+    # Team franchise pages: promote the "Franchise Summary" fields into a
     # Wikipedia-style right-rail infobox (Zensical-only enhancement).
-    if re.match(r"teams/[^/]+\.md$", cur_rel):
+    # Skip the teams *index* (a category/list page, not a franchise) so it
+    # doesn't get a meaningless _TBD_ stub infobox that floats over its table.
+    if re.match(r"teams/[^/]+\.md$", cur_rel) and cur_rel != "teams/index.md":
         out = inject_team_infobox(out)
     return out
 
@@ -111,9 +113,11 @@ def inject_team_infobox(text: str) -> str:
         "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
     }
     rows = ""
+    row_pairs = []
     for label, pat in fields.items():
         fm = re.search(pat, text)
         val = fm.group(1).strip() if fm else "_TBD_"
+        row_pairs.append((label, val))
         rows += (
             f'<div class="infobox-row"><div class="label">{label}</div>'
             f'<div class="value">{val}</div></div>\n'
@@ -127,7 +131,9 @@ def inject_team_infobox(text: str) -> str:
         )
     if not rows:
         return text
-    # Insert right after the H1 heading line.
+    # Don't emit a meaningless stub: require at least one real (non-_TBD_) value.
+    if all(val == "_TBD_" for _, val in row_pairs) and not champ:
+        return text
     infobox = (
         f'<div class="infobox">\n'
         f'  <div class="infobox-title">{title}</div>\n'
