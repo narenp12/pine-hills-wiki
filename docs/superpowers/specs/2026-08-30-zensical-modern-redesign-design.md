@@ -107,9 +107,8 @@ Set via `[data-md-color-scheme="default"]` and `[data-md-color-scheme="slate"]` 
 
 Replace the blue-gradient `tx-hero` (an AI-tell: generic gradient + sun-moon) with a custom `.ph-hero` block built on modern surface tokens:
 
-- **Left column:** league name (sans, large), one-line value prop ("The community-run encyclopedia of the Pine Hills Fantasy Football League."), and 2–3 quick-explore links as `.md-button` tiles.
-- **Right column:** a small "at a glance" stat strip (seasons covered, years active, champions logged) using real numbers from `index.md` — no invented precision, no version labels.
-- Asymmetric (left wider), single accent on links/buttons, off-white bg with a subtle `--wiki-panel` right panel. Collapses to single column `< 768px`.
+- **DOM contract (deterministic):** a single `<div class="ph-hero">` containing two children: `<div class="ph-hero__lead">` (the league `<h1>` + one-line `<p>` value prop + 2–3 quick-explore `.md-button` links) and `<div class="ph-hero__stats">` (3 stat tiles: seasons covered, years active, champions logged, values pulled from `index.md` — no invented precision).
+- Asymmetric (lead wider), single accent on links/buttons, off-white bg with a subtle `--wiki-panel` right panel. Collapses to single column `< 768px`.
 
 No em-dashes, no decorative status dots, no eyebrow above every section.
 
@@ -118,7 +117,7 @@ No em-dashes, no decorative status dots, no eyebrow above every section.
 ## 7. Infobox + Tables (Wikipedia formatting preserved)
 
 - `.infobox` (injected by `transform.py`): right-floated, bordered, `--wiki-panel` bg, `border-top: 3px solid var(--md-accent-fg-color)` (pine), responsive `max-width` 90% on narrow.
-- Tables: bordered + zebra (`--wiki-panel` even rows), header `var(--wiki-panel-2)`, hairline `--wiki-border`. Keep `tablesort` JS.
+- Tables: bordered + zebra (`--wiki-panel` even rows), header `var(--wiki-panel-2)`, hairline `--wiki-border` (single token, no second table-color var). Keep `tablesort` JS.
 - Champion rows: `tr.champion-row > td` tinted with `color-mix(in srgb, var(--wiki-gold) 14%, bg)` (already working; re-express with tokens).
 - All colors via tokens so both schemes render correctly.
 
@@ -129,7 +128,7 @@ No em-dashes, no decorative status dots, no eyebrow above every section.
 - `variant = "modern"`.
 - `extra_css = ["stylesheets/zensical.css"]` (drop `wikipedia-v2.css`).
 - `font.text = "Source Serif 4"`, `font.code = "JetBrains Mono"`.
-- `primary = "custom"` (neutral ink via CSS) ; `accent = "custom"` (pine via CSS) — *or* keep named `primary`/set accent custom. (Finalized in plan.)
+- `primary = "custom"` (neutral ink via CSS) ; `accent = "custom"` (pine via CSS). **Deterministic: full custom, no named-color fallback.** All required `--md-primary-*` / `--md-accent-*` vars are provided in `zensical.css` scheme blocks (per zensical-setup custom-color contract).
 - Palette: keep the two `[[project.theme.palette]]` blocks (default + slate) with toggle icons.
 - `features` (modern UX): `navigation.instant`, `navigation.instant.prefetch`, `navigation.instant.progress`, `navigation.tabs`, `navigation.sections`, `navigation.top`, `navigation.footer`, `navigation.indexes`, `toc.follow`, `search.highlight`, `content.code.copy`, `content.tooltips`, `content.footnote.tooltips`, `announce.dismiss`, `header.autohide`.
   - Drop nothing that breaks content. Note `navigation.indexes` ↔ `toc.integrate` incompatibility (we keep `indexes`, drop `integrate`).
@@ -176,6 +175,14 @@ No em-dashes, no decorative status dots, no eyebrow above every section.
 
 ## 12. Risks
 
-- **`modern` hero:** the variant has no built-in `tx-hero`; we supply `.ph-hero` markup + CSS. Low risk (pure CSS block).
+- **`modern` hero:** the variant has no built-in `tx-hero`; we supply `.ph-hero` markup + CSS. Low risk (pure CSS block, DOM contract pinned in §6).
 - **Font split:** serif body via `theme.font.text` + sans override on headings is well-supported; verify heading weight contrast in both schemes.
-- **Custom primary/accent:** if `modern` requires named colors for some internal chrome, fall back to a named near-neutral `primary` (e.g. `grey`/`black`) and keep `accent = "custom"` (pine). Finalized during implementation.
+- **Custom primary/accent:** resolved deterministically (§8) — full custom with all vars supplied. No named fallback. If a specific `modern` internal chrome element ignores the var, that is caught in §11 verification (build + visual check both schemes) and fixed with an explicit override, not a revert.
+
+## 13. Rollback (reversible change)
+
+All changes are per-file and committed independently, so rollback is a targeted revert, not a redeploy:
+- `git revert` (or `git checkout <prev> --`) the three changed files: `zensical/zensical.toml`, `zensical/docs/stylesheets/zensical.css`, `zensical/docs/index.md`.
+- Restore `extra_css` to `wikipedia-v2.css` and `variant = "classic"` if a full revert is needed.
+- No content, `transform.py`, `build.mjs`, or Starlight edition is touched, so a partial revert cannot break data generation.
+- CI deploy (GitHub Pages) rebuilds from committed sources on push; a revert commit redeploys automatically.
