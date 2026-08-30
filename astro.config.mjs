@@ -2,9 +2,16 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
+import { readFileSync } from 'node:fs';
+import { remarkWikilinkCustom } from './src/remark-wikilink-custom.mjs';
+
+// Title -> slug permalink map (run `node scripts/wikilink-map.mjs` first / via prebuild).
+// Referenced by the custom wikilink resolver, which also reads it directly.
+const permalinks = JSON.parse(readFileSync('permalinks.json', 'utf8'));
+const BASE = '/pine-hills-wiki';
 
 export default defineConfig({
-  base: '/pine-hills-wiki',
+  base: BASE,
   site: 'https://narenp12.github.io',
   integrations: [
     starlight({
@@ -22,4 +29,7 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  markdown: {
+    remarkPlugins: [remarkWikilinkCustom],
+  },
 });

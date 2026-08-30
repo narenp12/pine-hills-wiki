@@ -12,8 +12,8 @@
     "url": "https://github.com/narenp12/pine-hills-wiki.git"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node scripts/wikilink-map.mjs && astro dev",
+    "build": "node scripts/wikilink-map.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check && prettier . --check",
     "format": "prettier . --write"
@@ -25,7 +25,6 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/starlight": "^0.41.10",
-    "@portaljs/remark-wiki-link": "^1.2.0",
     "astro": "^7.2.9"
   },
   "devDependencies": {
