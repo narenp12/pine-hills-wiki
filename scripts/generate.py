@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
-CONTENT = ROOT / "content"
+CONTENT = ROOT / "src" / "content" / "docs"
 
 
 # ---------- helpers -------------------------------------------------------
