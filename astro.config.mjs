@@ -21,6 +21,7 @@ export default defineConfig({
       customCss: ['./src/styles/wikipedia.css'],
       components: {
         Header: './src/components/Header.astro',
+        Footer: './src/components/Footer.astro',
       },
       sidebar: [
         { label: 'Home', link: '/' },

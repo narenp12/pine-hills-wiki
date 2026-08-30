@@ -41,4 +41,4 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 
 ---
 
-*This site is generated with [Quartz](https://quartz.jzhao.xyz/) from Markdown. Data is sourced manually from Yahoo Fantasy Football and community contributions.*
+*This site is a community-maintained Wikipedia of the Pine Hills Fantasy Football League, built with [Astro](https://astro.build/) + [Starlight](https://starlight.astro.build/). Data is sourced manually from Yahoo Fantasy Football and community contributions.*

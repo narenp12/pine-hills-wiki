@@ -3,39 +3,66 @@
  * Goal: faithful look — serif body/headings, neutral panels, an accent blue,
  * a top bar with title (left) + search (right), and an <hr>-style rule under
  * each article <h1>.
+ *
+ * The palette is declared for BOTH light and dark so Starlight's theme toggle
+ * stays correct (no white-on-dark overlap). Every surface uses a palette token,
+ * never a hard-coded colour.
  */
 
-/* ---- Typography: serif, Wikipedia-like ---- */
+/* ---- Shared Wikipedia tokens (light defaults) ---- */
 :root {
-  /* Override Starlight's sans-serif stack with a Wikipedia-style serif. */
-  --sl-font: Georgia, 'Linux Libertine', 'Times New Roman', 'Liberation Serif', serif;
-  --sl-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-
-  /* Wikipedia palette */
   --wiki-link: #3366cc;
   --wiki-link-visited: #795cb2;
+  --wiki-link-new: #d73333;
   --wiki-accent: #0d47a1;
   --wiki-border: #a2a9b1;
   --wiki-panel: #f8f9fa;
   --wiki-panel-2: #eaecf0;
+  --wiki-bg: #ffffff;
+  --wiki-bg-2: #f6f6f6;
   --wiki-text: #202122;
   --wiki-muted: #54595d;
+  --wiki-font: Georgia, 'Linux Libertine', 'Times New Roman', 'Liberation Serif', serif;
+}
+
+/* Wikipedia dark mode (Vector 2022-style tokens). */
+:root[data-theme='dark'] {
+  --wiki-link: #6b8cff;
+  --wiki-link-visited: #b693d6;
+  --wiki-link-new: #ff6e6e;
+  --wiki-accent: #8ab4f8;
+  --wiki-border: #4c5760;
+  --wiki-panel: #2a2e33;
+  --wiki-panel-2: #373b40;
+  --wiki-bg: #202122;
+  --wiki-bg-2: #1b1d1e;
+  --wiki-text: #eaecf0;
+  --wiki-muted: #b6bcc4;
+}
+
+/* Override Starlight's sans-serif stack with a Wikipedia-style serif. */
+:root {
+  --sl-font: var(--wiki-font);
+  --sl-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
 html {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
+  background: var(--wiki-bg);
+  color-scheme: light dark;
 }
 
 body {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
   color: var(--wiki-text);
+  background: var(--wiki-bg);
   font-size: 1rem;
   line-height: 1.6;
 }
 
-/* Headings share the serif face (Starlight may set sans on some). */
+/* Headings share the serif face. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
   font-weight: normal;
   color: var(--wiki-text);
 }
@@ -57,21 +84,20 @@ a.wiki-link {
   color: var(--wiki-link);
 }
 a.wiki-new {
-  color: #d73333; /* red link = page does not exist yet */
+  color: var(--wiki-link-new); /* red link = page does not exist yet */
 }
 
 /* ---- Top bar: title left, search right, with a bottom rule ---- */
 .sl-nav {
   border-bottom: 1px solid var(--wiki-border);
-  background: #fff;
+  background: var(--wiki-bg);
 }
 .sl-nav .title-wrapper,
 .sl-nav .header {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
 }
-/* Site title in the header reads as the encyclopedia wordmark. */
 .sl-nav :global(.site-title) {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
   font-weight: bold;
   letter-spacing: 0.01em;
 }
@@ -82,20 +108,21 @@ main h1 {
   border-bottom: 1px solid var(--wiki-border);
   padding-bottom: 0.3em;
   margin-bottom: 0.6em;
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
 }
 
 /* ---- Neutral panels (tables, notices, infobox) ---- */
 .sl-markdown-content table,
 .sl-markdown-content .table-wrapper {
   border: 1px solid var(--wiki-border);
-  background: #fff;
+  background: var(--wiki-bg);
 }
 .sl-markdown-content th {
   background: var(--wiki-panel-2);
   border: 1px solid var(--wiki-border);
   text-align: left;
   padding: 0.4em 0.6em;
+  color: var(--wiki-text);
 }
 .sl-markdown-content td {
   border: 1px solid var(--wiki-border);
@@ -116,13 +143,12 @@ main h1 {
 /* ---- Sidebar (left "toolbox") ---- */
 .sidebar-content,
 .sl-sidebar {
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
+  background: var(--wiki-bg);
 }
 .sl-sidebar a {
   color: var(--wiki-link);
 }
-
-/* ---- Subtle accent on active/current nav ---- */
 .sl-sidebar a[aria-current='page'] {
   color: var(--wiki-accent);
 }
@@ -137,6 +163,7 @@ main h1 {
   border: 1px solid var(--wiki-border);
   border-radius: 2px;
   background: var(--wiki-panel);
+  color: var(--wiki-text);
   font-size: 0.92em;
   line-height: 1.5;
 }
@@ -146,7 +173,7 @@ main h1 {
   font-weight: bold;
   padding: 0.4em 0.6em;
   border-bottom: 1px solid var(--wiki-border);
-  font-family: var(--sl-font);
+  font-family: var(--wiki-font);
 }
 .infobox img {
   display: block;
