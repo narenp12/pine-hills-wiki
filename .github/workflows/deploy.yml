@@ -37,26 +37,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Cache Quartz plugins
-        uses: actions/cache@v5
-        with:
-          path: .quartz/plugins
-          key: ${{ runner.os }}-plugins-${{ hashFiles('quartz.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-plugins-
-
       - run: npm install
 
-      - name: Install Quartz plugins
-        run: npx quartz plugin install
+      - name: Build permalink map
+        run: node scripts/wikilink-map.mjs
 
-      - name: Build Quartz
-        run: npx quartz build
+      - name: Build Astro
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: public
+          path: dist
 
   deploy:
     needs: build
