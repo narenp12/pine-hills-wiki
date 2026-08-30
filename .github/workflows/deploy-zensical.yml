@@ -1,0 +1,61 @@
+name: Deploy Zensical to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "zensical/**"
+      - "raw/**"
+      - "scripts/generate.py"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-zensical
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt pyyaml
+
+      - name: Install Zensical
+        run: pip install zensical
+
+      - name: Build Zensical site
+        run: python zensical/build.mjs
+        # build.mjs runs generate.py (WIKI_CONTENT_DIR) -> transform.py -> zensical build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: zensical/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

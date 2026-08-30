@@ -1,0 +1,70 @@
+# Pine Hills Fantasy Football League — Zensical edition
+# See skills/zensical-setup for the authoritative config reference.
+
+[project]
+site_name = "Pine Hills Fantasy Football League"
+site_url = "https://narenp12.github.io/pine-hills-wiki"   # required for instant nav
+site_description = "The collaborative history of the Pine Hills Fantasy Football League."
+site_author = "Pine Hills League"
+copyright = "&copy; 2018&ndash;2025 Pine Hills Fantasy Football League"
+repo_url = "https://github.com/narenp12/pine-hills-wiki"
+repo_name = "narenp12/pine-hills-wiki"
+docs_dir = "docs"
+site_dir = "site"
+use_directory_urls = true
+dev_addr = "localhost:7860"
+
+# Custom CSS / JS are TOP-LEVEL [project] keys (not under [project.theme]).
+extra_css = [
+  "stylesheets/wikipedia-v2.css",
+]
+extra_javascript = [
+  "https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js",
+  "javascripts/tablesort.js",
+]
+
+[project.theme]
+variant = "classic"
+features = [
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.instant.progress",
+  "navigation.sections",
+  "navigation.indexes",
+  "navigation.top",
+  "navigation.footer",
+  "toc.follow",
+  "search.highlight",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.tooltips",
+  "content.footnote.tooltips",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "custom"
+accent = "blue"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "custom"
+accent = "blue"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+edit = "material/pencil"
+view = "material/eye"
+
+# Mermaid diagrams (playoff brackets) require a custom fence.
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+
+[project.extra]
+status = { new = "New", deprecated = "Deprecated" }
