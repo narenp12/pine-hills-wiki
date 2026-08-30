@@ -1,60 +1,67 @@
-# Handoff — Pine Hills FF scraper (end of 2026-08-29 session)
+# Handoff — Pine Hills FF scraper (updated 2026-08-29)
 
 ## Where we are
-We proved the data source and found the real Yahoo Fantasy API response shape.
-The DOM-table approach (old `selectors.toml`) is **obsolete** — Yahoo renders from
-a private JSON API, not `<table>` tags. The next build parses that JSON.
+The private JSON API approach is **dead** (proven): the SPA envelope is pre-draft
+zeros, and the v2 REST API is blocked in-session. We pivoted to a **rendered-page
+capture** pipeline that WORKS end-to-end and produces real scored data for the wiki.
 
-## Confirmed facts (evidence-backed)
-- Standings/draft/matchups/rosters are fetched by the page as **JSON** (sometimes
-  JSONP-wrapped: `callback({...})`). The data is NOT in the page HTML, not in a
-  `<table>`, and not in an embedded `<script>` blob.
-- The real payload: `dump/2016-standings.api.11.json` (captured live, 92 KB).
-  Envelope (see `API_SHAPE.md` for full detail):
-  ```
-  service.leagues."447010".teams."<id>" → {
-    id, name, rank, wins, losses, ties, pf, pa,
-    managers: { "1": { id, nickName } },
-    players: [ { id, position, ... }, ... ]
-  }
-  ```
-- `pf` = points for, `pa` = points against. `managers.<n>.nickName` = owner.
-  `players[]` = roster (slots empty pre-draft: `id:null`).
-- **Gotcha that cost us time:** the data endpoint host does NOT contain
-  "fantasy" or "yahoo" in the URL. First capture filtered URLs by those words and
-  MISSED the payload. Capture ALL response bodies, match on the JSON envelope.
+## Confirmed facts (evidence-backed, 2026-08-29)
+- **JSON API is unusable.** The SPA `service.leagues."447010".teams.<id>` envelope
+  (old `dump/2016-standings.api.11.json`) is **pre-draft zeros** (wins=0, pf=0,
+  rank="") for every team. The v2 REST API (`fantasysports.yahoo.com/ws/fantasy/v2/...`)
+  returns "Failed to fetch" / HTML error shells in-session (CORS / gated).
+- **Rendered pages are the source.** Driving a logged-in Edge tab and reading the
+  rendered `innerText` yields real scored data:
+  - **Standings** (in-app "Standings" nav → `/{year}/f1/{league}?lhst=stand`) renders a
+    table: `Rank | Team | W-L-T | PF | PA | Streak | Waiver | Moves` for all 12 teams.
+    This is the COMPLETE record (rank, wins, losses, points_for, points_against).
+  - **Draft Results** (`/draftresults`): `Round N / <pick>. <Player> → <Team>` for
+    every pick (134–135 picks/season).
+  - **Matchups** (`/matchup`, singular): header shows the viewed team's W-L-T + rank +
+    manager (e.g. `Save Me / Naren / 7-7-0 | 4th`). Only the *viewed* (your) team —
+    all-team W-L comes from the standings table above.
+- **Direct-URL navigation 404s for matchups/scoreboard.** `/f1/{league}/matchups` and
+  `/scoreboard` return "document not found" via `Page.navigate`. They ONLY render when
+  reached by **clicking the in-app nav link** (SPA route). `capture_season.py` does this.
+- **Seasons are 2018+**, each with a DISTINCT league id (from the Yahoo History tab).
+  Current 2026 season = `447010`. No 2016/2017 exist for this league. League IDs:
+  `2018=1578201 2019=369572 2020=698987 2021=760144 2022=703496 2023=21996
+   2024=489811 2025=484479` (see `selectors.toml` `[league].season_ids`).
 
-## What works
-- `scraper/run-edge.sh` — one-command launch of Edge with remote debugging +
-  `--remote-allow-origins=*`, waits for the port, prints the login URL.
-- `scraper/scripts/capture_api.py` — CDP capture tool (uv-managed:
-  `uv run --with websocket-client python3 scripts/capture_api.py <cdp> <url> <dir> <tag>`).
-  Saves every response body whose URL matches `fantasy`/`yahoo` to `<dir>/<tag>.api.<n>.json`.
-  This is the one that produced the 38 bodies including the real payload.
-- `scraper/src/scrape.rs` --connect ws-endpoint fix (resolves `ws://` from
-  `/json/version`) — committed earlier as cd30f87-adjacent; README + fix in tree.
+## What works (the live pipeline)
+1. `scraper/run-edge.sh` — launch Edge on `127.0.0.1:9222` (profile `~/.phf-edge`,
+   uBlock Origin Lite). Log in once; session persists.
+2. `scraper/scripts/capture_season.py <edge> <year> <league> [outdir]` — CDP capture
+   that clicks the in-app nav (Standings / Draft Results / Matchups) and saves
+   `<year>-<league>-<view>.innerText.txt`. Ban-safe: no login, sequential, human waits.
+3. `scraper/src/parse_rendered.rs` — pure-offline parser: standings table (rank/W-L/PF/PA),
+   draft picks, matchups W-L header. Tested in `tests/rendered_parse.rs` (TDD, GREEN).
+4. `scraper/src/extract.rs::from_dump_dir` + `phf-scraper --from-dump <dir>` — assembles
+   `Season` from the innerText dumps and writes `raw/<year>.json` (canonical contract).
+5. `scripts/generate.py` — consumes `raw/<year>.json` → `content/teams/*.md` wiki pages.
+   **Verified live:** 2024 + 2025 team pages generated with real W-L/PF/PA.
 
-## What does NOT work (do not rely on)
-- `scraper/scripts/capture_all.py` — throwaway, saves 0 bodies (bug: getResponseBody
-  result handler never matches). Left untracked on purpose. Replace logic by
-  extending `capture_api.py` to drop the URL filter, OR bake capture into the Rust
-  scraper (preferred — see below).
-- The old `selectors.toml` `<table>` selectors — wrong for modern Yahoo.
+## Reproduce (2024 + 2025 already captured)
+```
+cd scraper
+uv run --with websocket-client python3 scripts/capture_season.py http://127.0.0.1:9222 2025 484479
+uv run --with websocket-client python3 scripts/capture_season.py http://127.0.0.1:9222 2024 489811
+cargo run -- --from-dump dump --seasons 2024,2025 --out raw
+cp raw/2024.json raw/2025.json ../raw/
+cd .. && python3 scripts/generate.py
+```
 
-## Next session (the actual build)
-1. **Rebuild the Rust extractor** (`src/extract.rs`) to consume the JSON envelope
-   in `API_SHAPE.md`, NOT DOM tables. Keep the `raw/<year>.json` contract so
-   `scripts/generate.py` stays untouched.
-2. **Add CDP response capture into the Rust scraper** (chromiumoxide):
-   `Network.enable` → on `Network.loadingFinished` → `Network.getResponseBody`.
-   One ban-safe Rust tool, zero extra requests, sequential. This retires the
-   Python capture sidecar.
-3. **Code-review pass** with skills: `systematic-debugging` → `requesting-code-review`
-   → `simplify-code`, then a 1-season dry-run before the full 10-season run.
-4. Validate against the captured `api.11.json` as a fixture, then live 2016.
+## Known gaps / next
+- **Rosters** not yet captured (the `/rosters` page is a week-dropdown; lower priority).
+- **Owner/manager** for non-viewed teams comes only from the matchups header (the user's
+  team). Other teams' owners are blank unless scraped per-team.
+- **2018–2023** not yet captured — same `capture_season.py` flow with their league IDs.
+- Browser capture is still Python (`capture_season.py`); `src/scrape.rs` keeps the
+  chromiumoxide fetch path for the HTML-based `extract_*` functions (unused by the
+  dump pipeline but kept for the live `--connect` path once matchups/rosters routing is
+  solved). Prefer the `--from-dump` offline path for now.
 
-## Environment to resume
-- Edge running on `127.0.0.1:9222`, logged in, uBlock Origin Lite installed in the
-  `.phf-edge` profile (cuts ad noise + fewer outbound requests = more ban-safe).
-- League id `447010` (non-secret). Repo: `narenp12/pine-hills-wiki`, branch `main`.
-- `uv` for Python tooling; `cargo` for the Rust scraper (`edition="2024"`).
+## Environment
+- Edge on `127.0.0.1:9222`, logged in, `.phf-edge` profile.
+- `uv` for Python; `cargo` (edition 2024) for the Rust scraper.
+- Repo `narenp12/pine-hills-wiki`, branch `main`.

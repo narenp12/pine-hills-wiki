@@ -34,6 +34,35 @@ fn parse_seasons(s: &str) -> Vec<u32> {
     out
 }
 
+/// Build every requested season's raw/<year>.json from capture_season.py dumps.
+fn build_from_dump(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors) -> Result<()> {
+    let seasons = parse_seasons(&cli.seasons);
+    println!(">> building {} seasons from dumps in {}", seasons.len(), dir.display());
+    std::fs::create_dir_all(&cli.out)?;
+    for year in seasons {
+        let lid = sel.league
+            .season_ids
+            .get(&year.to_string())
+            .cloned()
+            .unwrap_or_else(|| cli.league_id.clone());
+        let season = extract::from_dump_dir(dir, year, &lid)?;
+        let dest = cli.out.join(format!("{year}.json"));
+        std::fs::write(&dest, serde_json::to_string_pretty(&season)?)?;
+        println!(
+            "   wrote {}  (teams={}, picks={})",
+            dest.display(),
+            season.teams.teams.len(),
+            season.draft.draft_results.len()
+        );
+        if cli.dry_run {
+            println!(">> dry-run: stopping after first season.");
+            break;
+        }
+    }
+    println!("\n>> done. Next: run scripts/generate.py to build the wiki.");
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
@@ -42,6 +71,11 @@ async fn main() -> Result<()> {
     // Offline parser validation (no Yahoo, no browser).
     if let Some(fixture) = &cli.self_test {
         return extract::self_test(fixture, &sel);
+    }
+
+    // Offline build from capture_season.py dumps (no Yahoo, no browser).
+    if let Some(dir) = &cli.from_dump {
+        return build_from_dump(&cli, dir, &sel);
     }
 
     let seasons = parse_seasons(&cli.seasons);
@@ -55,7 +89,7 @@ async fn main() -> Result<()> {
         for year in seasons {
             let lid = sel.league
                 .season_ids
-                .get(&year)
+                .get(&year.to_string())
                 .cloned()
                 .unwrap_or_else(|| cli.league_id.clone());
             let base = sel.league.url_template.replace("{id}", &lid).replace("{season}", &year.to_string());

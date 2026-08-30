@@ -4,6 +4,7 @@
 
 pub mod extract;
 pub mod model;
+pub mod parse_rendered;
 pub mod scrape;
 pub mod selectors;
 
@@ -53,6 +54,11 @@ pub struct Cli {
     /// Validate the parser against a dumped HTML fixture (no browser needed).
     #[arg(long)]
     pub self_test: Option<PathBuf>,
+
+    /// Build raw/<year>.json from existing `capture_season.py` innerText dumps in
+    /// this directory (no browser needed). Files: <dir>/<year>-<league>-<view>.innerText.txt
+    #[arg(long)]
+    pub from_dump: Option<PathBuf>,
 
     /// Which datasets to extract.
     #[arg(long, value_enum, default_values_t = vec![Dataset::Standings, Dataset::Draft, Dataset::Matchups, Dataset::Roster])]

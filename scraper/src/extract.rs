@@ -306,3 +306,33 @@ pub fn self_test(fixture: &std::path::Path, sel: &crate::selectors::Selectors) -
     println!("  roster weeks   : {:?}", ros.keys().collect::<Vec<_>>());
     Ok(())
 }
+
+/// Assemble a `Season` from the `innerText` captures produced by `capture_season.py`
+/// (the proven, ban-safe pipeline: logged-in Edge + in-app nav clicks). Reads:
+///   <dir>/<year>-<league>-standings.innerText.txt
+///   <dir>/<year>-<league>-draftresults.innerText.txt
+///   <dir>/<year>-<league>-matchups.innerText.txt   (optional; supplies owner)
+/// The standings file carries rank/W-L/PF/PA for all 12 teams; draft carries picks;
+/// matchups header supplies the manager/owner for the viewed team (best-effort).
+pub fn from_dump_dir(dir: &std::path::Path, season: u32, league_id: &str) -> Result<Season> {
+    use crate::parse_rendered::{parse_draft, parse_matchups_header, parse_standings};
+    let read = |suffix: &str| -> String {
+        let p = dir.join(format!("{}-{}-{}.innerText.txt", season, league_id, suffix));
+        std::fs::read_to_string(&p).unwrap_or_default()
+    };
+    let (mut s, _lid) = parse_standings(&read("standings"), season, league_id);
+    s.draft = parse_draft(&read("draftresults"), season, league_id);
+    let mtext = read("matchups");
+    if !mtext.is_empty() {
+        let ms = parse_matchups_header(&mtext, season, league_id);
+        // merge owner from matchups into standings teams by name
+        for t in &ms.teams.teams {
+            if let Some(dst) = s.teams.teams.iter_mut().find(|x| x.name == t.name) {
+                if dst.owner.is_empty() {
+                    dst.owner = t.owner.clone();
+                }
+            }
+        }
+    }
+    Ok(s)
+}

@@ -12,11 +12,9 @@
 # The base URL template. {id} = league id, {season} = year.
 url_template = "https://football.fantasysports.yahoo.com/f1/{id}/{season}"
 
-# If past seasons are split into separate league ids (history NOT linked in
-# Yahoo Settings), list them here keyed by season. Leave empty to use the
-# single `id` for all seasons.
-# 2016 = "123456"
-# 2017 = "234567"
+# Past seasons each have a DISTINCT league id (from the Yahoo History tab).
+# Current 2026 season = 447010. Seasons 2018+ only (no 2016/2017 in this league).
+season_ids = { "2018" = "1578201", "2019" = "369572", "2020" = "698987", "2021" = "760144", "2022" = "703496", "2023" = "21996", "2024" = "489811", "2025" = "484479" }
 
 [standings]
 # Final standings table.

@@ -59,46 +59,54 @@ which is how it reuses your session.
 
 > Linux path for Option B: `chromium-*/chrome-linux/chrome`.
 
-## 3. First run — capture real Yahoo HTML, then stop (do this BEFORE a full run)
+## 3. Recommended path — capture rendered pages, then parse offline (no 2016)
 
-The selectors in `selectors.toml` are **starting guesses** (Yahoo's DOM is
-JS-rendered and can't be seen from here). Dump the real markup for the first
-season and exit, so we can tune the selectors against actual HTML:
-
-```bash
-./target/release/phf-scraper --connect http://127.0.0.1:9222 --dump dump --dry-run
-```
-
-What this does:
-- Connects to the Chrome you launched in step 2 (`--connect` accepts either the
-  HTTP debugger URL `http://127.0.0.1:9222` or a raw `ws://…` URL — the scraper
-  resolves the WebSocket endpoint from `/json/version` automatically).
-- Scrapes **only season 2016** and writes these files:
-  - `dump/2016-standings.html`
-  - `dump/2016-draft.html`
-  - `dump/2016-matchups.html`
-  - `dump/2016-rosters.html`
-- Prints detected row counts, then stops (`--dry-run`).
-
-**Send me those four `dump/*.html` files** (or at least `2016-standings.html`
-and `2016-rosters.html`). I'll tune `selectors.toml` against the real markup and
-tell you to re-run. You can also self-validate the parser offline against any
-dumped file:
+Yahoo's standings/draft/matchups render as **JS-rendered pages**, not static HTML, and
+the private JSON API only returns pre-draft zeros. The reliable flow captures the
+rendered `innerText` via in-app nav clicks (direct-URL nav 404s for matchups/scoreboard),
+then parses offline:
 
 ```bash
-./target/release/phf-scraper --self-test dump/2016-standings.html
+# 1) launch Edge logged in on :9222 (run-edge.sh), then:
+cd scraper
+uv run --with websocket-client python3 scripts/capture_season.py http://127.0.0.1:9222 2025 484479
+uv run --with websocket-client python3 scripts/capture_season.py http://127.0.0.1:9222 2024 489811
+
+# 2) parse the innerText dumps -> raw/<year>.json (no browser needed)
+cargo run -- --from-dump dump --seasons 2024,2025 --out raw
+
+# 3) build the wiki
+cp raw/2024.json raw/2025.json ../raw/
+cd .. && python3 scripts/generate.py
 ```
 
-## 4. Full scrape (after selectors are tuned)
+`capture_season.py` clicks the in-app nav (Standings / Draft Results / Matchups) and
+saves `<year>-<league>-<view>.innerText.txt`. The parser (`src/parse_rendered.rs`)
+reads those and emits the canonical `raw/<year>.json`. Seasons are **2018+** (each has a
+distinct league id in `selectors.toml` `[league].season_ids`); 2016/2017 don't exist for
+this league.
+
+You can self-validate the parser offline against any dumped file:
+
+```bash
+./target/release/phf-scraper --self-test dump/2025-484479-standings.innerText.txt
+```
+
+## 4. Full scrape (live `--connect` path, experimental)
+
+The browser capture is also implementable in Rust via `chromiumoxide` (`--connect`),
+but the matchups/rosters SPA routes need in-app navigation that the current
+`--connect` fetch path does not yet perform. Prefer the `--from-dump` path in section 3
+until that is solved. When it works:
 
 ```bash
 ./target/release/phf-scraper --connect http://127.0.0.1:9222 --out ../raw
 ```
 
-- Default seasons: **2016–2025**. Narrow it with `--seasons`:
+- Default seasons: **2018–2025**. Narrow it with `--seasons`:
   - `--seasons 2024`            one year
-  - `--seasons 2016,2018,2024`  a few
-  - `--seasons 2016-2020`       a range
+  - `--seasons 2018,2020,2024`  a few
+  - `--seasons 2018-2025`       a range
 - Default datasets: standings, draft, matchups, rosters. Limit with
   `--datasets Standings Draft` (space-separated `Standings|Draft|Matchups|Roster`).
 - Writes `../raw/<year>.json` for every scraped season.

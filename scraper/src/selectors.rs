@@ -9,7 +9,7 @@ use std::path::Path;
 pub struct LeagueCfg {
     pub url_template: String,
     #[serde(default)]
-    pub season_ids: HashMap<u32, String>,
+    pub season_ids: HashMap<String, String>,
 }
 
 #[derive(Debug, Deserialize, Default)]
