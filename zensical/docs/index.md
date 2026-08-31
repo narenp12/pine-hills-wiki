@@ -1,6 +1,6 @@
 ---
 title: Pine Hills Fantasy Football League
-description: The collaborative history of the Pine Hills Fantasy Football League, established 2016.
+description: The collaborative history of the Pine Hills Fantasy Football League, established 2018.
 ---
 
 <div class="ph-hero">
@@ -14,22 +14,29 @@ description: The collaborative history of the Pine Hills Fantasy Football League
   <div class="ph-hero__stats">
     <div class="stat"><span class="num">8</span><span class="cap">Seasons Covered</span></div>
     <div class="stat"><span class="num">2018&ndash;2025</span><span class="cap">Years Active</span></div>
-    <div class="stat"><span class="num">_TBD_</span><span class="cap">Championships Logged</span></div>
+    <div class="stat"><span class="num">1</span><span class="cap">Championships Logged</span></div>
   </div>
 </div>
 
 > *"Where legends are made and trade offers are refused."*
 
-Welcome to the unofficial Wikipedia of the **Pine Hills Fantasy Football League (PHFFL)**, a living record of our seasons, champions, rivalries, and lore since **2016**.
+Welcome to the unofficial Wikipedia of the **Pine Hills Fantasy Football League (PHFFL)**, a living record of our seasons, champions, rivalries, and lore since **2018**.
 
 This wiki is community-maintained. Every page is Markdown, version-controlled, and deployed to GitHub Pages. Edit a page and open a pull request. Even the commissioner can't unilaterally rewrite history here.
 
 ## 🏆 Champions by Year
 
 <!-- champions-table:start -->
-| Year | Champion | Owner | Notes |
-|------|----------|-------|-------|
-| 2025 | _TBD_ | _TBD_ | _TBD_ |
+| Year | Champion | Runner-Up | Top Seed |
+|------|----------|-----------|----------|
+| 2025 | Save Me | Super Squirrels | Save Me |
+| 2024 | _TBD_ | _TBD_ | _TBD_ |
+| 2023 | _TBD_ | _TBD_ | _TBD_ |
+| 2022 | _TBD_ | _TBD_ | _TBD_ |
+| 2021 | _TBD_ | _TBD_ | _TBD_ |
+| 2020 | _TBD_ | _TBD_ | _TBD_ |
+| 2019 | _TBD_ | _TBD_ | _TBD_ |
+| 2018 | _TBD_ | _TBD_ | _TBD_ |
 <!-- champions-table:end -->
 
 ## 📚 Explore the Wiki

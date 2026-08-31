@@ -11,7 +11,7 @@ The ledger of greatness and shame. Standings-driven records are computed automat
 
 | Owner / Team | Titles | Years |
 |--------------|--------|-------|
-| _TBD_ | 0 | - |
+| Save Me | 1 | 2025 |
 
 ## Single-Season Records
 

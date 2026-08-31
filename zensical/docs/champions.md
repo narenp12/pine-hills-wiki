@@ -9,7 +9,7 @@ The complete list of Pine Hills Fantasy Football League champions, year by year.
 
 | Year | Champion | Runner-Up | Regular Season Top Seed | Season |
 |------|----------|-----------|-------------------------|--------|
-| 2025 | _TBD_ | _TBD_ | _TBD_ | [2025 Season](#) |
+| 2025 | Save Me | Super Squirrels | Save Me | [2025 Season](#) |
 | 2024 | _TBD_ | _TBD_ | _TBD_ | [2024 Season](#) |
 | 2023 | _TBD_ | _TBD_ | _TBD_ | [2023 Season](#) |
 | 2022 | _TBD_ | _TBD_ | _TBD_ | [2022 Season](#) |
@@ -22,7 +22,7 @@ The complete list of Pine Hills Fantasy Football League champions, year by year.
 
 | Team | Titles | Years |
 |------|--------|-------|
-| _TBD_ | 0 | - |
+| Save Me | 1 | 2025 |
 
 ## Related
 

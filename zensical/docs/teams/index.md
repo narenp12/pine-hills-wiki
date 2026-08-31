@@ -35,7 +35,7 @@ Every franchise in Pine Hills history. Each team page tracks the owner, season-b
 | My team is Koo(l) | _TBD_ | 2020- | 0 | [My team is Koo(l)](#) |
 | Pukakke NaKupp | _TBD_ | 2023- | 0 | [Pukakke NaKupp](#) |
 | Roger That | _TBD_ | 2018- | 0 | [Roger That](#) |
-| Save Me | Naren | 2025- | 0 | [Save Me](#) |
+| Save Me | Naren | 2025- | 1 | [Save Me](#) |
 | Sharman’s Scorpions | _TBD_ | 2018- | 0 | [Sharman’s Scorpions](#) |
 | Stroud Boys | _TBD_ | 2023- | 0 | [Stroud Boys](#) |
 | Super Squirrels | _TBD_ | 2018- | 0 | [Super Squirrels](#) |

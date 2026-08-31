@@ -33,7 +33,7 @@ GAME_CODE = "nfl"
 # yfpy bootstrap. Use get_game_key_by_season(year) to map any year.
 CURRENT_GAME_ID = int(os.getenv("YAHOO_GAME_ID", "449"))
 # Seasons your league has played. Expand as needed.
-SEASONS = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+SEASONS = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
 
 
 def get_query():

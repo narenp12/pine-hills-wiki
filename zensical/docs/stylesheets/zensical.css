@@ -1,6 +1,17 @@
 /* Pine Hills Wiki — Zensical "modern" variant theme.
-   Token-driven, dual-scheme. Pine-green single accent, neutral ink chrome,
-   champion gold reserved as a semantic highlight only. Serif body + sans chrome. */
+   Token‑driven, dual‑scheme with a single pine‑green accent and neutral ink.
+   Champion gold is used only as a semantic highlight. Serif body + sans‑chrome. */
+
+/* ---------------------------------------------------------------------------
+   Design token layer – reusable spacing and sizing variables.
+   Helps keep the visual language consistent across components.
+   --------------------------------------------------------------------------- */
+:root {
+  --spacing-xs: 0.4rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --border-radius: 6px;
+}
 
 /* ---------------------------------------------------------------------------
    LIGHT SCHEME (default)
@@ -151,7 +162,7 @@
   padding: 2.4rem 1.5rem;
   background: var(--wiki-panel);
   border: 1px solid var(--wiki-border);
-  border-radius: 6px;
+  border-radius: var(--border-radius);
 }
 .md-content .ph-hero__lead h1 {
   margin: 0 0 0.5rem;
@@ -177,7 +188,7 @@
 .md-content .ph-hero__stats .stat {
   background: var(--md-default-bg-color);
   border: 1px solid var(--wiki-border);
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   padding: 0.9rem 0.8rem;
   text-align: center;
 }
@@ -214,7 +225,7 @@
   max-width: 90%;
   border: 1px solid var(--wiki-border);
   background: var(--wiki-panel);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 0.72rem;
 }
@@ -282,4 +293,10 @@
 /* Honor reduced motion (no infinite loops are used, but be safe). */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Enhanced button spacing using design tokens */
+.md-typeset .md-button {
+  margin: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
 }

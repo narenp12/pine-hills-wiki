@@ -7,9 +7,9 @@ year: 2025
 
 # 🏈 2025 Season
 
-**Champion:** _TBD_
-**Runner-Up:** _TBD_
-**Regular Season Top Seed:** _TBD_
+**Champion:** Save Me
+**Runner-Up:** Super Squirrels
+**Regular Season Top Seed:** Save Me
 **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
@@ -52,7 +52,7 @@ flowchart LR
 
 ## Awards
 
-- 🏆 **League Champion:** _TBD_
+- 🏆 **League Champion:** Save Me
 - 💥 **Highest Single-Week Score:** _TBD_
 - 📉 **Lowest Single-Week Score:** _TBD_
 - 🔥 **Biggest Bust:** _TBD_
