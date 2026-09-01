@@ -22,7 +22,8 @@ const stage = resolve(root, "zensical", ".stage");
 const raw = resolve(root, "raw");
 
 function py() {
-  return process.env.VIRTUAL_ENV ? process.env.VIRTUAL_ENV + "/bin/python" : "python3";
+  // Use uv to run Python so project dependencies (e.g., pyyaml) are available
+  return ["uv", "run", "python"]; 
 }
 
 function rawHasData() {

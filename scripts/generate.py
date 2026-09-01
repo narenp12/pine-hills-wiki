@@ -40,6 +40,11 @@ _DASH_RE = re.compile("|".join(re.escape(k) for k in _DASHES))
 # Magic numbers replaced with named constants
 DEFAULT_RANK = 99
 PLAYOFF_SEEDS = 4
+# Week boundaries used throughout the generator
+POST_DRAFT_WEEK = 1
+END_SEASON_WEEK = 18
+PLAYOFF_START_WEEK = 14
+PLAYOFF_END_WEEK = 18
 INITIAL_WORST_PF = 1e9
 PF_LEADERBOARD_MIN_ROWS = 6
 
@@ -50,7 +55,7 @@ def dash_normalize(text: str) -> str:
 
 try:
     import yaml
-except ImportError:  # CI may run without PyYAML installed
+except ImportError:
     yaml = None
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -82,8 +87,12 @@ def load_raw():
         try:
             d = json.loads(f.read_text())
             seasons[int(d["season"])] = d
-        except Exception as e:  # noqa: BLE001
-            print(f"  ! skipping {f.name}: {e}")
+        except json.JSONDecodeError as e:
+            print(f"  ! skipping {f.name}: invalid JSON - {e}")
+        except KeyError as e:
+            print(f"  ! skipping {f.name}: missing key {e} in JSON")
+        except OSError as e:
+            print(f"  ! skipping {f.name}: unable to read file - {e}")
     return seasons
 
 
@@ -92,12 +101,18 @@ def load_bible():
         return {}
     if yaml is None:
         print(
-            "  ! PyYAML not installed — skipping league bible "
-            "(owners/champions will be _TBD_). Install pyyaml for full data.",
+            "  ! PyYAML not installed — skipping league bible (owners/champions will be _TBD_). Install pyyaml for full data.",
             file=sys.stderr,
         )
         return {}
-    return yaml.safe_load(BIBLE_PATH.read_text()) or {}
+    try:
+        return yaml.safe_load(BIBLE_PATH.read_text()) or {}
+    except yaml.YAMLError as e:
+        print(f"  ! Failed to parse bible.yaml: {e}", file=sys.stderr)
+        return {}
+    except OSError as e:
+        print(f"  ! Could not read bible.yaml: {e}", file=sys.stderr)
+        return {}
 
 
 def wikilink(title: str, label=None) -> str:

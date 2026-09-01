@@ -28,6 +28,13 @@ ENV_FILE = ROOT / ".env"
 # ---- league config (edit these) -----------------------------------------
 LEAGUE_ID = os.getenv("YAHOO_LEAGUE_ID", "447010")
 GAME_CODE = "nfl"
+
+# ---- season / week constants --------------------------------------------
+START_WEEK = 1
+END_WEEK = 18
+PLAYOFF_START_WEEK = 14
+PLAYOFF_END_WEEK = 18
+
 # Yahoo "game id" per season. NFL game ids are stable per year; the query
 # helper can resolve them, but providing the CURRENT season's game_id lets
 # yfpy bootstrap. Use get_game_key_by_season(year) to map any year.
@@ -57,6 +64,7 @@ def game_key_for_season(q, season):
     try:
         return q.get_game_key_by_season(season)
     except Exception as e:  # noqa: BLE001
+        # yfpy does not expose a specific exception hierarchy; catch-all is intentional.
         print(f"  ! could not resolve game key for {season}: {e}")
         return None
 
@@ -74,6 +82,7 @@ def extract_season(q, season):
         try:
             return fn(*a, **kw)
         except Exception as e:  # noqa: BLE001
+            # yfpy does not expose a specific exception hierarchy; catch-all is intentional.
             print(f"    ! {fn.__name__} failed: {e}")
             return None
 
@@ -83,13 +92,13 @@ def extract_season(q, season):
     data["draft"] = _serialize(safe(q.get_league_draft_results, gk))
     data["transactions"] = _serialize(safe(q.get_league_transactions, gk))
     data["weeks"] = {}
-    # Determine number of weeks from settings or just try 1..18
-    for week in range(1, 19):
+    # Determine number of weeks from settings or just try START_WEEK..END_WEEK
+    for week in range(START_WEEK, END_WEEK + 1):
         wk = {}
         wk["matchups"] = _serialize(safe(q.get_league_matchups_by_week, gk, week))
         wk["scoreboard"] = _serialize(safe(q.get_league_scoreboard_by_week, gk, week))
         # roster for week 1 (post-draft) and last week (end-of-season) handled separately
-        if week == 1 or week == 18:
+        if week == START_WEEK or week == END_WEEK:
             wk["rosters"] = {}
             teams = data["teams"] or []
             team_keys = [t.get("team_key") for t in _team_list(teams)] if teams else []
@@ -97,14 +106,14 @@ def extract_season(q, season):
                 wk["rosters"][tk] = _serialize(safe(q.get_team_roster_by_week, tk, week))
         # stop early if no data
         if not wk["matchups"] and not wk["scoreboard"]:
-            if week > 14:
+            if week > PLAYOFF_START_WEEK:
                 break
         data["weeks"][str(week)] = wk
 
     # ---- Playoffs: pull matchups for the typical playoff window (weeks 14-17) ----
     # Each matchup carries teams, scores, and the winner — enough to draw a real bracket.
     data["playoffs"] = {"weeks": {}}
-    for week in range(14, 18):
+    for week in range(PLAYOFF_START_WEEK, PLAYOFF_END_WEEK):
         m = _serialize(safe(q.get_league_matchups_by_week, gk, week))
         if m:
             # normalize to a list of matchups, each with two teams + scores + winner
