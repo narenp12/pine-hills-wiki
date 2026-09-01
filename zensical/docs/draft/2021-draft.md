@@ -160,4 +160,4 @@ description: "Pine Hills FF 2021 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2021 Season](#)
+- [Draft History](index.md) · [2021 Season](../seasons/2021-season.md)

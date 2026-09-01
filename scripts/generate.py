@@ -240,6 +240,38 @@ def champ_fields(bible: dict, year: int) -> tuple[str, str, str, str]:
     )
 
 
+def _mermaid_label(text: str) -> str:
+    """Quote a team name for use as a Mermaid node label."""
+    return '"' + str(text).replace('"', "'") + '"'
+
+
+def playoff_bracket(seeded: list[tuple[int, str]], champion: str) -> str:
+    """Render the playoff bracket with the seeds that actually qualified.
+
+    Falls back to a generic Seed 1-4 skeleton when the standings do not name a
+    full bracket, so a season with incomplete data still shows the format.
+    """
+    by_seed = dict(seeded)
+    if len(by_seed) < PLAYOFF_SEEDS:
+        names = {n: f"Seed {n}" for n in range(1, PLAYOFF_SEEDS + 1)}
+    else:
+        names = {n: f"({n}) {by_seed[n]}" for n in range(1, PLAYOFF_SEEDS + 1)}
+
+    champ_label = f"🏆 {champion}" if champion != TBD else "🏆 Champion"
+    lines = [
+        "```mermaid",
+        "flowchart LR",
+        f"    S1[{_mermaid_label(names[1])}] --> W1[Semifinal 1]",
+        f"    S4[{_mermaid_label(names[4])}] --> W1",
+        f"    S2[{_mermaid_label(names[2])}] --> W2[Semifinal 2]",
+        f"    S3[{_mermaid_label(names[3])}] --> W2",
+        f"    W1 --> Champ[{_mermaid_label(champ_label)}]",
+        "    W2 --> Champ",
+        "```",
+    ]
+    return "\n".join(lines)
+
+
 # --------------------------------------------------------------------------- #
 # page generators
 # --------------------------------------------------------------------------- #
@@ -249,6 +281,7 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
     champion, runner_up, top_seed, toilet_bowl_winner = champ_fields(bible, year)
 
     rows = []
+    seeded: list[tuple[int, str]] = []  # (seed, team name) for the bracket
     for position, team in enumerate(sorted(teams, key=lambda x: int(x.get("rank", DEFAULT_RANK))), 1):
         rank = int(team.get("rank", position))
         team_name = team.get("name", "?")
@@ -257,46 +290,48 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
         losses = team.get("losses", 0)
         points_for = team.get("points_for", "?")
         points_against = team.get("points_against", "?")
-        seed = position if position <= PLAYOFF_SEEDS else "—"
+        if position <= PLAYOFF_SEEDS:
+            seed = position
+            seeded.append((position, team_name))
+        else:
+            seed = "—"
         rows.append(
             f"| {rank} | {team_name} | {owner} | {wins}–{losses} | {points_for} | {points_against} | {seed} |"
         )
+
+    bracket = playoff_bracket(seeded, champion)
+
+    # Flag the page as unfinished while the bible has no champion for the year.
+    # `status` renders the badge configured in zensical.toml.
+    status_line = "status: incomplete\n" if champion == TBD else ""
 
     md = f"""---
 title: "{year} Season"
 description: "Pine Hills Fantasy Football League — {year} season."
 season: {year}
 year: {year}
----
+{status_line}---
 
 # 🏈 {year} Season
 
-**Champion:** {champion}
-**Runner-Up:** {runner_up}
-**Regular Season Top Seed:** {top_seed}
-**Toilet Bowl Winner:** {toilet_bowl_winner}
+- **Champion:** {champion}
+- **Runner-Up:** {runner_up}
+- **Regular Season Top Seed:** {top_seed}
+- **Toilet Bowl Winner:** {toilet_bowl_winner}
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W–L order.
 
-| Rank | Team | Owner | W–L | PF | PA | Playoff Seed |
-|------|------|-------|-----|----|----|--------------|
+| Finish | Team | Owner | W–L | PF | PA | Playoff Seed |
+|--------|------|-------|-----|----|----|--------------|
 {chr(10).join(rows)}
 
 ## Playoff Bracket
 
 > Playoff results are recorded in the league bible. Add `champions: {{ {year}: {{ champion: ..., runner_up: ... }} }}` to `raw/bible.yaml` to populate this section.
 
-```mermaid
-flowchart LR
-    S1[Seed 1] --> W1
-    S4[Seed 4] --> W1
-    S2[Seed 2] --> W2
-    S3[Seed 3] --> W2
-    W1 --> Champ[🏆 Champion]
-    W2 --> Champ
-```
+{bracket}
 
 ## Team Rosters
 
@@ -359,13 +394,13 @@ description: "Franchise history for {name} in the Pine Hills Fantasy Football Le
 
 # 🏈 {name}
 
-**Owner:** {owner}
-**Joined:** {joined_year}
-**Status:** {status}
+- **Owner:** {owner}
+- **Joined:** {joined_year}
+- **Status:** {status}
 
 ## Franchise Summary
 
-- **Championships:** {TBD} _(playoff titles — record in `raw/bible.yaml`)_
+- **Championships:** {TBD}
 - **Regular-Season 1-Seeds:** {regular_season_titles}
 - **Runner-Up Finishes (regular season):** {runner_up_finishes}
 - **Playoff Appearances:** {franchise_stats['playoff_appears'] if franchise_stats else TBD} / {franchise_stats['seasons_count'] if franchise_stats else TBD} seasons
@@ -485,15 +520,30 @@ def gen_teams_index(aggregates: dict, bible: dict) -> str:
         if isinstance(champ_data, dict) and champ_data.get("champion"):
             championship_counts[champ_data["champion"]] = championship_counts.get(champ_data["champion"], 0) + 1
 
+    # Latest season in the data: a franchise still active in it reads "present"
+    # rather than the open-ended "2018–" the table used to show.
+    latest_year = max(
+        (max(f["years"]) for f in aggregates.values() if f.get("years")), default=None
+    )
+
     rows = []
     for canonical_name, franchise in sorted(aggregates.items(), key=lambda x: x[0].lower()):
         # pick a representative name (prefer the one that appears latest)
         representative_name = franchise["names"][-1]
         owner = owners.get(representative_name, "") or TBD
-        year_range = f"{franchise['years'][0]}–"
+        first_year, last_year = min(franchise["years"]), max(franchise["years"])
+        if last_year == latest_year:
+            year_range = f"{first_year}–present"
+        elif first_year == last_year:
+            year_range = str(first_year)
+        else:
+            year_range = f"{first_year}–{last_year}"
         titles = championship_counts.get(representative_name, 0)
-        link = wikilink(representative_name)
-        rows.append(f"| {representative_name} | {owner} | {year_range} | {titles} | {link} |")
+        # The team name is the link; a separate "Page" column repeated it and
+        # forced both columns to wrap to three lines each on narrow screens.
+        rows.append(
+            f"| {wikilink(representative_name)} | {owner} | {year_range} | {titles} |"
+        )
 
     md = f"""---
 title: Teams
@@ -506,8 +556,8 @@ Every franchise in Pine Hills history. Each team page tracks the owner, season-b
 
 ## Active & Historical Franchises
 
-| Team | Owner | Seasons | Titles | Page |
-|------|-------|---------|--------|------|
+| Team | Owner | Seasons | Titles |
+|------|-------|---------|--------|
 {chr(10).join(rows)}
 
 ## Team Pages Should Include

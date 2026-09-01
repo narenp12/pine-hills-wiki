@@ -7,17 +7,17 @@ year: 2025
 
 # 🏈 2025 Season
 
-**Champion:** Save Me
-**Runner-Up:** Super Squirrels
-**Regular Season Top Seed:** Save Me
-**Toilet Bowl Winner:** _TBD_
+- **Champion:** Save Me
+- **Runner-Up:** Super Squirrels
+- **Regular Season Top Seed:** Save Me
+- **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
 
-| Rank | Team | Owner | W-L | PF | PA | Playoff Seed |
-|------|------|-------|-----|----|----|--------------|
+| Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
+|--------|------|-------|-----|----|----|--------------|
 | 1 | Jeremy's Neat Team | _TBD_ | 8-6 | 1526.46 | 1552.74 | 1 |
 | 2 | Big black big back | _TBD_ | 7-7 | 1603.4 | 1557.16 | 2 |
 | 3 | Roger That | _TBD_ | 10-4 | 1751.42 | 1564.38 | 3 |
@@ -37,11 +37,11 @@ year: 2025
 
 ```mermaid
 flowchart LR
-    S1[Seed 1] --> W1
-    S4[Seed 4] --> W1
-    S2[Seed 2] --> W2
-    S3[Seed 3] --> W2
-    W1 --> Champ[🏆 Champion]
+    S1["(1) Jeremy's Neat Team"] --> W1[Semifinal 1]
+    S4["(4) Save Me"] --> W1
+    S2["(2) Big black big back"] --> W2[Semifinal 2]
+    S3["(3) Roger That"] --> W2
+    W1 --> Champ["🏆 Save Me"]
     W2 --> Champ
 ```
 
@@ -65,4 +65,4 @@ _TBD - add the defining moments._
 
 ## Related
 
-- [Seasons](index.md) · [2025 Draft](#) · [Teams](../teams/index.md) · [Records](../records/index.md) · [Lore](#) · [Playoffs](../playoffs.md)
+- [Seasons](index.md) · [2025 Draft](../draft/2025-draft.md) · [Teams](../teams/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Playoffs](../playoffs.md)

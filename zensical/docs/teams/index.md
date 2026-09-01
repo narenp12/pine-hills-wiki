@@ -9,41 +9,41 @@ Every franchise in Pine Hills history. Each team page tracks the owner, season-b
 
 ## Active & Historical Franchises
 
-| Team | Owner | Seasons | Titles | Page |
-|------|-------|---------|--------|------|
-| Anish's Awesome Team | _TBD_ | 2018- | 0 | [Anish's Awesome Team](#) |
-| Aryan's Amazing Team | _TBD_ | 2020- | 0 | [Aryan's Amazing Team](#) |
-| BBigg MACKS | _TBD_ | 2023- | 0 | [BBigg MACKS](#) |
-| Big black big back | _TBD_ | 2024- | 0 | [Big black big back](#) |
-| CHOPSTIX | _TBD_ | 2019- | 0 | [CHOPSTIX](chopstix.md) |
-| Curry’s legit team | _TBD_ | 2018- | 0 | [Curry’s legit team](#) |
-| D4rthSi Dragons | _TBD_ | 2018- | 0 | [D4rthSi Dragons](#) |
-| Hill We Go… Again (feat Kyler) | _TBD_ | 2022- | 0 | [Hill We Go… Again (feat Kyler)](#) |
-| I have Hop(e) | _TBD_ | 2020- | 0 | [I have Hop(e)](#) |
-| Imagine Losing | _TBD_ | 2020- | 0 | [Imagine Losing](#) |
-| Indiana Jones | _TBD_ | 2025- | 0 | [Indiana Jones](#) |
-| Jayesh's Great Team | _TBD_ | 2024- | 0 | [Jayesh's Great Team](#) |
-| Jeremy's Neat Team | _TBD_ | 2022- | 0 | [Jeremy's Neat Team](#) |
-| Joe Sheisty | _TBD_ | 2024- | 0 | [Joe Sheisty](#) |
-| Ju Let The Dogs Out | _TBD_ | 2019- | 0 | [Ju Let The Dogs Out](#) |
-| Kamara’s a b*tch | _TBD_ | 2024- | 0 | [Kamara’s a b*tch](#) |
-| Kaushal's Potatoes | _TBD_ | 2019- | 0 | [Kaushal's Potatoes](#) |
-| Ken Keenan Kum | _TBD_ | 2023- | 0 | [Ken Keenan Kum](#) |
-| L takes only | _TBD_ | 2022- | 0 | [L takes only](#) |
-| Michael's Marvelous Team | _TBD_ | 2021- | 0 | [Michael's Marvelous Team](#) |
-| most likely injured | _TBD_ | 2021- | 0 | [most likely injured](#) |
-| My team is Koo(l) | _TBD_ | 2020- | 0 | [My team is Koo(l)](#) |
-| Pukakke NaKupp | _TBD_ | 2023- | 0 | [Pukakke NaKupp](#) |
-| Roger That | _TBD_ | 2018- | 0 | [Roger That](#) |
-| Save Me | Naren | 2025- | 1 | [Save Me](#) |
-| Sharman’s Scorpions | _TBD_ | 2018- | 0 | [Sharman’s Scorpions](#) |
-| Stroud Boys | _TBD_ | 2023- | 0 | [Stroud Boys](#) |
-| Super Squirrels | _TBD_ | 2018- | 0 | [Super Squirrels](#) |
-| Tanmay's Hospital | _TBD_ | 2022- | 0 | [Tanmay's Hospital](#) |
-| Tanmay's Top-Notch Team | _TBD_ | 2021- | 0 | [Tanmay's Top-Notch Team](#) |
-| The Herbs | _TBD_ | 2021- | 0 | [The Herbs](#) |
-| The Johnson and Johnson team | _TBD_ | 2021- | 0 | [The Johnson and Johnson team](#) |
-| varun’s victorious team | _TBD_ | 2021- | 0 | [varun’s victorious team](#) |
+| Team | Owner | Seasons | Titles |
+|------|-------|---------|--------|
+| [Anish's Awesome Team](anish-s-awesome-team.md) | _TBD_ | 2018-2022 | 0 |
+| [Aryan's Amazing Team](aryan-s-amazing-team.md) | _TBD_ | 2020 | 0 |
+| [BBigg MACKS](bbigg-macks.md) | _TBD_ | 2023 | 0 |
+| [Big black big back](big-black-big-back.md) | _TBD_ | 2024-present | 0 |
+| [CHOPSTIX](chopstix.md) | _TBD_ | 2019-2020 | 0 |
+| [Curry’s legit team](curry-s-legit-team.md) | _TBD_ | 2018-2019 | 0 |
+| [D4rthSi Dragons](d4rthsi-dragons.md) | _TBD_ | 2018 | 0 |
+| [Hill We Go… Again (feat Kyler)](hill-we-go-again-feat-kyler.md) | _TBD_ | 2022 | 0 |
+| [I have Hop(e)](i-have-hop-e.md) | _TBD_ | 2020 | 0 |
+| [Imagine Losing](imagine-losing.md) | _TBD_ | 2020 | 0 |
+| [Indiana Jones](indiana-jones.md) | _TBD_ | 2025-present | 0 |
+| [Jayesh's Great Team](jayesh-s-great-team.md) | _TBD_ | 2024-present | 0 |
+| [Jeremy's Neat Team](jeremy-s-neat-team.md) | _TBD_ | 2022-present | 0 |
+| [Joe Sheisty](joe-sheisty.md) | _TBD_ | 2024 | 0 |
+| [Ju Let The Dogs Out](ju-let-the-dogs-out.md) | _TBD_ | 2019 | 0 |
+| [Kamara’s a b*tch](kamara-s-a-b-tch.md) | _TBD_ | 2024 | 0 |
+| [Kaushal's Potatoes](kaushal-s-potatoes.md) | _TBD_ | 2019-present | 0 |
+| [Ken Keenan Kum](ken-keenan-kum.md) | _TBD_ | 2023 | 0 |
+| [L takes only](l-takes-only.md) | _TBD_ | 2022 | 0 |
+| [Michael's Marvelous Team](michael-s-marvelous-team.md) | _TBD_ | 2021-present | 0 |
+| [most likely injured](most-likely-injured.md) | _TBD_ | 2021 | 0 |
+| [My team is Koo(l)](my-team-is-koo-l.md) | _TBD_ | 2020 | 0 |
+| [Pukakke NaKupp](pukakke-nakupp.md) | _TBD_ | 2023 | 0 |
+| [Roger That](roger-that.md) | _TBD_ | 2018-present | 0 |
+| [Save Me](save-me.md) | Naren | 2025-present | 1 |
+| [Sharman’s Scorpions](sharman-s-scorpions.md) | _TBD_ | 2018-present | 0 |
+| [Stroud Boys](stroud-boys.md) | _TBD_ | 2023-present | 0 |
+| [Super Squirrels](super-squirrels.md) | _TBD_ | 2018-present | 0 |
+| [Tanmay's Hospital](tanmay-s-hospital.md) | _TBD_ | 2022 | 0 |
+| [Tanmay's Top-Notch Team](tanmay-s-top-notch-team.md) | _TBD_ | 2021 | 0 |
+| [The Herbs](the-herbs.md) | _TBD_ | 2021 | 0 |
+| [The Johnson and Johnson team](the-johnson-and-johnson-team.md) | _TBD_ | 2021 | 0 |
+| [varun’s victorious team](varun-s-victorious-team.md) | _TBD_ | 2021-present | 0 |
 
 ## Team Pages Should Include
 
@@ -53,4 +53,4 @@ Every franchise in Pine Hills history. Each team page tracks the owner, season-b
 - **Rivalries** - head-to-head record vs. nemesis teams.
 - **Signature moments** - the trade that defined them, the meltdown, the heater.
 
-> Building a new team page? Start from [Team Template](#).
+> Building a new team page? Start from <span class="wiki-new" title="This page has not been written yet">Team Template</span>.

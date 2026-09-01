@@ -190,4 +190,4 @@ description: "Pine Hills FF 2025 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2025 Season](#)
+- [Draft History](index.md) · [2025 Season](../seasons/2025-season.md)

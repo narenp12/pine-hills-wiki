@@ -3,21 +3,22 @@ title: "2019 Season"
 description: "Pine Hills Fantasy Football League - 2019 season."
 season: 2019
 year: 2019
+status: incomplete
 ---
 
 # 🏈 2019 Season
 
-**Champion:** _TBD_
-**Runner-Up:** _TBD_
-**Regular Season Top Seed:** _TBD_
-**Toilet Bowl Winner:** _TBD_
+- **Champion:** _TBD_
+- **Runner-Up:** _TBD_
+- **Regular Season Top Seed:** _TBD_
+- **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
 
-| Rank | Team | Owner | W-L | PF | PA | Playoff Seed |
-|------|------|-------|-----|----|----|--------------|
+| Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
+|--------|------|-------|-----|----|----|--------------|
 | 1 | Curry’s legit team | _TBD_ | 8-5 | 1863.5 | 1661.14 | 1 |
 | 2 | Ju Let The Dogs Out | _TBD_ | 9-4 | 1766.38 | 1615.02 | 2 |
 | 3 | Kaushal's Potatoes | _TBD_ | 8-5 | 1673.66 | 1575.2 | 3 |
@@ -33,11 +34,11 @@ year: 2019
 
 ```mermaid
 flowchart LR
-    S1[Seed 1] --> W1
-    S4[Seed 4] --> W1
-    S2[Seed 2] --> W2
-    S3[Seed 3] --> W2
-    W1 --> Champ[🏆 Champion]
+    S1["(1) Curry’s legit team"] --> W1[Semifinal 1]
+    S4["(4) Super Squirrels"] --> W1
+    S2["(2) Ju Let The Dogs Out"] --> W2[Semifinal 2]
+    S3["(3) Kaushal's Potatoes"] --> W2
+    W1 --> Champ["🏆 Champion"]
     W2 --> Champ
 ```
 
@@ -61,4 +62,4 @@ _TBD - add the defining moments._
 
 ## Related
 
-- [Seasons](index.md) · [2019 Draft](#) · [Teams](../teams/index.md) · [Records](../records/index.md) · [Lore](#) · [Playoffs](../playoffs.md)
+- [Seasons](index.md) · [2019 Draft](../draft/2019-draft.md) · [Teams](../teams/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Playoffs](../playoffs.md)

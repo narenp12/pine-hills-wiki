@@ -130,4 +130,4 @@ description: "Pine Hills FF 2019 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2019 Season](#)
+- [Draft History](index.md) · [2019 Season](../seasons/2019-season.md)

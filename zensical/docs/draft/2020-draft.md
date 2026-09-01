@@ -160,4 +160,4 @@ description: "Pine Hills FF 2020 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2020 Season](#)
+- [Draft History](index.md) · [2020 Season](../seasons/2020-season.md)

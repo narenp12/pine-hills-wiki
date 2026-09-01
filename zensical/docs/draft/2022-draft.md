@@ -160,4 +160,4 @@ description: "Pine Hills FF 2022 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2022 Season](#)
+- [Draft History](index.md) · [2022 Season](../seasons/2022-season.md)

@@ -42,4 +42,4 @@ A hall of fame for the league's most infamous moments - bad beats, vetoed trades
 
 ## Related
 
-- [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Lore](#) · [Champions](../champions.md)
+- [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Champions](../champions.md)

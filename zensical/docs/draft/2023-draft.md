@@ -160,4 +160,4 @@ description: "Pine Hills FF 2023 draft board."
 
 ## Related
 
-- [Draft History](index.md) · [2023 Season](#)
+- [Draft History](index.md) · [2023 Season](../seasons/2023-season.md)

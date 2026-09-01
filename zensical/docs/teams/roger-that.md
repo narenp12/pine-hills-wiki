@@ -4,25 +4,23 @@ description: "Franchise history for Roger That in the Pine Hills Fantasy Footbal
 ---
 
 # 🏈 Roger That
+
 <div class="infobox">
   <div class="infobox-title">🏈 Roger That</div>
-<div class="infobox-row"><div class="label">Owner</div><div class="value">_TBD_</div></div>
-<div class="infobox-row"><div class="label">Joined</div><div class="value">_TBD_</div></div>
+<div class="infobox-row"><div class="label">Owner</div><div class="value"><em class="tbd">TBD</em></div></div>
+<div class="infobox-row"><div class="label">Joined</div><div class="value"><em class="tbd">TBD</em></div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
 <div class="infobox-row"><div class="label">All-Time</div><div class="value">46-60 (43.4%)</div></div>
 <div class="infobox-row"><div class="label">Points For/Ag.</div><div class="value">13094.50 / 13278.08</div></div>
-<div class="infobox-row"><div class="label">Championships</div><div class="value">_TBD_ _(playoff titles - record in `raw/bible.yaml`)_</div></div>
+<div class="infobox-row"><div class="label">Championships</div><div class="value"><em class="tbd">TBD</em></div></div>
 </div>
 
 
 
-**Owner:** _TBD_
-**Joined:** _TBD_
-**Status:** Active
 
 ## Franchise Summary
 
-- **Championships:** _TBD_ _(playoff titles - record in `raw/bible.yaml`)_
+- **Championships:** _TBD_
 - **Regular-Season 1-Seeds:** 1
 - **Runner-Up Finishes (regular season):** 0
 - **Playoff Appearances:** 4 / 8 seasons
@@ -33,14 +31,14 @@ description: "Franchise history for Roger That in the Pine Hills Fantasy Footbal
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2018 | 4-6 | 5 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2019 | 2-11 | 8 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2020 | 6-7 | 1 | Yes | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2021 | 7-7 | 3 | Yes | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2022 | 10-4 | 4 | Yes | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2023 | 5-9 | 7 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2024 | 2-12 | 12 | No | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
-| 2025 | 10-4 | 3 | Yes | [Post-Draft](#) | [End-of-Season](#) | _TBD_ |
+| 2018 | 4-6 | 5 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2019 | 2-11 | 8 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2020 | 6-7 | 1 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2021 | 7-7 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2022 | 10-4 | 4 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2023 | 5-9 | 7 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2024 | 2-12 | 12 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2025 | 10-4 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
 
 ## Rivalries
 
@@ -54,4 +52,4 @@ _TBD._
 
 ## Related
 
-- [Teams](index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · [Lore](#)
+- [Teams](index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span>

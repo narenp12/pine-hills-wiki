@@ -3,21 +3,22 @@ title: "2023 Season"
 description: "Pine Hills Fantasy Football League - 2023 season."
 season: 2023
 year: 2023
+status: incomplete
 ---
 
 # 🏈 2023 Season
 
-**Champion:** _TBD_
-**Runner-Up:** _TBD_
-**Regular Season Top Seed:** _TBD_
-**Toilet Bowl Winner:** _TBD_
+- **Champion:** _TBD_
+- **Runner-Up:** _TBD_
+- **Regular Season Top Seed:** _TBD_
+- **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
 
-| Rank | Team | Owner | W-L | PF | PA | Playoff Seed |
-|------|------|-------|-----|----|----|--------------|
+| Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
+|--------|------|-------|-----|----|----|--------------|
 | 1 | Super Squirrels | _TBD_ | 7-7 | 1588.64 | 1644.92 | 1 |
 | 2 | BBigg MACKS | _TBD_ | 11-3 | 1874.16 | 1444.54 | 2 |
 | 3 | Stroud Boys | _TBD_ | 11-3 | 1888.52 | 1619.28 | 3 |
@@ -35,11 +36,11 @@ year: 2023
 
 ```mermaid
 flowchart LR
-    S1[Seed 1] --> W1
-    S4[Seed 4] --> W1
-    S2[Seed 2] --> W2
-    S3[Seed 3] --> W2
-    W1 --> Champ[🏆 Champion]
+    S1["(1) Super Squirrels"] --> W1[Semifinal 1]
+    S4["(4) Ken Keenan Kum"] --> W1
+    S2["(2) BBigg MACKS"] --> W2[Semifinal 2]
+    S3["(3) Stroud Boys"] --> W2
+    W1 --> Champ["🏆 Champion"]
     W2 --> Champ
 ```
 
@@ -63,4 +64,4 @@ _TBD - add the defining moments._
 
 ## Related
 
-- [Seasons](index.md) · [2023 Draft](#) · [Teams](../teams/index.md) · [Records](../records/index.md) · [Lore](#) · [Playoffs](../playoffs.md)
+- [Seasons](index.md) · [2023 Draft](../draft/2023-draft.md) · [Teams](../teams/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Playoffs](../playoffs.md)

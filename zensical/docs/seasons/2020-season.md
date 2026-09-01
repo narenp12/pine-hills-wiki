@@ -3,21 +3,22 @@ title: "2020 Season"
 description: "Pine Hills Fantasy Football League - 2020 season."
 season: 2020
 year: 2020
+status: incomplete
 ---
 
 # 🏈 2020 Season
 
-**Champion:** _TBD_
-**Runner-Up:** _TBD_
-**Regular Season Top Seed:** _TBD_
-**Toilet Bowl Winner:** _TBD_
+- **Champion:** _TBD_
+- **Runner-Up:** _TBD_
+- **Regular Season Top Seed:** _TBD_
+- **Toilet Bowl Winner:** _TBD_
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); `_TBD_` means not yet recorded.
+> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
 
-| Rank | Team | Owner | W-L | PF | PA | Playoff Seed |
-|------|------|-------|-----|----|----|--------------|
+| Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
+|--------|------|-------|-----|----|----|--------------|
 | 1 | Roger That | _TBD_ | 6-7 | 1529.92 | 1623.92 | 1 |
 | 2 | Imagine Losing | _TBD_ | 7-6 | 1515.24 | 1564.58 | 2 |
 | 3 | Kaushal's Potatoes | _TBD_ | 6-7 | 1636.04 | 1579.58 | 3 |
@@ -35,11 +36,11 @@ year: 2020
 
 ```mermaid
 flowchart LR
-    S1[Seed 1] --> W1
-    S4[Seed 4] --> W1
-    S2[Seed 2] --> W2
-    S3[Seed 3] --> W2
-    W1 --> Champ[🏆 Champion]
+    S1["(1) Roger That"] --> W1[Semifinal 1]
+    S4["(4) CHOPSTIX"] --> W1
+    S2["(2) Imagine Losing"] --> W2[Semifinal 2]
+    S3["(3) Kaushal's Potatoes"] --> W2
+    W1 --> Champ["🏆 Champion"]
     W2 --> Champ
 ```
 
@@ -63,4 +64,4 @@ _TBD - add the defining moments._
 
 ## Related
 
-- [Seasons](index.md) · [2020 Draft](#) · [Teams](../teams/index.md) · [Records](../records/index.md) · [Lore](#) · [Playoffs](../playoffs.md)
+- [Seasons](index.md) · [2020 Draft](../draft/2020-draft.md) · [Teams](../teams/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Playoffs](../playoffs.md)
