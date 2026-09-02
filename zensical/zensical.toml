@@ -6,25 +6,45 @@ site_name = "Pine Hills Fantasy Football League"
 site_url = "https://narenp12.github.io/pine-hills-wiki"   # required for instant nav
 site_description = "The collaborative history of the Pine Hills Fantasy Football League."
 site_author = "Pine Hills League"
-copyright = "&copy; 2018&ndash;2025 Pine Hills Fantasy Football League"
+# Plain hyphen, per the project's no-en/em-dash rule (zensical/transform.py).
+copyright = "&copy; 2018-2025 Pine Hills Fantasy Football League"
 repo_url = "https://github.com/narenp12/pine-hills-wiki"
 repo_name = "narenp12/pine-hills-wiki"
 docs_dir = "docs"
 site_dir = "site"
 use_directory_urls = true
 dev_addr = "localhost:7860"
+# Enables the pencil/eye actions below. Docs live under zensical/docs.
+edit_uri = "edit/main/zensical/docs/"
+
+# Explicit nav: without it the tabs are alphabetical, which buries Seasons and
+# Teams behind the two thinnest pages, and labels the home tab with the whole
+# site name.
+nav = [
+  { Home = "index.md" },
+  { Seasons = "seasons/index.md" },
+  { Teams = "teams/index.md" },
+  { Owners = "owners/index.md" },
+  { Records = "records/index.md" },
+  { "Draft History" = "draft/index.md" },
+  { Playoffs = "playoffs.md" },
+  { Champions = "champions.md" },
+]
 
 # Custom CSS / JS are TOP-LEVEL [project] keys (not under [project.theme]).
 extra_css = [
   "stylesheets/zensical.css",
 ]
+# tablesort.js is self-contained; the unpkg tablesort bundle was loaded on every
+# page and never called, so it is not listed here.
 extra_javascript = [
-  "https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js",
   "javascripts/tablesort.js",
 ]
 
 [project.theme]
 variant = "modern"
+# overrides/main.html adds the Open Graph / Twitter tags the base template omits.
+custom_dir = "overrides"
 features = [
   "navigation.instant",
   "navigation.instant.prefetch",
@@ -39,6 +59,9 @@ features = [
   "content.code.copy",
   "content.tooltips",
   "content.footnote.tooltips",
+  "content.action.edit",
+  "content.action.view",
+  "navigation.path",
   "announce.dismiss",
   "header.autohide",
 ]
@@ -63,12 +86,24 @@ toggle.name = "Switch to light mode"
 repo = "fontawesome/brands/github"
 edit = "material/pencil"
 view = "material/eye"
+logo = "lucide/tree-pine"
 
-# Mermaid diagrams (playoff brackets) require a custom fence.
-[project.markdown_extensions.pymdownx.superfences]
-custom_fences = [
-  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
-]
+# DO NOT add a [project.markdown_extensions.*] table here.
+#
+# Zensical falls back to DEFAULT_MARKDOWN_EXTENSIONS only when the key is
+# ABSENT (zensical/config.py: `config.get("markdown_extensions",
+# DEFAULT_MARKDOWN_EXTENSIONS)`). Declaring any single extension replaces the
+# whole default set. This file used to declare a superfences custom_fence for
+# mermaid, which silently reduced the site to ["pymdownx.superfences", "toc",
+# "tables"] and disabled md_in_html, attr_list, admonition, def_list,
+# footnotes, emoji, tasklist, tabbed, permalinks and the rest.
+#
+# The mermaid fence was never needed: Zensical registers it natively, and
+# playoff brackets render without any extension config. If an extension really
+# must be configured, re-declare the full default set alongside it.
 
 [project.extra]
-status = { new = "New", deprecated = "Deprecated" }
+# Applied by scripts/generate.py: any page whose key facts are still `_TBD_`
+# carries `status: incomplete` in its front matter, so readers can tell an
+# unfinished page from a finished one at a glance in the nav.
+status = { incomplete = "Awaiting league records" }

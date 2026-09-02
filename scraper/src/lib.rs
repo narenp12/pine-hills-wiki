@@ -5,6 +5,7 @@
 pub mod extract;
 pub mod model;
 pub mod parse_rendered;
+pub mod parse_v2;
 pub mod scrape;
 pub mod selectors;
 
@@ -71,6 +72,16 @@ pub struct Cli {
     /// this directory (no browser needed). Files: <dir>/<year>-<league>-<view>.innerText.txt
     #[arg(long)]
     pub from_dump: Option<PathBuf>,
+
+    /// Build raw/<year>.json from harvested Yahoo v2 API payloads in this
+    /// directory (no browser needed). Files come from `scripts/harvest_v2.py`.
+    ///
+    /// This MERGES over any existing raw/<year>.json: standings, matchups and
+    /// champions are replaced with the v2 data, and everything else already in
+    /// the file (notably draft picks, which the v2 harvest does not fetch) is
+    /// preserved.
+    #[arg(long)]
+    pub from_v2: Option<PathBuf>,
 
     /// Which datasets to extract. Standings+Draft are proven; Matchups+Roster are
     /// EXPERIMENTAL (unvalidated SPA selectors — may yield empty/mis-attributed data).

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Build the Zensical edition of the Pine Hills wiki.
 //
-// Pipeline (when raw/ JSON is present — local dev with fresh data):
+// Run with node, not python: `node zensical/build.mjs`.
+//
+// Pipeline (when raw/ JSON is present - local dev with fresh data):
 //   1. scripts/generate.py  (WIKI_CONTENT_DIR -> zensical/.stage)  generates Markdown
 //   2. zensical/transform.py  resolves [[wikilinks]] -> zensical/docs
 //   3. zensical build --clean  -> zensical/site
@@ -14,16 +16,35 @@
 // and zensical/docs/index.md are committed in git and are NOT regenerated.
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { dirname, resolve, join } from "node:path";
-import { existsSync, readdirSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { readdirSync } from "node:fs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const stage = resolve(root, "zensical", ".stage");
 const raw = resolve(root, "raw");
 
-function py() {
-  // Use uv to run Python so project dependencies (e.g., pyyaml) are available
-  return ["uv", "run", "python"]; 
+// Everything Python-side runs through uv so deps resolve from uv.lock.
+// execFileSync takes (file, args) - passing an array as `file` throws
+// TypeError, so the command and its arguments are kept separate here.
+const HAS_UV = (() => {
+  try {
+    execFileSync("uv", ["--version"], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+})();
+
+if (!HAS_UV) {
+  console.error(
+    "[build] uv not found. Install it (https://docs.astral.sh/uv/) - the build " +
+      "resolves Python and the zensical binary through `uv run`.",
+  );
+  process.exit(1);
+}
+
+function uvRun(args, options = {}) {
+  execFileSync("uv", ["run", ...args], { stdio: "inherit", ...options });
 }
 
 function rawHasData() {
@@ -36,20 +57,18 @@ function rawHasData() {
 
 if (rawHasData()) {
   console.log("[build] 1/3 generate.py ->", stage);
-  execFileSync(py(), ["scripts/generate.py"], {
+  uvRun(["python", "scripts/generate.py"], {
     cwd: root,
-    stdio: "inherit",
     env: { ...process.env, WIKI_CONTENT_DIR: stage },
   });
   console.log("[build] 2/3 transform.py -> zensical/docs");
-  execFileSync(py(), ["zensical/transform.py"], { cwd: root, stdio: "inherit" });
+  uvRun(["python", "zensical/transform.py"], { cwd: root });
 } else {
-  console.log("[build] raw/ has no JSON (CI) — building from committed zensical/docs");
+  console.log("[build] raw/ has no JSON (CI) - building from committed zensical/docs");
 }
 
 console.log("[build] zensical build --clean -> zensical/site");
-execFileSync("zensical", ["build", "--clean"], {
-  cwd: resolve(root, "zensical"),
-  stdio: "inherit",
-});
+// cwd must be zensical/ so the CLI picks up zensical.toml; uv still discovers
+// the project by walking up to the repo-root pyproject.toml.
+uvRun(["zensical", "build", "--clean"], { cwd: resolve(root, "zensical") });
 console.log("[build] done.");

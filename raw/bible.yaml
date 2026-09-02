@@ -1,0 +1,83 @@
+# =============================================================================
+# Pine Hills Fantasy Football League — "League Bible"
+# -----------------------------------------------------------------------------
+# The single source of truth for HUMAN-ONLY facts that cannot be derived from
+# the captured Yahoo data.
+#
+# Facts that the machine CAN derive (W-L, points for/against, finish, playoff
+# seed, draft board, all-time records, every team's owner, weekly matchup scores,
+# and the champion / runner-up / top seed) are computed automatically by
+# scripts/generate.py and must NOT be hand-edited here.
+#
+# Everything below is OPTIONAL. Leave a field blank ('') or omit it and the
+# generator will emit "_TBD_" — never a fabricated value.
+#
+# How to fill this in:
+#   1. owners:        map a team name -> the person who runs it
+#   2. champions:     per year, the playoff winner (and runner-up / top seed /
+#                     toilet-bowl winner if known). The champion is the ONLY
+#                     thing that decides "who won the year" — it is NOT the
+#                     regular-season #1.
+#   3. aliases:       if a franchise changed its team name across years, list
+#                     the historical names under one canonical name so its
+#                     history is aggregated correctly.
+#   4. franchise_notes: joined year, status, signature moments, etc.
+#   5. lore:          curses and infamous incidents (community-sourced).
+# =============================================================================
+
+league:
+  name: Pine Hills Fantasy Football League
+  established: 2018
+
+# --- Owners -----------------------------------------------------------------
+# team name (as it appears in a season) -> owner name
+owners:
+  "Save Me": Naren
+
+# --- Owner aliases (same person, different spelling) -------------------------
+# canonical person -> list of spellings Yahoo has reported for them.
+# Casing is merged automatically ("lokesh" and "Lokesh" are already one person),
+# so this is only needed for genuinely different spellings or nicknames. The
+# canonical name here is what the owner page is titled and slugged from.
+owner_aliases: {}
+
+# --- Team images -------------------------------------------------------------
+# team name (as it appears in a season) -> image for that franchise.
+# Yahoo's capture carries no logo, so these are hand-supplied. Drop the file in
+# zensical/docs/assets/teams/ and reference it by file name; a docs-relative
+# path or an absolute https:// URL also works. The image heads the team's
+# infobox and appears as a thumbnail in the Teams and Owners tables. Teams
+# missing from this map simply render without an image.
+#   "Roger That": roger-that.png
+team_images: {}
+
+# --- Champions (playoff winners, NOT regular-season #1) ----------------------
+# All four fields are now DERIVED from the Yahoo v2 API and written into
+# raw/<year>.json by `phf-scraper --from-v2`:
+#   champion / runner_up  <- final playoff-adjusted standings rank 1 / 2
+#   top_seed              <- the team that entered the playoffs seeded 1
+#   toilet_winner         <- whoever finished last in the final standings
+# generate.py overlays those values on top of this block, so anything typed here
+# is ignored whenever derived data exists. Leave them blank.
+champions:
+  2025: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2024: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2023: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2022: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2021: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2020: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2019: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+  2018: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
+
+# --- Franchise aliases (name changes across years) ---------------------------
+# canonical name -> list of names that belong to the same franchise
+aliases: {}
+
+# --- Per-franchise notes -----------------------------------------------------
+# canonical name -> free-form facts
+franchise_notes: {}
+
+# --- Lore --------------------------------------------------------------------
+lore:
+  incidents: []
+  curses: []

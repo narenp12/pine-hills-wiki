@@ -1,15 +1,31 @@
 # Handoff — Pine Hills FF scraper (updated 2026-08-29)
 
 ## Where we are
-The private JSON API approach is **dead** (proven): the SPA envelope is pre-draft
-zeros, and the v2 REST API is blocked in-session. We pivoted to a **rendered-page
-capture** pipeline that WORKS end-to-end and produces real scored data for the wiki.
+**The Yahoo v2 API works and is now the primary source.** (Updated 2026-09-01 —
+this reverses the previous conclusion, see below.) The rendered-page capture
+pipeline is retained, but only draft picks still come from it.
+
+## RETRACTED: "the JSON API is dead" (2026-09-01)
+The previous version of this document claimed the JSON API was dead "(proven)".
+That was wrong, and both supporting tests were faulty:
+
+1. **The envelope capture read a season that does not exist.** It used
+   `/f1/447010/2016/standings`, but `447010` is the *current* season's league and
+   this league has no 2016. Pre-draft zeros were the correct response for that
+   page — not evidence about historical seasons.
+2. **The v2 test used the wrong host.** v2 is served from a dedicated read-only
+   host, `pub-api-ro.fantasysports.yahoo.com`, with `format=json_f`. Requesting it
+   from the page's own origin 404s, which is what produced the "HTML error shells"
+   reading. Fetching from the page's JS context with `credentials: 'include'`
+   returns 200 JSON.
+
+Confirmed working (140 payloads harvested across 2018-2025, 0 failures):
+- `users;use_login=1/games;game_codes=nfl/leagues` — every league key
+- `league/<key>/standings` — rank, W-L-T, PF, PA, playoff seed, **every** owner
+- `league/<key>/scoreboard;week=N` — scores, `winner_team_key`, `is_playoffs`
+- `league/<key>/teams/roster;week=N` — all teams' rosters in ONE request
 
 ## Confirmed facts (evidence-backed, 2026-08-29)
-- **JSON API is unusable.** The SPA `service.leagues."447010".teams.<id>` envelope
-  (old `dump/2016-standings.api.11.json`) is **pre-draft zeros** (wins=0, pf=0,
-  rank="") for every team. The v2 REST API (`fantasysports.yahoo.com/ws/fantasy/v2/...`)
-  returns "Failed to fetch" / HTML error shells in-session (CORS / gated).
 - **Rendered pages are the source.** Driving a logged-in Edge tab and reading the
   rendered `innerText` yields real scored data:
   - **Standings** (in-app "Standings" nav → `/{year}/f1/{league}?lhst=stand`) renders a
@@ -106,13 +122,71 @@ Team count grew over time (6 → 8 → 10 → 12); that is real, not missing dat
 - Rendered HTML confirmed: each season page has one standings row per team with
   real PF/PA, each draft page has `picks + 1` table rows.
 
+## The v2 pipeline (current, 2026-09-01)
+```
+cd scraper
+./run-edge.sh                                    # log in once, keep the window open
+uv run --with websocket-client python3 scripts/harvest_v2.py http://127.0.0.1:9222 dump/v2
+cargo run -- --from-v2 dump/v2 --seasons 2018-2025 --out ../raw
+cd .. && python3 scripts/generate.py
+```
+`harvest_v2.py` is resumable — any file already on disk that parses is skipped, so
+a re-run only fetches what is missing. It issues two calls per week (scoreboard +
+roster); a cold run over all eight seasons is ~262 requests and roughly 25
+minutes at the 5s spacing. Roster payloads are ~1.8 MB each, so `dump/v2` grows
+to a few hundred MB — it is gitignored.
+
+`--from-v2` MERGES: it replaces standings / matchups / champions / weeks and
+preserves everything else in `raw/<year>.json`, notably the draft picks, which
+the v2 harvest does not fetch.
+
+**`raw/*.json` is committed** (~3.5 MB across eight seasons) and is what the
+generator reads. Keep it that way: `--from-v2` MERGES onto the file already on
+disk, so rebuilding where `raw/` is empty merges onto `{}` and destroys every
+draft pick, which the v2 harvest cannot re-fetch. The `picks_before ==
+picks_after` guard does not catch that, because 0 equals 0.
+
+Note that the working copy's root `.gitignore` lists both `raw/` and itself, and
+is untracked — it never reaches a clone, so the ignore rule is local to whoever
+created it. If you reinstate it locally, remember that already-tracked files stay
+tracked; the risk is only ever a fresh checkout that skips copying `raw/` in.
+
+## Gaps CLOSED by the v2 pipeline
+- **Every team's owner** — was blank for all but your own team, now populated from
+  `managers[].nickname` for all 78 team-seasons.
+- **Weekly matchup scores** — all 131 weeks, in `matchups`, with `is_playoffs`.
+- **Champion / runner-up / top seed / toilet winner** — derived from Yahoo's final
+  playoff-adjusted rank; 7 of 8 seasons previously rendered `_TBD_`.
+- **Real playoff seeds** — the generator was printing the standings row position
+  as the seed, which is wrong (2025's champion entered as the 5 seed).
+- **Weekly rosters with player points** — every team's lineup for all 131 weeks,
+  bench and IR rows included, in `weeks[wk].rosters` as
+  `{name, position, slot, points}`. One nested call per week
+  (`teams/roster;week=N/players/stats;type=week;week=N`) covers all 12 teams;
+  the shape is confirmed and recorded in `scripts/probe_rosters.py`. This fills
+  the season-page roster blocks, backfills the draft-pick positions that were
+  blank for all eight seasons, and supplies both the player record book and the
+  computed draft-value awards.
+- **The real playoff bracket.** Was a fixed 4-team seed skeleton that never
+  happened; now derived per season from the captured weekly matchups, with real
+  scores, who beat whom, and first-round byes. All 8 seasons verified to parse
+  through `@mermaid-js/mermaid-cli`.
+
+### How the bracket is derived
+Yahoo gives no reliable flag for "this game is on the path to the title":
+`is_consolation` is 0 even for games that plainly are consolation (2018 week 16
+has two games, both `is_playoffs=1, is_consolation=0`), and both brackets run in
+the same weeks with the same matchup count. So `derive_bracket` starts from the
+one game it can identify with certainty — the last playoff week's game containing
+the champion — and walks BACKWARDS, keeping in each earlier week only the games
+involving teams already known to be in the bracket. Byes need no special case: a
+team with one simply appears for the first time in a later round.
+
 ## Known gaps (NOT faked)
-- **Rosters** not captured (the `/rosters` page is a week-dropdown). `content/rosters/`
-  pages exist as scaffolding only.
-- **Owner/manager** is only known for the viewed (your) team per season, from the
-  matchups header. Other teams' owners render blank.
-- **Playoff brackets / matchup scores** are not captured — only the matchups page
-  header is parsed, so `playoffs.weeks` is empty and bracket sections stay `TBD`.
+- **`PLAYOFF_SEEDS = 4` is still hardcoded** in `generate.py` and is wrong for
+  this league (2025 ran an 8-team playoff). It no longer affects the bracket,
+  which uses real data, but it still drives the "top N qualify" copy on
+  `playoffs.md` and the `made_playoffs` flag on team pages.
 - `content/seasons/2016-season.md` is pre-existing placeholder scaffolding
   (committed in `fbfaf2f`) for a season this league never had — it contains
   "Example FC" dummy data and should be deleted or rewritten.

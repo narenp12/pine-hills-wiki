@@ -228,6 +228,8 @@ pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
             points_for: parse_f64(&get("pf")),
             points_against: parse_f64(&get("pa")),
             rank: parse_i64(&get("rank")),
+            // HTML tables have no seed column.
+            playoff_seed: None,
         });
     }
     out
@@ -391,6 +393,11 @@ pub fn extract_rosters(
             .push(RosterPlayer {
                 name: player,
                 position: get("pos"),
+                // The rendered /rosters page carries neither the lineup slot nor
+                // the week's points, so this path leaves them empty. The v2 API
+                // path (parse_v2::parse_rosters) is the one that fills them.
+                slot: String::new(),
+                points: 0.0,
             });
     }
     out

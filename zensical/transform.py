@@ -32,12 +32,48 @@ DST = REPO / "zensical" / "docs"        # final Zensical sources
 
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 TITLE_CLEAN = re.compile(r"\s+")
+# Headings are authored with a leading emoji ("# 🏈 2025 Season"). Strip any
+# leading run of non-word characters so the heading keys the same as the
+# wikilink that points at it.
+LEADING_SYMBOLS = re.compile(r"^[^\w]+", re.UNICODE)
 
 # Pages intentionally forward-referenced (red-links like Starlight wiki-new).
 FORWARD_REFS = {"lore", "roster", "post-draft", "end-of-season"}
+# Per-team/per-year roster pages that generate.py links to but does not yet
+# emit, e.g. "2021 save-me Post-Draft". Matched as a suffix so the whole family
+# is recognised as forward-referenced rather than looking broken.
+FORWARD_REF_SUFFIXES = ("post-draft", "end-of-season", "roster", "template")
+
+
+def _is_forward_ref(key: str) -> bool:
+    return key in FORWARD_REFS or key.endswith(FORWARD_REF_SUFFIXES)
+
+
+def red_link(display: str) -> str:
+    """Render a link to a page that does not exist yet.
+
+    Emitting `[text](#)` produces an anchor that looks live, scrolls the reader
+    to the top of the page, and does nothing else. A non-anchor span carries the
+    same "not written yet" meaning without pretending to be navigable.
+    """
+    return (
+        f'<span class="wiki-new" title="This page has not been written yet">'
+        f"{display}</span>"
+    )
 
 
 def _norm(s: str) -> str:
+    """Normalize a title or wikilink target into a lookup key.
+
+    Strips surrounding YAML quotes, any leading emoji/punctuation, and collapses
+    whitespace. Without the first two, `title: "2025 Season"` keys as
+    '"2025 season"' and `# 🏈 2025 Season` keys as '🏈 2025 season', so neither
+    matches the `[[2025 Season]]` that points at them.
+    """
+    s = s.strip()
+    if len(s) >= 2 and s[0] == s[-1] and s[0] in "\"'":
+        s = s[1:-1]
+    s = LEADING_SYMBOLS.sub("", s)
     return TITLE_CLEAN.sub(" ", s).strip().lower()
 
 
@@ -50,11 +86,13 @@ def build_title_map(src: Path) -> dict[str, str]:
         if fm:
             tm = re.search(r"(?m)^title:\s*(.+)$", fm.group(1))
             if tm:
-                m[_norm(tm.group(1).strip())] = rel
+                m[_norm(tm.group(1))] = rel
         h1 = re.search(r"(?m)^#\s+(.+)$", text)
         if h1:
-            m[_norm(h1.group(1).strip())] = rel
+            m[_norm(h1.group(1))] = rel
+        # Slug fallback: "2025-season" should also answer to "2025 season".
         m[_norm(f.stem)] = rel
+        m[_norm(f.stem.replace("-", " ").replace("_", " "))] = rel
     return m
 
 
@@ -70,11 +108,11 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
         target = target.strip()
         display = display.strip()
         key = _norm(target)
-        if key in FORWARD_REFS:
-            return f"[{display}](#)"
+        if _is_forward_ref(key):
+            return red_link(display)
         dest = title_map.get(key)
         if not dest:
-            return f"[{display}](#)"  # intentional red-link
+            return red_link(display)
         dest_path = Path(dest)
         try:
             rel = dest_path.relative_to(cur_dir)
@@ -86,16 +124,63 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
         return f"[{display}]({rel})"
 
     out = WIKILINK_RE.sub(repl, text)
-    # Team franchise pages: promote the "Franchise Summary" fields into a
+    # Franchise and manager pages: promote the summary fields into a
     # Wikipedia-style right-rail infobox (Zensical-only enhancement).
-    # Skip the teams *index* (a category/list page, not a franchise) so it
-    # doesn't get a meaningless _TBD_ stub infobox that floats over its table.
-    if re.match(r"teams/[^/]+\.md$", cur_rel) and cur_rel != "teams/index.md":
-        out = inject_team_infobox(out)
+    # Skip the section *indexes* (category/list pages) so they don't get a
+    # meaningless _TBD_ stub infobox floating over their tables.
+    for section, fields in (("teams", TEAM_INFOBOX_FIELDS), ("owners", OWNER_INFOBOX_FIELDS)):
+        if re.match(rf"{section}/[^/]+\.md$", cur_rel) and cur_rel != f"{section}/index.md":
+            out = inject_infobox(out, fields)
     return out
 
 
-def inject_team_infobox(text: str) -> str:
+def infobox_value(value: str) -> str:
+    """Convert the inline Markdown that appears in summary values to HTML.
+
+    The infobox is raw HTML. Relying on md_in_html to reach into a nested
+    `markdown="span"` div proved unreliable, so the handful of inline
+    constructs generate.py actually emits are converted here instead. `_TBD_`
+    additionally gets a class so unrecorded values are visually distinct.
+    """
+    value = value.strip()
+    # Links reach here already resolved to source-relative .md paths (the
+    # wikilink pass runs first). Zensical rewrites href/src in raw HTML the same
+    # way it does in Markdown, so the path is handed over untouched.
+    value = re.sub(
+        r"\[([^\]]+)\]\(([^)\s]+)\)",
+        lambda mm: f'<a href="{mm.group(2)}">{mm.group(1)}</a>',
+        value,
+    )
+    value = re.sub(r"`([^`]+)`", r"<code>\1</code>", value)
+    value = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", value)
+    value = re.sub(r"(?<!\w)_([^_]+)_(?!\w)", r"<em>\1</em>", value)
+    if value == "<em>TBD</em>":
+        value = '<em class="tbd">TBD</em>'
+    return value
+
+
+# Infobox row labels -> the generated "**Label:**" line each one reads. Lead
+# lines (the ones above the first "## " heading) are removed after the box is
+# built, since the box repeats them verbatim.
+TEAM_INFOBOX_FIELDS = {
+    "Owner": r"\*\*Owner:\*\*\s*(.+)",
+    "Joined": r"\*\*Joined:\*\*\s*(.+)",
+    "Status": r"\*\*Status:\*\*\s*(.+)",
+    "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
+    "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
+}
+OWNER_INFOBOX_FIELDS = {
+    "Franchises": r"\*\*Franchises:\*\*\s*(.+)",
+    "Seasons": r"\*\*Seasons:\*\*\s*(.+)",
+    "Status": r"\*\*Status:\*\*\s*(.+)",
+    "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
+    "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
+}
+LEAD_LINE_LABELS = ("Owner", "Joined", "Status", "Franchises", "Seasons", "Image")
+IMAGE_LINE_RE = re.compile(r"^- \*\*Image:\*\*\s*!\[([^\]]*)\]\(([^)\s]+)\)\s*$", re.MULTILINE)
+
+
+def inject_infobox(text: str, fields: dict) -> str:
     """Build a right-rail infobox from the stable **Label:** summary lines that
     generate.py emits. Defensive: returns text unchanged if already present or
     if the expected shape isn't found."""
@@ -105,13 +190,16 @@ def inject_team_infobox(text: str) -> str:
     if not m:
         return text
     title = m.group(1).strip()
-    fields = {
-        "Owner": r"\*\*Owner:\*\*\s*(.+)",
-        "Joined": r"\*\*Joined:\*\*\s*(.+)",
-        "Status": r"\*\*Status:\*\*\s*(.+)",
-        "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
-        "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
-    }
+    # Optional hand-supplied image, emitted by generate.py as a lead
+    # "- **Image:** ![alt](src)" line. It heads the box like a Wikipedia lead
+    # photo; teams with no bible entry simply have no line and no row.
+    image = IMAGE_LINE_RE.search(text)
+    image_html = ""
+    if image:
+        alt, src = image.group(1), image.group(2)
+        image_html = (
+            f'<div class="infobox-image"><img src="{src}" alt="{alt}" loading="lazy"></div>\n'
+        )
     rows = ""
     row_pairs = []
     for label, pat in fields.items():
@@ -120,26 +208,41 @@ def inject_team_infobox(text: str) -> str:
         row_pairs.append((label, val))
         rows += (
             f'<div class="infobox-row"><div class="label">{label}</div>'
-            f'<div class="value">{val}</div></div>\n'
+            f'<div class="value">{infobox_value(val)}</div></div>\n'
         )
     # Championships line lives under "## Franchise Summary" as a bullet.
     champ = re.search(r"^- \*\*Championships:\*\*\s*(.+)$", text, re.MULTILINE)
     if champ:
+        # Drop the trailing "_(playoff titles - record in `raw/bible.yaml`)_"
+        # helper note; it is guidance for editors, not an infobox value.
+        champ_val = re.sub(r"\s*_\(.*?\)_\s*$", "", champ.group(1).strip())
         rows += (
             '<div class="infobox-row"><div class="label">Championships</div>'
-            f'<div class="value">{champ.group(1).strip()}</div></div>\n'
+            f'<div class="value">{infobox_value(champ_val)}</div>'
+            "</div>\n"
         )
     if not rows:
         return text
     # Don't emit a meaningless stub: require at least one real (non-_TBD_) value.
-    if all(val == "_TBD_" for _, val in row_pairs) and not champ:
+    if all(val == "_TBD_" for _, val in row_pairs) and not champ and not image_html:
         return text
+    # markdown="1" opts the block into the md_in_html extension (on by default in
+    # Zensical). Without it the values ship as literal "_TBD_" and backticks.
     infobox = (
         f'<div class="infobox">\n'
-        f'  <div class="infobox-title">{title}</div>\n'
-        f"{rows}</div>\n\n"
+        f'  <div class="infobox-title">{infobox_value(title)}</div>\n'
+        f"{image_html}{rows}</div>\n\n"
     )
-    return re.sub(r"^(#\s+.+)$", r"\1\n" + infobox, text, count=1, flags=re.MULTILINE)
+    # The blank line after the heading matters: Python-Markdown only treats this
+    # as an HTML block (and so only honours markdown="1") when it starts a new
+    # block. Without it the attribute is ignored and values ship as "_TBD_".
+    text = re.sub(r"^(#\s+.+)$", r"\1\n\n" + infobox, text, count=1, flags=re.MULTILINE)
+    # The lead lines were the infobox's data source; leaving them in place
+    # repeats the top rows immediately under the box.
+    text = re.sub(
+        rf"^- \*\*(?:{'|'.join(LEAD_LINE_LABELS)}):\*\*.*\n", "", text, flags=re.MULTILINE
+    )
+    return text
 
 
 def main() -> None:
@@ -155,9 +258,13 @@ def main() -> None:
         dst = DST / rel
         # The home page (index.md) is hand-authored chrome (hero, explore links)
         # committed in git; only its champions table is generated data. Inject
-        # the generated table between the markers instead of overwriting.
+        # the generated table between the markers instead of overwriting, then
+        # run the result back through transform() so the hand-authored
+        # [[wikilinks]] resolve too - without this pass they ship as literal
+        # "[[Seasons]]" text in the site's main navigation block.
         if rel == "index.md" and dst.exists():
-            out = inject_champions_table(dst.read_text(), out)
+            merged = inject_champions_table(dst.read_text(), out)
+            out = transform(merged, title_map, rel)
         dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_text(dash_normalize(out))
         count += 1

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{#
+  Shared page title.
+
+  The base template falls through to `page.title` for the home page, which the
+  builder derives from the filename ("Index"). Detect the home page explicitly
+  and use the bare site name there instead.
+#}
+{% set _home = page.is_homepage or page.url in ("", "/", "./", "index.html") %}
+{% if _home %}
+  {% set page_title = config.site_name %}
+{% elif page.meta and page.meta.title %}
+  {% set page_title = page.meta.title ~ " - " ~ config.site_name %}
+{% elif page.title %}
+  {% set page_title = (page.title | striptags) ~ " - " ~ config.site_name %}
+{% else %}
+  {% set page_title = config.site_name %}
+{% endif %}
+
+{% block htmltitle %}
+  <title>{{ page_title }}</title>
+{% endblock %}
+
+{#
+  Open Graph / Twitter card metadata.
+
+  Zensical's base template emits description, author, canonical and generator
+  only, so links to this site unfurl as bare URLs anywhere they are shared -
+  which, for a league wiki, is the group chat. This block adds the tags every
+  unfurler actually reads.
+#}
+{% block extrahead %}
+  {% if page.meta and page.meta.description %}
+    {% set og_description = page.meta.description %}
+  {% else %}
+    {% set og_description = config.site_description %}
+  {% endif %}
+
+  {% set og_url = page.canonical_url | d(config.site_url, true) %}
+  {% set og_image = config.site_url ~ "/assets/images/social-card.png" %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ og_description }}">
+  <meta property="og:url" content="{{ og_url }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:image:alt" content="{{ config.site_name }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ og_description }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+{% endblock %}

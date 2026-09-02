@@ -1,7 +1,11 @@
 ---
-title: Pine Hills Fantasy Football League
 description: The collaborative history of the Pine Hills Fantasy Football League, established 2018.
 ---
+<!-- No `title:` here on purpose: the theme appends the site name to page
+     titles, so `title: Pine Hills Fantasy Football League` rendered as
+     "Pine Hills Fantasy Football League - Pine Hills Fantasy Football League".
+     The nav label comes from the `nav` table in zensical.toml. -->
+
 
 <div class="ph-hero">
   <div class="ph-hero__lead">
@@ -12,9 +16,9 @@ description: The collaborative history of the Pine Hills Fantasy Football League
     <a href="records/" class="md-button">All-Time Records</a>
   </div>
   <div class="ph-hero__stats">
-    <div class="stat"><span class="num">8</span><span class="cap">Seasons Covered</span></div>
-    <div class="stat"><span class="num">2018&ndash;2025</span><span class="cap">Years Active</span></div>
-    <div class="stat"><span class="num">1</span><span class="cap">Championships Logged</span></div>
+    <div class="stat"><span class="num">8</span><span class="cap">Seasons, 2018-2025</span></div>
+    <div class="stat"><span class="num">33</span><span class="cap">Franchises</span></div>
+    <div class="stat"><span class="num">527</span><span class="cap">Matchups Played</span></div>
   </div>
 </div>
 
@@ -29,28 +33,27 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 <!-- champions-table:start -->
 | Year | Champion | Runner-Up | Top Seed |
 |------|----------|-----------|----------|
-| 2025 | Save Me | Super Squirrels | Save Me |
-| 2024 | _TBD_ | _TBD_ | _TBD_ |
-| 2023 | _TBD_ | _TBD_ | _TBD_ |
-| 2022 | _TBD_ | _TBD_ | _TBD_ |
-| 2021 | _TBD_ | _TBD_ | _TBD_ |
-| 2020 | _TBD_ | _TBD_ | _TBD_ |
-| 2019 | _TBD_ | _TBD_ | _TBD_ |
-| 2018 | _TBD_ | _TBD_ | _TBD_ |
+| 2025 | Jeremy's Neat Team | Big black big back | Roger That |
+| 2024 | Stroud Boys | Jayesh's Great Team | Kamara’s a b*tch |
+| 2023 | Super Squirrels | BBigg MACKS | Stroud Boys |
+| 2022 | Jeremy's Neat Team | Michael's Marvelous Team | Sharman’s Scorpions |
+| 2021 | varun’s victorious team | Super Squirrels | Super Squirrels |
+| 2020 | Roger That | Imagine Losing | My team is Koo(l) |
+| 2019 | Curry’s legit team | Ju Let The Dogs Out | Ju Let The Dogs Out |
+| 2018 | Curry’s legit team | Anish's Awesome Team | Sharman’s Scorpions |
 <!-- champions-table:end -->
 
 ## 📚 Explore the Wiki
 
-- **[[Seasons]]**: Year-by-year breakdowns, standings, playoffs, and awards.
-- **[[Teams]]**: Franchise histories, owners, and head-to-head records.
-- **[[Records]]**: All-time leaders, single-season feats, and dubious achievements.
-- **[[Draft History]]**: Every pick, every reach, every steal.
-- **[[Lore]]**: The controversies, the curses, the group-chat meltdowns.
+- **[Seasons](seasons/index.md)**: Year-by-year breakdowns, standings, playoffs, and awards.
+- **[Teams](teams/index.md)**: Franchise histories, owners, and head-to-head records.
+- **[Records](records/index.md)**: All-time leaders, single-season feats, and dubious achievements.
+- **[Draft History](draft/index.md)**: Every pick, every reach, every steal.
+- **<span class="wiki-new" title="This page has not been written yet">Lore</span>**: The controversies, the curses, the group-chat meltdowns.
 
 ## 🔗 Quick Links
 
-- [Yahoo Fantasy League Page](https://football.fantasysports.yahoo.com/f1/LEAGUE_ID)
-- [League Constitution & Rules](https://example.com) _(replace with your rules doc)_
+- [Contribute on GitHub](https://github.com/narenp12/pine-hills-wiki)
 
 ---
 

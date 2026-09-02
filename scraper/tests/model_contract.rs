@@ -22,6 +22,7 @@ fn sample_season() -> Season {
         points_for: 1500.5,
         points_against: 1100.0,
         rank: 1,
+        playoff_seed: None,
     });
     season.teams = season.standings.clone();
     season.draft.draft_results.push(DraftPick {
@@ -58,6 +59,8 @@ fn sample_season() -> Season {
             players: vec![RosterPlayer {
                 name: "Christian McCaffrey".into(),
                 position: "RB".into(),
+                slot: "RB".into(),
+                points: 24.7,
             }],
         },
     );
@@ -105,7 +108,7 @@ fn emitted_json_matches_generator_contract() {
     assert_eq!(po[0]["teams"][1]["score"], 98.2);
     assert_eq!(po[0]["teams"][0]["is_winner"], true);
 
-    // weeks.<n>.rosters keyed by team -> {players:[{name,position}]}
+    // weeks.<n>.rosters keyed by team -> {players:[{name,position,slot,points}]}
     let r1 = &v["weeks"]["1"]["rosters"]["Example FC"]["players"];
     assert!(
         r1.is_array(),
@@ -113,6 +116,10 @@ fn emitted_json_matches_generator_contract() {
     );
     assert_eq!(r1[0]["name"], "Christian McCaffrey");
     assert_eq!(r1[0]["position"], "RB");
+    // slot is what separates a starter from a bench row; generate.py's player
+    // record book cannot be computed without it.
+    assert_eq!(r1[0]["slot"], "RB");
+    assert_eq!(r1[0]["points"], 24.7);
     assert!(v["weeks"]["18"]["rosters"]["Example FC"]["players"].is_array());
 }
 

@@ -97,6 +97,25 @@
   line-height: 1.65;
 }
 
+/* Scoped to the article, NOT to every .md-typeset. The theme reuses that class
+   on tooltip bodies (.md-tooltip2__inner.md-typeset), and `container-type:
+   inline-size` makes an element's inline size independent of its contents - on
+   a shrink-to-fit tooltip that collapses it to one character per line. */
+.md-content__inner.md-typeset {
+  display: flow-root;        /* contain floated .infobox */
+
+  /* Query container so the hero and the infobox respond to the width of the
+     content column, not the window. The TOC rail is what actually steals their
+     space, so a viewport media query collapses them at the wrong moment. */
+  container-type: inline-size;
+  container-name: article;
+}
+
+/* NOTE: overflow-x deliberately does NOT live on .md-typeset. Putting it here
+   turns the whole article into one scroll box (and, because overflow-x also
+   computes overflow-y to auto, adds a nested vertical scrollbar). Wide content
+   scrolls inside its own container instead - see the table rules below. */
+
 /* Body text = serif for the encyclopedia editorial read. */
 .md-typeset p,
 .md-typeset li,
@@ -153,13 +172,20 @@
 /* ---------------------------------------------------------------------------
    HERO (editorial split) — replaces the old blue-gradient tx-hero
 --------------------------------------------------------------------------- */
+/* Stacked, not split. The content column tops out near 34rem even on a 1440px
+   screen, so a 1.4fr/1fr split left the headline in a ~19rem gutter wrapping to
+   four lines. Lead above, stat row below, at every width. */
 .md-content .ph-hero {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  margin: -1.5rem -1.5rem 2rem;
-  padding: 2.4rem 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  /* No negative side margins: they assumed the content wrapper's padding was
+     exactly 1.5rem, which pushed the article ~30px wider than its own box and
+     left every page with a phantom horizontal scroll. */
+  /* The theme floats the edit/view action buttons at the top right of the
+     content column; the top margin keeps them clear of the hero panel. */
+  margin: 2.2rem 0 2rem;
+  padding: 2.4rem 1.8rem;
   background: var(--wiki-panel);
   border: 1px solid var(--wiki-border);
   border-radius: var(--border-radius);
@@ -203,15 +229,25 @@
 .md-content .ph-hero__stats .stat .cap {
   display: block;
   margin-top: 0.3rem;
-  font-size: 0.62rem;
+  font-size: 0.7rem;
+  line-height: 1.3;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--wiki-muted);
 }
 
-@media screen and (max-width: 768px) {
-  .md-content .ph-hero { grid-template-columns: 1fr; }
+/* Collapse on the width of the content column, not the window: at an 800px
+   viewport the TOC rail leaves the article ~430px, which the old 768px
+   viewport query treated as "wide". Note the content column tops out around
+   34rem even on a 1440px screen, so these thresholds sit well below the
+   viewport widths they correspond to. */
+@container article (max-width: 30rem) {
+  .md-content .ph-hero { padding: 1.8rem 1.4rem; }
   .md-content .ph-hero__lead h1 { font-size: 1.7rem; }
+}
+
+@container article (max-width: 20rem) {
+  .md-content .ph-hero__stats { grid-template-columns: 1fr 1fr; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -221,8 +257,10 @@
   float: right;
   clear: right;
   margin: 0.4rem 0 1rem 1.5rem;
-  width: 20rem;
-  max-width: 90%;
+  /* Never take more than ~42% of the content column: a fixed 20rem left the
+     prose a ~7rem gutter and broke headings mid-word. */
+  width: min(20rem, 42%);
+  box-sizing: border-box;
   border: 1px solid var(--wiki-border);
   background: var(--wiki-panel);
   border-radius: var(--border-radius);
@@ -239,6 +277,21 @@
   border-top: 3px solid var(--md-accent-fg-color);
   color: var(--wiki-ink);
 }
+/* Lead image, Wikipedia-style: sits directly under the title, above the rows.
+   Height-capped so a tall portrait can't push every fact below the fold. */
+.md-typeset .infobox .infobox-image {
+  padding: 0.6rem;
+  text-align: center;
+  background: var(--wiki-panel-2);
+  border-top: 1px solid var(--wiki-border);
+}
+.md-typeset .infobox .infobox-image img {
+  max-width: 100%;
+  max-height: 12rem;
+  width: auto;
+  height: auto;
+  border-radius: var(--border-radius);
+}
 .md-typeset .infobox .infobox-row {
   display: flex;
   border-top: 1px solid var(--wiki-border);
@@ -252,17 +305,55 @@
 }
 .md-typeset .infobox .infobox-row > .value {
   flex: 1 1 auto;
+  min-width: 0;
   padding: 0.35rem 0.5rem;
   color: var(--md-default-fg-color);
+}
+
+/* Below ~30rem of content column even 42% is too narrow to read beside. Drop
+   the float and let the infobox run full width above the article instead. */
+@container article (max-width: 30rem) {
+  .md-typeset .infobox {
+    float: none;
+    width: auto;
+    max-width: none;
+    margin: 0 0 1.25rem;
+  }
+}
+
+/* Inline team thumbnail used in list tables (teams index, owner pages). Sized
+   to the line so a row with an image is the same height as one without. */
+.md-typeset img.team-thumb {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.6rem;
+  height: 1.6rem;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--wiki-border);
+  margin-right: 0.4rem;
 }
 
 /* ---------------------------------------------------------------------------
    TABLES (bordered, zebra, sortable) — Wikipedia formatting preserved
 --------------------------------------------------------------------------- */
+/* Wide tables scroll inside .md-typeset__scrollwrap, which the theme provides
+   and which deliberately bleeds to the viewport edge on narrow screens. The
+   old `.md-typeset { overflow-x: auto }` rule pre-empted it by making the whole
+   article the scroller, which is why the Records table clipped on mobile with
+   no reachable scrollbar. Nothing here should re-add overflow to an ancestor.
+   tablesort.js gives the scrollwrap a tab stop so it is keyboard-reachable. */
+.md-typeset .md-typeset__scrollwrap:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
 .md-typeset table:not([class]) {
   border: 1px solid var(--wiki-border);
   border-collapse: collapse;
   font-size: 0.74rem;
+  /* Keep numeric columns aligned digit-for-digit. */
+  font-variant-numeric: tabular-nums;
 }
 .md-typeset table:not([class]) th {
   background: var(--wiki-panel-2);
@@ -286,17 +377,99 @@
 }
 
 /* ---------------------------------------------------------------------------
+   SORTABLE TABLE HEADERS
+   The sort control is a real button so it is reachable by keyboard and
+   announced as interactive; aria-sort on the th carries the state.
+--------------------------------------------------------------------------- */
+.md-typeset table:not([class]) th .sort-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+.md-typeset table:not([class]) th .sort-toggle::after {
+  content: "↕";
+  font-size: 0.85em;
+  opacity: 0.4;
+}
+.md-typeset table:not([class]) th[aria-sort="ascending"] .sort-toggle::after {
+  content: "↑";
+  opacity: 1;
+  color: var(--md-accent-fg-color);
+}
+.md-typeset table:not([class]) th[aria-sort="descending"] .sort-toggle::after {
+  content: "↓";
+  opacity: 1;
+  color: var(--md-accent-fg-color);
+}
+.md-typeset table:not([class]) th .sort-toggle:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   RED LINKS (pages referenced but not written yet)
+--------------------------------------------------------------------------- */
+.md-typeset .wiki-new {
+  color: var(--wiki-muted);
+  border-bottom: 1px dotted var(--wiki-muted);
+  cursor: help;
+}
+
+/* Values the league bible has not recorded yet. */
+.md-typeset .tbd {
+  color: var(--wiki-muted);
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------------
    MISC
 --------------------------------------------------------------------------- */
 .md-typeset .admonition.info { border-left: 4px solid var(--md-accent-fg-color); }
 
-/* Honor reduced motion (no infinite loops are used, but be safe). */
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+/* Mermaid inherits the light/dark theme on its own; nudge node outlines onto
+   the site accent so brackets read as part of the pine system. */
+.md-typeset .mermaid .node rect,
+.md-typeset .mermaid .node polygon {
+  stroke: var(--md-accent-fg-color);
 }
 
-/* Enhanced button spacing using design tokens */
+/* Buttons: spacing from the token scale, and an explicit foreground. Inheriting
+   the theme's muted colour left the secondary buttons at 3.34:1 on the hero
+   panel, under the 4.5:1 AA threshold. */
 .md-typeset .md-button {
   margin: var(--spacing-xs);
   padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--wiki-ink);
+  border-color: var(--wiki-border);
+}
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus {
+  color: var(--md-accent-bg-color);
+  background-color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+}
+.md-typeset .md-button--primary {
+  color: var(--md-accent-bg-color);
+  background-color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* Honor reduced motion (no infinite loops are used, but be safe). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

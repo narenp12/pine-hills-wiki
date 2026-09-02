@@ -24,19 +24,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
+          enable-cache: true
 
-      - name: Install Python deps
-        run: pip install -r requirements.txt pyyaml
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
 
-      - name: Install Zensical
-        run: pip install zensical
+      # Installs the locked environment from uv.lock, including the dev group
+      # that provides the `zensical` binary build.mjs shells out to.
+      - name: Install build environment
+        run: uv sync --locked --group dev
 
       - name: Build Zensical site
-        run: python zensical/build.mjs
+        run: node zensical/build.mjs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

@@ -1,19 +1,28 @@
 [project]
 name = "pine-hills-wiki"
 version = "1.0.0"
-description = "Wikipedia-style history of the Pine Hills fantasy football league (Quartz + GitHub Pages)"
+description = "Wikipedia-style history of the Pine Hills fantasy football league (Zensical + GitHub Pages)"
 requires-python = ">=3.11"
-# NOTE: yfpy is the *original* extraction path but requires a Yahoo developer API
-# key, which was denied. The working path is Fantasy Helper (fantasyhelper.net) —
-# a FREE, no-key export of Yahoo league data (Teams/Matchups/Transactions/Rosters)
-# as CSV/JSON. The adapter scripts/import_export.py maps those exports into the
-# canonical raw/<year>.json that scripts/generate.py consumes. No third-party
-# Python deps are needed for the working path (stdlib only).
+# The working extraction path is Fantasy Helper (fantasyhelper.net) - a FREE,
+# no-key export of Yahoo league data (Teams/Matchups/Transactions/Rosters) as
+# CSV/JSON. The adapter scripts/import_export.py maps those exports into the
+# canonical raw/<year>.json that scripts/generate.py consumes; that path needs
+# only pyyaml (for raw/bible.yaml) on top of the stdlib.
 dependencies = [
+    "pyyaml>=6.0",
+]
+
+# yfpy is the *original* extraction path. It requires a Yahoo developer API key,
+# which was denied, so it is not installed by default. Enable with:
+#   uv sync --extra yahoo-api
+[project.optional-dependencies]
+yahoo-api = [
     "yfpy>=1.2.0",
 ]
 
 [dependency-groups]
 dev = [
+    "pillow>=12.3.0",
+    "pytest>=9.1.1",
     "zensical>=0.0.57",
 ]
