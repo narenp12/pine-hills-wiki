@@ -54,3 +54,12 @@ def test_roster_blocks_without_data():
     out = team_roster_blocks({"weeks": {}}, [{"name": "Team A"}])
     assert "_TBD" in out
     assert "???" not in out
+
+
+def test_season_log_roster_cells():
+    from scripts.generate import roster_cell
+
+    with_data = {"weeks": {"3": {"rosters": {"Team A": {"players": []}}}}}
+    assert "2018 Season" in roster_cell(2018, with_data)
+    # No data means no link — the old code linked to pages that were never generated.
+    assert roster_cell(2018, {"weeks": {}}) == "_TBD_"

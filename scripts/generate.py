@@ -1302,6 +1302,7 @@ def gen_team_page(
     aggregates: dict,
     owner_map: dict,
     matchup_stats: dict,
+    seasons: dict,
 ) -> str:
     """Generate a franchise page.
     years_data: list of (year, wins, losses, rank, made_playoffs, owner).
@@ -1352,10 +1353,12 @@ def gen_team_page(
 
     rows = []
     for (year, wins, losses, rank, made_playoffs, _) in sorted(years_data, key=lambda x: x[0]):
-        post_draft_link = wikilink(f"{year} {slug(name)} Post-Draft", "Post-Draft")
-        end_of_season_link = wikilink(f"{year} {slug(name)} End-of-Season", "End-of-Season")
+        # Both cells point at the same place: the season page's roster blocks.
+        # These previously linked to per-team roster pages the generator never
+        # wrote, so every row shipped two dead links.
+        roster_link = roster_cell(year, seasons.get(year) or {})
         rows.append(
-            f"| {year} | {wins}–{losses} | {rank} | {'Yes' if made_playoffs else 'No'} | {post_draft_link} | {end_of_season_link} | {TBD} |"
+            f"| {year} | {wins}–{losses} | {rank} | {'Yes' if made_playoffs else 'No'} | {roster_link} | {roster_link} | {TBD} |"
         )
 
     md = f"""---
@@ -2264,7 +2267,7 @@ def main():
     # team pages
     for name, ydata in team_years.items():
         tp = CONTENT / "teams" / f"{slug(name)}.md"
-        tp.write_text(dash_normalize(gen_team_page(name, ydata, bible, aggregates, owner_map, matchup_stats)))
+        tp.write_text(dash_normalize(gen_team_page(name, ydata, bible, aggregates, owner_map, matchup_stats, seasons)))
         print(f"  wrote {tp.relative_to(ROOT)}")
 
     all_years = sorted(seasons.keys())
