@@ -228,6 +228,8 @@ pub fn extract_standings(html: &str, cfg: &TableCfg) -> Vec<Team> {
             points_for: parse_f64(&get("pf")),
             points_against: parse_f64(&get("pa")),
             rank: parse_i64(&get("rank")),
+            // HTML tables have no seed column.
+            playoff_seed: None,
         });
     }
     out

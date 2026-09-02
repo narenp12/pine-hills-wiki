@@ -63,6 +63,8 @@ pub fn parse_standings(text: &str, season: u32, league_id: &str) -> (Season, Str
                     points_for,
                     points_against: 0.0,
                     rank: rank as i64,
+                    // Rendered pages never expose the real seed.
+                    playoff_seed: None,
                 });
                 i = k;
             } else {
@@ -134,6 +136,8 @@ fn parse_standings_row(line: &str, league_id: &str) -> Option<Team> {
         points_for,
         points_against,
         rank,
+        // Rendered pages never expose the real seed.
+        playoff_seed: None,
     })
 }
 
@@ -308,6 +312,8 @@ pub fn parse_matchups_header(text: &str, season: u32, league_id: &str) -> Season
                                 points_for: 0.0,
                                 points_against: 0.0,
                                 rank,
+                                // Rendered pages never expose the real seed.
+                                playoff_seed: None,
                             });
                         }
                     }

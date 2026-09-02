@@ -15,7 +15,7 @@ use anyhow::Result;
 use clap::Parser;
 
 use phf_scraper::model::Season;
-use phf_scraper::{Cli, Dataset, extract, scrape, selectors};
+use phf_scraper::{Cli, Dataset, extract, parse_v2, scrape, selectors};
 
 fn parse_seasons(s: &str) -> Vec<u32> {
     let mut out = Vec::new();
@@ -68,6 +68,112 @@ fn build_from_dump(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors)
     Ok(())
 }
 
+/// Build every requested season's raw/<year>.json from harvested v2 API payloads.
+///
+/// Merges rather than overwrites: the v2 harvest fetches standings and
+/// scoreboards but NOT the draft, so blindly writing a fresh `Season` here would
+/// silently blank 1170 draft picks that the rendered-page pipeline captured. We
+/// splice through `serde_json::Value` so every key we do not own survives.
+fn build_from_v2(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors) -> Result<()> {
+    use anyhow::Context;
+
+    let index = std::fs::read_to_string(dir.join("leagues.json"))
+        .context("reading leagues.json — run scripts/harvest_v2.py first")?;
+
+    let seasons = parse_seasons(&cli.seasons);
+    println!(
+        ">> building {} seasons from v2 payloads in {}",
+        seasons.len(),
+        dir.display()
+    );
+    std::fs::create_dir_all(&cli.out)?;
+
+    for year in seasons {
+        let lid = sel
+            .league
+            .season_ids
+            .get(&year.to_string())
+            .cloned()
+            .unwrap_or_else(|| cli.league_id.clone());
+        let Some(key) = parse_v2::find_league_key(&index, year, &lid) else {
+            println!("   {year}: no league key for league_id {lid} — skipped");
+            continue;
+        };
+
+        let season = parse_v2::from_v2_dir(dir, year, &key)?;
+        let fresh = serde_json::to_value(&season)?;
+        let dest = cli.out.join(format!("{year}.json"));
+
+        // Start from what is already on disk so draft picks (and anything else
+        // this path does not produce) are carried forward.
+        let mut merged = match std::fs::read_to_string(&dest) {
+            Ok(existing) => serde_json::from_str::<serde_json::Value>(&existing)
+                .with_context(|| format!("parsing existing {}", dest.display()))?,
+            Err(_) => serde_json::json!({}),
+        };
+        let picks_before = merged
+            .pointer("/draft/draft_results")
+            .and_then(|v| v.as_array())
+            .map_or(0, Vec::len);
+
+        let obj = merged
+            .as_object_mut()
+            .context("existing raw JSON is not an object")?;
+        // Exactly the keys the v2 path is authoritative for.
+        for k in [
+            "season",
+            "standings",
+            "teams",
+            "playoffs",
+            "matchups",
+            "champions",
+            "bracket",
+        ] {
+            match fresh.get(k) {
+                Some(v) => {
+                    obj.insert(k.to_string(), v.clone());
+                }
+                // `champions`/`matchups` are skipped when empty; drop any stale
+                // value rather than leaving last run's behind.
+                None => {
+                    obj.remove(k);
+                }
+            }
+        }
+
+        let picks_after = merged
+            .pointer("/draft/draft_results")
+            .and_then(|v| v.as_array())
+            .map_or(0, Vec::len);
+        anyhow::ensure!(
+            picks_before == picks_after,
+            "{year}: merge dropped draft picks ({picks_before} -> {picks_after})"
+        );
+
+        std::fs::write(&dest, serde_json::to_string_pretty(&merged)?)?;
+        let champ = season
+            .champions
+            .as_ref()
+            .map(|c| c.champion.clone())
+            .unwrap_or_default();
+        println!(
+            "   wrote {}  (teams={}, weeks={}, picks kept={}, champion={:?})",
+            dest.display(),
+            season.teams.teams.len(),
+            season.matchups.len(),
+            picks_after,
+            champ
+        );
+
+        if cli.dry_run {
+            println!(">> dry-run: stopping after first season.");
+            break;
+        }
+    }
+    println!("\n>> done. Next: run scripts/generate.py to build the wiki.");
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
@@ -97,6 +203,11 @@ async fn main() -> Result<()> {
     // Offline build from capture_season.py dumps (no Yahoo, no browser).
     if let Some(dir) = &cli.from_dump {
         return build_from_dump(&cli, dir, &sel);
+    }
+
+    // Offline build from harvested v2 API payloads (no Yahoo, no browser).
+    if let Some(dir) = &cli.from_v2 {
+        return build_from_v2(&cli, dir, &sel);
     }
 
     let seasons = parse_seasons(&cli.seasons);

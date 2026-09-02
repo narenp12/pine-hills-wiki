@@ -19,6 +19,7 @@ Run with uv (no stray venv):
 """
 import base64
 import json
+import re
 import sys
 import time
 import urllib.request
@@ -27,11 +28,27 @@ from urllib.parse import urlparse
 from websocket import create_connection
 
 
+_JSONP = re.compile(r"^[A-Za-z_$][\w$.]*\s*\(")
+
+
+def strip_jsonp(text):
+    """Unwrap `callback({...});` to `{...}` (see API_SHAPE.md). No-op otherwise."""
+    s = text.strip()
+    m = _JSONP.match(s)
+    if not m:
+        return s
+    end = s.rstrip().rstrip(";").rstrip()
+    if not end.endswith(")"):
+        return s
+    return end[m.end():-1].strip()
+
+
 def main():
     endpoint = sys.argv[1]
     page_url = sys.argv[2]
     out_dir = sys.argv[3]
     tag = sys.argv[4] if len(sys.argv) > 4 else "capture"
+    wait = int(sys.argv[5]) if len(sys.argv) > 5 else 50
     import os
     os.makedirs(out_dir, exist_ok=True)
 
@@ -63,9 +80,11 @@ def main():
     session_id = None
 
     # Process the handshake replies, then drive the session.
-    bodies = {}      # requestId -> url
+    bodies = {}      # requestId -> (url, mimeType)
+    pending = {}     # getResponseBody message id -> source url
+    manifest = []    # [{file, url, kind}] so we can trace a payload back to its host
     captured = 0
-    deadline = time.time() + 50
+    deadline = time.time() + wait
     attached = False
     while time.time() < deadline:
         try:
@@ -97,31 +116,58 @@ def main():
         elif method == "Network.responseReceived":
             r = params.get("requestId")
             resp = params.get("response", {})
-            bodies[r] = resp.get("url", "")
-            print(f"   [net] {resp.get('status','?')} {resp.get('url','')[:110]}")
+            bodies[r] = (resp.get("url", ""), resp.get("mimeType", ""))
+            print(f"   [net] {resp.get('status','?')} {resp.get('mimeType','')} {resp.get('url','')[:100]}")
 
         elif method == "Network.loadingFinished":
             r = params.get("requestId")
-            url = bodies.get(r, "")
-            if "fantasy" in url or "yahoo" in url:
-                send("Network.getResponseBody", {"requestId": r}, sid=session_id)
+            url, mime = bodies.get(r, ("", ""))
+            # Do NOT filter on URL: the envelope is served from a host that
+            # contains neither "fantasy" nor "yahoo" (see API_SHAPE.md). Ask for
+            # every text-ish body and match on the JSON envelope after decoding.
+            if any(t in mime for t in ("json", "javascript", "text/plain")):
+                # Remember which URL this body reply will belong to; the reply
+                # carries only our message id, not the requestId.
+                pending[send("Network.getResponseBody", {"requestId": r}, sid=session_id)] = url
 
         elif rid and method is None and "result" in msg and "body" in msg["result"]:
             res = msg["result"]
             b64 = res["body"]
             data = base64.b64decode(b64) if res.get("base64Encoded") else b64.encode()
             text = data.decode("utf-8", "replace")
-            if text.lstrip().startswith("{") or text.lstrip().startswith("["):
-                fn = os.path.join(out_dir, f"{tag}.api.{captured}.json")
-                with open(fn, "w") as f:
-                    f.write(text)
-                captured += 1
-                print(f"   captured [{captured}] ({len(text)} bytes) -> {fn}")
+            body = strip_jsonp(text)
+            if not (body.startswith("{") or body.startswith("[")):
+                continue
+            # Flag the payloads that actually carry league data, so a capture of
+            # 200 unrelated JSON blobs still tells us which file to open.
+            kind = "api"
+            try:
+                doc = json.loads(body)
+                if isinstance(doc, dict):
+                    leagues = doc.get("service", {}).get("leagues")
+                    if isinstance(leagues, dict) and leagues:
+                        kind = "envelope"
+                    elif "fantasy_content" in doc:
+                        kind = "fantasy_content"
+            except Exception:
+                pass
+            src = pending.get(rid, "")
+            fn = os.path.join(out_dir, f"{tag}.{kind}.{captured}.json")
+            with open(fn, "w") as f:
+                f.write(body)
+            manifest.append({"file": os.path.basename(fn), "kind": kind, "url": src})
+            captured += 1
+            print(f"   captured [{captured}] {kind} ({len(body)} bytes) -> {fn}")
+            if kind != "api":
+                print(f"      FROM {src}")
 
         if not attached and time.time() > deadline - 5:
             print("   (warning: never attached to target; retry)")
 
-    print(f">> done. captured {captured} JSON response(s) in {out_dir}")
+    mf = os.path.join(out_dir, f"{tag}.manifest.json")
+    with open(mf, "w") as f:
+        json.dump(manifest, f, indent=2)
+    print(f">> done. captured {captured} JSON response(s) in {out_dir}; manifest -> {mf}")
     try:
         conn.close()
     except Exception:

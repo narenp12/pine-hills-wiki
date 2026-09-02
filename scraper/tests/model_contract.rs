@@ -22,6 +22,7 @@ fn sample_season() -> Season {
         points_for: 1500.5,
         points_against: 1100.0,
         rank: 1,
+        playoff_seed: None,
     });
     season.teams = season.standings.clone();
     season.draft.draft_results.push(DraftPick {
