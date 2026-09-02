@@ -140,11 +140,16 @@ to a few hundred MB — it is gitignored.
 preserves everything else in `raw/<year>.json`, notably the draft picks, which
 the v2 harvest does not fetch.
 
-**`raw/` is gitignored** (a bare `raw/` entry in the root `.gitignore`), so
-`raw/*.json` is untracked. A fresh clone or worktree therefore has no season
-files, and `--from-v2` would merge onto `{}` and destroy every draft pick — the
-`picks_before == picks_after` guard cannot catch that, because 0 equals 0. Copy
-`raw/*.json` in before rebuilding, and use `git add -f` to commit results.
+**`raw/*.json` is committed** (~3.5 MB across eight seasons) and is what the
+generator reads. Keep it that way: `--from-v2` MERGES onto the file already on
+disk, so rebuilding where `raw/` is empty merges onto `{}` and destroys every
+draft pick, which the v2 harvest cannot re-fetch. The `picks_before ==
+picks_after` guard does not catch that, because 0 equals 0.
+
+Note that the working copy's root `.gitignore` lists both `raw/` and itself, and
+is untracked — it never reaches a clone, so the ignore rule is local to whoever
+created it. If you reinstate it locally, remember that already-tracked files stay
+tracked; the risk is only ever a fresh checkout that skips copying `raw/` in.
 
 ## Gaps CLOSED by the v2 pipeline
 - **Every team's owner** — was blank for all but your own team, now populated from

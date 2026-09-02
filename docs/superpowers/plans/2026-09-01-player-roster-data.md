@@ -1611,7 +1611,9 @@ git commit -m "docs: describe the roster harvest and player records"
 
 **Task 6 is a data run, not code.** It takes ~22 minutes and needs the logged-in Edge session from Task 1 still open.
 
-**`raw/` is gitignored and `raw/*.json` is untracked.** The root `.gitignore` has a bare `raw/` entry, which overrides the comment in `scraper/.gitignore` claiming the generated JSON is committed. A fresh worktree therefore starts with an empty `raw/`, and `--from-v2` merges onto `{}` instead of onto the existing season files. The v2 harvest does not fetch draft results, so **rebuilding without the existing `raw/*.json` present silently destroys all 1,400+ draft picks** — and the merge's own `picks_before == picks_after` guard cannot catch it, because 0 equals 0. Copy `raw/*.json` and `raw/bible.yaml` into any new worktree before running Task 6, and confirm with:
+**RESOLVED during execution — `raw/*.json` is now committed.** The original note here said the root `.gitignore` untracked it. That was half right: the `raw/` entry is real and does hide the files in the main working copy, but `.gitignore` also lists *itself* and was never committed, so no repo-level rule ever excluded them and a worktree does not inherit the rule at all.
+
+The hazard it described was real regardless: `--from-v2` MERGES onto whatever `raw/<year>.json` is on disk, so rebuilding against an empty `raw/` merges onto `{}` and **destroys all 1,170 draft picks**, which the v2 harvest cannot re-fetch — and the merge's own `picks_before == picks_after` guard cannot catch it, because 0 equals 0. Before any rebuild, confirm the season files are present:
 
 ```bash
 python3 -c "import json;print(len(json.load(open('raw/2025.json'))['draft']['draft_results']))"
@@ -1619,6 +1621,6 @@ python3 -c "import json;print(len(json.load(open('raw/2025.json'))['draft']['dra
 
 Expected: `180`. Task 6's audit script prints `picks=` per season for the same reason — a zero there means the merge started from nothing.
 
-**Task 6 commits `raw/20*.json` with `git add`, which the ignore rule blocks.** Use `git add -f raw/20*.json`, or the roster data never leaves the worktree.
+**Task 6's `git add -f raw/20*.json` needs no `-f` in a worktree**, since the untracked `.gitignore` does not reach one. The flag is harmless, and is still required in the main working copy while its local ignore rule stands.
 
 **The never-fabricate rule holds throughout.** Unmatched draft picks keep a blank position, seasons without roster data render `_TBD_`, and every computed award prints its formula.
