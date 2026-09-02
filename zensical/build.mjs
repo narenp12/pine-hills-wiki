@@ -3,14 +3,17 @@
 //
 // Run with node, not python: `node zensical/build.mjs`.
 //
-// Pipeline (when raw/ JSON is present - local dev with fresh data):
+// Pipeline (when raw/ JSON is present - the normal case, local and CI):
 //   1. scripts/generate.py  (WIKI_CONTENT_DIR -> zensical/.stage)  generates Markdown
 //   2. zensical/transform.py  resolves [[wikilinks]] -> zensical/docs
 //   3. zensical build --clean  -> zensical/site
 //
-// When raw/ is absent (CI: raw/*.json is gitignored, but the generated
-// zensical/docs/*.md are committed), skip steps 1-2 and build directly from
-// the committed Markdown. This keeps the deploy hermetic.
+// raw/*.json and raw/bible.yaml are committed, so CI takes that same path and
+// regenerates zensical/docs on every build. Editing a generated page by hand
+// does not survive: change raw/ instead.
+//
+// The fallback below (skip steps 1-2, build from the committed Markdown) only
+// fires in a checkout with no JSON in raw/ at all.
 //
 // The hand-authored skin (zensical/docs/stylesheets, zensical/docs/javascripts)
 // and zensical/docs/index.md are committed in git and are NOT regenerated.
@@ -64,7 +67,7 @@ if (rawHasData()) {
   console.log("[build] 2/3 transform.py -> zensical/docs");
   uvRun(["python", "zensical/transform.py"], { cwd: root });
 } else {
-  console.log("[build] raw/ has no JSON (CI) - building from committed zensical/docs");
+  console.log("[build] raw/ has no JSON - building from committed zensical/docs");
 }
 
 console.log("[build] zensical build --clean -> zensical/site");

@@ -73,7 +73,7 @@ uv sync --group dev
 node zensical/build.mjs
 ```
 
-That one command runs the whole pipeline: `generate.py` -> `zensical/.stage`, `transform.py` -> `zensical/docs`, then `zensical build --clean` -> `zensical/site`. With no JSON in `raw/` it skips the first two steps and builds from the committed Markdown, exactly as CI does.
+That one command runs the whole pipeline: `generate.py` -> `zensical/.stage`, `transform.py` -> `zensical/docs`, then `zensical build --clean` -> `zensical/site`. With no JSON in `raw/` it skips the first two steps and builds from the committed Markdown; because `raw/` is committed, that fallback does not fire in CI.
 
 To run a stage on its own:
 
