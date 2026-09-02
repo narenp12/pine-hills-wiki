@@ -607,15 +607,23 @@ def build_player_log(seasons: dict) -> list:
     for year in sorted(seasons):
         season_data = seasons[year]
         playoff_start, bracket_games = season_phases(season_data)
-        # (week, team) pairs that played a real bracket game.
-        bracket_teams = {(week, name) for (week, names) in bracket_games for name in names}
+        # (week, team) -> the bracket round that team played that week. Keeping
+        # the round, not just the fact of a playoff game, is what lets a mark be
+        # reported as the Final rather than a generic postseason week.
+        bracket_teams = {
+            (week, name): round_label
+            for (week, names), round_label in bracket_games.items()
+            for name in names
+        }
         for week_key, week_data in sorted(
             (season_data.get("weeks") or {}).items(), key=lambda kv: int(kv[0])
         ):
             week = int(week_key)
             for team_name, roster in ((week_data or {}).get("rosters") or {}).items():
+                playoff_round = ""
                 if (week, team_name) in bracket_teams:
                     phase = PHASE_PLAYOFF
+                    playoff_round = bracket_teams[(week, team_name)]
                 elif playoff_start is not None and week >= playoff_start:
                     phase = PHASE_CONSOLATION
                 else:
@@ -626,6 +634,7 @@ def build_player_log(seasons: dict) -> list:
                         "year": year,
                         "week": week,
                         "phase": phase,
+                        "round": playoff_round,
                         "team": team_name,
                         "player": player.get("name") or "",
                         "position": player.get("position") or "",
@@ -656,7 +665,15 @@ def player_book_rows(player_log: list) -> list[str]:
         ]
 
     def week_when(row) -> str:
-        return f"{row['year']} Wk {row['week']}, {wikilink(row['team'])}"
+        """When and for whom: "2024 Wk 16 (Final), Stroud Boys".
+
+        The bracket round is more specific than the phase tag, so it wins when
+        the game had one — a Final reads as a Final, not as a generic postseason
+        week. The fantasy team is always named: a player's big week belongs to
+        whoever actually had them rostered.
+        """
+        tag = f" ({row['round']})" if row.get("round") else PHASE_LABELS[row["phase"]]
+        return f"{row['year']} Wk {row['week']}{tag}, {wikilink(row['team'])}"
 
     def points_value(row) -> str:
         return f"{row['points']:.2f} ({row['position'] or '—'})"
@@ -670,10 +687,31 @@ def player_book_rows(player_log: list) -> list[str]:
         for k, v in season_totals.items()
     ]
 
+    # Weeks rostered is a career mark, so it needs the teams that did the
+    # rostering — a player who bounced between three managers reads very
+    # differently from one who sat on the same roster all eight years.
     rostered = {}
+    rostered_teams = {}
     for row in player_log:
-        rostered[row["player"]] = rostered.get(row["player"], 0) + 1
-    weeks_rows = [{"player": k, "weeks": v} for k, v in rostered.items()]
+        player = row["player"]
+        rostered[player] = rostered.get(player, 0) + 1
+        teams = rostered_teams.setdefault(player, {})
+        teams[row["team"]] = teams.get(row["team"], 0) + 1
+    weeks_rows = [
+        {
+            "player": k,
+            "weeks": v,
+            # Most weeks first, so the primary owner leads.
+            "teams": sorted(rostered_teams[k], key=lambda t: -rostered_teams[k][t]),
+        }
+        for k, v in rostered.items()
+    ]
+
+    def teams_when(row) -> str:
+        names = [wikilink(t) for t in row["teams"]]
+        if len(names) <= 3:
+            return ", ".join(names)
+        return f"{', '.join(names[:3])} +{len(names) - 3} more"
 
     table = []
     table += holders_rows(
@@ -701,7 +739,7 @@ def player_book_rows(player_log: list) -> list[str]:
         "Most Weeks Rostered", weeks_rows,
         lambda r: r["weeks"],
         lambda r: f"{r['weeks']} weeks",
-        lambda r: "career",
+        teams_when,
     )
     return table
 
@@ -1201,6 +1239,107 @@ def team_roster_blocks(season_data: dict, teams: list[dict]) -> str:
     return "\n".join(out) if out else "_TBD — no roster data captured for this season._"
 
 
+BUST_MAX_ROUND = 3
+
+
+def weekly_score_awards(season_data: dict) -> tuple[str, str]:
+    """Highest and lowest single-week team score. Needs no roster data."""
+    scored = []
+    for week_key, games in (season_data.get("matchups") or {}).items():
+        for game in games:
+            for side in game.get("teams") or []:
+                if side.get("score") is None:
+                    continue
+                scored.append((float(side["score"]), side.get("name") or "?", int(week_key)))
+    if not scored:
+        return (TBD, TBD)
+    high = max(scored)
+    low = min(scored)
+    return (
+        f"{high[1]} — {_fmt_score(high[0])} (Wk {high[2]})",
+        f"{low[1]} — {_fmt_score(low[0])} (Wk {low[2]})",
+    )
+
+
+def draft_value_awards(season_data: dict) -> tuple[str, str]:
+    """Best Draft Pick and Biggest Bust, by draft-slot-versus-finish gap.
+
+    Within each position, picks are ranked by draft order and players by season
+    points. The gap is (draft rank) - (finish rank): positive means the player
+    finished better than where they were taken. Best pick is the largest gap;
+    bust is the smallest, restricted to the first three rounds so a late-round
+    miss cannot win an award nobody would give it.
+
+    Computed, not voted — and the season page prints the formula next to the
+    result so it reads as arithmetic rather than a verdict.
+    """
+    picks = (season_data.get("draft") or {}).get("draft_results") or []
+    totals = {}
+    # Where the points were actually scored, which is not always the team that
+    # drafted the player — a mid-season trade or waiver claim moves them.
+    weeks_by_team = {}
+    for week in (season_data.get("weeks") or {}).values():
+        for team_name, roster in ((week or {}).get("rosters") or {}).items():
+            for player in roster.get("players") or []:
+                name = player.get("name")
+                if not name:
+                    continue
+                totals[name] = totals.get(name, 0.0) + float(player.get("points") or 0.0)
+                teams = weeks_by_team.setdefault(name, {})
+                teams[team_name] = teams.get(team_name, 0) + 1
+    if not picks or not totals:
+        return (TBD, TBD)
+
+    by_position = {}
+    for pick in picks:
+        position = pick.get("position") or ""
+        if position and pick.get("player") in totals:
+            by_position.setdefault(position, []).append(pick)
+
+    scored = []
+    for position, position_picks in by_position.items():
+        draft_order = sorted(position_picks, key=lambda p: int(p.get("pick") or 0))
+        finish_order = sorted(
+            position_picks, key=lambda p: totals.get(p.get("player"), 0.0), reverse=True
+        )
+        draft_rank = {p["player"]: i for i, p in enumerate(draft_order, 1)}
+        finish_rank = {p["player"]: i for i, p in enumerate(finish_order, 1)}
+        for pick in position_picks:
+            name = pick["player"]
+            scored.append({
+                "player": name,
+                "position": position,
+                "team": pick.get("team") or "?",
+                "round": int(pick.get("round") or 0),
+                "pick": int(pick.get("pick") or 0),
+                "gap": draft_rank[name] - finish_rank[name],
+                "points": totals.get(name, 0.0),
+            })
+    if not scored:
+        return (TBD, TBD)
+
+    def line(row) -> str:
+        """Name the drafting team explicitly, and the roster the points came
+        from when a trade or waiver claim moved the player mid-season."""
+        rostered = weeks_by_team.get(row["player"]) or {}
+        primary = max(rostered, key=lambda t: rostered[t], default="")
+        where = ""
+        if primary and primary != row["team"]:
+            where = f", scored mostly for {wikilink(primary)}"
+        return (
+            f"{row['player']} ({row['position']}) — drafted by {wikilink(row['team'])} "
+            f"at pick {row['pick']}, finished {row['gap']:+d} spots at the position, "
+            f"{_fmt_score(row['points'])} pts{where}"
+        )
+
+    best = max(scored, key=lambda r: (r["gap"], r["points"]))
+    early = [r for r in scored if 0 < r["round"] <= BUST_MAX_ROUND]
+    if not early:
+        return (line(best), TBD)
+    bust = min(early, key=lambda r: (r["gap"], -r["points"]))
+    return (line(best), line(bust))
+
+
 def backfill_draft_positions(season_data: dict) -> None:
     """Fill blank draft-pick positions from that season's roster data, in place.
 
@@ -1289,6 +1428,8 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
         bracket = playoff_bracket(seeded, champion)
 
     roster_blocks = team_roster_blocks(season_data, teams)
+    high_week, low_week = weekly_score_awards(season_data)
+    best_pick, biggest_bust = draft_value_awards(season_data)
 
     # Flag the page as unfinished while the bible has no champion for the year.
     # `status` renders the badge configured in zensical.toml.
@@ -1331,11 +1472,13 @@ year: {year}
 ## Awards
 
 - 🏆 **League Champion:** {champion}
-- 💥 **Highest Single-Week Score:** {TBD}
-- 📉 **Lowest Single-Week Score:** {TBD}
-- 🔥 **Biggest Bust:** {TBD}
-- 🎯 **Best Draft Pick:** {TBD}
+- 💥 **Highest Single-Week Score:** {high_week}
+- 📉 **Lowest Single-Week Score:** {low_week}
+- 🔥 **Biggest Bust:** {biggest_bust}
+- 🎯 **Best Draft Pick:** {best_pick}
 - 🍗 **"Poultry Controversy" Nominee:** {TBD}
+
+> Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-{BUST_MAX_ROUND}.
 
 ## The Story of the Year
 

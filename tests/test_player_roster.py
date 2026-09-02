@@ -142,3 +142,77 @@ def test_player_book_rows_cover_every_record():
     bench_row = [r for r in rows if "Benched" in r][0]
     assert "Bench Guy" in bench_row and "40.00" in bench_row
     assert "Most Weeks Rostered" in joined
+
+
+def test_weekly_score_awards():
+    from scripts.generate import weekly_score_awards
+
+    high, low = weekly_score_awards(two_week_season()[2025])
+    assert "110" in high and "Team A" in high
+    assert "90" in low and "Team B" in low
+
+
+def test_weekly_score_awards_without_matchups():
+    from scripts.generate import weekly_score_awards
+
+    high, low = weekly_score_awards({"matchups": {}})
+    assert high == "_TBD_" and low == "_TBD_"
+
+
+def draft_value_season():
+    return {
+        "draft": {"draft_results": [
+            {"pick": 1, "round": 1, "player": "Bust QB", "position": "QB", "team": "Team A"},
+            {"pick": 2, "round": 1, "player": "Steal QB", "position": "QB", "team": "Team B"},
+        ]},
+        "weeks": {"1": {"rosters": {
+            "Team A": {"players": [{"name": "Bust QB", "position": "QB", "slot": "QB", "points": 5.0}]},
+            "Team B": {"players": [{"name": "Steal QB", "position": "QB", "slot": "QB", "points": 50.0}]},
+        }}},
+    }
+
+
+def test_draft_value_awards():
+    from scripts.generate import draft_value_awards
+
+    best, bust = draft_value_awards(draft_value_season())
+    assert "Steal QB" in best
+    assert "Bust QB" in bust
+
+
+def test_draft_value_awards_without_rosters():
+    from scripts.generate import draft_value_awards
+
+    best, bust = draft_value_awards({"draft": {"draft_results": []}, "weeks": {}})
+    assert best == "_TBD_" and bust == "_TBD_"
+
+
+def test_player_book_names_the_fantasy_team_and_round():
+    from scripts.generate import build_player_log, player_book_rows
+
+    season = two_week_season()
+    # Give week 2 a real bracket so the round label has something to report.
+    season[2025]["bracket"] = {"games": [{
+        "id": "W2G1", "week": 2, "round": "Final",
+        "teams": [{"name": "Team A", "score": 110.0, "is_winner": True},
+                  {"name": "Team B", "score": 95.0, "is_winner": False}],
+    }]}
+    rows = player_book_rows(build_player_log(season))
+
+    playoff_row = [r for r in rows if "Highest Playoff Week" in r][0]
+    # The specific round beats the generic "(playoffs)" tag, and the fantasy
+    # team that rostered the player is named.
+    assert "(Final)" in playoff_row
+    assert "Team A" in playoff_row
+
+    # Career marks name the teams that did the rostering, not a bare "career".
+    weeks_row = [r for r in rows if "Most Weeks Rostered" in r][0]
+    assert "Team A" in weeks_row
+
+
+def test_draft_award_names_the_drafting_team():
+    from scripts.generate import draft_value_awards
+
+    best, _ = draft_value_awards(draft_value_season())
+    assert "drafted by" in best
+    assert "Team B" in best
