@@ -110,6 +110,7 @@ def load_raw():
     # the same data.
     for season_data in seasons.values():
         backfill_draft_positions(season_data)
+        annotate_overall_picks(season_data)
     return seasons
 
 
@@ -1307,9 +1308,15 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
         if position and pick.get("player") in totals:
             by_position.setdefault(position, []).append(pick)
 
+    # Order by the OVERALL pick. Yahoo's `pick` restarts every round, so sorting
+    # on it would rank round 2 pick 1 ahead of round 1 pick 5 and invert the
+    # draft order. `overall` is set by annotate_overall_picks at load.
+    def pick_order(p) -> int:
+        return int(p.get("overall") or p.get("pick") or 0)
+
     scored = []
     for position, position_picks in by_position.items():
-        draft_order = sorted(position_picks, key=lambda p: int(p.get("pick") or 0))
+        draft_order = sorted(position_picks, key=pick_order)
         finish_order = sorted(
             position_picks, key=lambda p: totals.get(p.get("player"), 0.0), reverse=True
         )
@@ -1322,7 +1329,7 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
                 "position": position,
                 "team": pick.get("team") or "?",
                 "round": int(pick.get("round") or 0),
-                "pick": int(pick.get("pick") or 0),
+                "pick": pick_order(pick),
                 "gap": draft_rank[name] - finish_rank[name],
                 "points": totals.get(name, 0.0),
             })
@@ -1349,6 +1356,33 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
         return (line(best), TBD)
     bust = min(early, key=lambda r: (r["gap"], -r["points"]))
     return (line(best), line(bust))
+
+
+def annotate_overall_picks(season_data: dict) -> None:
+    """Add an `overall` field to each draft pick, in place.
+
+    Yahoo numbers picks WITHIN the round: round 2 starts again at 1. What a draft
+    board wants is the overall number — round 2 pick 1 of a 12-team league is the
+    13th pick of the draft, not the 2nd. Ordering on the within-round number also
+    inverts the draft order outright, ranking round 2 pick 1 ahead of round 1
+    pick 5.
+
+    Round size is the widest round in the season, since the last round can be
+    short (a forfeited or auto-skipped pick); taking the short one would number
+    every later round too low.
+    """
+    picks = (season_data.get("draft") or {}).get("draft_results") or []
+    if not picks:
+        return
+    round_size = max((int(p.get("pick") or 0) for p in picks), default=0)
+    if round_size <= 0:
+        return
+    for pick in picks:
+        round_number = int(pick.get("round") or 0)
+        within = int(pick.get("pick") or 0)
+        if round_number <= 0 or within <= 0:
+            continue
+        pick["overall"] = (round_number - 1) * round_size + within
 
 
 def backfill_draft_positions(season_data: dict) -> None:
@@ -2555,7 +2589,9 @@ def main():
             for p in picks:
                 if isinstance(p, dict):
                     dlines.append(
-                        f"| {p.get('pick','?')} | {p.get('round','?')} | {p.get('team','?')} | {p.get('player','?')} | {p.get('position','?')} |"
+                        # The column is "Overall", so print the overall number:
+                        # Yahoo's `pick` restarts at 1 every round.
+                        f"| {p.get('overall', p.get('pick','?'))} | {p.get('round','?')} | {p.get('team','?')} | {p.get('player','?')} | {p.get('position','?')} |"
                     )
         dp = CONTENT / "draft" / f"{year}-draft.md"
         dp.write_text(

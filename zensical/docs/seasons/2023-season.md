@@ -487,8 +487,8 @@ flowchart LR
 - 🏆 **League Champion:** Super Squirrels
 - 💥 **Highest Single-Week Score:** Stroud Boys - 193.44 (Wk 5)
 - 📉 **Lowest Single-Week Score:** Sharman’s Scorpions - 25.80 (Wk 13)
-- 🔥 **Biggest Bust:** Justin Jefferson (WR) - drafted by [varun’s victorious team](../teams/varun-s-victorious-team.md) at pick 1, finished -28 spots at the position, 166.20 pts
-- 🎯 **Best Draft Pick:** DJ Moore (WR) - drafted by [Stroud Boys](../teams/stroud-boys.md) at pick 9, finished +36 spots at the position, 276.10 pts
+- 🔥 **Biggest Bust:** Nick Chubb (RB) - drafted by [Roger That](../teams/roger-that.md) at pick 7, finished -31 spots at the position, 23.10 pts
+- 🎯 **Best Draft Pick:** Mike Evans (WR) - drafted by [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) at pick 92, finished +28 spots at the position, 277.30 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

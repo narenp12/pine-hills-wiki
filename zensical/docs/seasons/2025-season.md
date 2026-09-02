@@ -567,8 +567,8 @@ flowchart LR
 - 🏆 **League Champion:** Jeremy's Neat Team
 - 💥 **Highest Single-Week Score:** Sharman’s Scorpions - 177.24 (Wk 7)
 - 📉 **Lowest Single-Week Score:** Stroud Boys - 38.50 (Wk 6)
-- 🔥 **Biggest Bust:** Brian Thomas Jr. (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 2, finished -28 spots at the position, 130.90 pts
-- 🎯 **Best Draft Pick:** Courtland Sutton (WR) - drafted by [Save Me](../teams/save-me.md) at pick 12, finished +43 spots at the position, 218.20 pts
+- 🔥 **Biggest Bust:** Malik Nabers (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 11, finished -45 spots at the position, 57.10 pts
+- 🎯 **Best Draft Pick:** Rashid Shaheed (WR) - drafted by [varun’s victorious team](../teams/varun-s-victorious-team.md) at pick 113, finished +40 spots at the position, 227.60 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

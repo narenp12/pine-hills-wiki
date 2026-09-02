@@ -569,7 +569,7 @@ flowchart LR
 - 💥 **Highest Single-Week Score:** varun’s victorious team - 180.24 (Wk 8)
 - 📉 **Lowest Single-Week Score:** Jayesh's Great Team - 45.70 (Wk 12)
 - 🔥 **Biggest Bust:** Christian McCaffrey (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 1, finished -38 spots at the position, 47.80 pts
-- 🎯 **Best Draft Pick:** Ladd McConkey (WR) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 12, finished +44 spots at the position, 227.20 pts
+- 🎯 **Best Draft Pick:** Ladd McConkey (WR) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 144, finished +41 spots at the position, 227.20 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

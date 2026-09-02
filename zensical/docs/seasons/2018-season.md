@@ -302,8 +302,8 @@ flowchart LR
 - 🏆 **League Champion:** Curry’s legit team
 - 💥 **Highest Single-Week Score:** D4rthSi Dragons - 203.12 (Wk 11)
 - 📉 **Lowest Single-Week Score:** Super Squirrels - 77.12 (Wk 15)
-- 🔥 **Biggest Bust:** Jamaal Williams (RB) - drafted by [Curry’s legit team](../teams/curry-s-legit-team.md) at pick 4, finished -4 spots at the position, 27.60 pts
-- 🎯 **Best Draft Pick:** Tyreek Hill (WR) - drafted by [Roger That](../teams/roger-that.md) at pick 6, finished +15 spots at the position, 243.10 pts
+- 🔥 **Biggest Bust:** A.J. Green (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 18, finished -11 spots at the position, 100.30 pts, scored mostly for [D4rthSi Dragons](../teams/d4rthsi-dragons.md)
+- 🎯 **Best Draft Pick:** Christian McCaffrey (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 65, finished +15 spots at the position, 339.10 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

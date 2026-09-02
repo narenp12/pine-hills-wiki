@@ -487,8 +487,8 @@ flowchart LR
 - 🏆 **League Champion:** varun’s victorious team
 - 💥 **Highest Single-Week Score:** Roger That - 196.28 (Wk 5)
 - 📉 **Lowest Single-Week Score:** Tanmay's Top-Notch Team - 63.98 (Wk 16)
-- 🔥 **Biggest Bust:** Christian McCaffrey (RB) - drafted by [The Herbs](../teams/the-herbs.md) at pick 1, finished -24 spots at the position, 127.50 pts
-- 🎯 **Best Draft Pick:** Davante Adams (WR) - drafted by [Roger That](../teams/roger-that.md) at pick 8, finished +37 spots at the position, 332.80 pts
+- 🔥 **Biggest Bust:** Calvin Ridley (WR) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 15, finished -32 spots at the position, 71.10 pts
+- 🎯 **Best Draft Pick:** Deebo Samuel Sr. (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 102, finished +34 spots at the position, 317.50 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

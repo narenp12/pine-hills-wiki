@@ -480,8 +480,8 @@ flowchart LR
 - 🏆 **League Champion:** Roger That
 - 💥 **Highest Single-Week Score:** My team is Koo(l) - 175.42 (Wk 2)
 - 📉 **Lowest Single-Week Score:** Imagine Losing - 67.72 (Wk 10)
-- 🔥 **Biggest Bust:** Saquon Barkley (RB) - drafted by [CHOPSTIX](../teams/chopstix.md) at pick 2, finished -28 spots at the position, 15.40 pts
-- 🎯 **Best Draft Pick:** Tyreek Hill (WR) - drafted by [My team is Koo(l)](../teams/my-team-is-koo-l.md) at pick 10, finished +37 spots at the position, 328.90 pts
+- 🔥 **Biggest Bust:** Michael Thomas (WR) - drafted by [Imagine Losing](../teams/imagine-losing.md) at pick 6, finished -33 spots at the position, 83.90 pts
+- 🎯 **Best Draft Pick:** Kareem Hunt (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 104, finished +23 spots at the position, 213.40 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.

@@ -246,3 +246,55 @@ def test_playoff_appearances_fall_back_without_bracket_data():
     ]}}}
     # No bracket data: the seed cutoff is the only thing left to go on.
     assert build_aggregates(seasons)["Top Seed"]["playoff_appears"] == 1
+
+
+def overall_pick_season():
+    """A 3-team league, two rounds. Yahoo numbers picks within the round."""
+    return {"draft": {"draft_results": [
+        {"round": 1, "pick": 1, "player": "A", "position": "RB", "team": "T1"},
+        {"round": 1, "pick": 2, "player": "B", "position": "RB", "team": "T2"},
+        {"round": 1, "pick": 3, "player": "C", "position": "RB", "team": "T3"},
+        {"round": 2, "pick": 1, "player": "D", "position": "RB", "team": "T3"},
+        {"round": 2, "pick": 2, "player": "E", "position": "RB", "team": "T2"},
+    ]}}
+
+
+def test_overall_pick_numbers_run_through_the_whole_draft():
+    from scripts.generate import annotate_overall_picks
+
+    season = overall_pick_season()
+    annotate_overall_picks(season)
+    picks = season["draft"]["draft_results"]
+    # Round 1 is unchanged; round 2 continues from 4 rather than restarting at 1.
+    assert [p["overall"] for p in picks] == [1, 2, 3, 4, 5]
+
+
+def test_overall_pick_handles_a_short_final_round():
+    from scripts.generate import annotate_overall_picks
+
+    season = overall_pick_season()
+    # Drop a round-2 pick: round size still comes from the full round, not the
+    # short one, or every later round would be numbered too low.
+    season["draft"]["draft_results"].pop()
+    annotate_overall_picks(season)
+    assert [p["overall"] for p in season["draft"]["draft_results"]] == [1, 2, 3, 4]
+
+
+def test_draft_award_ranks_by_overall_not_round_pick():
+    """Round 2 pick 1 is a LATER pick than round 1 pick 3, so it must rank as
+    one — sorting on the within-round number inverts the draft order."""
+    from scripts.generate import annotate_overall_picks, draft_value_awards
+
+    season = overall_pick_season()
+    season["weeks"] = {"1": {"rosters": {"T1": {"players": [
+        # The round-2 player outscores everyone; he is the steal, and the
+        # round-1 first overall pick is the bust.
+        {"name": "D", "position": "RB", "slot": "RB", "points": 300.0},
+        {"name": "A", "position": "RB", "slot": "RB", "points": 10.0},
+        {"name": "B", "position": "RB", "slot": "RB", "points": 50.0},
+        {"name": "C", "position": "RB", "slot": "RB", "points": 40.0},
+    ]}}}}
+    annotate_overall_picks(season)
+    best, bust = draft_value_awards(season)
+    assert "D" in best and "pick 4" in best
+    assert "A" in bust

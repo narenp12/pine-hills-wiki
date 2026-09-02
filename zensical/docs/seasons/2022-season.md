@@ -486,8 +486,8 @@ flowchart LR
 - 🏆 **League Champion:** Jeremy's Neat Team
 - 💥 **Highest Single-Week Score:** Hill We Go… Again (feat Kyler) - 185.70 (Wk 9)
 - 📉 **Lowest Single-Week Score:** Michael's Marvelous Team - 45.80 (Wk 9)
-- 🔥 **Biggest Bust:** Jonathan Taylor (RB) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 2, finished -22 spots at the position, 146.40 pts
-- 🎯 **Best Draft Pick:** Stefon Diggs (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 10, finished +41 spots at the position, 293.20 pts
+- 🔥 **Biggest Bust:** Jonathan Taylor (RB) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 2, finished -24 spots at the position, 146.40 pts
+- 🎯 **Best Draft Pick:** DeVonta Smith (WR) - drafted by [Tanmay's Hospital](../teams/tanmay-s-hospital.md) at pick 109, finished +31 spots at the position, 242.40 pts
 - 🍗 **"Poultry Controversy" Nominee:** _TBD_
 
 > Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-3.
