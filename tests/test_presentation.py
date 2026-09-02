@@ -87,6 +87,13 @@ def test_lore_block_is_a_collapsible_admonition_with_indented_body():
     assert f"    {TBD}" in out
 
 
+def test_lore_block_kind_sets_the_admonition_type():
+    """Curses render as warnings, incidents as quotes: the icon tells them apart."""
+    entries = lore_entries(bible_with_lore(), "incidents")
+    assert '??? warning "2022 - The Vetoed Trade"' in lore_blocks(entries, "e", "warning")
+    assert '??? quote "2022 - The Vetoed Trade"' in lore_blocks(entries, "e", "quote")
+
+
 def test_empty_lore_prints_the_invitation():
     assert lore_blocks([], "_Nothing recorded yet._") == "_Nothing recorded yet._"
 

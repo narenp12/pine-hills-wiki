@@ -61,7 +61,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -103,7 +103,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Christian McCaffrey](../players/christian-mccaffrey.md) | RB | 0.00 |
     | IR | [Hunter Henry](../players/hunter-henry.md) | TE | 0.00 |
 
-??? note "Imagine Losing"
+??? abstract "Imagine Losing"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -144,7 +144,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Colts](../players/colts.md) | DEF | 0.00 |
     | BN | [Michael Thomas](../players/michael-thomas.md) | WR | 0.00 |
 
-??? note "Kaushal's Potatoes"
+??? abstract "Kaushal's Potatoes"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -186,7 +186,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Dallas Goedert](../players/dallas-goedert.md) | TE | 6.80 |
     | BN | [Matthew Stafford](../players/matthew-stafford.md) | QB | 0.68 |
 
-??? note "CHOPSTIX"
+??? abstract "CHOPSTIX"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -227,7 +227,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Phillip Lindsay](../players/phillip-lindsay.md) | RB | 0.00 |
     | BN | [Ronald Jones](../players/ronald-jones.md) | RB | 0.00 |
 
-??? note "Anish's Awesome Team"
+??? abstract "Anish's Awesome Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -268,7 +268,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Antonio Brown](../players/antonio-brown.md) | WR | 13.50 |
     | BN | [Tony Pollard](../players/tony-pollard.md) | RB | 3.00 |
 
-??? note "My team is Koo(l)"
+??? abstract "My team is Koo(l)"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -308,7 +308,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Cordarrelle Patterson](../players/cordarrelle-patterson.md) | WR | 2.20 |
     | BN | [Terry McLaurin](../players/terry-mclaurin.md) | WR | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -349,7 +349,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Cam Akers](../players/cam-akers.md) | RB | 0.00 |
     | BN | [Corey Davis](../players/corey-davis.md) | WR | 0.00 |
 
-??? note "Aryan's Amazing Team"
+??? abstract "Aryan's Amazing Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -390,7 +390,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jordan Wilkins](../players/jordan-wilkins.md) | RB | 0.00 |
     | BN | [Kenny Golladay](../players/kenny-golladay.md) | WR | 0.00 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -431,7 +431,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Clyde Edwards-Helaire](../players/clyde-edwards-helaire.md) | RB | 0.00 |
     | BN | [Tyler Boyd](../players/tyler-boyd.md) | WR | 0.00 |
 
-??? note "I have Hop(e)"
+??? abstract "I have Hop(e)"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -527,9 +527,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

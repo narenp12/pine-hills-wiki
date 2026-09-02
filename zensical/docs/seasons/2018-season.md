@@ -53,7 +53,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Curry's legit team"
+??? abstract "Curry's legit team"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -94,7 +94,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jaylen Samuels](../players/jaylen-samuels.md) | RB | 15.40 |
     | BN | [Curtis Samuel](../players/curtis-samuel.md) | WR | 11.10 |
 
-??? note "Anish's Awesome Team"
+??? abstract "Anish's Awesome Team"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -135,7 +135,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [George Kittle](../players/george-kittle.md) | TE | 14.40 |
     | BN | [Todd Gurley](../players/todd-gurley.md) | RB | 0.00 |
 
-??? note "D4rthSi Dragons"
+??? abstract "D4rthSi Dragons"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -176,7 +176,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Brandin Cooks](../players/brandin-cooks.md) | WR | 9.20 |
     | BN | [Rob Gronkowski](../players/rob-gronkowski.md) | TE | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -215,7 +215,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Mark Ingram II](../players/mark-ingram-ii.md) | RB | 11.30 |
     | BN | [Trey Burton](../players/trey-burton.md) | TE | 8.00 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -255,7 +255,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jarvis Landry](../players/jarvis-landry.md) | WR | 11.82 |
     | BN | [Jimmy Graham](../players/jimmy-graham.md) | TE | 6.40 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -349,9 +349,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

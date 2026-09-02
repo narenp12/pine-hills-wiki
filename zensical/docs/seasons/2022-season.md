@@ -61,7 +61,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Jeremy's Neat Team"
+??? abstract "Jeremy's Neat Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -102,7 +102,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jahan Dotson](../players/jahan-dotson.md) | WR | 6.70 |
     | BN | [Tyler Lockett](../players/tyler-lockett.md) | WR | 3.50 |
 
-??? note "Michael's Marvelous Team"
+??? abstract "Michael's Marvelous Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -143,7 +143,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Broncos](../players/broncos.md) | DEF | 6.00 |
     | BN | [Tyler Boyd](../players/tyler-boyd.md) | WR | 0.00 |
 
-??? note "L takes only"
+??? abstract "L takes only"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -186,7 +186,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Gabe Davis](../players/gabe-davis.md) | WR | 0.00 |
     | BN | [Jalen Hurts](../players/jalen-hurts.md) | QB | 0.00 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -228,7 +228,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [James Robinson](../players/james-robinson.md) | RB | 0.00 |
     | IR | [Michael Thomas](../players/michael-thomas.md) | WR | 0.00 |
 
-??? note "Anish's Awesome Team"
+??? abstract "Anish's Awesome Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -268,7 +268,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [D'Onta Foreman](../players/d-onta-foreman.md) | RB | 3.50 |
     | BN | [Curtis Samuel](../players/curtis-samuel.md) | WR | 1.60 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -310,7 +310,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Devin Singletary](../players/devin-singletary.md) | RB | 0.00 |
     | BN | [Lamar Jackson](../players/lamar-jackson.md) | QB | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -351,7 +351,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Darius Slayton](../players/darius-slayton.md) | WR | 1.40 |
     | BN | [Antonio Gibson](../players/antonio-gibson.md) | RB | 0.00 |
 
-??? note "Hill We Go… Again (feat Kyler)"
+??? abstract "Hill We Go… Again (feat Kyler)"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -395,7 +395,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Kyler Murray](../players/kyler-murray.md) | QB | 0.00 |
     | IR | [Rashaad Penny](../players/rashaad-penny.md) | RB | 0.00 |
 
-??? note "Tanmay's Hospital"
+??? abstract "Tanmay's Hospital"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -437,7 +437,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Clyde Edwards-Helaire](../players/clyde-edwards-helaire.md) | RB | 0.00 |
     | BN | [Dawson Knox](../players/dawson-knox.md) | TE | 0.00 |
 
-??? note "varun's victorious team"
+??? abstract "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -533,9 +533,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

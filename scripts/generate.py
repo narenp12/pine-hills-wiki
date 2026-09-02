@@ -2013,7 +2013,8 @@ def team_roster_blocks(season_data: dict, teams: list[dict]) -> str:
         ]
         if not any(roster for _, _, roster in snapshots):
             continue
-        out.append(f'??? note "{name}"')
+        # `abstract` for its clipboard icon: this is a roster listing.
+        out.append(f'??? abstract "{name}"')
         for label, week, roster in snapshots:
             if not roster:
                 continue
@@ -3609,13 +3610,16 @@ def lore_entries(bible: dict, key: str) -> list:
     )
 
 
-def lore_blocks(entries: list, empty: str) -> str:
+def lore_blocks(entries: list, empty: str, kind: str = "note") -> str:
     """Render lore entries as collapsible admonitions.
 
     One entry can be a sentence or six paragraphs, and a table would truncate
     the long ones while padding the short. A collapsed admonition per entry
     keeps the page scannable - the reader sees every title at once and opens the
     one they want.
+
+    `kind` is the admonition type, which decides the icon. Each collapsible
+    section of the wiki uses a different one so they are told apart at a glance.
     """
     if not entries:
         return empty
@@ -3623,7 +3627,7 @@ def lore_blocks(entries: list, empty: str) -> str:
     for entry in entries:
         year = entry.get("year")
         heading = f"{year} - {entry['title']}" if year else entry["title"]
-        out.append(f'??? note "{heading}"')
+        out.append(f'??? {kind} "{heading}"')
         out.append("")
         # Who it happened to, when the bible names them. Franchise and manager
         # names are linked, so a curse reads as part of that team's history.
@@ -3678,11 +3682,11 @@ captured data.
 
 ## Incidents
 
-{lore_blocks(incidents, "_No incidents recorded. Entries are added under `lore.incidents` in the league bible._")}
+{lore_blocks(incidents, "_No incidents recorded. Entries are added under `lore.incidents` in the league bible._", "quote")}
 
 ## Curses
 
-{lore_blocks(curses, "_No curses recorded. Entries are added under `lore.curses` in the league bible._")}
+{lore_blocks(curses, "_No curses recorded. Entries are added under `lore.curses` in the league bible._", "warning")}
 
 ## Related
 
@@ -3817,7 +3821,8 @@ def gen_awards_page(
         selected = all_league_teams.get(year) or []
         if not selected:
             continue
-        lineups.append(f'??? note "{year}"')
+        # `success` for its check icon: these are the players selected.
+        lineups.append(f'??? success "{year}"')
         lineups.append("")
         lineups.append("    | Slot | Player | Pos | Wins Swung | Rostered By |")
         lineups.append("    |------|--------|-----|------------|-------------|")

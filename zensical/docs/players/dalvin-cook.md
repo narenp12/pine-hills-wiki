@@ -50,5 +50,4 @@ played; lineup points exclude weeks spent on the bench.
 
 - [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)
 
-*[RB]: Running back
 *[MVP]: Most Valuable Player

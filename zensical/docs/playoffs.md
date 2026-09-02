@@ -140,6 +140,3 @@ Every manager who has reached a bracket. Consolation play is excluded.
 ## Related
 
 - [Champions](champions.md) · [Seasons](seasons/index.md) · [Records](records/index.md) · [Lore](lore.md)
-
-*[QB]: Quarterback
-*[WR]: Wide receiver

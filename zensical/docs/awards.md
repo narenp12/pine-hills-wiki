@@ -63,7 +63,7 @@ Both compare, within a position, where a player was taken against where they fin
 
 ## Team of the Season
 
-??? note "2025"
+??? success "2025"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -78,7 +78,7 @@ Both compare, within a position, where a player was taken against where they fin
     | DEF (2-way tie) | [Broncos](players/broncos.md) | DEF | 3 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
     |  | [Lions](players/lions.md) | DEF | 3 | <span class="wiki-new" title="This page has not been written yet">Save Me</span>, <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
 
-??? note "2024"
+??? success "2024"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -92,7 +92,7 @@ Both compare, within a position, where a player was taken against where they fin
     | K | [Chase McLaughlin](players/chase-mclaughlin.md) | K | 5 | <span class="wiki-new" title="This page has not been written yet">Stroud Boys</span>, <span class="wiki-new" title="This page has not been written yet">Big black big back</span> |
     | DEF | [Vikings](players/vikings.md) | DEF | 4 | <span class="wiki-new" title="This page has not been written yet">Kamara's a b*tch</span>, <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
 
-??? note "2023"
+??? success "2023"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -106,7 +106,7 @@ Both compare, within a position, where a player was taken against where they fin
     | K | [Jake Elliott](players/jake-elliott.md) | K | 3 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
     | DEF | [Eagles](players/eagles.md) | DEF | 3 | <span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span> |
 
-??? note "2022"
+??? success "2022"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -120,7 +120,7 @@ Both compare, within a position, where a player was taken against where they fin
     | K | [Nick Folk](players/nick-folk.md) | K | 3 | <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
     | DEF | [Cowboys](players/cowboys.md) | DEF | 2 | <span class="wiki-new" title="This page has not been written yet">Hill We Go… Again (feat Kyler)</span>, <span class="wiki-new" title="This page has not been written yet">Tanmay's Hospital</span> |
 
-??? note "2021"
+??? success "2021"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -135,7 +135,7 @@ Both compare, within a position, where a player was taken against where they fin
     |  | [Matt Prater](players/matt-prater.md) | K | 2 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
     | DEF | [Bills](players/bills.md) | DEF | 2 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span>, <span class="wiki-new" title="This page has not been written yet">The Herbs</span> |
 
-??? note "2020"
+??? success "2020"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -149,7 +149,7 @@ Both compare, within a position, where a player was taken against where they fin
     | K | [Jason Sanders](players/jason-sanders.md) | K | 3 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
     | DEF | [Colts](players/colts.md) | DEF | 4 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
 
-??? note "2019"
+??? success "2019"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -163,7 +163,7 @@ Both compare, within a position, where a player was taken against where they fin
     | K | [Greg Zuerlein](players/greg-zuerlein.md) | K | 2 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
     | DEF | [Patriots](players/patriots.md) | DEF | 4 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
 
-??? note "2018"
+??? success "2018"
 
     | Slot | Player | Pos | Wins Swung | Rostered By |
     |------|--------|-----|------------|-------------|
@@ -191,9 +191,4 @@ Both compare, within a position, where a player was taken against where they fin
 - [Seasons](seasons/index.md) · [Players](players/index.md) · [Records](records/index.md) · [Champions](champions.md)
 
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

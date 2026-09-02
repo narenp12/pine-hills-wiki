@@ -161,9 +161,3 @@ description: "Pine Hills FF 2022 draft board."
 ## Related
 
 - [Draft History](index.md) · [2022 Season](../seasons/2022-season.md)
-
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense

@@ -63,7 +63,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Stroud Boys"
+??? abstract "Stroud Boys"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -104,7 +104,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Dallas Goedert](../players/dallas-goedert.md) | TE | 0.00 |
     | BN | [Trevor Lawrence](../players/trevor-lawrence.md) | QB | 0.00 |
 
-??? note "Jayesh's Great Team"
+??? abstract "Jayesh's Great Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -145,7 +145,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Cole Kmet](../players/cole-kmet.md) | TE | 0.00 |
     | BN | [Diontae Johnson](../players/diontae-johnson.md) | WR | 0.00 |
 
-??? note "varun's victorious team"
+??? abstract "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -188,7 +188,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Dak Prescott](../players/dak-prescott.md) | QB | 0.00 |
     | BN | [Tua Tagovailoa](../players/tua-tagovailoa.md) | QB | 0.00 |
 
-??? note "Kaushal's Potatoes"
+??? abstract "Kaushal's Potatoes"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -230,7 +230,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Tyler Bass](../players/tyler-bass.md) | K | 8.00 |
     | BN | [Evan Engram](../players/evan-engram.md) | TE | 0.00 |
 
-??? note "Big black big back"
+??? abstract "Big black big back"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -270,7 +270,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Rhamondre Stevenson](../players/rhamondre-stevenson.md) | RB | 0.10 |
     | BN | [Tank Dell](../players/tank-dell.md) | WR | 0.00 |
 
-??? note "Kamara's a b*tch"
+??? abstract "Kamara's a b*tch"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -315,7 +315,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Chris Olave](../players/chris-olave.md) | WR | 0.00 |
     | IR | [Jalen Hurts](../players/jalen-hurts.md) | QB | 0.00 |
 
-??? note "Joe Sheisty"
+??? abstract "Joe Sheisty"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -356,7 +356,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Alexander Mattison](../players/alexander-mattison.md) | RB | 4.80 |
     | BN | [Devaughn Vele](../players/devaughn-vele.md) | WR | 4.70 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -398,7 +398,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jaylen Waddle](../players/jaylen-waddle.md) | WR | 0.00 |
     | IR | [Rashid Shaheed](../players/rashid-shaheed.md) | WR | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -439,7 +439,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Zack Moss](../players/zack-moss.md) | RB | 0.00 |
     | BN | [Steelers](../players/steelers.md) | DEF | -1.00 |
 
-??? note "Jeremy's Neat Team"
+??? abstract "Jeremy's Neat Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -480,7 +480,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Javonte Williams](../players/javonte-williams.md) | RB | 2.00 |
     | BN | [Cedric Tillman](../players/cedric-tillman.md) | WR | 0.00 |
 
-??? note "Michael's Marvelous Team"
+??? abstract "Michael's Marvelous Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -521,7 +521,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Rachaad White](../players/rachaad-white.md) | RB | 4.40 |
     | BN | [Christian Watson](../players/christian-watson.md) | WR | 0.00 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -615,9 +615,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

@@ -61,7 +61,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "varun's victorious team"
+??? abstract "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -102,7 +102,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [DJ Moore](../players/dj-moore.md) | WR | 5.90 |
     | BN | [Clyde Edwards-Helaire](../players/clyde-edwards-helaire.md) | RB | 0.00 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -143,7 +143,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Myles Gaskin](../players/myles-gaskin.md) | RB | 2.30 |
     | BN | [Marquez Valdes-Scantling](../players/marquez-valdes-scantling.md) | WR | 1.30 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -186,7 +186,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Julio Jones](../players/julio-jones.md) | WR | 0.00 |
     | BN | [Lamar Jackson](../players/lamar-jackson.md) | QB | 0.00 |
 
-??? note "Tanmay's Top-Notch Team"
+??? abstract "Tanmay's Top-Notch Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -227,7 +227,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [DeVonta Smith](../players/devonta-smith.md) | WR | 8.40 |
     | BN | [Bills](../players/bills.md) | DEF | 8.00 |
 
-??? note "The Herbs"
+??? abstract "The Herbs"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -270,7 +270,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Christian McCaffrey](../players/christian-mccaffrey.md) | RB | 0.00 |
     | BN | [Kareem Hunt](../players/kareem-hunt.md) | RB | 0.00 |
 
-??? note "most likely injured"
+??? abstract "most likely injured"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -313,7 +313,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jeff Wilson Jr.](../players/jeff-wilson-jr.md) | RB | 0.00 |
     | IR | [Leonard Fournette](../players/leonard-fournette.md) | RB | 0.00 |
 
-??? note "The Johnson and Johnson team"
+??? abstract "The Johnson and Johnson team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -355,7 +355,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Darren Waller](../players/darren-waller.md) | TE | 0.00 |
     | IR | [Derrick Henry](../players/derrick-henry.md) | RB | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -397,7 +397,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Darrell Henderson Jr.](../players/darrell-henderson-jr.md) | RB | 0.00 |
     | BN | [Dawson Knox](../players/dawson-knox.md) | TE | 0.00 |
 
-??? note "Anish's Awesome Team"
+??? abstract "Anish's Awesome Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -439,7 +439,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jermar Jefferson](../players/jermar-jefferson.md) | RB | 0.00 |
     | BN | [T.J. Hockenson](../players/t-j-hockenson.md) | TE | 0.00 |
 
-??? note "Michael's Marvelous Team"
+??? abstract "Michael's Marvelous Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -536,9 +536,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

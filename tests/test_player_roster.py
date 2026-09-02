@@ -43,7 +43,7 @@ def test_roster_table_puts_starters_above_bench():
 
 def test_roster_blocks_render_both_snapshots():
     out = team_roster_blocks(season_with_rosters(), [{"name": "Team A"}])
-    assert '??? note "Team A"' in out
+    assert '??? abstract "Team A"' in out
     assert "**Post-draft — week 3**" in out
     assert "**End of season — week 16**" in out
     # Admonition content must be indented or Zensical drops it out of the block.

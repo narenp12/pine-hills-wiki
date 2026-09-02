@@ -61,7 +61,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -104,7 +104,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [T.J. Hockenson](../players/t-j-hockenson.md) | TE | 0.00 |
     | BN | [Trevor Lawrence](../players/trevor-lawrence.md) | QB | 0.00 |
 
-??? note "BBigg MACKS"
+??? abstract "BBigg MACKS"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -147,7 +147,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Stefon Diggs](../players/stefon-diggs.md) | WR | 7.10 |
     | BN | [Raiders](../players/raiders.md) | DEF | 1.00 |
 
-??? note "Stroud Boys"
+??? abstract "Stroud Boys"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -189,7 +189,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Ja'Marr Chase](../players/ja-marr-chase.md) | WR | 7.10 |
     | IR | [Mike Williams](../players/mike-williams.md) | WR | 0.00 |
 
-??? note "Ken Keenan Kum"
+??? abstract "Ken Keenan Kum"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -231,7 +231,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Keenan Allen](../players/keenan-allen.md) | WR | 0.00 |
     | BN | [Raheem Mostert](../players/raheem-mostert.md) | RB | 0.00 |
 
-??? note "Pukakke NaKupp"
+??? abstract "Pukakke NaKupp"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -273,7 +273,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Jonathan Mingo](../players/jonathan-mingo.md) | WR | 2.00 |
     | BN | [Russell Wilson](../players/russell-wilson.md) | QB | 0.00 |
 
-??? note "Michael's Marvelous Team"
+??? abstract "Michael's Marvelous Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -315,7 +315,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Deshaun Watson](../players/deshaun-watson.md) | QB | 0.00 |
     | BN | [Rhamondre Stevenson](../players/rhamondre-stevenson.md) | RB | 0.00 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -357,7 +357,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Clyde Edwards-Helaire](../players/clyde-edwards-helaire.md) | RB | 0.00 |
     | IR | [Kirk Cousins](../players/kirk-cousins.md) | QB | 0.00 |
 
-??? note "Jeremy's Neat Team"
+??? abstract "Jeremy's Neat Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -398,7 +398,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Odell Beckham Jr.](../players/odell-beckham-jr.md) | WR | 4.30 |
     | BN | [Tee Higgins](../players/tee-higgins.md) | WR | 2.90 |
 
-??? note "varun's victorious team"
+??? abstract "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -440,7 +440,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | IR | [Joe Burrow](../players/joe-burrow.md) | QB | 0.00 |
     | BN | [Ray-Ray McCloud III](../players/ray-ray-mccloud-iii.md) | WR | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -535,9 +535,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

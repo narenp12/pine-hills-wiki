@@ -43,16 +43,13 @@ GLOSSARY = {
     "W/R/T": "Flex slot - a receiver, back or tight end may start in it",
     "BN": "Bench - rostered that week, but not in the starting lineup",
     "IR": "Injured Reserve",
-    "QB": "Quarterback",
-    "RB": "Running back",
-    "WR": "Wide receiver",
-    "TE": "Tight end",
-    "DEF": "Team defense",
     "MVP": "Most Valuable Player",
 }
-# Whole-token match: "PA" must not fire inside "PART", and "TE" must not fire
-# inside a player's name. Slashes are excluded on both sides so "W/R/T" matches
-# as one token while "R" and "T" alone never do.
+# Roster positions (QB/RB/WR/TE/DEF) are deliberately absent: not jargon here,
+# and a tooltip on every position cell is noise.
+#
+# Whole-token match: "PA" must not fire inside "PART". Slashes are excluded on
+# both sides so "W/R/T" matches as one token while "R" and "T" alone never do.
 _GLOSSARY_RES = {
     term: re.compile(rf"(?<![\w/]){re.escape(term)}(?![\w/])")
     for term in GLOSSARY

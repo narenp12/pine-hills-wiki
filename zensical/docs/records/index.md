@@ -181,9 +181,4 @@ Championships, playoff and Finals single-game records, career playoff leaders an
 
 - [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Lore](../lore.md) · [Champions](../champions.md)
 
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

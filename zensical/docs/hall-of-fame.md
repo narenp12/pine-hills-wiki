@@ -171,9 +171,4 @@ alone. Every other position is inducted on a whole career.
 
 - [Awards](awards.md) · [Records](records/index.md) · [Players](players/index.md) · [Champions](champions.md) · [Seasons](seasons/index.md)
 
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player

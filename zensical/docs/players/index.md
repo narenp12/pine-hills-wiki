@@ -654,9 +654,3 @@ still occupied one.
 ## Related
 
 - [Teams](../teams/index.md) · [Owners](../owners/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)
-
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense

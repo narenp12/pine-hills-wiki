@@ -55,7 +55,7 @@ flowchart LR
 
 Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Curry's legit team"
+??? abstract "Curry's legit team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -96,7 +96,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Devin Singletary](../players/devin-singletary.md) | RB | 5.80 |
     | BN | [Mike Boone](../players/mike-boone.md) | RB | 4.30 |
 
-??? note "Ju Let The Dogs Out"
+??? abstract "Ju Let The Dogs Out"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -137,7 +137,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [49ers](../players/49ers.md) | DEF | 7.00 |
     | BN | [DJ Moore](../players/dj-moore.md) | WR | 1.10 |
 
-??? note "Kaushal's Potatoes"
+??? abstract "Kaushal's Potatoes"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -178,7 +178,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [James White](../players/james-white.md) | RB | 6.90 |
     | BN | [DJ Chark](../players/dj-chark.md) | WR | 3.80 |
 
-??? note "Super Squirrels"
+??? abstract "Super Squirrels"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -219,7 +219,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Todd Gurley](../players/todd-gurley.md) | RB | 16.80 |
     | BN | [Dalvin Cook](../players/dalvin-cook.md) | RB | 0.00 |
 
-??? note "Sharman's Scorpions"
+??? abstract "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -260,7 +260,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Calvin Ridley](../players/calvin-ridley.md) | WR | 0.00 |
     | BN | [DK Metcalf](../players/dk-metcalf.md) | WR | 0.00 |
 
-??? note "Anish's Awesome Team"
+??? abstract "Anish's Awesome Team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -301,7 +301,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Zach Pascal](../players/zach-pascal.md) | WR | 1.60 |
     | BN | [Alshon Jeffery](../players/alshon-jeffery.md) | WR | 0.00 |
 
-??? note "CHOPSTIX"
+??? abstract "CHOPSTIX"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -341,7 +341,7 @@ Post-draft and end-of-season lineups as the league's platform recorded them. Ben
     | BN | [Christian Kirk](../players/christian-kirk.md) | WR | 0.90 |
     | BN | [Jordan Howard](../players/jordan-howard.md) | RB | 0.00 |
 
-??? note "Roger That"
+??? abstract "Roger That"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -435,9 +435,4 @@ Every award is computed rather than voted. Full definitions are on [Awards](../a
 *[W/R/T]: Flex slot - a receiver, back or tight end may start in it
 *[BN]: Bench - rostered that week, but not in the starting lineup
 *[IR]: Injured Reserve
-*[QB]: Quarterback
-*[RB]: Running back
-*[WR]: Wide receiver
-*[TE]: Tight end
-*[DEF]: Team defense
 *[MVP]: Most Valuable Player
