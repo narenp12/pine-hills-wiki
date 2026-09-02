@@ -33,6 +33,7 @@ import math
 import os
 import re
 import sys
+import textwrap
 from collections import Counter
 from pathlib import Path
 
@@ -3610,6 +3611,47 @@ def lore_entries(bible: dict, key: str) -> list:
     )
 
 
+# Admonition bodies are indented four spaces, so 76 keeps the line at 80.
+LORE_WRAP = 76
+# A paragraph holding any of these is Markdown whose line breaks carry meaning:
+# list items, headings, quotes, tables, code fences. Joining those lines would
+# turn a list into one run-on sentence, so such a block is passed through.
+STRUCTURED_LINE = re.compile(r"^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>|\||```|    \S)")
+
+
+def wrap_story(story: str) -> list:
+    """A lore story as indented lines, re-wrapped paragraph by paragraph.
+
+    A contributor should be able to paste a story as one long line, or wrap it
+    wherever their editor happens to, and get the same tidy page either way.
+    Blank lines separate paragraphs; every other line break in prose is a soft
+    break Markdown would collapse anyway, so it is not preserved.
+    """
+    out = []
+    for index, paragraph in enumerate(re.split(r"\n\s*\n", story.strip())):
+        lines = [line for line in paragraph.splitlines() if line.strip()]
+        if not lines:
+            continue
+        if index:
+            out.append("")
+        if any(STRUCTURED_LINE.match(line) for line in lines):
+            out.extend(f"    {line.rstrip()}" for line in lines)
+            continue
+        # Never split a word: a Markdown link is one "word" with no spaces in
+        # it, and breaking one mid-URL would render the raw text instead.
+        out.extend(
+            textwrap.wrap(
+                " ".join(" ".join(lines).split()),
+                width=LORE_WRAP,
+                initial_indent="    ",
+                subsequent_indent="    ",
+                break_long_words=False,
+                break_on_hyphens=False,
+            )
+        )
+    return out
+
+
 def lore_blocks(entries: list, empty: str, kind: str = "note") -> str:
     """Render lore entries as collapsible admonitions.
 
@@ -3650,8 +3692,7 @@ def lore_blocks(entries: list, empty: str, kind: str = "note") -> str:
             names = ", ".join(team_link(str(name)) for name in involved)
             out.append(f"    **Involved:** {names}")
             out.append("")
-        for line in str(entry.get("story") or TBD).strip().splitlines():
-            out.append(f"    {line}".rstrip())
+        out.extend(wrap_story(str(entry.get("story") or TBD)))
         out.append("")
     return "\n".join(out)
 

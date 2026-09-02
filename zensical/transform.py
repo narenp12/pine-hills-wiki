@@ -136,6 +136,11 @@ def build_title_map(src: Path) -> dict[str, str]:
     return m
 
 
+def heading_slug(text: str) -> str:
+    """A heading's anchor id, as the Markdown renderer generates it."""
+    return re.sub(r"[^a-z0-9]+", "-", _norm(text)).strip("-")
+
+
 def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
     cur_dir = Path(cur_rel).parent
 
@@ -145,6 +150,9 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
             target, display = inner.split("|", 1)
         else:
             target, display = inner, inner
+        # `[[2018 Season#Playoff Bracket]]` lands on the section, not the page
+        # top. The display half keeps the "#" so an un-aliased link still reads.
+        target, _, anchor = target.partition("#")
         target = target.strip()
         display = display.strip()
         key = _norm(target)
@@ -161,6 +169,8 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
         rel = rel.as_posix()
         if not rel.endswith(".md"):
             rel += ".md"
+        if anchor:
+            rel += f"#{heading_slug(anchor)}"
         return f"[{display}]({rel})"
 
     out = WIKILINK_RE.sub(repl, text)
