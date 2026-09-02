@@ -698,8 +698,10 @@ Expected: eight rows, each with `weeks_with_rosters` of at least 10 and `player_
 
 - [ ] **Step 4: Commit the data**
 
+`-f` is required: the root `.gitignore` has a bare `raw/` entry, so a plain `git add` silently stages nothing.
+
 ```bash
-git add raw/20*.json
+git add -f raw/20*.json
 git commit -m "data: weekly rosters with player points, 2018-2025"
 ```
 
@@ -1608,5 +1610,15 @@ git commit -m "docs: describe the roster harvest and player records"
 **Task 1 blocks everything.** If the nested endpoint is rejected, Task 5's fallback doubles the request count and Task 3's parser needs a join step. Do not start Task 5 before Task 1 reports a winning path.
 
 **Task 6 is a data run, not code.** It takes ~22 minutes and needs the logged-in Edge session from Task 1 still open.
+
+**`raw/` is gitignored and `raw/*.json` is untracked.** The root `.gitignore` has a bare `raw/` entry, which overrides the comment in `scraper/.gitignore` claiming the generated JSON is committed. A fresh worktree therefore starts with an empty `raw/`, and `--from-v2` merges onto `{}` instead of onto the existing season files. The v2 harvest does not fetch draft results, so **rebuilding without the existing `raw/*.json` present silently destroys all 1,400+ draft picks** — and the merge's own `picks_before == picks_after` guard cannot catch it, because 0 equals 0. Copy `raw/*.json` and `raw/bible.yaml` into any new worktree before running Task 6, and confirm with:
+
+```bash
+python3 -c "import json;print(len(json.load(open('raw/2025.json'))['draft']['draft_results']))"
+```
+
+Expected: `180`. Task 6's audit script prints `picks=` per season for the same reason — a zero there means the merge started from nothing.
+
+**Task 6 commits `raw/20*.json` with `git add`, which the ignore rule blocks.** Use `git add -f raw/20*.json`, or the roster data never leaves the worktree.
 
 **The never-fabricate rule holds throughout.** Unmatched draft picks keep a blank position, seasons without roster data render `_TBD_`, and every computed award prints its formula.
