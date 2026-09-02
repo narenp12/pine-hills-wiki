@@ -1008,6 +1008,96 @@ def playoff_bracket(seeded: list[tuple[int, str]], champion: str) -> str:
 # --------------------------------------------------------------------------- #
 # page generators
 # --------------------------------------------------------------------------- #
+# Yahoo's slot vocabulary, in the order a lineup card reads. Anything unknown
+# sorts after the named slots but still above the bench.
+ROSTER_SLOT_ORDER = [
+    "QB", "RB", "WR", "TE", "W/R", "W/T", "W/R/T", "Q/W/R/T", "K", "DEF", "D/ST",
+]
+BENCH_SLOTS = {"BN", "IR"}
+
+
+def roster_snapshot_weeks(season_data: dict) -> tuple:
+    """(first, last) week that actually has rosters, or (None, None).
+
+    Discovered, never assumed: 2018 ran weeks 3-16 while later seasons ran 1-17,
+    and a mid-season week is empty if its harvest file was missing.
+    """
+    weeks = season_data.get("weeks") or {}
+    have = sorted(int(w) for w, v in weeks.items() if (v or {}).get("rosters"))
+    if not have:
+        return (None, None)
+    return (have[0], have[-1])
+
+
+def roster_table(roster: dict) -> list[str]:
+    """Markdown rows for one team's roster snapshot, starters first."""
+    players = (roster or {}).get("players") or []
+
+    def sort_key(player):
+        slot = player.get("slot") or ""
+        if slot in BENCH_SLOTS:
+            rank = len(ROSTER_SLOT_ORDER) + 1
+        elif slot in ROSTER_SLOT_ORDER:
+            rank = ROSTER_SLOT_ORDER.index(slot)
+        else:
+            rank = len(ROSTER_SLOT_ORDER)
+        # Within a slot, the bigger week takes the higher row.
+        return (rank, -float(player.get("points") or 0.0), player.get("name") or "")
+
+    rows = ["| Slot | Player | Pos | Pts |", "|------|--------|-----|-----|"]
+    for player in sorted(players, key=sort_key):
+        rows.append(
+            f"| {player.get('slot') or '—'} "
+            f"| {player.get('name') or TBD} "
+            f"| {player.get('position') or '—'} "
+            f"| {_fmt_score(player.get('points'))} |"
+        )
+    return rows
+
+
+def team_roster_blocks(season_data: dict, teams: list[dict]) -> str:
+    """One collapsed admonition per team, holding both roster snapshots."""
+    first, last = roster_snapshot_weeks(season_data)
+    if first is None:
+        return "_TBD — no roster data captured for this season._"
+
+    weeks = season_data.get("weeks") or {}
+
+    def roster_for(week, name):
+        return ((weeks.get(str(week)) or {}).get("rosters") or {}).get(name)
+
+    out: list[str] = []
+    for team in teams:
+        name = team.get("name") or "?"
+        snapshots = [
+            ("Post-draft", first, roster_for(first, name)),
+            ("End of season", last, roster_for(last, name)),
+        ]
+        if not any(roster for _, _, roster in snapshots):
+            continue
+        out.append(f'??? note "{name}"')
+        for label, week, roster in snapshots:
+            if not roster:
+                continue
+            out.append(f"    **{label} — week {week}**")
+            out.append("")
+            out.extend("    " + line for line in roster_table(roster))
+            out.append("")
+    return "\n".join(out) if out else "_TBD — no roster data captured for this season._"
+
+
+def roster_cell(year: int, season_data: dict) -> str:
+    """Season-log cell: a link to the year's roster blocks, or _TBD_.
+
+    Sixteen names will not fit in a table cell and there are no player pages, so
+    the column's job is navigation.
+    """
+    first, _ = roster_snapshot_weeks(season_data)
+    if first is None:
+        return TBD
+    return wikilink(f"{year} Season")
+
+
 def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> str:
     teams = standings_teams(season_data)
     owners = get_owners(bible)
@@ -1060,6 +1150,8 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
     if not bracket:
         bracket = playoff_bracket(seeded, champion)
 
+    roster_blocks = team_roster_blocks(season_data, teams)
+
     # Flag the page as unfinished while the bible has no champion for the year.
     # `status` renders the badge configured in zensical.toml.
     status_line = "status: incomplete\n" if champion == TBD else ""
@@ -1094,8 +1186,9 @@ year: {year}
 
 ## Team Rosters
 
-| Team | Post-Draft Roster | End-of-Season Roster |
-|------|-------------------|----------------------|
+> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+
+{roster_blocks}
 
 ## Awards
 
