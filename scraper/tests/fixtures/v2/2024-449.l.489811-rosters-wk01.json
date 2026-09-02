@@ -1,0 +1,1153 @@
+{
+ "fantasy_content": {
+  "xml:lang": "en-US",
+  "yahoo:uri": "/fantasy/v2/league/449.l.489811/teams/roster;week=1/players/stats;type=week;week=1",
+  "league": {
+   "league_key": "449.l.489811",
+   "league_id": "489811",
+   "name": "Pine Hills",
+   "url": "https://football.fantasysports.yahoo.com/2024/f1/489811",
+   "recordbook_url": "https://football.fantasysports.yahoo.com/2024/f1/489811/recordbook?layout=webview&device=smartphone",
+   "logo_url": null,
+   "password": null,
+   "draft_status": "postdraft",
+   "num_teams": 12,
+   "max_teams": "18",
+   "edit_key": "17",
+   "weekly_deadline": null,
+   "roster_type": "week",
+   "league_update_timestamp": "1736409510",
+   "scoring_type": "head",
+   "scoring_label": "H2H",
+   "league_type": "private",
+   "renew": "423_21996",
+   "renewed": "461_484479",
+   "felo_tier": "silver",
+   "is_highscore": null,
+   "is_guillotine": "0",
+   "matchup_week": 17,
+   "iris_group_chat_id": null,
+   "short_invitation_url": "https://football.fantasysports.yahoo.com/2024/f1/489811/invitation?key=376a3bfea8da9547&ikey=adec5b7d6c34c749",
+   "allow_add_to_dl_extra_pos": 1,
+   "is_pro_league": "0",
+   "is_cash_league": "0",
+   "current_week": "17",
+   "start_week": "1",
+   "start_date": "2024-09-05",
+   "end_week": "17",
+   "end_date": "2024-12-30",
+   "is_finished": 1,
+   "is_plus_league": "0",
+   "game_code": "nfl",
+   "season": "2024",
+   "teams": [
+    {
+     "team": {
+      "team_key": "449.l.489811.t.1",
+      "team_id": "1",
+      "name": "Kamara\u2019s a b*tch",
+      "is_owned_by_current_login": 1,
+      "url": "https://football.fantasysports.yahoo.com/2024/f1/489811/1",
+      "team_logos": [
+       {
+        "team_logo": {
+         "size": "large",
+         "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/6ef254fdb8de21dc8b3fe2218452f23c60881d71329ab0c1578c94d8011d6609.png"
+        }
+       }
+      ],
+      "previous_season_team_rank": 2,
+      "waiver_priority": 12,
+      "number_of_moves": 53,
+      "number_of_trades": "2",
+      "roster_adds": {
+       "coverage_type": "week",
+       "coverage_value": 18,
+       "value": "0"
+      },
+      "clinched_playoffs": 1,
+      "league_scoring_type": "head",
+      "has_draft_grade": 1,
+      "draft_grade": "D+",
+      "draft_recap_url": "https://football.fantasysports.yahoo.com/2024/f1/489811/1/draftrecap",
+      "managers": [
+       {
+        "manager": {
+         "manager_id": "1",
+         "nickname": "Naren",
+         "guid": "645RCRLFI6GUND6VVTAVA66HTA",
+         "is_commissioner": "1",
+         "is_current_login": "1",
+         "image_url": "https://s.yimg.com/ag/images/4579/38342316612_9e0214_64sq.jpg",
+         "felo_score": "816",
+         "felo_tier": "platinum"
+        }
+       }
+      ],
+      "roster": {
+       "coverage_type": "week",
+       "week": "1",
+       "is_prescoring": 0,
+       "is_editable": 0,
+       "players": [
+        {
+         "player": {
+          "player_key": "449.p.32723",
+          "player_id": "32723",
+          "name": {
+           "full": "Jalen Hurts",
+           "first": "Jalen",
+           "last": "Hurts",
+           "ascii_first": "Jalen",
+           "ascii_last": "Hurts"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/32723",
+          "editorial_player_key": "nfl.p.32723",
+          "editorial_team_key": "nfl.t.21",
+          "editorial_team_full_name": "Philadelphia Eagles",
+          "editorial_team_abbr": "Phi",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/philadelphia/",
+          "bye_weeks": {
+           "week": "5"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "1",
+          "display_position": "QB",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/rxsu3cY0VkambYSUhFcSwA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212026/32723.1.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/rxsu3cY0VkambYSUhFcSwA--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08212026/32723.1.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "QB",
+          "eligible_positions": [
+           {
+            "position": "QB"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "WR"
+           },
+           {
+            "position": "RB"
+           },
+           {
+            "position": "TE"
+           }
+          ],
+          "has_player_notes": 1,
+          "has_recent_player_notes": 1,
+          "player_notes_last_timestamp": 1788280017,
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "QB",
+           "is_flex": 0
+          },
+          "is_editable": 0,
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "278"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "2"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "2"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "13"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "33"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "1"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "18.42"
+          }
+         }
+        },
+        {
+         "player": {
+          "player_key": "449.p.32704",
+          "player_id": "32704",
+          "name": {
+           "full": "Michael Pittman Jr.",
+           "first": "Michael",
+           "last": "Pittman Jr.",
+           "ascii_first": "Michael",
+           "ascii_last": "Pittman Jr."
+          },
+          "url": "https://sports.yahoo.com/nfl/players/32704",
+          "status": "Q",
+          "status_full": "Questionable",
+          "injury_note": "Back",
+          "editorial_player_key": "nfl.p.32704",
+          "editorial_team_key": "nfl.t.23",
+          "editorial_team_full_name": "Pittsburgh Steelers",
+          "editorial_team_abbr": "Pit",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/pittsburgh/",
+          "bye_weeks": {
+           "week": "9"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "11",
+          "display_position": "WR",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/RbfOdQEOZa.kBRGSNDS2OQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/03132026/32704.1.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/RbfOdQEOZa.kBRGSNDS2OQ--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/03132026/32704.1.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "WR",
+          "eligible_positions": [
+           {
+            "position": "WR"
+           },
+           {
+            "position": "W/R/T"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "QB"
+           },
+           {
+            "position": "RB"
+           },
+           {
+            "position": "TE"
+           }
+          ],
+          "has_player_notes": 1,
+          "player_notes_last_timestamp": 1788203846,
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "WR",
+           "is_flex": 0
+          },
+          "is_editable": 0,
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "4"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "31"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "8"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "7.10"
+          }
+         }
+        },
+        {
+         "player": {
+          "player_key": "449.p.32803",
+          "player_id": "32803",
+          "name": {
+           "full": "Colby Parkinson",
+           "first": "Colby",
+           "last": "Parkinson",
+           "ascii_first": "Colby",
+           "ascii_last": "Parkinson"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/32803",
+          "editorial_player_key": "nfl.p.32803",
+          "editorial_team_key": "nfl.t.14",
+          "editorial_team_full_name": "Los Angeles Rams",
+          "editorial_team_abbr": "LAR",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/la-rams/",
+          "bye_weeks": {
+           "week": "6"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "84",
+          "display_position": "TE",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/FQxKC1SbTwUX062vVJh3_A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/32803.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/FQxKC1SbTwUX062vVJh3_A--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08252025/32803.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "TE",
+          "eligible_positions": [
+           {
+            "position": "TE"
+           },
+           {
+            "position": "W/R/T"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "QB"
+           },
+           {
+            "position": "WR"
+           },
+           {
+            "position": "RB"
+           }
+          ],
+          "has_player_notes": 1,
+          "player_notes_last_timestamp": 1787586852,
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "BN",
+           "is_flex": 0
+          },
+          "is_editable": 0,
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "4"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "47"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "5"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "8.70"
+          }
+         }
+        }
+       ],
+       "players:attributes": {
+        "count": 17
+       }
+      }
+     }
+    },
+    {
+     "team": {
+      "team_key": "449.l.489811.t.2",
+      "team_id": "2",
+      "name": "Joe Sheisty",
+      "url": "https://football.fantasysports.yahoo.com/2024/f1/489811/2",
+      "team_logos": [
+       {
+        "team_logo": {
+         "size": "large",
+         "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/965c68152ed258b202f5020bb4dd2f4c36de855cc3d2396b79a5e7fd3992c62b.jpg"
+        }
+       }
+      ],
+      "previous_season_team_rank": 5,
+      "waiver_priority": 9,
+      "number_of_moves": 13,
+      "number_of_trades": 0,
+      "roster_adds": {
+       "coverage_type": "week",
+       "coverage_value": 18,
+       "value": "0"
+      },
+      "clinched_playoffs": 1,
+      "league_scoring_type": "head",
+      "has_draft_grade": 1,
+      "draft_grade": "B",
+      "draft_recap_url": "https://football.fantasysports.yahoo.com/2024/f1/489811/2/draftrecap",
+      "managers": [
+       {
+        "manager": {
+         "manager_id": "2",
+         "nickname": "Anish",
+         "guid": "2LXUIR6NL5VAOBHHP2SS7VXTUQ",
+         "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+         "felo_score": "713",
+         "felo_tier": "gold"
+        }
+       }
+      ],
+      "roster": {
+       "coverage_type": "week",
+       "week": "1",
+       "is_prescoring": 0,
+       "is_editable": 0,
+       "players": [
+        {
+         "player": {
+          "player_key": "449.p.32671",
+          "player_id": "32671",
+          "name": {
+           "full": "Joe Burrow",
+           "first": "Joe",
+           "last": "Burrow",
+           "ascii_first": "Joe",
+           "ascii_last": "Burrow"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/32671",
+          "editorial_player_key": "nfl.p.32671",
+          "editorial_team_key": "nfl.t.4",
+          "editorial_team_full_name": "Cincinnati Bengals",
+          "editorial_team_abbr": "Cin",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/cincinnati/",
+          "bye_weeks": {
+           "week": "12"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "9",
+          "display_position": "QB",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/VnU.xoV9ZxUJeMYKyjssZg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122026/32671.1.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/VnU.xoV9ZxUJeMYKyjssZg--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122026/32671.1.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "QB",
+          "eligible_positions": [
+           {
+            "position": "QB"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "WR"
+           },
+           {
+            "position": "RB"
+           },
+           {
+            "position": "TE"
+           }
+          ],
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "QB",
+           "is_flex": 0
+          },
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "164"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "4"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "15"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "8.06"
+          }
+         }
+        },
+        {
+         "player": {
+          "player_key": "449.p.33393",
+          "player_id": "33393",
+          "name": {
+           "full": "Ja'Marr Chase",
+           "first": "Ja'Marr",
+           "last": "Chase",
+           "ascii_first": "Ja'Marr",
+           "ascii_last": "Chase"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/33393",
+          "editorial_player_key": "nfl.p.33393",
+          "editorial_team_key": "nfl.t.4",
+          "editorial_team_full_name": "Cincinnati Bengals",
+          "editorial_team_abbr": "Cin",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/cincinnati/",
+          "bye_weeks": {
+           "week": "12"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "1",
+          "display_position": "WR",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/8DFQtQd4gJsvWGpzq0rbag--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122026/33393.1.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/8DFQtQd4gJsvWGpzq0rbag--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/08122026/33393.1.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "WR",
+          "eligible_positions": [
+           {
+            "position": "WR"
+           },
+           {
+            "position": "W/R/T"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "QB"
+           },
+           {
+            "position": "RB"
+           },
+           {
+            "position": "TE"
+           }
+          ],
+          "has_player_notes": 1,
+          "has_recent_player_notes": 1,
+          "player_notes_last_timestamp": 1788285708,
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "WR",
+           "is_flex": 0
+          },
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "6"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "62"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "6"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "12.20"
+          }
+         }
+        },
+        {
+         "player": {
+          "player_key": "449.p.40899",
+          "player_id": "40899",
+          "name": {
+           "full": "Malik Nabers",
+           "first": "Malik",
+           "last": "Nabers",
+           "ascii_first": "Malik",
+           "ascii_last": "Nabers"
+          },
+          "url": "https://sports.yahoo.com/nfl/players/40899",
+          "editorial_player_key": "nfl.p.40899",
+          "editorial_team_key": "nfl.t.19",
+          "editorial_team_full_name": "New York Giants",
+          "editorial_team_abbr": "NYG",
+          "editorial_team_url": "https://sports.yahoo.com/nfl/teams/ny-giants/",
+          "bye_weeks": {
+           "week": "11"
+          },
+          "is_keeper": {
+           "status": null,
+           "cost": null,
+           "kept": null
+          },
+          "uniform_number": "1",
+          "display_position": "WR",
+          "headshot": {
+           "url": "https://s.yimg.com/iu/api/res/1.2/Df0fqJ37.bWIf7UIcdW35g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09092025/40899.png",
+           "size": "small"
+          },
+          "image_url": "https://s.yimg.com/iu/api/res/1.2/Df0fqJ37.bWIf7UIcdW35g--~C/YXBwaWQ9eXNwb3J0cztjaD0yMzM2O2NyPTE7Y3c9MTc5MDtkeD04NTc7ZHk9MDtmaT11bGNyb3A7aD02MDtxPTEwMDt3PTQ2/https://s.yimg.com/xe/i/us/sp/v/nfl_cutout/players_l/09092025/40899.png",
+          "is_undroppable": "0",
+          "position_type": "O",
+          "primary_position": "WR",
+          "eligible_positions": [
+           {
+            "position": "WR"
+           },
+           {
+            "position": "W/R/T"
+           }
+          ],
+          "eligible_positions_to_add": [
+           {
+            "position": "QB"
+           },
+           {
+            "position": "RB"
+           },
+           {
+            "position": "TE"
+           }
+          ],
+          "has_player_notes": 1,
+          "has_recent_player_notes": 1,
+          "player_notes_last_timestamp": 1788292227,
+          "selected_position": {
+           "coverage_type": "week",
+           "week": "1",
+           "position": "BN",
+           "is_flex": 0
+          },
+          "player_stats": {
+           "coverage_type": "week",
+           "week": "1",
+           "stats": [
+            {
+             "stat": {
+              "stat_id": "4",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "5",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "6",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "8",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "9",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "10",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "11",
+              "value": "5"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "12",
+              "value": "66"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "13",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "14",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "15",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "16",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "18",
+              "value": "0"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "78",
+              "value": "7"
+             }
+            },
+            {
+             "stat": {
+              "stat_id": "57",
+              "value": "0"
+             }
+            }
+           ]
+          },
+          "player_points": {
+           "coverage_type": "week",
+           "week": "1",
+           "total": "11.60"
+          }
+         }
+        }
+       ],
+       "players:attributes": {
+        "count": 15
+       }
+      }
+     }
+    }
+   ],
+   "teams:attributes": {
+    "count": 12
+   }
+  },
+  "@time": "384.5739364624ms",
+  "@copyright": "Certain Data by Sportradar, Stats Perform and Rotowire",
+  "@refresh_rate": "30"
+ }
+}

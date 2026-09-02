@@ -251,3 +251,53 @@ fn bracket_is_none_without_a_champion() {
     assert!(phf_scraper::parse_v2::derive_bracket(&weeks, "").is_none());
     assert!(phf_scraper::parse_v2::derive_bracket(&weeks, "Nobody").is_none());
 }
+
+#[test]
+fn parses_rosters_with_slots_and_points() {
+    let text = read("2024-449.l.489811-rosters-wk01.json");
+    let (week, rosters) = phf_scraper::parse_v2::parse_rosters(&text).expect("parse rosters");
+
+    assert_eq!(week, 1);
+    assert_eq!(rosters.len(), 2, "one entry per team in the fixture");
+
+    // Keyed by team NAME, which is the key model_contract.rs locks and the key
+    // generate.py joins on — the generator never sees Yahoo's team keys.
+    let (name, roster) = rosters.iter().next().expect("at least one team");
+    assert!(!name.is_empty(), "team key must be the team name, not empty");
+    assert_eq!(roster.players.len(), 3);
+
+    let starter = roster
+        .players
+        .iter()
+        .find(|p| p.slot != "BN")
+        .expect("fixture has a starter");
+    assert!(!starter.name.is_empty(), "player name populated");
+    assert!(!starter.position.is_empty(), "primary position populated");
+    assert!(starter.points > 0.0, "weekly points parsed from a string");
+
+    // The bench row is the whole reason slot exists.
+    assert!(
+        roster.players.iter().any(|p| p.slot == "BN"),
+        "fixture must include a benched player"
+    );
+}
+
+/// REGRESSION: `build_from_v2` overwrites only the keys it lists as authoritative.
+/// Rosters live under `weeks`, so omitting that key from the list means every
+/// rebuild silently drops them — the same failure mode the draft-pick guard exists
+/// to catch, except the guard cannot see this one.
+#[test]
+fn weeks_is_authoritative_in_the_merge() {
+    let src = std::fs::read_to_string(
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("src/main.rs"),
+    )
+    .expect("read main.rs");
+    let start = src
+        .find("// Exactly the keys the v2 path is authoritative for.")
+        .expect("authoritative key list comment");
+    let list = &src[start..start + 400];
+    assert!(
+        list.contains("\"weeks\""),
+        "\"weeks\" must be in the authoritative key list or rosters are dropped on rebuild"
+    );
+}

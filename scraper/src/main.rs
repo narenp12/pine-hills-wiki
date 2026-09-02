@@ -128,6 +128,9 @@ fn build_from_v2(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors) -
             "matchups",
             "champions",
             "bracket",
+            // Rosters live here. Without it every rebuild drops them, the same
+            // way omitting "draft" would drop the picks.
+            "weeks",
         ] {
             match fresh.get(k) {
                 Some(v) => {

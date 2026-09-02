@@ -12,7 +12,7 @@
 use anyhow::{Context, Result};
 use serde_json::Value;
 
-use crate::model::{Champions, MatchTeam, Matchup, Season, Team};
+use crate::model::{Champions, MatchTeam, Matchup, Roster, RosterPlayer, Season, Team};
 
 /// Yahoo returns numbers as JSON strings in most places but as bare numbers in a
 /// few (`rank`, `ties`). Accept either.
@@ -330,15 +330,72 @@ pub fn derive_bracket(
     Some(Bracket { games })
 }
 
+/// Parse a `league/<key>/teams/roster;week=N/players/stats` payload.
+///
+/// Returns `(week, team_name -> Roster)`. Keyed by NAME rather than Yahoo's
+/// `team_key` because that is what `model_contract.rs` locks and what
+/// generate.py joins against -- the generator never sees Yahoo's keys.
+///
+/// The week is read from the payload's own echo rather than the filename, so a
+/// mislabeled file cannot silently land a week's rosters under the wrong number.
+pub fn parse_rosters(json: &str) -> Result<(i64, std::collections::BTreeMap<String, Roster>)> {
+    let doc: Value = serde_json::from_str(json).context("roster payload is not valid JSON")?;
+    let league = doc
+        .pointer("/fantasy_content/league")
+        .context("no fantasy_content.league in roster payload")?;
+    let teams = league
+        .pointer("/teams")
+        .and_then(Value::as_array)
+        .context("no league.teams array in roster payload")?;
+
+    let mut week = 0_i64;
+    let mut out = std::collections::BTreeMap::new();
+
+    for entry in teams {
+        let t = unwrap_entry(entry, "team");
+        let name = as_str(&t["name"]);
+        if name.is_empty() {
+            continue;
+        }
+        let roster = &t["roster"];
+        // Every team echoes the same week; take the first non-zero one.
+        if week == 0 {
+            week = as_i64(&roster["week"]);
+        }
+        let players = roster
+            .pointer("/players")
+            .and_then(Value::as_array)
+            .map(Vec::as_slice)
+            .unwrap_or(&[]);
+
+        let mut parsed = Vec::with_capacity(players.len());
+        for pentry in players {
+            let p = unwrap_entry(pentry, "player");
+            parsed.push(RosterPlayer {
+                name: as_str(&p["name"]["full"]),
+                position: as_str(&p["primary_position"]),
+                slot: as_str(&p["selected_position"]["position"]),
+                // Yahoo sends this as a STRING ("18.42"); as_f64 accepts either.
+                points: as_f64(&p["player_points"]["total"]),
+            });
+        }
+        out.insert(name, Roster { players: parsed });
+    }
+
+    anyhow::ensure!(!out.is_empty(), "roster payload contained no teams");
+    Ok((week, out))
+}
+
 /// Build a `Season` from a directory of harvested v2 payloads.
 ///
 /// Files are named by `harvest_v2.py`:
 ///   `<season>-<league_key>-standings.json`
 ///   `<season>-<league_key>-scoreboard-wk<NN>.json`
+///   `<season>-<league_key>-rosters-wk<NN>.json`
 ///
-/// Only standings and matchups are filled here. Draft picks are NOT touched --
-/// the caller merges them from the existing rendered-page pipeline, which remains
-/// the only source for them.
+/// Standings, matchups and rosters are filled here. Draft picks are NOT touched
+/// -- the caller merges them from the existing rendered-page pipeline, which
+/// remains the only source for them.
 pub fn from_v2_dir(dir: &std::path::Path, season: u32, league_key: &str) -> Result<Season> {
     let mut s = Season {
         season,
@@ -388,6 +445,25 @@ pub fn from_v2_dir(dir: &std::path::Path, season: u32, league_key: &str) -> Resu
             s.playoffs.weeks.insert(week.to_string(), playoff_games);
         }
         s.matchups.insert(week.to_string(), ws.matchups);
+    }
+
+    // Rosters are a separate harvest file per week. Same discovery pattern as the
+    // scoreboards: read what is on disk rather than assuming a week range, since
+    // 2018 ran weeks 3-16 and later seasons 1-17.
+    for entry in std::fs::read_dir(dir).with_context(|| format!("reading {}", dir.display()))? {
+        let path = entry?.path();
+        let Some(fname) = path.file_name().and_then(|f| f.to_str()) else {
+            continue;
+        };
+        let prefix = format!("{season}-{league_key}-rosters-wk");
+        if !fname.starts_with(&prefix) || !fname.ends_with(".json") {
+            continue;
+        }
+        let text = std::fs::read_to_string(&path)
+            .with_context(|| format!("reading {}", path.display()))?;
+        let (week, rosters) =
+            parse_rosters(&text).with_context(|| format!("parsing {}", path.display()))?;
+        s.weeks.entry(week.to_string()).or_default().rosters = rosters;
     }
 
     if let Some(c) = &s.champions {
