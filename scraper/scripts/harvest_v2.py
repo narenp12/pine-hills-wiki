@@ -5,8 +5,11 @@ Uses the `pub-api-ro.fantasysports.yahoo.com` host discovered by observing the
 league page's own traffic (see probe_v2.py). Requests are issued from the fantasy
 page's JS context so session cookies and Origin match what Yahoo expects.
 
-Fetches, per season: one `standings` call + one `scoreboard;week=N` call for each
-week in the league's real start_week..end_week range (2018 starts at week 3).
+Fetches, per season: one `standings` call, plus a `scoreboard;week=N` and a
+`teams/roster;week=N/players/stats` call for each week in the league's real
+start_week..end_week range (2018 starts at week 3). Roster payloads are large
+(~1.8 MB per week), so expect dump/v2 to reach a few hundred MB. It is
+gitignored.
 
 RESUMABLE: an output file that already exists and parses as JSON is skipped, so a
 re-run after an interruption only fetches what is missing.
@@ -156,7 +159,7 @@ def main():
             })
     seasons.sort(key=lambda s: s["season"])
 
-    total = len(seasons) + sum(s["end"] - s["start"] + 1 for s in seasons)
+    total = len(seasons) + 2 * sum(s["end"] - s["start"] + 1 for s in seasons)
     print(f">> {len(seasons)} seasons of {want_name!r}; {total} requests max (cached ones skipped)")
 
     for s in seasons:
@@ -166,6 +169,11 @@ def main():
         for wk in range(s["start"], s["end"] + 1):
             get(conn, sid, f"league/{s['key']}/scoreboard;week={wk}",
                 os.path.join(outdir, f"{s['season']}-{s['key']}-scoreboard-wk{wk:02d}.json"), stats)
+            # Every team's roster AND that week's player points in one response.
+            # Shape confirmed by scripts/probe_rosters.py; ~1.8 MB per week.
+            get(conn, sid,
+                f"league/{s['key']}/teams/roster;week={wk}/players/stats;type=week;week={wk}",
+                os.path.join(outdir, f"{s['season']}-{s['key']}-rosters-wk{wk:02d}.json"), stats)
 
     send(conn, "Target.closeTarget", {"targetId": tid})
     conn.close()
