@@ -3,10 +3,10 @@ title: "Curry’s legit team"
 description: "Franchise history for Curry’s legit team in the Pine Hills Fantasy Football League."
 ---
 
-# 🏈 Curry’s legit team
+# Curry’s legit team
 
 <div class="infobox">
-  <div class="infobox-title">🏈 Curry’s legit team</div>
+  <div class="infobox-title">Curry’s legit team</div>
 <div class="infobox-row"><div class="label">Owner</div><div class="value"><a href="../owners/lokesh.md">lokesh</a></div></div>
 <div class="infobox-row"><div class="label">Joined</div><div class="value"><em class="tbd">TBD</em></div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
@@ -62,4 +62,4 @@ _TBD._
 
 ## Related
 
-- [Teams](index.md) · [Owners](../owners/index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span>
+- [Teams](index.md) · [Owners](../owners/index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · [Lore](../lore.md)

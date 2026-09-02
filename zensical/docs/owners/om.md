@@ -3,10 +3,10 @@ title: "Om"
 description: "Career record and franchises of Om in the Pine Hills Fantasy Football League."
 ---
 
-# 🧑 Om
+# Om
 
 <div class="infobox">
-  <div class="infobox-title">🧑 Om</div>
+  <div class="infobox-title">Om</div>
 <div class="infobox-row"><div class="label">Franchises</div><div class="value">1</div></div>
 <div class="infobox-row"><div class="label">Seasons</div><div class="value">2020</div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Former</div></div>
@@ -44,7 +44,7 @@ description: "Career record and franchises of Om in the Pine Hills Fantasy Footb
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than franchise, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|

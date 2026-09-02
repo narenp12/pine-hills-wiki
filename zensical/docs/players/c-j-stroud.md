@@ -1,0 +1,41 @@
+---
+title: "C.J. Stroud"
+description: "Every Pine Hills fantasy roster C.J. Stroud has appeared on, season by season."
+---
+
+# C.J. Stroud
+
+- **Position:** QB
+- **Seasons:** 2023-present
+- **Fantasy Teams:** 3
+
+## Career Summary
+
+- **Weeks Rostered:** 47 (19 started)
+- **Points in Lineup:** 287.98
+- **Points on the Bench:** 323.56
+- **Best Week:** 41.80 (benched) - 2023 Wk 9, [varun’s victorious team](../teams/varun-s-victorious-team.md)
+- **Times Drafted:** 2 (first: 2024 R5 P52)
+
+## Team History
+
+One row per franchise per season. Weeks counts roster spots rather than games
+played; lineup points exclude weeks spent on the bench.
+
+| Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
+|--------|------|-------|-----|-------|--------|---------------|-----------|
+| 2023 | [Stroud Boys](../teams/stroud-boys.md) | [Tanmay](../owners/tanmay.md) | QB | 8 | 2 | 46.92 | 30.86 - 2023 Wk 12 |
+| 2023 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | QB | 5 | 1 | 14.16 | 41.80 (benched) - 2023 Wk 9 |
+| 2024 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | QB | 17 | 13 | 189.58 | 23.50 - 2024 Wk 4 |
+| 2025 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | QB | 17 | 3 | 37.32 | 28.76 (benched) - 2025 Wk 5 |
+
+## Draft History
+
+| Year | Round | Overall | Drafted By |
+|------|-------|---------|------------|
+| 2024 | 5 | 52 | [Roger That](../teams/roger-that.md) |
+| 2025 | 7 | 80 | [varun’s victorious team](../teams/varun-s-victorious-team.md) |
+
+## Related
+
+- [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)

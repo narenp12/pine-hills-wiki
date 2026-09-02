@@ -1,0 +1,38 @@
+---
+title: "Rico Dowdle"
+description: "Every Pine Hills fantasy roster Rico Dowdle has appeared on, season by season."
+---
+
+# Rico Dowdle
+
+- **Position:** RB
+- **Seasons:** 2024-present
+- **Fantasy Teams:** 2
+
+## Career Summary
+
+- **Weeks Rostered:** 30 (20 started)
+- **Points in Lineup:** 282.40
+- **Points on the Bench:** 96.20
+- **Best Week:** 33.90 - 2025 Wk 6, [Big black big back](../teams/big-black-big-back.md)
+- **Times Drafted:** 1 (first: 2024 R11 P127)
+
+## Team History
+
+One row per franchise per season. Weeks counts roster spots rather than games
+played; lineup points exclude weeks spent on the bench.
+
+| Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
+|--------|------|-------|-----|-------|--------|---------------|-----------|
+| 2024 | [Joe Sheisty](../teams/joe-sheisty.md) | [Anish](../owners/anish.md) | RB | 17 | 12 | 145.60 | 21.70 - 2024 Wk 9 |
+| 2025 | [Big black big back](../teams/big-black-big-back.md) | [lokesh](../owners/lokesh.md) | RB | 13 | 8 | 136.80 | 33.90 - 2025 Wk 6 |
+
+## Draft History
+
+| Year | Round | Overall | Drafted By |
+|------|-------|---------|------------|
+| 2024 | 11 | 127 | [Joe Sheisty](../teams/joe-sheisty.md) |
+
+## Related
+
+- [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)

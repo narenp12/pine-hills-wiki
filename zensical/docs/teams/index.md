@@ -1,11 +1,12 @@
 ---
 title: Teams
+icon: lucide/users
 description: Franchise histories and owners of the Pine Hills Fantasy Football League.
 ---
 
-# 👥 Teams
+# Teams
 
-Every franchise in Pine Hills history. Each team page tracks the owner, season-by-season results, championships, and head-to-head records. Standings-derived stats are computed automatically; owners and titles come from the league bible. For career totals that follow a person across every team they have run, see [Owners](../owners/index.md).
+Every franchise in league history, with its owner, seasons active, and titles won. A franchise page carries the season log and head-to-head records. Career totals that follow a manager across franchises are on [Owners](../owners/index.md).
 
 ## Active & Historical Franchises
 
@@ -45,12 +46,3 @@ Every franchise in Pine Hills history. Each team page tracks the owner, season-b
 | [The Johnson and Johnson team](the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | 2021 | 0 |
 | [varun’s victorious team](varun-s-victorious-team.md) | [Varun](../owners/varun.md) | 2021-present | 1 |
 
-## Team Pages Should Include
-
-- **Owner & tenure** - who runs it, what years.
-- **Championships** - years won, runner-up finishes.
-- **Season log** - W-L and finish per year.
-- **Rivalries** - head-to-head record vs. nemesis teams.
-- **Signature moments** - the trade that defined them, the meltdown, the heater.
-
-> Building a new team page? Start from <span class="wiki-new" title="This page has not been written yet">Team Template</span>.

@@ -3,10 +3,10 @@ title: "Aneesh"
 description: "Career record and franchises of Aneesh in the Pine Hills Fantasy Football League."
 ---
 
-# 🧑 Aneesh
+# Aneesh
 
 <div class="infobox">
-  <div class="infobox-title">🧑 Aneesh</div>
+  <div class="infobox-title">Aneesh</div>
 <div class="infobox-row"><div class="label">Franchises</div><div class="value">1</div></div>
 <div class="infobox-row"><div class="label">Seasons</div><div class="value">2021</div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Former</div></div>
@@ -44,7 +44,7 @@ description: "Career record and franchises of Aneesh in the Pine Hills Fantasy F
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than franchise, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|

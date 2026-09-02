@@ -7,7 +7,7 @@ site_url = "https://narenp12.github.io/pine-hills-wiki"   # required for instant
 site_description = "The collaborative history of the Pine Hills Fantasy Football League."
 site_author = "Pine Hills League"
 # Plain hyphen, per the project's no-en/em-dash rule (zensical/transform.py).
-copyright = "&copy; 2018-2025 Pine Hills Fantasy Football League"
+copyright = "&copy; 2018-2026 Pine Hills Fantasy Football League"
 repo_url = "https://github.com/narenp12/pine-hills-wiki"
 repo_name = "narenp12/pine-hills-wiki"
 docs_dir = "docs"
@@ -25,14 +25,21 @@ nav = [
   { Seasons = "seasons/index.md" },
   { Teams = "teams/index.md" },
   { Owners = "owners/index.md" },
+  { Players = "players/index.md" },
   { Records = "records/index.md" },
+  { Awards = "awards.md" },
   { "Draft History" = "draft/index.md" },
   { Playoffs = "playoffs.md" },
   { Champions = "champions.md" },
+  { Lore = "lore.md" },
+  { History = "history.md" },
 ]
 
 # Custom CSS / JS are TOP-LEVEL [project] keys (not under [project.theme]).
 extra_css = [
+  # display=swap, not the theme's display=fallback: no block period, so text
+  # paints in the fallback face immediately instead of flashing blank.
+  "https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300..700;1,300..700&family=JetBrains+Mono:wght@400;700&display=swap",
   "stylesheets/zensical.css",
 ]
 # tablesort.js is self-contained; the unpkg tablesort bundle was loaded on every
@@ -65,8 +72,13 @@ features = [
   "announce.dismiss",
   "header.autohide",
 ]
-font.text = "Source Serif 4"
-font.code = "JetBrains Mono"
+# Fonts are NOT loaded through this key. The theme builds its Google Fonts URL
+# with `display=fallback`, whose ~100ms block period paints text invisible on a
+# cold load - the reason button and body text flashed blank on first paint. The
+# same families are requested from extra_css with `display=swap` instead, which
+# has no block period: the fallback face renders immediately and the webfont
+# swaps in when it arrives. Stacks live in zensical.css.
+font = false
 
 [[project.theme.palette]]
 scheme = "default"

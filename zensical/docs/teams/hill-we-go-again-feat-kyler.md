@@ -3,10 +3,10 @@ title: "Hill We Go… Again (feat Kyler)"
 description: "Franchise history for Hill We Go… Again (feat Kyler) in the Pine Hills Fantasy Football League."
 ---
 
-# 🏈 Hill We Go… Again (feat Kyler)
+# Hill We Go… Again (feat Kyler)
 
 <div class="infobox">
-  <div class="infobox-title">🏈 Hill We Go… Again (feat Kyler)</div>
+  <div class="infobox-title">Hill We Go… Again (feat Kyler)</div>
 <div class="infobox-row"><div class="label">Owner</div><div class="value"><a href="../owners/naren.md">Naren</a></div></div>
 <div class="infobox-row"><div class="label">Joined</div><div class="value"><em class="tbd">TBD</em></div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
@@ -61,4 +61,4 @@ _TBD._
 
 ## Related
 
-- [Teams](index.md) · [Owners](../owners/index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span>
+- [Teams](index.md) · [Owners](../owners/index.md) · [Seasons](../seasons/index.md) · [Records](../records/index.md) · [Lore](../lore.md)

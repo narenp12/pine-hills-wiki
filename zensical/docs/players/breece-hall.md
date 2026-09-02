@@ -1,0 +1,44 @@
+---
+title: "Breece Hall"
+description: "Every Pine Hills fantasy roster Breece Hall has appeared on, season by season."
+---
+
+# Breece Hall
+
+- **Position:** RB
+- **Seasons:** 2022-present
+- **Fantasy Teams:** 3
+- **Awards:** Finals MVP 2023 · Team of the Season 2023
+
+## Career Summary
+
+- **Weeks Rostered:** 62 (49 started)
+- **Points in Lineup:** 711.56
+- **Points on the Bench:** 95.40
+- **Best Week:** 43.10 - 2023 Wk 16 (Semifinal), [Super Squirrels](../teams/super-squirrels.md)
+- **Times Drafted:** 4 (first: 2022 R4 P32)
+
+## Team History
+
+One row per franchise per season. Weeks counts roster spots rather than games
+played; lineup points exclude weeks spent on the bench.
+
+| Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
+|--------|------|-------|-----|-------|--------|---------------|-----------|
+| 2022 | [Tanmay's Hospital](../teams/tanmay-s-hospital.md) | [Tanmay](../owners/tanmay.md) | RB | 11 | 2 | 33.30 | 27.70 (benched) - 2022 Wk 5 |
+| 2023 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 17 | 14 | 247.90 | 43.10 - 2023 Wk 16 (Semifinal) |
+| 2024 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 17 | 17 | 222.70 | 31.10 - 2024 Wk 11 |
+| 2025 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 17 | 16 | 207.66 | 32.86 - 2025 Wk 8 |
+
+## Draft History
+
+| Year | Round | Overall | Drafted By |
+|------|-------|---------|------------|
+| 2022 | 4 | 32 | [Tanmay's Hospital](../teams/tanmay-s-hospital.md) |
+| 2023 | 4 | 36 | [Super Squirrels](../teams/super-squirrels.md) |
+| 2024 | 1 | 4 | [Roger That](../teams/roger-that.md) |
+| 2025 | 4 | 48 | [Roger That](../teams/roger-that.md) |
+
+## Related
+
+- [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)

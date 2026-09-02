@@ -1,0 +1,40 @@
+---
+title: "Dustin Hopkins"
+description: "Every Pine Hills fantasy roster Dustin Hopkins has appeared on, season by season."
+---
+
+# Dustin Hopkins
+
+- **Position:** K
+- **Seasons:** 2018-2024
+- **Fantasy Teams:** 4
+
+## Career Summary
+
+- **Weeks Rostered:** 33 (20 started)
+- **Points in Lineup:** 176.00
+- **Points on the Bench:** 75.00
+- **Best Week:** 22.00 - 2023 Wk 7, [Stroud Boys](../teams/stroud-boys.md)
+- **Times Drafted:** 1 (first: 2024 R15 P172)
+
+## Team History
+
+One row per franchise per season. Weeks counts roster spots rather than games
+played; lineup points exclude weeks spent on the bench.
+
+| Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
+|--------|------|-------|-----|-------|--------|---------------|-----------|
+| 2018 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | K | 1 | 1 | 10.00 | 10.00 - 2018 Wk 8 |
+| 2021 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | K | 8 | 8 | 72.00 | 13.00 - 2021 Wk 14 |
+| 2023 | [Stroud Boys](../teams/stroud-boys.md) | [Tanmay](../owners/tanmay.md) | K | 11 | 11 | 94.00 | 22.00 - 2023 Wk 7 |
+| 2024 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | K | 13 | 0 | 0.00 | 13.00 (benched) - 2024 Wk 2 |
+
+## Draft History
+
+| Year | Round | Overall | Drafted By |
+|------|-------|---------|------------|
+| 2024 | 15 | 172 | [Roger That](../teams/roger-that.md) |
+
+## Related
+
+- [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)

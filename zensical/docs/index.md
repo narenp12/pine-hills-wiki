@@ -9,8 +9,8 @@ description: The collaborative history of the Pine Hills Fantasy Football League
 
 <div class="ph-hero">
   <div class="ph-hero__lead">
-    <h1>🏈 Pine Hills Fantasy Football League</h1>
-    <p>The community-run encyclopedia of the Pine Hills Fantasy Football League. Every season, franchise, champion, and record, kept by the league for the league.</p>
+    <h1>Pine Hills Fantasy Football League</h1>
+    <p>A record of every season, franchise, champion, player and game in the Pine Hills Fantasy Football League since 2018.</p>
     <a href="seasons/" class="md-button md-button--primary">Browse Seasons</a>
     <a href="teams/" class="md-button">Explore Teams</a>
     <a href="records/" class="md-button">All-Time Records</a>
@@ -22,13 +22,9 @@ description: The collaborative history of the Pine Hills Fantasy Football League
   </div>
 </div>
 
-> *"Where legends are made and trade offers are refused."*
+The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018**. This wiki records its seasons, franchises, managers, players, drafts and championships, computed from the league's captured Yahoo data.
 
-Welcome to the unofficial Wikipedia of the **Pine Hills Fantasy Football League (PHFFL)**, a living record of our seasons, champions, rivalries, and lore since **2018**.
-
-This wiki is community-maintained. Every page is Markdown, version-controlled, and deployed to GitHub Pages. Edit a page and open a pull request. Even the commissioner can't unilaterally rewrite history here.
-
-## 🏆 Champions by Year
+## Champions by Year
 
 <!-- champions-table:start -->
 | Year | Champion | Runner-Up | Top Seed |
@@ -43,18 +39,20 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 | 2018 | Curry’s legit team | Anish's Awesome Team | Sharman’s Scorpions |
 <!-- champions-table:end -->
 
-## 📚 Explore the Wiki
+## Explore the Wiki
 
 - **[Seasons](seasons/index.md)**: Year-by-year breakdowns, standings, playoffs, and awards.
 - **[Teams](teams/index.md)**: Franchise histories, owners, and head-to-head records.
+- **[Owners](owners/index.md)**: Career totals that follow a manager across every franchise they have run.
+- **[Players](players/index.md)**: Every player ever rostered, and the teams that held them.
 - **[Records](records/index.md)**: All-time leaders, single-season feats, and dubious achievements.
 - **[Draft History](draft/index.md)**: Every pick, every reach, every steal.
-- **<span class="wiki-new" title="This page has not been written yet">Lore</span>**: The controversies, the curses, the group-chat meltdowns.
+- **[Lore](lore.md)**: The controversies, the curses, the group-chat meltdowns.
 
-## 🔗 Quick Links
+## Quick Links
 
 - [Contribute on GitHub](https://github.com/narenp12/pine-hills-wiki)
 
 ---
 
-*This site is a community-maintained Wikipedia of the Pine Hills Fantasy Football League, built with [Zensical](https://zensical.org). Data is sourced manually from Yahoo Fantasy Football and community contributions.*
+*Built with [Zensical](https://zensical.org). Results are derived from Yahoo Fantasy Football; lore and other unrecorded facts are community-contributed.*

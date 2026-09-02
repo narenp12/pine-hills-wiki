@@ -1,11 +1,12 @@
 ---
 title: Records
+icon: lucide/chart-bar
 description: All-time records, single-season feats, and dubious achievements of the Pine Hills Fantasy Football League.
 ---
 
-# 📊 Records
+# Records
 
-The ledger of greatness and shame, computed from 615 captured matchups across 8 seasons. Everything here is regular season. The postseason keeps its own record book on [Playoffs](../playoffs.md).
+League records across 8 seasons and 615 captured matchups. Every mark on this page is regular season; postseason records are on [Playoffs](../playoffs.md).
 
 ## Single-Season Records
 
@@ -14,7 +15,7 @@ The ledger of greatness and shame, computed from 615 captured matchups across 8 
 | Most Points For (season) | [Super Squirrels](../teams/super-squirrels.md) | 1980.66 | 2021 |
 | Fewest Points For (season) | [Stroud Boys](../teams/stroud-boys.md) | 1151.54 | 2025 |
 | Best Regular-Season Record | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 9-2 (81.8%) | 2018 |
-| Worst Regular-Season Record (tied) | [varun’s victorious team](../teams/varun-s-victorious-team.md), [Roger That](../teams/roger-that.md) | 2-12 (14.3%) | 2022, 2024 |
+| Worst Regular-Season Record (2-way tie) | [varun’s victorious team](../teams/varun-s-victorious-team.md), [Roger That](../teams/roger-that.md) | 2-12 (14.3%) | 2022, 2024 |
 
 ## Single-Game Records
 
@@ -23,15 +24,15 @@ The ledger of greatness and shame, computed from 615 captured matchups across 8 
 | Highest Score | [Curry’s legit team](../teams/curry-s-legit-team.md) | 218.24 - 141.46 vs [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 2019 Wk 5 |
 | Lowest Score | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 25.80 - 76.18 vs [varun’s victorious team](../teams/varun-s-victorious-team.md) | 2023 Wk 13 |
 | Biggest Blowout | [Indiana Jones](../teams/indiana-jones.md) | 105.28 (143.78 - 38.50 vs [Stroud Boys](../teams/stroud-boys.md)) | 2025 Wk 6 |
-| Closest Game (tied) | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 0.02 (166.58 - 166.56 vs [D4rthSi Dragons](../teams/d4rthsi-dragons.md)) | 2018 Wk 4 |
-| Closest Game (tied) | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 0.02 (125.50 - 125.48 vs [Roger That](../teams/roger-that.md)) | 2019 Wk 10 |
+| Closest Game (2-way tie) | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 0.02 (166.58 - 166.56 vs [D4rthSi Dragons](../teams/d4rthsi-dragons.md)) | 2018 Wk 4 |
+|  | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 0.02 (125.50 - 125.48 vs [Roger That](../teams/roger-that.md)) | 2019 Wk 10 |
 | Most Points in a Loss | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) | 169.84 - 179.54 vs [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 2018 Wk 9 |
 | Fewest Points in a Win | [Stroud Boys](../teams/stroud-boys.md) | 74.20 - 73.56 vs [Jayesh's Great Team](../teams/jayesh-s-great-team.md) | 2024 Wk 14 |
 | Tie | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 143.20 - 143.20 vs [Roger That](../teams/roger-that.md) | 2018 Wk 8 |
 
 ## Career Records
 
-By manager: a career follows the person, not whichever franchise name they were flying that year. Rates carry their sample size, since one full season qualifies and several managers have played exactly that.
+Career totals follow the manager, not the franchise name. Rate marks qualify at 11 games, one full regular season, and carry their sample size.
 
 | Record | Owner | Value |
 |--------|-------|-------|
@@ -42,22 +43,22 @@ By manager: a career follows the person, not whichever franchise name they were 
 
 ## Outright Marks
 
-Every game ever played, phase ignored - the league's single-game marks with nothing held back. When the regular-season book above shows the same game, that game is the outright record too.
+Single-game marks across every phase. A mark that also appears in the regular-season book above is the outright record as well.
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
 | Highest Score | [Curry’s legit team](../teams/curry-s-legit-team.md) | 218.24 - 141.46 vs [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 2019 Wk 5 |
 | Lowest Score | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 25.80 - 76.18 vs [varun’s victorious team](../teams/varun-s-victorious-team.md) | 2023 Wk 13 |
 | Biggest Blowout | [Indiana Jones](../teams/indiana-jones.md) | 105.28 (143.78 - 38.50 vs [Stroud Boys](../teams/stroud-boys.md)) | 2025 Wk 6 |
-| Closest Game (tied) | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 0.02 (166.58 - 166.56 vs [D4rthSi Dragons](../teams/d4rthsi-dragons.md)) | 2018 Wk 4 |
-| Closest Game (tied) | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 0.02 (125.50 - 125.48 vs [Roger That](../teams/roger-that.md)) | 2019 Wk 10 |
+| Closest Game (2-way tie) | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 0.02 (166.58 - 166.56 vs [D4rthSi Dragons](../teams/d4rthsi-dragons.md)) | 2018 Wk 4 |
+|  | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 0.02 (125.50 - 125.48 vs [Roger That](../teams/roger-that.md)) | 2019 Wk 10 |
 | Most Points in a Loss | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) | 169.84 - 179.54 vs [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | 2018 Wk 9 |
 | Fewest Points in a Win | [Stroud Boys](../teams/stroud-boys.md) | 74.20 - 73.56 vs [Jayesh's Great Team](../teams/jayesh-s-great-team.md) | 2024 Wk 14 |
 | Tie | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 143.20 - 143.20 vs [Roger That](../teams/roger-that.md) | 2018 Wk 8 |
 
 ## Blowouts
 
-Every game won by 80 or more, across all 615 captured games. Phase is tagged where it is not a regular-season week.
+Games decided by 80 points or more. Phase is tagged where it is not a regular-season week.
 
 | Margin | Team | Score | Opponent | When |
 |--------|------|-------|----------|------|
@@ -84,7 +85,7 @@ Every game won by 80 or more, across all 615 captured games. Phase is tagged whe
 
 ## Nailbiters
 
-Every game decided by 1 point or less, a tie included - it is the closest a game can be.
+Games decided by 1 point or less, ties included.
 
 | Margin | Team | Score | Opponent | When |
 |--------|------|-------|----------|------|
@@ -115,7 +116,7 @@ Every game decided by 1 point or less, a tie included - it is the closest a game
 
 ## All-Time Totals
 
-Every game a manager has played, regular season, playoffs and consolation alike. The books above ask who was best; this asks who has played the most and scored the most.
+Every game a manager has played, in all phases.
 
 | Owner | Games | Record | Win% | Points For | Points Against | Avg |
 |-------|-------|--------|------|------------|----------------|-----|
@@ -138,32 +139,28 @@ Every game a manager has played, regular season, playoffs and consolation alike.
 
 ## Players
 
-> Player records are keyed to the **player**, not the manager or the franchise. This book is **regular season only**, the same split the team records use - the playoff and Finals player books live on [Playoffs](../playoffs.md). Bench marks count a player who scored while sitting. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
+> Keyed to the player rather than the manager or franchise, and regular season only; the playoff and Finals player books are on [Playoffs](../playoffs.md). Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
-| Highest Week | Tyreek Hill | 57.90 (WR) | 2020 Wk 12, [My team is Koo(l)](../teams/my-team-is-koo-l.md) |
-| Highest-Scoring Benched Player | Josh Allen | 51.88 (QB) | 2024 Wk 14, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
-| Highest Season Total | Christian McCaffrey | 354.10 | 2019, [Super Squirrels](../teams/super-squirrels.md) |
-| Most Weeks Rostered (tied) | Travis Kelce | 131 weeks | [Roger That](../teams/roger-that.md), [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md), [Ken Keenan Kum](../teams/ken-keenan-kum.md) +4 more |
-| Most Weeks Rostered (tied) | Davante Adams | 131 weeks | [Roger That](../teams/roger-that.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Curry’s legit team](../teams/curry-s-legit-team.md) +2 more |
-| Most Weeks Rostered (tied) | Mike Evans | 131 weeks | [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md), [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) +4 more |
-| Most Weeks Rostered (tied) | Alvin Kamara | 131 weeks | [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [varun’s victorious team](../teams/varun-s-victorious-team.md), [BBigg MACKS](../teams/bbigg-macks.md) +7 more |
-| Most Weeks Rostered (tied) | Tyreek Hill | 131 weeks | [Tanmay's Top-Notch Team](../teams/tanmay-s-top-notch-team.md), [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md), [Pukakke NaKupp](../teams/pukakke-nakupp.md) +5 more |
-| Most Weeks Rostered (tied) | Patrick Mahomes | 131 weeks | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) +4 more |
+| Highest Week | [Tyreek Hill](../players/tyreek-hill.md) | 57.90 (WR) | 2020 Wk 12, [My team is Koo(l)](../teams/my-team-is-koo-l.md) |
+| Highest-Scoring Benched Player | [Josh Allen](../players/josh-allen.md) | 51.88 (QB) | 2024 Wk 14, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
+| Highest Season Total | [Christian McCaffrey](../players/christian-mccaffrey.md) | 354.10 | 2019, [Super Squirrels](../teams/super-squirrels.md) |
+| Most Weeks Rostered (6-way tie) | [Travis Kelce](../players/travis-kelce.md) | 131 weeks | [Roger That](../teams/roger-that.md), [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) <details class="more"><summary><span class="more-show">+5 more</span><span class="more-hide">show less</span></summary><span class="more-list">[Ken Keenan Kum](../teams/ken-keenan-kum.md), [Joe Sheisty](../teams/joe-sheisty.md), [varun’s victorious team](../teams/varun-s-victorious-team.md), [D4rthSi Dragons](../teams/d4rthsi-dragons.md), [Anish's Awesome Team](../teams/anish-s-awesome-team.md)</span></details> |
+|  | [Davante Adams](../players/davante-adams.md) | 131 weeks | [Roger That](../teams/roger-that.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) <details class="more"><summary><span class="more-show">+3 more</span><span class="more-hide">show less</span></summary><span class="more-list">[Curry’s legit team](../teams/curry-s-legit-team.md), [Save Me](../teams/save-me.md), [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md)</span></details> |
+|  | [Mike Evans](../players/mike-evans.md) | 131 weeks | [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) <details class="more"><summary><span class="more-show">+5 more</span><span class="more-hide">show less</span></summary><span class="more-list">[Jeremy's Neat Team](../teams/jeremy-s-neat-team.md), [Super Squirrels](../teams/super-squirrels.md), [Roger That](../teams/roger-that.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [D4rthSi Dragons](../teams/d4rthsi-dragons.md)</span></details> |
+|  | [Alvin Kamara](../players/alvin-kamara.md) | 131 weeks | [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [varun’s victorious team](../teams/varun-s-victorious-team.md) <details class="more"><summary><span class="more-show">+8 more</span><span class="more-hide">show less</span></summary><span class="more-list">[BBigg MACKS](../teams/bbigg-macks.md), [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md), [Super Squirrels](../teams/super-squirrels.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Roger That](../teams/roger-that.md), [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md), [Tanmay's Top-Notch Team](../teams/tanmay-s-top-notch-team.md), [most likely injured](../teams/most-likely-injured.md)</span></details> |
+|  | [Tyreek Hill](../players/tyreek-hill.md) | 131 weeks | [Tanmay's Top-Notch Team](../teams/tanmay-s-top-notch-team.md), [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md) <details class="more"><summary><span class="more-show">+6 more</span><span class="more-hide">show less</span></summary><span class="more-list">[Pukakke NaKupp](../teams/pukakke-nakupp.md), [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md), [Big black big back](../teams/big-black-big-back.md), [CHOPSTIX](../teams/chopstix.md), [My team is Koo(l)](../teams/my-team-is-koo-l.md), [Roger That](../teams/roger-that.md)</span></details> |
+|  | [Patrick Mahomes](../players/patrick-mahomes.md) | 131 weeks | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Anish's Awesome Team](../teams/anish-s-awesome-team.md) <details class="more"><summary><span class="more-show">+5 more</span><span class="more-hide">show less</span></summary><span class="more-list">[Jeremy's Neat Team](../teams/jeremy-s-neat-team.md), [Ken Keenan Kum](../teams/ken-keenan-kum.md), [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md), [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md), [Super Squirrels](../teams/super-squirrels.md)</span></details> |
+
+## Player Awards
+
+MVP, Finals MVP, Team of the Season, Newcomer of the Year and Undrafted Player of the Year, season by season and by career, are on [Awards](../awards.md).
 
 ## Postseason
 
-Kept in its own book, so a big regular-season week is never a Finals record. Championships, playoff and Finals single-game records, career playoff leaders and the per-manager ledger all live on [Playoffs](../playoffs.md).
-
-## 🍗 The "Poultry Controversy" Board
-
-A hall of fame for the league's most infamous moments - bad beats, vetoed trades, and questionable lineup decisions.
-
-| Year | Incident | Accused |
-|------|----------|---------|
-| _TBD_ | _TBD_ | _TBD_ |
+Championships, playoff and Finals single-game records, career playoff leaders and the per-manager ledger are on [Playoffs](../playoffs.md).
 
 ## Related
 
-- [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span> · [Champions](../champions.md)
+- [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Lore](../lore.md) · [Champions](../champions.md)

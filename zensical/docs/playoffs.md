@@ -1,11 +1,12 @@
 ---
 title: Playoffs
+icon: lucide/swords
 description: Pine Hills Fantasy Football League playoff format, champions, and Finals history.
 ---
 
-# 🏆 Playoffs
+# Playoffs
 
-The Pine Hills Fantasy Football League postseason. The bracket decides the title; the regular-season #1 is not the champion unless it wins it.
+The league postseason. The title is decided by the bracket: the regular-season top seed is champion only by winning it.
 
 ## Format
 
@@ -28,7 +29,7 @@ The Pine Hills Fantasy Football League postseason. The bracket decides the title
 
 ## All-Time Championships
 
-By manager: the trophy follows the person, not the team name they were flying that year.
+Titles follow the manager, not the franchise name.
 
 | Owner | Titles | Years | Won With |
 |-------|--------|-------|----------|
@@ -41,7 +42,7 @@ By manager: the trophy follows the person, not the team name they were flying th
 
 ## Playoff Records
 
-Bracket games only. The postseason keeps its own book: a 200-point week in October is a regular-season record and nothing more. Regular-season records live on [Records](records/index.md).
+Bracket games only. Regular-season records are on [Records](records/index.md).
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -67,12 +68,12 @@ The title game only.
 
 ## Playoff Player Records
 
-Keyed to the **player**, not the manager. Bracket games only - consolation play runs in the same weeks and is excluded. Each mark names the fantasy team that had the player rostered. The regular-season player book lives on [Records](records/index.md).
+Keyed to the player rather than the manager. Bracket games only; consolation play runs in the same weeks and is excluded. Each mark names the franchise that had the player rostered. The regular-season player book is on [Records](records/index.md).
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
-| Highest Week | Ja'Marr Chase | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
-| Highest-Scoring Benched Player | Aaron Rodgers | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
+| Highest Week | [Ja'Marr Chase](players/ja-marr-chase.md) | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
+| Highest-Scoring Benched Player | [Aaron Rodgers](players/aaron-rodgers.md) | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
 
 ## Finals Player Records
 
@@ -80,12 +81,12 @@ The title game only.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
-| Highest Week | Ja'Marr Chase | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
-| Highest-Scoring Benched Player | Aaron Rodgers | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
+| Highest Week | [Ja'Marr Chase](players/ja-marr-chase.md) | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
+| Highest-Scoring Benched Player | [Aaron Rodgers](players/aaron-rodgers.md) | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
 
 ## Career Playoff Leaders
 
-By manager, not franchise. Rates qualify at 3 playoff games - one full bracket run - and carry their sample, so a thin one is visible rather than hidden.
+By manager. Rate marks qualify at 3 playoff games, one full bracket run, and carry their sample size.
 
 | Record | Owner | Value |
 |--------|-------|-------|
@@ -94,7 +95,7 @@ By manager, not franchise. Rates qualify at 3 playoff games - one full bracket r
 | Most Finals | [lokesh](owners/lokesh.md) | 3 |
 | Best Win% | [Jeremy](owners/jeremy.md) | 85.7% (6-1) |
 | Best Scoring Average | [Om](owners/om.md) | 140.08 pts/game (3 games) |
-| Most Titles (tied) | [Jeremy](owners/jeremy.md), [lokesh](owners/lokesh.md) | 2 |
+| Most Titles (2-way tie) | [Jeremy](owners/jeremy.md), [lokesh](owners/lokesh.md) | 2 |
 
 ## Playoff Ledger
 
@@ -134,4 +135,4 @@ Every manager who has reached a bracket. Consolation play is excluded.
 
 ## Related
 
-- [Champions](champions.md) · [Seasons](seasons/index.md) · [Records](records/index.md) · <span class="wiki-new" title="This page has not been written yet">Lore</span>
+- [Champions](champions.md) · [Seasons](seasons/index.md) · [Records](records/index.md) · [Lore](lore.md)

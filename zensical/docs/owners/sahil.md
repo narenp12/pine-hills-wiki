@@ -3,10 +3,10 @@ title: "sahil"
 description: "Career record and franchises of sahil in the Pine Hills Fantasy Football League."
 ---
 
-# 🧑 sahil
+# sahil
 
 <div class="infobox">
-  <div class="infobox-title">🧑 sahil</div>
+  <div class="infobox-title">sahil</div>
 <div class="infobox-row"><div class="label">Franchises</div><div class="value">1</div></div>
 <div class="infobox-row"><div class="label">Seasons</div><div class="value">2019-2020</div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Former</div></div>
@@ -44,7 +44,7 @@ description: "Career record and franchises of sahil in the Pine Hills Fantasy Fo
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than franchise, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|

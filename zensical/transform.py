@@ -38,7 +38,9 @@ TITLE_CLEAN = re.compile(r"\s+")
 LEADING_SYMBOLS = re.compile(r"^[^\w]+", re.UNICODE)
 
 # Pages intentionally forward-referenced (red-links like Starlight wiki-new).
-FORWARD_REFS = {"lore", "roster", "post-draft", "end-of-season"}
+# "lore" is NOT here: generate.py emits lore.md on every run, so the link
+# resolves whether or not the bible has any entries yet.
+FORWARD_REFS = {"roster", "post-draft", "end-of-season"}
 # Per-team/per-year roster pages that generate.py links to but does not yet
 # emit, e.g. "2021 save-me Post-Draft". Matched as a suffix so the whole family
 # is recognised as forward-referenced rather than looking broken.
