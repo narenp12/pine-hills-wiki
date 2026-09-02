@@ -12,7 +12,7 @@ captured data.
 
 ## Incidents
 
-??? quote "2018 - The Reversed Touchdown"
+??? quote "2018 - The Reynolds Reversal"
 
     **Involved:** [D4rthSi Dragons](owners/naren.md), [Curry's legit team](owners/lokesh.md)
 
