@@ -59,31 +59,3 @@ The **Pine Hills Fantasy League** (**PHFL**) is a fantasy football league founde
 *Built with [Zensical](https://zensical.org). Results are derived from Yahoo Fantasy Football; lore and other unrecorded facts are community-contributed.*
 
 *[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League
-
-*[PHFL]: Pine Hills Fantasy League

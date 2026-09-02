@@ -62,7 +62,14 @@ def with_glossary(md: str) -> str:
     Only terms the page actually contains are defined, so a player page does not
     carry a definition of PF it never uses.
     """
-    used = [term for term, rx in _GLOSSARY_RES.items() if rx.search(md)]
+    # A term already defined is skipped, which keeps this idempotent. index.md
+    # is merged from its own previous output rather than regenerated, so without
+    # the check it collected another copy of every definition on every build.
+    used = [
+        term
+        for term, rx in _GLOSSARY_RES.items()
+        if rx.search(md) and f"*[{term}]:" not in md
+    ]
     if not used:
         return md
     defs = "\n".join(f"*[{term}]: {GLOSSARY[term]}" for term in used)

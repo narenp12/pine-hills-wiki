@@ -55,3 +55,11 @@ def test_a_slash_term_matches_whole_but_its_letters_do_not():
     out = transform.with_glossary("Started in the W/R/T slot.")
     assert "*[W/R/T]: Flex slot - a receiver, back or tight end may start in it" in out
     assert "*[PA]:" not in transform.with_glossary("Scored 10 PA/game.")
+
+
+def test_glossary_is_idempotent():
+    """index.md is merged from its own previous output, so a second pass must
+    not append a second copy of every definition."""
+    once = transform.with_glossary("The MVP swung it.")
+    assert transform.with_glossary(once) == once
+    assert once.count("*[MVP]:") == 1
