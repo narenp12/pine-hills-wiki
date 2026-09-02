@@ -33,14 +33,14 @@ This wiki is community-maintained. Every page is Markdown, version-controlled, a
 <!-- champions-table:start -->
 | Year | Champion | Runner-Up | Top Seed |
 |------|----------|-----------|----------|
-| 2025 | Save Me | Super Squirrels | Save Me |
-| 2024 | _TBD_ | _TBD_ | _TBD_ |
-| 2023 | _TBD_ | _TBD_ | _TBD_ |
-| 2022 | _TBD_ | _TBD_ | _TBD_ |
-| 2021 | _TBD_ | _TBD_ | _TBD_ |
-| 2020 | _TBD_ | _TBD_ | _TBD_ |
-| 2019 | _TBD_ | _TBD_ | _TBD_ |
-| 2018 | _TBD_ | _TBD_ | _TBD_ |
+| 2025 | Jeremy's Neat Team | Big black big back | Roger That |
+| 2024 | Stroud Boys | Jayesh's Great Team | Kamara’s a b*tch |
+| 2023 | Super Squirrels | BBigg MACKS | Stroud Boys |
+| 2022 | Jeremy's Neat Team | Michael's Marvelous Team | Sharman’s Scorpions |
+| 2021 | varun’s victorious team | Super Squirrels | Super Squirrels |
+| 2020 | Roger That | Imagine Losing | My team is Koo(l) |
+| 2019 | Curry’s legit team | Ju Let The Dogs Out | Ju Let The Dogs Out |
+| 2018 | Curry’s legit team | Anish's Awesome Team | Sharman’s Scorpions |
 <!-- champions-table:end -->
 
 ## 📚 Explore the Wiki

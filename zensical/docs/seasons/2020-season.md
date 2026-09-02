@@ -3,45 +3,58 @@ title: "2020 Season"
 description: "Pine Hills Fantasy Football League - 2020 season."
 season: 2020
 year: 2020
-status: incomplete
 ---
 
 # 🏈 2020 Season
 
-- **Champion:** _TBD_
-- **Runner-Up:** _TBD_
-- **Regular Season Top Seed:** _TBD_
-- **Toilet Bowl Winner:** _TBD_
+- **Champion:** Roger That
+- **Runner-Up:** Imagine Losing
+- **Regular Season Top Seed:** My team is Koo(l)
+- **Toilet Bowl Winner:** I have Hop(e)
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
+> Auto-generated from Yahoo. **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order - a team can win the title from a lower seed. **Playoff Seed** is the seed the team actually entered the playoffs with; - means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Roger That | _TBD_ | 6-7 | 1529.92 | 1623.92 | 1 |
-| 2 | Imagine Losing | _TBD_ | 7-6 | 1515.24 | 1564.58 | 2 |
-| 3 | Kaushal's Potatoes | _TBD_ | 6-7 | 1636.04 | 1579.58 | 3 |
-| 4 | CHOPSTIX | _TBD_ | 2-11 | 1374.98 | 1718.72 | 4 |
-| 5 | Anish's Awesome Team | _TBD_ | 9-4 | 1635.98 | 1576.34 | - |
-| 6 | My team is Koo(l) | _TBD_ | 9-4 | 1783.6 | 1593.36 | - |
-| 7 | Sharman’s Scorpions | _TBD_ | 8-5 | 1732.96 | 1522.1 | - |
-| 7 | Aryan's Amazing Team | _TBD_ | 6-7 | 1538.1 | 1652.8 | - |
-| 8 | Super Squirrels | _TBD_ | 8-5 | 1635.56 | 1452.18 | - |
-| 9 | I have Hop(e) | _TBD_ | 4-9 | 1548.58 | 1647.38 | - |
+| 1 | Roger That | Pranav | 6-7 | 1529.92 | 1623.92 | 7 |
+| 2 | Imagine Losing | Om | 7-6 | 1515.24 | 1564.58 | 5 |
+| 3 | Kaushal's Potatoes | Kaushal | 6-7 | 1636.04 | 1579.58 | 6 |
+| 4 | CHOPSTIX | sahil | 2-11 | 1374.98 | 1718.72 | 8 |
+| 5 | Anish's Awesome Team | Anish | 9-4 | 1635.98 | 1576.34 | 2 |
+| 6 | My team is Koo(l) | lokesh | 9-4 | 1783.6 | 1593.36 | 1 |
+| 7 | Sharman’s Scorpions | Sharman | 8-5 | 1732.96 | 1522.1 | 3 |
+| 7 | Aryan's Amazing Team | Aryan | 6-7 | 1538.1 | 1652.8 | - |
+| 8 | Super Squirrels | Super | 8-5 | 1635.56 | 1452.18 | 4 |
+| 9 | I have Hop(e) | Naren | 4-9 | 1548.58 | 1647.38 | - |
 
 ## Playoff Bracket
 
-> Playoff results are recorded in the league bible. Add `champions: { 2020: { champion: ..., runner_up: ... } }` to `raw/bible.yaml` to populate this section.
+> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
 
 ```mermaid
 flowchart LR
-    S1["(1) Roger That"] --> W1[Semifinal 1]
-    S4["(4) CHOPSTIX"] --> W1
-    S2["(2) Imagine Losing"] --> W2[Semifinal 2]
-    S3["(3) Kaushal's Potatoes"] --> W2
-    W1 --> Champ["🏆 Champion"]
-    W2 --> Champ
+    subgraph RQuarterfinal["Quarterfinal"]
+        W14G1["✓ (7) Roger That 165.74<br>(2) Anish's Awesome Team 87.96"]
+        W14G2["(1) My team is Koo(l) 117.52<br>✓ (8) CHOPSTIX 118.52"]
+        W14G3["(3) Sharman’s Scorpions 107.62<br>✓ (6) Kaushal's Potatoes 132.26"]
+        W14G4["(4) Super Squirrels 158.44<br>✓ (5) Imagine Losing 162.26"]
+    end
+    subgraph RSemifinal["Semifinal"]
+        W15G1["✓ (7) Roger That 111.84<br>(6) Kaushal's Potatoes 105.98"]
+        W15G2["(8) CHOPSTIX 111.42<br>✓ (5) Imagine Losing 130.72"]
+    end
+    subgraph RFinal["Final"]
+        W16G1["✓ (7) Roger That 137.08<br>(5) Imagine Losing 127.26"]
+    end
+    W14G1 -->|"Roger That"| W15G1
+    W14G2 -->|"CHOPSTIX"| W15G2
+    W14G3 -->|"Kaushal's Potatoes"| W15G1
+    W14G4 -->|"Imagine Losing"| W15G2
+    W15G1 -->|"Roger That"| W16G1
+    W15G2 -->|"Imagine Losing"| W16G1
+    W16G1 --> CHAMP["🏆 Roger That"]
 ```
 
 ## Team Rosters
@@ -51,7 +64,7 @@ flowchart LR
 
 ## Awards
 
-- 🏆 **League Champion:** _TBD_
+- 🏆 **League Champion:** Roger That
 - 💥 **Highest Single-Week Score:** _TBD_
 - 📉 **Lowest Single-Week Score:** _TBD_
 - 🔥 **Biggest Bust:** _TBD_

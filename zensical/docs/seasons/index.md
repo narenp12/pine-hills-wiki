@@ -11,14 +11,14 @@ Every completed season of the Pine Hills Fantasy Football League. Click a year f
 
 | Year | Champion | Notable Story | Page |
 |------|----------|---------------|------|
-| 2025 | Save Me | _TBD_ | [2025 Season](2025-season.md) |
-| 2024 | _TBD_ | _TBD_ | [2024 Season](2024-season.md) |
-| 2023 | _TBD_ | _TBD_ | [2023 Season](2023-season.md) |
-| 2022 | _TBD_ | _TBD_ | [2022 Season](2022-season.md) |
-| 2021 | _TBD_ | _TBD_ | [2021 Season](2021-season.md) |
-| 2020 | _TBD_ | _TBD_ | [2020 Season](2020-season.md) |
-| 2019 | _TBD_ | _TBD_ | [2019 Season](2019-season.md) |
-| 2018 | _TBD_ | _TBD_ | [2018 Season](2018-season.md) |
+| 2025 | Jeremy's Neat Team | _TBD_ | [2025 Season](2025-season.md) |
+| 2024 | Stroud Boys | _TBD_ | [2024 Season](2024-season.md) |
+| 2023 | Super Squirrels | _TBD_ | [2023 Season](2023-season.md) |
+| 2022 | Jeremy's Neat Team | _TBD_ | [2022 Season](2022-season.md) |
+| 2021 | varun’s victorious team | _TBD_ | [2021 Season](2021-season.md) |
+| 2020 | Roger That | _TBD_ | [2020 Season](2020-season.md) |
+| 2019 | Curry’s legit team | _TBD_ | [2019 Season](2019-season.md) |
+| 2018 | Curry’s legit team | _TBD_ | [2018 Season](2018-season.md) |
 
 ## How Seasons Are Documented
 

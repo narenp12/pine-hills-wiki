@@ -3,41 +3,50 @@ title: "2018 Season"
 description: "Pine Hills Fantasy Football League - 2018 season."
 season: 2018
 year: 2018
-status: incomplete
 ---
 
 # 🏈 2018 Season
 
-- **Champion:** _TBD_
-- **Runner-Up:** _TBD_
-- **Regular Season Top Seed:** _TBD_
-- **Toilet Bowl Winner:** _TBD_
+- **Champion:** Curry’s legit team
+- **Runner-Up:** Anish's Awesome Team
+- **Regular Season Top Seed:** Sharman’s Scorpions
+- **Toilet Bowl Winner:** Super Squirrels
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
+> Auto-generated from Yahoo. **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order - a team can win the title from a lower seed. **Playoff Seed** is the seed the team actually entered the playoffs with; - means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Curry’s legit team | _TBD_ | 4-7 | 1406.78 | 1614.6 | 1 |
-| 2 | Anish's Awesome Team | _TBD_ | 3-7 | 1523.54 | 1590.72 | 2 |
-| 3 | D4rthSi Dragons | _TBD_ | 8-3 | 1736.5 | 1545.16 | 3 |
-| 4 | Sharman’s Scorpions | _TBD_ | 9-2 | 1754.04 | 1523.54 | 4 |
-| 5 | Roger That | _TBD_ | 4-6 | 1632.38 | 1703.34 | - |
-| 6 | Super Squirrels | _TBD_ | 4-7 | 1450.44 | 1526.32 | - |
+| 1 | Curry’s legit team | lokesh | 4-7 | 1406.78 | 1614.6 | 5 |
+| 2 | Anish's Awesome Team | Anish | 3-7 | 1523.54 | 1590.72 | 6 |
+| 3 | D4rthSi Dragons | Naren | 8-3 | 1736.5 | 1545.16 | 2 |
+| 4 | Sharman’s Scorpions | Sharman | 9-2 | 1754.04 | 1523.54 | 1 |
+| 5 | Roger That | Pranav | 4-6 | 1632.38 | 1703.34 | 3 |
+| 6 | Super Squirrels | Super | 4-7 | 1450.44 | 1526.32 | 4 |
 
 ## Playoff Bracket
 
-> Playoff results are recorded in the league bible. Add `champions: { 2018: { champion: ..., runner_up: ... } }` to `raw/bible.yaml` to populate this section.
+> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
 
 ```mermaid
 flowchart LR
-    S1["(1) Curry’s legit team"] --> W1[Semifinal 1]
-    S4["(4) Sharman’s Scorpions"] --> W1
-    S2["(2) Anish's Awesome Team"] --> W2[Semifinal 2]
-    S3["(3) D4rthSi Dragons"] --> W2
-    W1 --> Champ["🏆 Champion"]
-    W2 --> Champ
+    subgraph RQuarterfinal["Quarterfinal"]
+        W14G1["(3) Roger That 100.70<br>✓ (6) Anish's Awesome Team 142.10"]
+        W14G2["✓ (5) Curry’s legit team 152.44<br>(4) Super Squirrels 112.28"]
+    end
+    subgraph RSemifinal["Semifinal"]
+        W15G1["(2) D4rthSi Dragons 127.56<br>✓ (5) Curry’s legit team 129.76"]
+        W15G2["✓ (6) Anish's Awesome Team 148.86<br>(1) Sharman’s Scorpions 98.12"]
+    end
+    subgraph RFinal["Final"]
+        W16G1["(6) Anish's Awesome Team 120.74<br>✓ (5) Curry’s legit team 165.16"]
+    end
+    W14G1 -->|"Anish's Awesome Team"| W15G2
+    W14G2 -->|"Curry’s legit team"| W15G1
+    W15G1 -->|"Curry’s legit team"| W16G1
+    W15G2 -->|"Anish's Awesome Team"| W16G1
+    W16G1 --> CHAMP["🏆 Curry’s legit team"]
 ```
 
 ## Team Rosters
@@ -47,7 +56,7 @@ flowchart LR
 
 ## Awards
 
-- 🏆 **League Champion:** _TBD_
+- 🏆 **League Champion:** Curry’s legit team
 - 💥 **Highest Single-Week Score:** _TBD_
 - 📉 **Lowest Single-Week Score:** _TBD_
 - 🔥 **Biggest Bust:** _TBD_

@@ -277,6 +277,21 @@
   border-top: 3px solid var(--md-accent-fg-color);
   color: var(--wiki-ink);
 }
+/* Lead image, Wikipedia-style: sits directly under the title, above the rows.
+   Height-capped so a tall portrait can't push every fact below the fold. */
+.md-typeset .infobox .infobox-image {
+  padding: 0.6rem;
+  text-align: center;
+  background: var(--wiki-panel-2);
+  border-top: 1px solid var(--wiki-border);
+}
+.md-typeset .infobox .infobox-image img {
+  max-width: 100%;
+  max-height: 12rem;
+  width: auto;
+  height: auto;
+  border-radius: var(--border-radius);
+}
 .md-typeset .infobox .infobox-row {
   display: flex;
   border-top: 1px solid var(--wiki-border);
@@ -304,6 +319,19 @@
     max-width: none;
     margin: 0 0 1.25rem;
   }
+}
+
+/* Inline team thumbnail used in list tables (teams index, owner pages). Sized
+   to the line so a row with an image is the same height as one without. */
+.md-typeset img.team-thumb {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.6rem;
+  height: 1.6rem;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--wiki-border);
+  margin-right: 0.4rem;
 }
 
 /* ---------------------------------------------------------------------------

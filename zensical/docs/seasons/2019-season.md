@@ -3,43 +3,52 @@ title: "2019 Season"
 description: "Pine Hills Fantasy Football League - 2019 season."
 season: 2019
 year: 2019
-status: incomplete
 ---
 
 # 🏈 2019 Season
 
-- **Champion:** _TBD_
-- **Runner-Up:** _TBD_
-- **Regular Season Top Seed:** _TBD_
-- **Toilet Bowl Winner:** _TBD_
+- **Champion:** Curry’s legit team
+- **Runner-Up:** Ju Let The Dogs Out
+- **Regular Season Top Seed:** Ju Let The Dogs Out
+- **Toilet Bowl Winner:** Roger That
 
 ## Final Standings
 
-> Auto-generated from Yahoo standings. Owners and playoff results are filled from the league bible (`raw/bible.yaml`); _TBD_ means not yet recorded. **Finish** is the standing recorded in the source export and does not always follow W-L order.
+> Auto-generated from Yahoo. **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order - a team can win the title from a lower seed. **Playoff Seed** is the seed the team actually entered the playoffs with; - means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Curry’s legit team | _TBD_ | 8-5 | 1863.5 | 1661.14 | 1 |
-| 2 | Ju Let The Dogs Out | _TBD_ | 9-4 | 1766.38 | 1615.02 | 2 |
-| 3 | Kaushal's Potatoes | _TBD_ | 8-5 | 1673.66 | 1575.2 | 3 |
-| 4 | Super Squirrels | _TBD_ | 7-6 | 1682.84 | 1654.48 | 4 |
-| 5 | Sharman’s Scorpions | _TBD_ | 6-7 | 1590.34 | 1603.0 | - |
-| 6 | Anish's Awesome Team | _TBD_ | 7-6 | 1640.28 | 1762.64 | - |
-| 7 | CHOPSTIX | _TBD_ | 5-8 | 1431.02 | 1653.92 | - |
-| 8 | Roger That | _TBD_ | 2-11 | 1622.96 | 1745.58 | - |
+| 1 | Curry’s legit team | lokesh | 8-5 | 1863.5 | 1661.14 | 2 |
+| 2 | Ju Let The Dogs Out | Naren | 9-4 | 1766.38 | 1615.02 | 1 |
+| 3 | Kaushal's Potatoes | Kaushal | 8-5 | 1673.66 | 1575.2 | 3 |
+| 4 | Super Squirrels | Super | 7-6 | 1682.84 | 1654.48 | 4 |
+| 5 | Sharman’s Scorpions | Sharman | 6-7 | 1590.34 | 1603.0 | 6 |
+| 6 | Anish's Awesome Team | Anish | 7-6 | 1640.28 | 1762.64 | 5 |
+| 7 | CHOPSTIX | sahil | 5-8 | 1431.02 | 1653.92 | 7 |
+| 8 | Roger That | Pranav | 2-11 | 1622.96 | 1745.58 | 8 |
 
 ## Playoff Bracket
 
-> Playoff results are recorded in the league bible. Add `champions: { 2019: { champion: ..., runner_up: ... } }` to `raw/bible.yaml` to populate this section.
+> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
 
 ```mermaid
 flowchart LR
-    S1["(1) Curry’s legit team"] --> W1[Semifinal 1]
-    S4["(4) Super Squirrels"] --> W1
-    S2["(2) Ju Let The Dogs Out"] --> W2[Semifinal 2]
-    S3["(3) Kaushal's Potatoes"] --> W2
-    W1 --> Champ["🏆 Champion"]
-    W2 --> Champ
+    subgraph RQuarterfinal["Quarterfinal"]
+        W14G1["(5) Anish's Awesome Team 82.88<br>✓ (4) Super Squirrels 124.22"]
+        W14G2["(6) Sharman’s Scorpions 107.06<br>✓ (3) Kaushal's Potatoes 146.08"]
+    end
+    subgraph RSemifinal["Semifinal"]
+        W15G1["✓ (1) Ju Let The Dogs Out 169.10<br>(4) Super Squirrels 130.40"]
+        W15G2["✓ (2) Curry’s legit team 187.08<br>(3) Kaushal's Potatoes 136.92"]
+    end
+    subgraph RFinal["Final"]
+        W16G1["(1) Ju Let The Dogs Out 123.44<br>✓ (2) Curry’s legit team 156.92"]
+    end
+    W14G1 -->|"Super Squirrels"| W15G1
+    W14G2 -->|"Kaushal's Potatoes"| W15G2
+    W15G1 -->|"Ju Let The Dogs Out"| W16G1
+    W15G2 -->|"Curry’s legit team"| W16G1
+    W16G1 --> CHAMP["🏆 Curry’s legit team"]
 ```
 
 ## Team Rosters
@@ -49,7 +58,7 @@ flowchart LR
 
 ## Awards
 
-- 🏆 **League Champion:** _TBD_
+- 🏆 **League Champion:** Curry’s legit team
 - 💥 **Highest Single-Week Score:** _TBD_
 - 📉 **Lowest Single-Week Score:** _TBD_
 - 🔥 **Biggest Bust:** _TBD_

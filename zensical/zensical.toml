@@ -24,6 +24,7 @@ nav = [
   { Home = "index.md" },
   { Seasons = "seasons/index.md" },
   { Teams = "teams/index.md" },
+  { Owners = "owners/index.md" },
   { Records = "records/index.md" },
   { "Draft History" = "draft/index.md" },
   { Playoffs = "playoffs.md" },

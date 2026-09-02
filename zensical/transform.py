@@ -124,12 +124,13 @@ def transform(text: str, title_map: dict[str, str], cur_rel: str) -> str:
         return f"[{display}]({rel})"
 
     out = WIKILINK_RE.sub(repl, text)
-    # Team franchise pages: promote the "Franchise Summary" fields into a
+    # Franchise and manager pages: promote the summary fields into a
     # Wikipedia-style right-rail infobox (Zensical-only enhancement).
-    # Skip the teams *index* (a category/list page, not a franchise) so it
-    # doesn't get a meaningless _TBD_ stub infobox that floats over its table.
-    if re.match(r"teams/[^/]+\.md$", cur_rel) and cur_rel != "teams/index.md":
-        out = inject_team_infobox(out)
+    # Skip the section *indexes* (category/list pages) so they don't get a
+    # meaningless _TBD_ stub infobox floating over their tables.
+    for section, fields in (("teams", TEAM_INFOBOX_FIELDS), ("owners", OWNER_INFOBOX_FIELDS)):
+        if re.match(rf"{section}/[^/]+\.md$", cur_rel) and cur_rel != f"{section}/index.md":
+            out = inject_infobox(out, fields)
     return out
 
 
@@ -142,6 +143,14 @@ def infobox_value(value: str) -> str:
     additionally gets a class so unrecorded values are visually distinct.
     """
     value = value.strip()
+    # Links reach here already resolved to source-relative .md paths (the
+    # wikilink pass runs first). Zensical rewrites href/src in raw HTML the same
+    # way it does in Markdown, so the path is handed over untouched.
+    value = re.sub(
+        r"\[([^\]]+)\]\(([^)\s]+)\)",
+        lambda mm: f'<a href="{mm.group(2)}">{mm.group(1)}</a>',
+        value,
+    )
     value = re.sub(r"`([^`]+)`", r"<code>\1</code>", value)
     value = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", value)
     value = re.sub(r"(?<!\w)_([^_]+)_(?!\w)", r"<em>\1</em>", value)
@@ -150,7 +159,28 @@ def infobox_value(value: str) -> str:
     return value
 
 
-def inject_team_infobox(text: str) -> str:
+# Infobox row labels -> the generated "**Label:**" line each one reads. Lead
+# lines (the ones above the first "## " heading) are removed after the box is
+# built, since the box repeats them verbatim.
+TEAM_INFOBOX_FIELDS = {
+    "Owner": r"\*\*Owner:\*\*\s*(.+)",
+    "Joined": r"\*\*Joined:\*\*\s*(.+)",
+    "Status": r"\*\*Status:\*\*\s*(.+)",
+    "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
+    "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
+}
+OWNER_INFOBOX_FIELDS = {
+    "Franchises": r"\*\*Franchises:\*\*\s*(.+)",
+    "Seasons": r"\*\*Seasons:\*\*\s*(.+)",
+    "Status": r"\*\*Status:\*\*\s*(.+)",
+    "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
+    "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
+}
+LEAD_LINE_LABELS = ("Owner", "Joined", "Status", "Franchises", "Seasons", "Image")
+IMAGE_LINE_RE = re.compile(r"^- \*\*Image:\*\*\s*!\[([^\]]*)\]\(([^)\s]+)\)\s*$", re.MULTILINE)
+
+
+def inject_infobox(text: str, fields: dict) -> str:
     """Build a right-rail infobox from the stable **Label:** summary lines that
     generate.py emits. Defensive: returns text unchanged if already present or
     if the expected shape isn't found."""
@@ -160,13 +190,16 @@ def inject_team_infobox(text: str) -> str:
     if not m:
         return text
     title = m.group(1).strip()
-    fields = {
-        "Owner": r"\*\*Owner:\*\*\s*(.+)",
-        "Joined": r"\*\*Joined:\*\*\s*(.+)",
-        "Status": r"\*\*Status:\*\*\s*(.+)",
-        "All-Time": r"\*\*All-Time Record:\*\*\s*(.+)",
-        "Points For/Ag.": r"\*\*All-Time Points For / Against:\*\*\s*(.+)",
-    }
+    # Optional hand-supplied image, emitted by generate.py as a lead
+    # "- **Image:** ![alt](src)" line. It heads the box like a Wikipedia lead
+    # photo; teams with no bible entry simply have no line and no row.
+    image = IMAGE_LINE_RE.search(text)
+    image_html = ""
+    if image:
+        alt, src = image.group(1), image.group(2)
+        image_html = (
+            f'<div class="infobox-image"><img src="{src}" alt="{alt}" loading="lazy"></div>\n'
+        )
     rows = ""
     row_pairs = []
     for label, pat in fields.items():
@@ -191,23 +224,23 @@ def inject_team_infobox(text: str) -> str:
     if not rows:
         return text
     # Don't emit a meaningless stub: require at least one real (non-_TBD_) value.
-    if all(val == "_TBD_" for _, val in row_pairs) and not champ:
+    if all(val == "_TBD_" for _, val in row_pairs) and not champ and not image_html:
         return text
     # markdown="1" opts the block into the md_in_html extension (on by default in
     # Zensical). Without it the values ship as literal "_TBD_" and backticks.
     infobox = (
         f'<div class="infobox">\n'
         f'  <div class="infobox-title">{infobox_value(title)}</div>\n'
-        f"{rows}</div>\n\n"
+        f"{image_html}{rows}</div>\n\n"
     )
     # The blank line after the heading matters: Python-Markdown only treats this
     # as an HTML block (and so only honours markdown="1") when it starts a new
     # block. Without it the attribute is ignored and values ship as "_TBD_".
     text = re.sub(r"^(#\s+.+)$", r"\1\n\n" + infobox, text, count=1, flags=re.MULTILINE)
-    # The Owner/Joined/Status lead lines were the infobox's data source; leaving
-    # them in place repeats the top three rows immediately under the box.
+    # The lead lines were the infobox's data source; leaving them in place
+    # repeats the top rows immediately under the box.
     text = re.sub(
-        r"^- \*\*(?:Owner|Joined|Status):\*\*.*\n", "", text, flags=re.MULTILINE
+        rf"^- \*\*(?:{'|'.join(LEAD_LINE_LABELS)}):\*\*.*\n", "", text, flags=re.MULTILINE
     )
     return text
 
