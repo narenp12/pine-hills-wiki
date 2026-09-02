@@ -32,7 +32,7 @@ description: "Franchise history for I have Hop(e) in the Pine Hills Fantasy Foot
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2020 | 4-9 | 9 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2020 | 4-9 | 9 | No | [2020 Season](../seasons/2020-season.md) | [2020 Season](../seasons/2020-season.md) | _TBD_ |
 
 ## Scoring
 

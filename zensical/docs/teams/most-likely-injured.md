@@ -32,7 +32,7 @@ description: "Franchise history for most likely injured in the Pine Hills Fantas
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2021 | 6-8 | 6 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2021 | 6-8 | 6 | Yes | [2021 Season](../seasons/2021-season.md) | [2021 Season](../seasons/2021-season.md) | _TBD_ |
 
 ## Scoring
 

@@ -32,14 +32,14 @@ description: "Franchise history for Sharman’s Scorpions in the Pine Hills Fant
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2018 | 9-2 | 4 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2019 | 6-7 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2020 | 8-5 | 7 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2021 | 8-6 | 8 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2022 | 11-3 | 7 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2023 | 4-10 | 10 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2024 | 5-9 | 9 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2025 | 8-6 | 6 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2018 | 9-2 | 4 | Yes | [2018 Season](../seasons/2018-season.md) | [2018 Season](../seasons/2018-season.md) | _TBD_ |
+| 2019 | 6-7 | 5 | Yes | [2019 Season](../seasons/2019-season.md) | [2019 Season](../seasons/2019-season.md) | _TBD_ |
+| 2020 | 8-5 | 7 | Yes | [2020 Season](../seasons/2020-season.md) | [2020 Season](../seasons/2020-season.md) | _TBD_ |
+| 2021 | 8-6 | 8 | Yes | [2021 Season](../seasons/2021-season.md) | [2021 Season](../seasons/2021-season.md) | _TBD_ |
+| 2022 | 11-3 | 7 | Yes | [2022 Season](../seasons/2022-season.md) | [2022 Season](../seasons/2022-season.md) | _TBD_ |
+| 2023 | 4-10 | 10 | No | [2023 Season](../seasons/2023-season.md) | [2023 Season](../seasons/2023-season.md) | _TBD_ |
+| 2024 | 5-9 | 9 | No | [2024 Season](../seasons/2024-season.md) | [2024 Season](../seasons/2024-season.md) | _TBD_ |
+| 2025 | 8-6 | 6 | Yes | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 

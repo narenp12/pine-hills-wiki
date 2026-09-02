@@ -32,7 +32,7 @@ description: "Franchise history for Indiana Jones in the Pine Hills Fantasy Foot
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2025 | 8-6 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2025 | 8-6 | 5 | Yes | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 

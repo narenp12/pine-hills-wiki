@@ -32,11 +32,11 @@ description: "Franchise history for Michael's Marvelous Team in the Pine Hills F
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2021 | 4-10 | 10 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2022 | 5-9 | 2 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2023 | 6-8 | 6 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2024 | 3-11 | 11 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2025 | 5-9 | 11 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2021 | 4-10 | 10 | No | [2021 Season](../seasons/2021-season.md) | [2021 Season](../seasons/2021-season.md) | _TBD_ |
+| 2022 | 5-9 | 2 | Yes | [2022 Season](../seasons/2022-season.md) | [2022 Season](../seasons/2022-season.md) | _TBD_ |
+| 2023 | 6-8 | 6 | Yes | [2023 Season](../seasons/2023-season.md) | [2023 Season](../seasons/2023-season.md) | _TBD_ |
+| 2024 | 3-11 | 11 | No | [2024 Season](../seasons/2024-season.md) | [2024 Season](../seasons/2024-season.md) | _TBD_ |
+| 2025 | 5-9 | 11 | No | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 

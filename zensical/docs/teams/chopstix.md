@@ -32,8 +32,8 @@ description: "Franchise history for CHOPSTIX in the Pine Hills Fantasy Football 
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2019 | 5-8 | 7 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2020 | 2-11 | 4 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2019 | 5-8 | 7 | No | [2019 Season](../seasons/2019-season.md) | [2019 Season](../seasons/2019-season.md) | _TBD_ |
+| 2020 | 2-11 | 4 | Yes | [2020 Season](../seasons/2020-season.md) | [2020 Season](../seasons/2020-season.md) | _TBD_ |
 
 ## Scoring
 

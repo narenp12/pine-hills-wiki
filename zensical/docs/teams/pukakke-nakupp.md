@@ -32,7 +32,7 @@ description: "Franchise history for Pukakke NaKupp in the Pine Hills Fantasy Foo
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2023 | 8-6 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2023 | 8-6 | 5 | Yes | [2023 Season](../seasons/2023-season.md) | [2023 Season](../seasons/2023-season.md) | _TBD_ |
 
 ## Scoring
 

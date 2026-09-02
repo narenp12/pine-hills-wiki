@@ -32,7 +32,7 @@ description: "Franchise history for Ju Let The Dogs Out in the Pine Hills Fantas
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2019 | 9-4 | 2 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2019 | 9-4 | 2 | Yes | [2019 Season](../seasons/2019-season.md) | [2019 Season](../seasons/2019-season.md) | _TBD_ |
 
 ## Scoring
 

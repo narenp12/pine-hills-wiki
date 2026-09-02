@@ -32,11 +32,11 @@ description: "Franchise history for Anish's Awesome Team in the Pine Hills Fanta
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2018 | 3-7 | 2 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2019 | 7-6 | 6 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2020 | 9-4 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2021 | 6-8 | 9 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2022 | 6-8 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2018 | 3-7 | 2 | Yes | [2018 Season](../seasons/2018-season.md) | [2018 Season](../seasons/2018-season.md) | _TBD_ |
+| 2019 | 7-6 | 6 | Yes | [2019 Season](../seasons/2019-season.md) | [2019 Season](../seasons/2019-season.md) | _TBD_ |
+| 2020 | 9-4 | 5 | Yes | [2020 Season](../seasons/2020-season.md) | [2020 Season](../seasons/2020-season.md) | _TBD_ |
+| 2021 | 6-8 | 9 | No | [2021 Season](../seasons/2021-season.md) | [2021 Season](../seasons/2021-season.md) | _TBD_ |
+| 2022 | 6-8 | 5 | Yes | [2022 Season](../seasons/2022-season.md) | [2022 Season](../seasons/2022-season.md) | _TBD_ |
 
 ## Scoring
 

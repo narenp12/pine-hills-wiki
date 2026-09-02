@@ -32,7 +32,7 @@ description: "Franchise history for Save Me in the Pine Hills Fantasy Football L
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2025 | 7-7 | 4 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2025 | 7-7 | 4 | Yes | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 

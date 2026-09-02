@@ -32,7 +32,7 @@ description: "Franchise history for Kamara’s a b*tch in the Pine Hills Fantasy
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2024 | 11-3 | 6 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2024 | 11-3 | 6 | Yes | [2024 Season](../seasons/2024-season.md) | [2024 Season](../seasons/2024-season.md) | _TBD_ |
 
 ## Scoring
 

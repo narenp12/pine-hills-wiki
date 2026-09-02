@@ -32,10 +32,10 @@ description: "Franchise history for Kaushal's Potatoes in the Pine Hills Fantasy
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2019 | 8-5 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2020 | 6-7 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2024 | 8-6 | 4 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2025 | 7-7 | 8 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2019 | 8-5 | 3 | Yes | [2019 Season](../seasons/2019-season.md) | [2019 Season](../seasons/2019-season.md) | _TBD_ |
+| 2020 | 6-7 | 3 | Yes | [2020 Season](../seasons/2020-season.md) | [2020 Season](../seasons/2020-season.md) | _TBD_ |
+| 2024 | 8-6 | 4 | Yes | [2024 Season](../seasons/2024-season.md) | [2024 Season](../seasons/2024-season.md) | _TBD_ |
+| 2025 | 7-7 | 8 | Yes | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 

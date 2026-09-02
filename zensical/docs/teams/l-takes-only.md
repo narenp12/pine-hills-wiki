@@ -32,7 +32,7 @@ description: "Franchise history for L takes only in the Pine Hills Fantasy Footb
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2022 | 8-6 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2022 | 8-6 | 3 | Yes | [2022 Season](../seasons/2022-season.md) | [2022 Season](../seasons/2022-season.md) | _TBD_ |
 
 ## Scoring
 

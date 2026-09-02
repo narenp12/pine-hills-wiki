@@ -32,7 +32,7 @@ description: "Franchise history for The Herbs in the Pine Hills Fantasy Football
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2021 | 6-8 | 5 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2021 | 6-8 | 5 | Yes | [2021 Season](../seasons/2021-season.md) | [2021 Season](../seasons/2021-season.md) | _TBD_ |
 
 ## Scoring
 

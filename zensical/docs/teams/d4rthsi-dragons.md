@@ -32,7 +32,7 @@ description: "Franchise history for D4rthSi Dragons in the Pine Hills Fantasy Fo
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2018 | 8-3 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2018 | 8-3 | 3 | Yes | [2018 Season](../seasons/2018-season.md) | [2018 Season](../seasons/2018-season.md) | _TBD_ |
 
 ## Scoring
 

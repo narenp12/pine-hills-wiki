@@ -32,7 +32,7 @@ description: "Franchise history for Tanmay's Hospital in the Pine Hills Fantasy 
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2022 | 5-9 | 9 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2022 | 5-9 | 9 | No | [2022 Season](../seasons/2022-season.md) | [2022 Season](../seasons/2022-season.md) | _TBD_ |
 
 ## Scoring
 

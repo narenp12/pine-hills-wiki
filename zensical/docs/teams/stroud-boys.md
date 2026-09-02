@@ -32,9 +32,9 @@ description: "Franchise history for Stroud Boys in the Pine Hills Fantasy Footba
 
 | Year | W-L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
 |------|-----|--------|-----------|-------------------|----------------------|------|
-| 2023 | 11-3 | 3 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2024 | 8-6 | 1 | Yes | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
-| 2025 | 3-11 | 12 | No | <span class="wiki-new" title="This page has not been written yet">Post-Draft</span> | <span class="wiki-new" title="This page has not been written yet">End-of-Season</span> | _TBD_ |
+| 2023 | 11-3 | 3 | Yes | [2023 Season](../seasons/2023-season.md) | [2023 Season](../seasons/2023-season.md) | _TBD_ |
+| 2024 | 8-6 | 1 | Yes | [2024 Season](../seasons/2024-season.md) | [2024 Season](../seasons/2024-season.md) | _TBD_ |
+| 2025 | 3-11 | 12 | No | [2025 Season](../seasons/2025-season.md) | [2025 Season](../seasons/2025-season.md) | _TBD_ |
 
 ## Scoring
 
