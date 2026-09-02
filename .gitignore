@@ -1,0 +1,32 @@
+.DS_Store
+node_modules
+public
+prof
+tsconfig.tsbuildinfo
+.obsidian
+.quartz-cache
+private/
+.replit
+replit.nix
+.quartz/
+quartz/cli/tui/dist/
+.turbo/
+.env
+quartz.config.ts
+dist/
+.astro/
+permalinks.json
+linkcheck-report.txt
+
+# Python cache
+scripts/__pycache__/
+__pycache__/
+.pytest_cache/
+
+# pytest-cov output
+.coverage
+htmlcov/
+
+# Zensical build artifacts (sources in zensical/docs are committed)
+zensical/.stage/
+zensical/site/
