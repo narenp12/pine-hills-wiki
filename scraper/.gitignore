@@ -1,0 +1,12 @@
+# Rust build artifacts
+/target
+
+# Dumped HTML for selector tuning (regenerate as needed)
+/dump
+
+# Sleeper's player dictionary, trimmed and cached. Refetched on demand; Sleeper
+# asks that the ~15 MB source be pulled at most once a day.
+/.cache
+
+# Generated raw JSON is committed intentionally (it feeds the site), but
+# you may choose to gitignore it if you always regenerate from Yahoo.
