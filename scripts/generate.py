@@ -41,6 +41,10 @@ _DASH_RE = re.compile("|".join(re.escape(k) for k in _DASHES))
 
 # Magic numbers replaced with named constants
 DEFAULT_RANK = 99
+# FALLBACK ONLY. This league's field has never been 4 — it ran 6 teams in 2018
+# and 8 by 2025 — so anything that can read bracket membership from captured
+# matchups must do that instead. This is what remains for a season with no
+# matchup data at all, where a cutoff is the only thing left to guess with.
 PLAYOFF_SEEDS = 4
 # Week boundaries used throughout the generator
 POST_DRAFT_WEEK = 1
@@ -181,8 +185,15 @@ def team_image_src(name: str, images: dict, prefix: str = "../") -> str:
 # --------------------------------------------------------------------------- #
 # aggregate: cross-year franchise stats (data-derivable only)
 # --------------------------------------------------------------------------- #
-def build_aggregates(seasons: dict) -> dict:
-    """Return {canonical_name: stats}. Stats are purely data-derived."""
+def build_aggregates(seasons: dict, playoff_teams=None) -> dict:
+    """Return {canonical_name: stats}. Stats are purely data-derived.
+
+    `playoff_teams` is the set of (year, team) that actually reached the bracket.
+    Pass it whenever it is available: the field has grown from six teams to
+    eight, so the fixed `PLAYOFF_SEEDS` cutoff undercounts appearances for every
+    season with a larger bracket. It stays as the fallback for seasons with no
+    captured matchups.
+    """
     # alias map: every known name -> canonical
     bible = load_bible()
     name_to_canonical = build_name_to_canonical(bible)
@@ -224,7 +235,7 @@ def build_aggregates(seasons: dict) -> dict:
             franchise["pa"] += points_against
             rank = int(team.get("rank", DEFAULT_RANK))
             franchise["finishes"].append((rank, year))
-            if rank <= PLAYOFF_SEEDS:
+            if made_playoffs(year, team_name, rank, playoff_teams):
                 franchise["playoff_appears"] += 1
             if points_for > franchise["best_pf_season"][0]:
                 franchise["best_pf_season"] = (points_for, year)
@@ -1622,8 +1633,9 @@ def gen_team_page(
     playoff_wins = game_stats.get("playoff_wins", 0)
     playoff_losses = game_stats.get("playoff_losses", 0)
     playoff_record = f"{playoff_wins}-{playoff_losses}" if (playoff_wins or playoff_losses) else TBD
-    # Appearances come from the bracket itself. The seeding heuristic in
-    # build_aggregates assumes a four-team field, which later seasons outgrew.
+    # Appearances come from the bracket itself. build_aggregates now reads the
+    # same bracket membership, so the fallback agrees rather than reverting to a
+    # four-team cutoff this league outgrew.
     playoff_years = game_stats.get("playoff_years")
     appearances = (
         len(playoff_years)
@@ -2499,11 +2511,11 @@ def main():
     (CONTENT / "draft").mkdir(parents=True, exist_ok=True)
     (CONTENT / "records").mkdir(parents=True, exist_ok=True)
 
-    aggregates = build_aggregates(seasons)
     owner_map = build_owner_map(bible, seasons)
-    # The matchup log has to come first: bracket membership is what tells the
-    # owner aggregates who actually made the playoffs.
+    # The matchup log has to come first: bracket membership is what tells both
+    # the franchise and the owner aggregates who actually made the playoffs.
     matchup_stats = build_matchup_stats(seasons, bible)
+    aggregates = build_aggregates(seasons, matchup_stats["playoff_teams"])
     owner_aggregates = build_owner_aggregates(
         seasons, bible, owner_map, matchup_stats["playoff_teams"]
     )

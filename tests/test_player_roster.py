@@ -216,3 +216,33 @@ def test_draft_award_names_the_drafting_team():
     best, _ = draft_value_awards(draft_value_season())
     assert "drafted by" in best
     assert "Team B" in best
+
+
+def test_playoff_appearances_read_from_the_bracket():
+    """Franchise playoff appearances must come from who actually reached the
+    bracket, not a fixed top-4 cutoff — this league's field grew to eight."""
+    from scripts.generate import build_aggregates
+
+    seasons = {2025: {"standings": {"teams": [
+        {"name": "Made It", "wins": 6, "losses": 8, "rank": 6,
+         "points_for": 1200, "points_against": 1250},
+        {"name": "Missed It", "wins": 8, "losses": 6, "rank": 3,
+         "points_for": 1300, "points_against": 1200},
+    ]}}}
+    # The 6 seed reached the bracket; the 3 seed did not.
+    playoff_teams = {(2025, "Made It")}
+
+    agg = build_aggregates(seasons, playoff_teams)
+    assert agg["Made It"]["playoff_appears"] == 1
+    assert agg["Missed It"]["playoff_appears"] == 0
+
+
+def test_playoff_appearances_fall_back_without_bracket_data():
+    from scripts.generate import build_aggregates
+
+    seasons = {2025: {"standings": {"teams": [
+        {"name": "Top Seed", "wins": 10, "losses": 4, "rank": 1,
+         "points_for": 1400, "points_against": 1100},
+    ]}}}
+    # No bracket data: the seed cutoff is the only thing left to go on.
+    assert build_aggregates(seasons)["Top Seed"]["playoff_appears"] == 1
