@@ -393,6 +393,11 @@ pub fn extract_rosters(
             .push(RosterPlayer {
                 name: player,
                 position: get("pos"),
+                // The rendered /rosters page carries neither the lineup slot nor
+                // the week's points, so this path leaves them empty. The v2 API
+                // path (parse_v2::parse_rosters) is the one that fills them.
+                slot: String::new(),
+                points: 0.0,
             });
     }
     out

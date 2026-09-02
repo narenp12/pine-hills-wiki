@@ -45,6 +45,10 @@ pub struct Matchup {
 pub struct RosterPlayer {
     pub name: String,
     pub position: String,
+    /// Lineup slot Yahoo had the player in that week ("QB", "W/R/T", "BN", "IR").
+    /// Bench rows are what make start/sit questions answerable at all.
+    pub slot: String,
+    pub points: f64,
 }
 
 #[derive(Debug, Serialize, Default, Clone)]
