@@ -596,6 +596,116 @@ def build_game_log(seasons: dict, bible: dict) -> list:
     return log
 
 
+def build_player_log(seasons: dict) -> list:
+    """One row per player per week per roster, phase-tagged.
+
+    Phase comes from the same bracket read `build_game_log` uses, so a
+    consolation week never contaminates the playoff book. A row is tagged with
+    the team whose roster the player sat on that week.
+    """
+    log = []
+    for year in sorted(seasons):
+        season_data = seasons[year]
+        playoff_start, bracket_games = season_phases(season_data)
+        # (week, team) pairs that played a real bracket game.
+        bracket_teams = {(week, name) for (week, names) in bracket_games for name in names}
+        for week_key, week_data in sorted(
+            (season_data.get("weeks") or {}).items(), key=lambda kv: int(kv[0])
+        ):
+            week = int(week_key)
+            for team_name, roster in ((week_data or {}).get("rosters") or {}).items():
+                if (week, team_name) in bracket_teams:
+                    phase = PHASE_PLAYOFF
+                elif playoff_start is not None and week >= playoff_start:
+                    phase = PHASE_CONSOLATION
+                else:
+                    phase = PHASE_REGULAR
+                for player in roster.get("players") or []:
+                    slot = player.get("slot") or ""
+                    log.append({
+                        "year": year,
+                        "week": week,
+                        "phase": phase,
+                        "team": team_name,
+                        "player": player.get("name") or "",
+                        "position": player.get("position") or "",
+                        "slot": slot,
+                        "points": float(player.get("points") or 0.0),
+                        "started": slot not in BENCH_SLOTS,
+                    })
+    return log
+
+
+def player_book_rows(player_log: list) -> list[str]:
+    """The five player books as table rows.
+
+    Ties are listed and marked, never arbitrated — the same rule the team books
+    follow. Bench marks read the whole log; every other book reads starters only,
+    since a benched score is not a lineup result.
+    """
+    started = [row for row in player_log if row["started"]]
+
+    def holders_rows(label, items, key, value, when) -> list[str]:
+        holders = top_holders(items, key)
+        if not holders:
+            return [f"| {label} | {TBD} | {TBD} | {TBD} |"]
+        shared = " (tied)" if len(holders) > 1 else ""
+        return [
+            f"| {label}{shared} | {row['player']} | {value(row)} | {when(row)} |"
+            for row in holders
+        ]
+
+    def week_when(row) -> str:
+        return f"{row['year']} Wk {row['week']}, {wikilink(row['team'])}"
+
+    def points_value(row) -> str:
+        return f"{row['points']:.2f} ({row['position'] or '—'})"
+
+    season_totals = {}
+    for row in started:
+        key = (row["player"], row["team"], row["year"])
+        season_totals[key] = season_totals.get(key, 0.0) + row["points"]
+    totals = [
+        {"player": k[0], "team": k[1], "year": k[2], "points": v}
+        for k, v in season_totals.items()
+    ]
+
+    rostered = {}
+    for row in player_log:
+        rostered[row["player"]] = rostered.get(row["player"], 0) + 1
+    weeks_rows = [{"player": k, "weeks": v} for k, v in rostered.items()]
+
+    table = []
+    table += holders_rows(
+        "Highest Regular-Season Week",
+        [r for r in started if r["phase"] == PHASE_REGULAR],
+        lambda r: r["points"], points_value, week_when,
+    )
+    table += holders_rows(
+        "Highest Playoff Week",
+        [r for r in started if r["phase"] == PHASE_PLAYOFF],
+        lambda r: r["points"], points_value, week_when,
+    )
+    table += holders_rows(
+        "Highest Season Total", totals,
+        lambda r: r["points"],
+        lambda r: f"{r['points']:.2f}",
+        lambda r: f"{r['year']}, {wikilink(r['team'])}",
+    )
+    table += holders_rows(
+        "Highest-Scoring Benched Player",
+        [r for r in player_log if not r["started"]],
+        lambda r: r["points"], points_value, week_when,
+    )
+    table += holders_rows(
+        "Most Weeks Rostered", weeks_rows,
+        lambda r: r["weeks"],
+        lambda r: f"{r['weeks']} weeks",
+        lambda r: "career",
+    )
+    return table
+
+
 def games_by_margin(log: list, threshold: float, above: bool) -> list:
     """Every game whose margin clears a threshold, widest (or closest) first.
 
@@ -1514,6 +1624,8 @@ def gen_records_index(
     owner_aggregates: dict,
     owner_game_stats: dict,
 ) -> str:
+    player_rows = player_book_rows(build_player_log(seasons))
+
     # single-season leaders, straight off the standings
     def season_row(label: str, key: str, value) -> str:
         entries = season_records.get(key) or []
@@ -1664,6 +1776,14 @@ Every game a manager has played, regular season, playoffs and consolation alike.
 | Owner | Games | Record | Win% | Points For | Points Against | Avg |
 |-------|-------|--------|------|------------|----------------|-----|
 {chr(10).join(total_rows)}
+
+## Players
+
+> Player records are keyed to the **player**, not the manager or the franchise. Regular season and postseason keep separate books, the same split the team records use. Bench marks count a player who scored while sitting.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+{chr(10).join(player_rows)}
 
 ## Postseason
 

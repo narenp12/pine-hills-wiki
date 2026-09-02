@@ -82,3 +82,63 @@ def test_backfill_positions():
     assert picks[0]["position"] == "QB"
     # Never fabricate: an unmatched pick stays blank rather than getting a guess.
     assert picks[1]["position"] == ""
+
+
+def two_week_season():
+    return {2025: {
+        "standings": {"teams": [{"name": "Team A", "rank": 1}, {"name": "Team B", "rank": 2}]},
+        "matchups": {
+            "1": [{"teams": [{"name": "Team A", "score": 100.0, "is_winner": True},
+                             {"name": "Team B", "score": 90.0, "is_winner": False}]}],
+            "2": [{"teams": [{"name": "Team A", "score": 110.0, "is_winner": True},
+                             {"name": "Team B", "score": 95.0, "is_winner": False}]}],
+        },
+        "playoffs": {"weeks": {
+            "2": [{"teams": [{"name": "Team A", "score": 110.0, "is_winner": True},
+                             {"name": "Team B", "score": 95.0, "is_winner": False}]}],
+        }},
+        "weeks": {
+            "1": {"rosters": {"Team A": {"players": [
+                {"name": "Starter QB", "position": "QB", "slot": "QB", "points": 30.0},
+                {"name": "Bench Guy", "position": "WR", "slot": "BN", "points": 40.0},
+            ]}}},
+            "2": {"rosters": {"Team A": {"players": [
+                {"name": "Starter QB", "position": "QB", "slot": "QB", "points": 35.0},
+            ]}}},
+        },
+    }}
+
+
+def test_player_log_rows_and_phases():
+    from scripts.generate import PHASE_REGULAR, build_player_log
+
+    log = build_player_log(two_week_season())
+    assert len(log) == 3
+    week1 = [r for r in log if r["week"] == 1]
+    assert all(r["phase"] == PHASE_REGULAR for r in week1)
+    assert {r["player"] for r in week1} == {"Starter QB", "Bench Guy"}
+
+
+def test_player_log_marks_started():
+    from scripts.generate import build_player_log
+
+    log = build_player_log(two_week_season())
+    bench = [r for r in log if r["player"] == "Bench Guy"][0]
+    assert bench["started"] is False
+    starter = [r for r in log if r["player"] == "Starter QB"][0]
+    assert starter["started"] is True
+
+
+def test_player_book_rows_cover_every_record():
+    from scripts.generate import build_player_log, player_book_rows
+
+    rows = player_book_rows(build_player_log(two_week_season()))
+    joined = "\n".join(rows)
+    assert "Highest Regular-Season Week" in joined
+    assert "Highest Playoff Week" in joined
+    assert "Highest Season Total" in joined
+    # The benched 40.0 outscored every starter that week; it belongs to the
+    # bench book and to no other.
+    bench_row = [r for r in rows if "Benched" in r][0]
+    assert "Bench Guy" in bench_row and "40.00" in bench_row
+    assert "Most Weeks Rostered" in joined
