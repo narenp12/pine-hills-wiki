@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Parris Campbell has appeared on, s
 - **Weeks Rostered:** 7 (1 started)
 - **Points in Lineup:** 0.70
 - **Points on the Bench:** 27.40
-- **Best Week:** 8.50 (benched) - 2022 Wk 13, [varun’s victorious team](../teams/varun-s-victorious-team.md)
+- **Best Week:** 8.50 (benched) - 2022 Wk 13, [varun's victorious team](../owners/varun.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Aryan's Amazing Team](../teams/aryan-s-amazing-team.md) | [Aryan](../owners/aryan.md) | WR | 1 | 1 | 0.70 | 0.70 - 2020 Wk 2 |
-| 2022 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | WR | 6 | 0 | 0.00 | 8.50 (benched) - 2022 Wk 13 |
+| 2020 | [Aryan's Amazing Team](../owners/aryan.md) | [Aryan](../owners/aryan.md) | WR | 1 | 1 | 0.70 | 0.70 - 2020 Wk 2 |
+| 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 6 | 0 | 0.00 | 8.50 (benched) - 2022 Wk 13 |
 
 ## Draft History
 

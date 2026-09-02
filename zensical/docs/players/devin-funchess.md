@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Devin Funchess has appeared on, se
 - **Weeks Rostered:** 2 (1 started)
 - **Points in Lineup:** 8.40
 - **Points on the Bench:** 6.20
-- **Best Week:** 8.40 - 2018 Wk 9, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 8.40 - 2018 Wk 9, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 2 | 1 | 8.40 | 8.40 - 2018 Wk 9 |
+| 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 2 | 1 | 8.40 | 8.40 - 2018 Wk 9 |
 
 ## Draft History
 

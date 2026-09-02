@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Kalen Ballage has appeared on, sea
 - **Weeks Rostered:** 1 (1 started)
 - **Points in Lineup:** 14.10
 - **Points on the Bench:** 0.00
-- **Best Week:** 14.10 - 2020 Wk 11, [I have Hop(e)](../teams/i-have-hop-e.md)
+- **Best Week:** 14.10 - 2020 Wk 11, [I have Hop(e)](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [I have Hop(e)](../teams/i-have-hop-e.md) | [Naren](../owners/naren.md) | RB | 1 | 1 | 14.10 | 14.10 - 2020 Wk 11 |
+| 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 1 | 1 | 14.10 | 14.10 - 2020 Wk 11 |
 
 ## Draft History
 

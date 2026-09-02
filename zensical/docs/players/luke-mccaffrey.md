@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Luke McCaffrey has appeared on, se
 # Luke McCaffrey
 
 - **Position:** WR
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Luke McCaffrey has appeared on, se
 - **Weeks Rostered:** 2 (1 started)
 - **Points in Lineup:** 9.10
 - **Points on the Bench:** 20.90
-- **Best Week:** 20.90 (benched) - 2025 Wk 7, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 20.90 (benched) - 2025 Wk 7, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 2 | 1 | 9.10 | 20.90 (benched) - 2025 Wk 7 |
+| 2025 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 2 | 1 | 9.10 | 20.90 (benched) - 2025 Wk 7 |
 
 ## Draft History
 

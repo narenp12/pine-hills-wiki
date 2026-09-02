@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Devin Neal has appeared on, season
 # Devin Neal
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Devin Neal has appeared on, season
 - **Weeks Rostered:** 1 (1 started)
 - **Points in Lineup:** 10.20
 - **Points on the Bench:** 0.00
-- **Best Week:** 10.20 - 2025 Wk 15 (Quarterfinal), [Save Me](../teams/save-me.md)
+- **Best Week:** 10.20 - 2025 Wk 15 (Quarterfinal), [Save Me](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Save Me](../teams/save-me.md) | [Naren](../owners/naren.md) | RB | 1 | 1 | 10.20 | 10.20 - 2025 Wk 15 (Quarterfinal) |
+| 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 1 | 1 | 10.20 | 10.20 - 2025 Wk 15 (Quarterfinal) |
 
 ## Draft History
 

@@ -7,26 +7,26 @@ year: 2024
 
 # 2024 Season
 
-- **Champion:** Stroud Boys
-- **Runner-Up:** Jayesh's Great Team
-- **Regular Season Top Seed:** Kamara’s a b*tch
-- **Toilet Bowl Winner:** Roger That
+- **Champion:** [Stroud Boys](../owners/tanmay.md)
+- **Runner-Up:** [Jayesh's Great Team](../owners/jayesh.md)
+- **Regular Season Top Seed:** [Kamara's a b*tch](../owners/naren.md)
+- **Toilet Bowl Winner:** [Roger That](../owners/pranav.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
 | 1 | Stroud Boys | Tanmay | 8-6 | 1688.16 | 1665.3 | 6 |
 | 2 | Jayesh's Great Team | Jayesh | 6-8 | 1421.08 | 1658.9 | 8 |
-| 3 | varun’s victorious team | Varun | 8-6 | 1689.9 | 1385.9 | 5 |
+| 3 | varun's victorious team | Varun | 8-6 | 1689.9 | 1385.9 | 5 |
 | 4 | Kaushal's Potatoes | Kaushal | 8-6 | 1625.8 | 1571.04 | 7 |
-| 5 | Big black big back | lokesh | 9-5 | 1730.3 | 1519.7 | 3 |
-| 6 | Kamara’s a b*tch | Naren | 11-3 | 1749.22 | 1589.04 | 1 |
+| 5 | Big black big back | Lokesh | 9-5 | 1730.3 | 1519.7 | 3 |
+| 6 | Kamara's a b*tch | Naren | 11-3 | 1749.22 | 1589.04 | 1 |
 | 7 | Joe Sheisty | Anish | 9-5 | 1686.9 | 1478.74 | 4 |
-| 8 | Super Squirrels | Super | 11-3 | 1723.42 | 1401.42 | 2 |
-| 9 | Sharman’s Scorpions | Sharman | 5-9 | 1566.7 | 1662.7 | - |
+| 8 | Super Squirrels | Abhinav | 11-3 | 1723.42 | 1401.42 | 2 |
+| 9 | Sharman's Scorpions | Sharman | 5-9 | 1566.7 | 1662.7 | - |
 | 10 | Jeremy's Neat Team | Jeremy | 4-10 | 1537.98 | 1694.6 | - |
 | 11 | Michael's Marvelous Team | Michael | 3-11 | 1386.14 | 1803.18 | - |
 | 12 | Roger That | Pranav | 2-12 | 1293.38 | 1668.46 | - |
@@ -38,20 +38,20 @@ year: 2024
 ```mermaid
 flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
-        W15G1["(1) Kamara’s a b*tch 111.70<br>✓ (8) Jayesh's Great Team 129.06"]
-        W15G2["(4) Joe Sheisty 108.14<br>✓ (5) varun’s victorious team 148.14"]
+        W15G1["(1) Kamara's a b*tch 111.70<br>✓ (8) Jayesh's Great Team 129.06"]
+        W15G2["(4) Joe Sheisty 108.14<br>✓ (5) varun's victorious team 148.14"]
         W15G3["(3) Big black big back 129.80<br>✓ (6) Stroud Boys 140.44"]
         W15G4["(2) Super Squirrels 61.88<br>✓ (7) Kaushal's Potatoes 116.74"]
     end
     subgraph RSemifinal["Semifinal"]
         W16G1["✓ (6) Stroud Boys 149.22<br>(7) Kaushal's Potatoes 111.70"]
-        W16G2["(5) varun’s victorious team 108.00<br>✓ (8) Jayesh's Great Team 131.28"]
+        W16G2["(5) varun's victorious team 108.00<br>✓ (8) Jayesh's Great Team 131.28"]
     end
     subgraph RFinal["Final"]
         W17G1["✓ (6) Stroud Boys 153.78<br>(8) Jayesh's Great Team 121.44"]
     end
     W15G1 -->|"Jayesh's Great Team"| W16G2
-    W15G2 -->|"varun’s victorious team"| W16G2
+    W15G2 -->|"varun's victorious team"| W16G2
     W15G3 -->|"Stroud Boys"| W16G1
     W15G4 -->|"Kaushal's Potatoes"| W16G1
     W16G1 -->|"Stroud Boys"| W17G1
@@ -61,7 +61,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Stroud Boys"
     **Post-draft - week 1**
@@ -145,7 +145,7 @@ flowchart LR
     | BN | [Cole Kmet](../players/cole-kmet.md) | TE | 0.00 |
     | BN | [Diontae Johnson](../players/diontae-johnson.md) | WR | 0.00 |
 
-??? note "varun’s victorious team"
+??? note "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -270,7 +270,7 @@ flowchart LR
     | BN | [Rhamondre Stevenson](../players/rhamondre-stevenson.md) | RB | 0.10 |
     | BN | [Tank Dell](../players/tank-dell.md) | WR | 0.00 |
 
-??? note "Kamara’s a b*tch"
+??? note "Kamara's a b*tch"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -398,7 +398,7 @@ flowchart LR
     | BN | [Jaylen Waddle](../players/jaylen-waddle.md) | WR | 0.00 |
     | IR | [Rashid Shaheed](../players/rashid-shaheed.md) | WR | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -565,15 +565,28 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Stroud Boys
+- **League Champion:** [Stroud Boys](../owners/tanmay.md)
 - **Most Valuable Player:** [Jalen Hurts](../players/jalen-hurts.md) - 7 wins swung
-- **Finals MVP:** [Tee Higgins](../players/tee-higgins.md) - 40.10 pts ([Stroud Boys](../teams/stroud-boys.md))
+- **Finals MVP:** [Tee Higgins](../players/tee-higgins.md) - 40.10 pts ([Stroud Boys](../owners/tanmay.md))
 - **Newcomer of the Year:** [Jayden Daniels](../players/jayden-daniels.md) - 4 wins swung
 - **Undrafted Player of the Year:** [Chase McLaughlin](../players/chase-mclaughlin.md) - 5 wins swung
-- **Highest Single-Week Score:** varun’s victorious team - 180.24 (Wk 8)
+- **Highest Single-Week Score:** varun's victorious team - 180.24 (Wk 8)
 - **Lowest Single-Week Score:** Jayesh's Great Team - 45.70 (Wk 12)
-- **Best Draft Pick:** [Ladd McConkey](../players/ladd-mcconkey.md) (WR) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 144, finished +41 spots at the position, 227.20 pts
-- **Biggest Bust:** [Christian McCaffrey](../players/christian-mccaffrey.md) (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 1, finished -38 spots at the position, 47.80 pts
+- **Best Draft Pick:** [Ladd McConkey](../players/ladd-mcconkey.md) (WR) - drafted by [Sharman's Scorpions](../owners/sharman.md) at pick 144, finished +41 spots at the position, 227.20 pts
+- **Biggest Bust:** [Marvin Harrison Jr.](../players/marvin-harrison-jr.md) (WR) - drafted by [Kaushal's Potatoes](../owners/kaushal.md) at pick 15, finished -22 spots at the position, 179.20 pts, played 15 of 17 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Jalen Hurts](../players/jalen-hurts.md) | 35.14 | Wk 8, [Kamara's a b*tch](../owners/naren.md) |
+| RB | [Saquon Barkley](../players/saquon-barkley.md) | 46.20 | Wk 12, [Stroud Boys](../owners/tanmay.md) |
+| WR | [Ja'Marr Chase](../players/ja-marr-chase.md) | 55.40 | Wk 10, [Joe Sheisty](../owners/anish.md) |
+| TE | [Brock Bowers](../players/brock-bowers.md) | 31.30 | Wk 11, [Kaushal's Potatoes](../owners/kaushal.md) |
+| K | [Jake Moody](../players/jake-moody.md) | 26.00 | Wk 1, [Big black big back](../owners/lokesh.md) |
+| DEF | [Bears](../players/bears.md) | 24.00 | Wk 1, [varun's victorious team](../owners/varun.md) |
 
 ## Team of the Season
 
@@ -581,17 +594,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Jalen Hurts](../players/jalen-hurts.md) | QB | 7 | 153.48 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) |
-| RB | [Bijan Robinson](../players/bijan-robinson.md) | RB | 6 | 138.70 | [Jayesh's Great Team](../teams/jayesh-s-great-team.md) |
-|  | [James Cook III](../players/james-cook-iii.md) | RB | 6 | 134.80 | [Jayesh's Great Team](../teams/jayesh-s-great-team.md) |
-| WR | [Drake London](../players/drake-london.md) | WR | 5 | 106.10 | [Jayesh's Great Team](../teams/jayesh-s-great-team.md) |
-|  | [Justin Jefferson](../players/justin-jefferson.md) | WR | 4 | 91.08 | [Big black big back](../teams/big-black-big-back.md) |
-| TE | [Cade Otton](../players/cade-otton.md) | TE | 3 | 35.70 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) |
-| W/R/T | [Jahmyr Gibbs](../players/jahmyr-gibbs.md) | RB | 5 | 121.40 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) |
-| K | [Chase McLaughlin](../players/chase-mclaughlin.md) | K | 5 | 53.00 | [Stroud Boys](../teams/stroud-boys.md), [Big black big back](../teams/big-black-big-back.md) |
-| DEF | [Vikings](../players/vikings.md) | DEF | 4 | 42.00 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md), [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
+| QB | [Jalen Hurts](../players/jalen-hurts.md) | QB | 7 | 153.48 | <span class="wiki-new" title="This page has not been written yet">Kamara's a b*tch</span> |
+| RB | [Bijan Robinson](../players/bijan-robinson.md) | RB | 6 | 138.70 | <span class="wiki-new" title="This page has not been written yet">Jayesh's Great Team</span> |
+|  | [James Cook III](../players/james-cook-iii.md) | RB | 6 | 134.80 | <span class="wiki-new" title="This page has not been written yet">Jayesh's Great Team</span> |
+| WR | [Drake London](../players/drake-london.md) | WR | 5 | 106.10 | <span class="wiki-new" title="This page has not been written yet">Jayesh's Great Team</span> |
+|  | [Justin Jefferson](../players/justin-jefferson.md) | WR | 4 | 91.08 | <span class="wiki-new" title="This page has not been written yet">Big black big back</span> |
+| TE | [Cade Otton](../players/cade-otton.md) | TE | 3 | 35.70 | <span class="wiki-new" title="This page has not been written yet">Kamara's a b*tch</span> |
+| W/R/T | [Jahmyr Gibbs](../players/jahmyr-gibbs.md) | RB | 5 | 121.40 | <span class="wiki-new" title="This page has not been written yet">Kamara's a b*tch</span> |
+| K | [Chase McLaughlin](../players/chase-mclaughlin.md) | K | 5 | 53.00 | <span class="wiki-new" title="This page has not been written yet">Stroud Boys</span>, <span class="wiki-new" title="This page has not been written yet">Big black big back</span> |
+| DEF | [Vikings](../players/vikings.md) | DEF | 4 | 42.00 | <span class="wiki-new" title="This page has not been written yet">Kamara's a b*tch</span>, <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

@@ -7,14 +7,14 @@ year: 2020
 
 # 2020 Season
 
-- **Champion:** Roger That
-- **Runner-Up:** Imagine Losing
-- **Regular Season Top Seed:** My team is Koo(l)
-- **Toilet Bowl Winner:** I have Hop(e)
+- **Champion:** [Roger That](../owners/pranav.md)
+- **Runner-Up:** [Imagine Losing](../owners/om.md)
+- **Regular Season Top Seed:** [My team is Koo(l)](../owners/lokesh.md)
+- **Toilet Bowl Winner:** [I have Hop(e)](../owners/naren.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
@@ -23,10 +23,10 @@ year: 2020
 | 3 | Kaushal's Potatoes | Kaushal | 6-7 | 1636.04 | 1579.58 | 6 |
 | 4 | CHOPSTIX | sahil | 2-11 | 1374.98 | 1718.72 | 8 |
 | 5 | Anish's Awesome Team | Anish | 9-4 | 1635.98 | 1576.34 | 2 |
-| 6 | My team is Koo(l) | lokesh | 9-4 | 1783.6 | 1593.36 | 1 |
-| 7 | Sharman’s Scorpions | Sharman | 8-5 | 1732.96 | 1522.1 | 3 |
+| 6 | My team is Koo(l) | Lokesh | 9-4 | 1783.6 | 1593.36 | 1 |
+| 7 | Sharman's Scorpions | Sharman | 8-5 | 1732.96 | 1522.1 | 3 |
 | 7 | Aryan's Amazing Team | Aryan | 6-7 | 1538.1 | 1652.8 | - |
-| 8 | Super Squirrels | Super | 8-5 | 1635.56 | 1452.18 | 4 |
+| 8 | Super Squirrels | Abhinav | 8-5 | 1635.56 | 1452.18 | 4 |
 | 9 | I have Hop(e) | Naren | 4-9 | 1548.58 | 1647.38 | - |
 
 ## Playoff Bracket
@@ -38,7 +38,7 @@ flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
         W14G1["✓ (7) Roger That 165.74<br>(2) Anish's Awesome Team 87.96"]
         W14G2["(1) My team is Koo(l) 117.52<br>✓ (8) CHOPSTIX 118.52"]
-        W14G3["(3) Sharman’s Scorpions 107.62<br>✓ (6) Kaushal's Potatoes 132.26"]
+        W14G3["(3) Sharman's Scorpions 107.62<br>✓ (6) Kaushal's Potatoes 132.26"]
         W14G4["(4) Super Squirrels 158.44<br>✓ (5) Imagine Losing 162.26"]
     end
     subgraph RSemifinal["Semifinal"]
@@ -59,7 +59,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Roger That"
     **Post-draft - week 1**
@@ -308,7 +308,7 @@ flowchart LR
     | BN | [Cordarrelle Patterson](../players/cordarrelle-patterson.md) | WR | 2.20 |
     | BN | [Terry McLaurin](../players/terry-mclaurin.md) | WR | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -477,15 +477,28 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Roger That
+- **League Champion:** [Roger That](../owners/pranav.md)
 - **Most Valuable Player:** [Kyler Murray](../players/kyler-murray.md) - 9 wins swung
-- **Finals MVP:** [David Johnson](../players/david-johnson.md) - 28.90 pts ([Roger That](../teams/roger-that.md))
+- **Finals MVP:** [David Johnson](../players/david-johnson.md) - 28.90 pts ([Roger That](../owners/pranav.md))
 - **Newcomer of the Year:** [Jonathan Taylor](../players/jonathan-taylor.md) - 6 wins swung
 - **Undrafted Player of the Year:** [Justin Jefferson](../players/justin-jefferson.md) - 4 wins swung
 - **Highest Single-Week Score:** My team is Koo(l) - 175.42 (Wk 2)
 - **Lowest Single-Week Score:** Imagine Losing - 67.72 (Wk 10)
-- **Best Draft Pick:** [Kareem Hunt](../players/kareem-hunt.md) (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 104, finished +23 spots at the position, 213.40 pts
-- **Biggest Bust:** [Michael Thomas](../players/michael-thomas.md) (WR) - drafted by [Imagine Losing](../teams/imagine-losing.md) at pick 6, finished -33 spots at the position, 83.90 pts
+- **Best Draft Pick:** [Kareem Hunt](../players/kareem-hunt.md) (RB) - drafted by [Sharman's Scorpions](../owners/sharman.md) at pick 104, finished +23 spots at the position, 213.40 pts
+- **Biggest Bust:** [Lamar Jackson](../players/lamar-jackson.md) (QB) - drafted by [CHOPSTIX](../owners/sahil.md) at pick 22, finished -7 spots at the position, 316.56 pts, played 14 of 16 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Patrick Mahomes](../players/patrick-mahomes.md) | 40.00 | Wk 3, [Sharman's Scorpions](../owners/sharman.md) |
+| RB | [Dalvin Cook](../players/dalvin-cook.md) | 48.60 | Wk 8, [Super Squirrels](../owners/abhinav.md) |
+| WR | [Tyreek Hill](../players/tyreek-hill.md) | 57.90 | Wk 12, [My team is Koo(l)](../owners/lokesh.md) |
+| TE | [Darren Waller](../players/darren-waller.md) | 45.00 | Wk 13, [My team is Koo(l)](../owners/lokesh.md) |
+| K | [Younghoe Koo](../players/younghoe-koo.md) | 21.00 | Wk 12, [My team is Koo(l)](../owners/lokesh.md) |
+| DEF | [Patriots](../players/patriots.md) | 31.00 | Wk 13, [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Team of the Season
 
@@ -493,17 +506,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Kyler Murray](../players/kyler-murray.md) | QB | 9 | 249.48 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-| RB | [Aaron Jones Sr.](../players/aaron-jones-sr.md) | RB | 7 | 162.80 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-|  | [Jonathan Taylor](../players/jonathan-taylor.md) | RB | 6 | 112.60 | [Imagine Losing](../teams/imagine-losing.md) |
-| WR | [Calvin Ridley](../players/calvin-ridley.md) | WR | 7 | 175.10 | [Imagine Losing](../teams/imagine-losing.md) |
-|  | [Tyreek Hill](../players/tyreek-hill.md) | WR | 6 | 156.30 | [My team is Koo(l)](../teams/my-team-is-koo-l.md) |
-| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 104.36 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) |
-| W/R/T | [DK Metcalf](../players/dk-metcalf.md) | WR | 6 | 127.30 | [Imagine Losing](../teams/imagine-losing.md) |
-| K | [Jason Sanders](../players/jason-sanders.md) | K | 3 | 39.00 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-| DEF | [Colts](../players/colts.md) | DEF | 4 | 50.00 | [Imagine Losing](../teams/imagine-losing.md) |
+| QB | [Kyler Murray](../players/kyler-murray.md) | QB | 9 | 249.48 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+| RB | [Aaron Jones Sr.](../players/aaron-jones-sr.md) | RB | 7 | 162.80 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+|  | [Jonathan Taylor](../players/jonathan-taylor.md) | RB | 6 | 112.60 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
+| WR | [Calvin Ridley](../players/calvin-ridley.md) | WR | 7 | 175.10 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
+|  | [Tyreek Hill](../players/tyreek-hill.md) | WR | 6 | 156.30 | <span class="wiki-new" title="This page has not been written yet">My team is Koo(l)</span> |
+| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 104.36 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
+| W/R/T | [DK Metcalf](../players/dk-metcalf.md) | WR | 6 | 127.30 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
+| K | [Jason Sanders](../players/jason-sanders.md) | K | 3 | 39.00 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+| DEF | [Colts](../players/colts.md) | DEF | 4 | 50.00 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

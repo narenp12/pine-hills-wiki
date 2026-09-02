@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Greg Dulcich has appeared on, seas
 - **Weeks Rostered:** 5 (3 started)
 - **Points in Lineup:** 11.20
 - **Points on the Bench:** 13.90
-- **Best Week:** 13.90 (benched) - 2022 Wk 16 (consolation), [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md)
+- **Best Week:** 13.90 (benched) - 2022 Wk 16 (consolation), [Hill We Go… Again (feat Kyler)](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2022 | [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md) | [Naren](../owners/naren.md) | TE | 5 | 3 | 11.20 | 13.90 (benched) - 2022 Wk 16 (consolation) |
+| 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 5 | 3 | 11.20 | 13.90 (benched) - 2022 Wk 16 (consolation) |
 
 ## Draft History
 

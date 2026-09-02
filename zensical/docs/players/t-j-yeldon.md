@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster T.J. Yeldon has appeared on, seaso
 - **Weeks Rostered:** 4 (3 started)
 - **Points in Lineup:** 49.70
 - **Points on the Bench:** 17.80
-- **Best Week:** 26.20 - 2018 Wk 5, [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 26.20 - 2018 Wk 5, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | RB | 3 | 2 | 36.20 | 26.20 - 2018 Wk 5 |
-| 2018 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 1 | 1 | 13.50 | 13.50 - 2018 Wk 13 |
+| 2018 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 3 | 2 | 36.20 | 26.20 - 2018 Wk 5 |
+| 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 1 | 1 | 13.50 | 13.50 - 2018 Wk 13 |
 
 ## Draft History
 

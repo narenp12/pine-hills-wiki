@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Ty Johnson has appeared on, season
 - **Weeks Rostered:** 2 (2 started)
 - **Points in Lineup:** 13.90
 - **Points on the Bench:** 0.00
-- **Best Week:** 9.70 - 2021 Wk 14, [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md)
+- **Best Week:** 9.70 - 2021 Wk 14, [The Johnson and Johnson team](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | RB | 2 | 2 | 13.90 | 9.70 - 2021 Wk 14 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 2 | 2 | 13.90 | 9.70 - 2021 Wk 14 |
 
 ## Draft History
 

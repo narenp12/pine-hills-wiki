@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Theo Riddick has appeared on, seas
 - **Weeks Rostered:** 2 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 18.60
-- **Best Week:** 9.80 (benched) - 2018 Wk 14 (Quarterfinal), [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 9.80 (benched) - 2018 Wk 14 (Quarterfinal), [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | RB | 2 | 0 | 0.00 | 9.80 (benched) - 2018 Wk 14 (Quarterfinal) |
+| 2018 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 2 | 0 | 0.00 | 9.80 (benched) - 2018 Wk 14 (Quarterfinal) |
 
 ## Draft History
 

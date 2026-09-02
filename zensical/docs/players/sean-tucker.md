@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Sean Tucker has appeared on, seaso
 # Sean Tucker
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Sean Tucker has appeared on, seaso
 - **Weeks Rostered:** 8 (3 started)
 - **Points in Lineup:** 20.80
 - **Points on the Bench:** 30.50
-- **Best Week:** 15.20 - 2025 Wk 8, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 15.20 - 2025 Wk 8, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | RB | 6 | 2 | 5.60 | 10.90 (benched) - 2025 Wk 15 (Quarterfinal) |
-| 2025 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | RB | 2 | 1 | 15.20 | 15.20 - 2025 Wk 8 |
+| 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 6 | 2 | 5.60 | 10.90 (benched) - 2025 Wk 15 (Quarterfinal) |
+| 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 2 | 1 | 15.20 | 15.20 - 2025 Wk 8 |
 
 ## Draft History
 

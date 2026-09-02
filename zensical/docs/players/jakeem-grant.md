@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Jakeem Grant has appeared on, seas
 - **Weeks Rostered:** 6 (2 started)
 - **Points in Lineup:** 24.10
 - **Points on the Bench:** 28.20
-- **Best Week:** 20.00 - 2020 Wk 10, [Roger That](../teams/roger-that.md)
+- **Best Week:** 20.00 - 2020 Wk 10, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | WR | 6 | 2 | 24.10 | 20.00 - 2020 Wk 10 |
+| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 6 | 2 | 24.10 | 20.00 - 2020 Wk 10 |
 
 ## Draft History
 

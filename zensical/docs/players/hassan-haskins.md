@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Hassan Haskins has appeared on, se
 # Hassan Haskins
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Hassan Haskins has appeared on, se
 - **Weeks Rostered:** 4 (2 started)
 - **Points in Lineup:** 5.80
 - **Points on the Bench:** 0.00
-- **Best Week:** 3.30 - 2025 Wk 6, [Indiana Jones](../teams/indiana-jones.md)
+- **Best Week:** 3.30 - 2025 Wk 6, [Indiana Jones](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Indiana Jones](../teams/indiana-jones.md) | [Anish](../owners/anish.md) | RB | 4 | 2 | 5.80 | 3.30 - 2025 Wk 6 |
+| 2025 | [Indiana Jones](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 4 | 2 | 5.80 | 3.30 - 2025 Wk 6 |
 
 ## Draft History
 

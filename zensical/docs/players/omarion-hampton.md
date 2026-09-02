@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Omarion Hampton has appeared on, s
 # Omarion Hampton
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,23 +14,24 @@ description: "Every Pine Hills fantasy roster Omarion Hampton has appeared on, s
 - **Weeks Rostered:** 17 (7 started)
 - **Points in Lineup:** 96.10
 - **Points on the Bench:** 42.60
-- **Best Week:** 27.90 (benched) - 2025 Wk 3, [Indiana Jones](../teams/indiana-jones.md)
-- **Times Drafted:** 1 (first: 2025 R3 P33)
+- **Best Week:** 27.90 (benched) - 2025 Wk 3, [Indiana Jones](../owners/anish.md)
+- **Times Drafted:** 2 (first: 2025 R3 P33)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Indiana Jones](../teams/indiana-jones.md) | [Anish](../owners/anish.md) | RB | 17 | 7 | 96.10 | 27.90 (benched) - 2025 Wk 3 |
+| 2025 | [Indiana Jones](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 17 | 7 | 96.10 | 27.90 (benched) - 2025 Wk 3 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 3 | 33 | [Indiana Jones](../teams/indiana-jones.md) |
+| 2025 | 3 | 33 | [Indiana Jones](../owners/anish.md) |
+| 2026 | 2 | 168 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

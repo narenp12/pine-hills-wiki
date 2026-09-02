@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Foster Moreau has appeared on, sea
 - **Weeks Rostered:** 1 (1 started)
 - **Points in Lineup:** 4.40
 - **Points on the Bench:** 0.00
-- **Best Week:** 4.40 - 2021 Wk 13, [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md)
+- **Best Week:** 4.40 - 2021 Wk 13, [The Johnson and Johnson team](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | TE | 1 | 1 | 4.40 | 4.40 - 2021 Wk 13 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | TE | 1 | 1 | 4.40 | 4.40 - 2021 Wk 13 |
 
 ## Draft History
 

@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Dan Bailey has appeared on, season
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
-- **Best Week:** 0.00 (benched) - 2018 Wk 3, [D4rthSi Dragons](../teams/d4rthsi-dragons.md)
+- **Best Week:** 0.00 (benched) - 2018 Wk 3, [D4rthSi Dragons](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) | [Naren](../owners/naren.md) | K | 1 | 0 | 0.00 | 0.00 (benched) - 2018 Wk 3 |
+| 2018 | [D4rthSi Dragons](../owners/naren.md) | [Naren](../owners/naren.md) | K | 1 | 0 | 0.00 | 0.00 (benched) - 2018 Wk 3 |
 
 ## Draft History
 

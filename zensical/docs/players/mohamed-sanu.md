@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Mohamed Sanu has appeared on, seas
 - **Weeks Rostered:** 3 (2 started)
 - **Points in Lineup:** 11.40
 - **Points on the Bench:** 4.30
-- **Best Week:** 5.90 - 2019 Wk 6, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 5.90 - 2019 Wk 6, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | WR | 2 | 1 | 5.50 | 5.50 - 2019 Wk 11 |
-| 2019 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 1 | 1 | 5.90 | 5.90 - 2019 Wk 6 |
+| 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 2 | 1 | 5.50 | 5.50 - 2019 Wk 11 |
+| 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 1 | 1 | 5.90 | 5.90 - 2019 Wk 6 |
 
 ## Draft History
 

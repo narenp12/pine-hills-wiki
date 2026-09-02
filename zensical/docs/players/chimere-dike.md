@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Chimere Dike has appeared on, seas
 # Chimere Dike
 
 - **Position:** WR
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Chimere Dike has appeared on, seas
 - **Weeks Rostered:** 10 (8 started)
 - **Points in Lineup:** 154.40
 - **Points on the Bench:** 40.20
-- **Best Week:** 40.20 (benched) - 2025 Wk 12, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 40.20 (benched) - 2025 Wk 12, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 10 | 8 | 154.40 | 40.20 (benched) - 2025 Wk 12 |
+| 2025 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 10 | 8 | 154.40 | 40.20 (benched) - 2025 Wk 12 |
 
 ## Draft History
 

@@ -7,26 +7,26 @@ year: 2025
 
 # 2025 Season
 
-- **Champion:** Jeremy's Neat Team
-- **Runner-Up:** Big black big back
-- **Regular Season Top Seed:** Roger That
-- **Toilet Bowl Winner:** Stroud Boys
+- **Champion:** [Jeremy's Neat Team](../owners/jeremy.md)
+- **Runner-Up:** [Big black big back](../owners/lokesh.md)
+- **Regular Season Top Seed:** [Roger That](../owners/pranav.md)
+- **Toilet Bowl Winner:** [Stroud Boys](../owners/tanmay.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
 | 1 | Jeremy's Neat Team | Jeremy | 8-6 | 1526.46 | 1552.74 | 5 |
-| 2 | Big black big back | lokesh | 7-7 | 1603.4 | 1557.16 | 7 |
+| 2 | Big black big back | Lokesh | 7-7 | 1603.4 | 1557.16 | 7 |
 | 3 | Roger That | Pranav | 10-4 | 1751.42 | 1564.38 | 1 |
 | 4 | Save Me | Naren | 7-7 | 1657.02 | 1648.02 | 6 |
 | 5 | Indiana Jones | Anish | 8-6 | 1594.84 | 1458.2 | 4 |
-| 6 | Sharman’s Scorpions | Sharman | 8-6 | 1692.32 | 1697.14 | 3 |
-| 7 | varun’s victorious team | Varun | 9-5 | 1719.92 | 1559.16 | 2 |
+| 6 | Sharman's Scorpions | Sharman | 8-6 | 1692.32 | 1697.14 | 3 |
+| 7 | varun's victorious team | Varun | 9-5 | 1719.92 | 1559.16 | 2 |
 | 8 | Kaushal's Potatoes | Kaushal | 7-7 | 1551.74 | 1552.56 | 8 |
-| 9 | Super Squirrels | Super | 6-8 | 1470.88 | 1490.06 | - |
+| 9 | Super Squirrels | Abhinav | 6-8 | 1470.88 | 1490.06 | - |
 | 10 | Jayesh's Great Team | Jayesh | 6-8 | 1363.52 | 1470.56 | - |
 | 11 | Michael's Marvelous Team | Michael | 5-9 | 1694.9 | 1555.26 | - |
 | 12 | Stroud Boys | Tanmay | 3-11 | 1151.54 | 1672.72 | - |
@@ -38,9 +38,9 @@ year: 2025
 ```mermaid
 flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
-        W15G1["✓ (6) Save Me 106.50<br>(3) Sharman’s Scorpions 105.16"]
+        W15G1["✓ (6) Save Me 106.50<br>(3) Sharman's Scorpions 105.16"]
         W15G2["(4) Indiana Jones 109.36<br>✓ (5) Jeremy's Neat Team 121.80"]
-        W15G3["✓ (7) Big black big back 135.24<br>(2) varun’s victorious team 121.50"]
+        W15G3["✓ (7) Big black big back 135.24<br>(2) varun's victorious team 121.50"]
         W15G4["✓ (1) Roger That 138.72<br>(8) Kaushal's Potatoes 124.84"]
     end
     subgraph RSemifinal["Semifinal"]
@@ -61,7 +61,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Jeremy's Neat Team"
     **Post-draft - week 1**
@@ -271,7 +271,7 @@ flowchart LR
     | BN | [Jordan Mason](../players/jordan-mason.md) | RB | 0.00 |
     | BN | [Marvin Harrison Jr.](../players/marvin-harrison-jr.md) | WR | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -312,7 +312,7 @@ flowchart LR
     | BN | [Matt Prater](../players/matt-prater.md) | K | 0.00 |
     | BN | [Patrick Mahomes](../players/patrick-mahomes.md) | QB | 0.00 |
 
-??? note "varun’s victorious team"
+??? note "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -564,15 +564,29 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Jeremy's Neat Team
+- **League Champion:** [Jeremy's Neat Team](../owners/jeremy.md)
 - **Most Valuable Player:** [Ja'Marr Chase](../players/ja-marr-chase.md) - 6 wins swung
-- **Finals MVP:** [Rhamondre Stevenson](../players/rhamondre-stevenson.md) - 27.20 pts ([Jeremy's Neat Team](../teams/jeremy-s-neat-team.md))
+- **Finals MVP:** [Rhamondre Stevenson](../players/rhamondre-stevenson.md) - 27.20 pts ([Jeremy's Neat Team](../owners/jeremy.md))
 - **Newcomer of the Year:** [Ashton Jeanty](../players/ashton-jeanty.md) - 5 wins swung
 - **Undrafted Player of the Year:** [Eddy Pineiro](../players/eddy-pineiro.md) - 5 wins swung
-- **Highest Single-Week Score:** Sharman’s Scorpions - 177.24 (Wk 7)
+- **Highest Single-Week Score:** Sharman's Scorpions - 177.24 (Wk 7)
 - **Lowest Single-Week Score:** Stroud Boys - 38.50 (Wk 6)
-- **Best Draft Pick:** [Rashid Shaheed](../players/rashid-shaheed.md) (WR) - drafted by [varun’s victorious team](../teams/varun-s-victorious-team.md) at pick 113, finished +40 spots at the position, 227.60 pts
-- **Biggest Bust:** [Malik Nabers](../players/malik-nabers.md) (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 11, finished -45 spots at the position, 57.10 pts
+- **Best Draft Pick:** [Rashid Shaheed](../players/rashid-shaheed.md) (WR) - drafted by [varun's victorious team](../owners/varun.md) at pick 113, finished +40 spots at the position, 227.60 pts
+- **Biggest Bust:** [Brian Thomas Jr.](../players/brian-thomas-jr.md) (WR) - drafted by [Super Squirrels](../owners/abhinav.md) at pick 14, finished -26 spots at the position, 130.90 pts, played 13 of 17 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Josh Allen](../players/josh-allen.md) | 44.68 | Wk 11, [Jayesh's Great Team](../owners/jayesh.md) |
+| RB | [Jahmyr Gibbs](../players/jahmyr-gibbs.md) | 55.40 | Wk 12, [Sharman's Scorpions](../owners/sharman.md) |
+| WR | [Amon-Ra St. Brown](../players/amon-ra-st-brown.md) | 39.20 | Wk 2, [varun's victorious team](../owners/varun.md) |
+| TE | [Tucker Kraft](../players/tucker-kraft.md) | 33.30 | Wk 8, [Sharman's Scorpions](../owners/sharman.md) |
+| K | [Brandon Aubrey](../players/brandon-aubrey.md) | 23.00 | Wk 14, [Jayesh's Great Team](../owners/jayesh.md) |
+| DEF (2-way tie) | [Vikings](../players/vikings.md) | 30.00 | Wk 3, [varun's victorious team](../owners/varun.md) |
+|  | [Seahawks](../players/seahawks.md) | 30.00 | Wk 13, [Save Me](../owners/naren.md) |
 
 ## Team of the Season
 
@@ -580,18 +594,18 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Lamar Jackson](../players/lamar-jackson.md) | QB | 6 | 101.84 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) |
-| RB | [Saquon Barkley](../players/saquon-barkley.md) | RB | 6 | 92.30 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) |
-|  | [Jahmyr Gibbs](../players/jahmyr-gibbs.md) | RB | 5 | 142.20 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| WR | [Ja'Marr Chase](../players/ja-marr-chase.md) | WR | 6 | 138.70 | [Roger That](../teams/roger-that.md) |
-|  | [Davante Adams](../players/davante-adams.md) | WR | 6 | 82.00 | [Save Me](../teams/save-me.md) |
-| TE | [Trey McBride](../players/trey-mcbride.md) | TE | 5 | 109.50 | [Roger That](../teams/roger-that.md) |
-| W/R/T | [Travis Etienne Jr.](../players/travis-etienne-jr.md) | RB | 5 | 103.70 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) |
-| K | [Eddy Pineiro](../players/eddy-pineiro.md) | K | 5 | 69.00 | [Save Me](../teams/save-me.md), [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) |
-| DEF (2-way tie) | [Broncos](../players/broncos.md) | DEF | 3 | 37.00 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) |
-|  | [Lions](../players/lions.md) | DEF | 3 | 37.00 | [Save Me](../teams/save-me.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
+| QB | [Lamar Jackson](../players/lamar-jackson.md) | QB | 6 | 101.84 | <span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span> |
+| RB | [Saquon Barkley](../players/saquon-barkley.md) | RB | 6 | 92.30 | <span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span> |
+|  | [Jahmyr Gibbs](../players/jahmyr-gibbs.md) | RB | 5 | 142.20 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| WR | [Ja'Marr Chase](../players/ja-marr-chase.md) | WR | 6 | 138.70 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+|  | [Davante Adams](../players/davante-adams.md) | WR | 6 | 82.00 | <span class="wiki-new" title="This page has not been written yet">Save Me</span> |
+| TE | [Trey McBride](../players/trey-mcbride.md) | TE | 5 | 109.50 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| W/R/T | [Travis Etienne Jr.](../players/travis-etienne-jr.md) | RB | 5 | 103.70 | <span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span> |
+| K | [Eddy Pineiro](../players/eddy-pineiro.md) | K | 5 | 69.00 | <span class="wiki-new" title="This page has not been written yet">Save Me</span>, <span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span> |
+| DEF (2-way tie) | [Broncos](../players/broncos.md) | DEF | 3 | 37.00 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
+|  | [Lions](../players/lions.md) | DEF | 3 | 37.00 | <span class="wiki-new" title="This page has not been written yet">Save Me</span>, <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

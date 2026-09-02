@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Ty'Son Williams has appeared on, s
 - **Weeks Rostered:** 3 (1 started)
 - **Points in Lineup:** 2.20
 - **Points on the Bench:** 29.70
-- **Best Week:** 18.40 (benched) - 2021 Wk 1, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md)
+- **Best Week:** 18.40 (benched) - 2021 Wk 1, [Michael's Marvelous Team](../owners/michael.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | RB | 2 | 0 | 0.00 | 18.40 (benched) - 2021 Wk 1 |
-| 2021 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | RB | 1 | 1 | 2.20 | 2.20 - 2021 Wk 3 |
+| 2021 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 2 | 0 | 0.00 | 18.40 (benched) - 2021 Wk 1 |
+| 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 1 | 1 | 2.20 | 2.20 - 2021 Wk 3 |
 
 ## Draft History
 

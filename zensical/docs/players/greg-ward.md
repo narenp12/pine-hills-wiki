@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Greg Ward has appeared on, season 
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 8.60
-- **Best Week:** 8.60 (benched) - 2020 Wk 4, [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 8.60 (benched) - 2020 Wk 4, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 8.60 (benched) - 2020 Wk 4 |
+| 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 8.60 (benched) - 2020 Wk 4 |
 
 ## Draft History
 

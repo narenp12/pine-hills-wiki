@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Jonathan Williams has appeared on,
 - **Weeks Rostered:** 2 (2 started)
 - **Points in Lineup:** 24.60
 - **Points on the Bench:** 0.00
-- **Best Week:** 21.10 - 2019 Wk 12, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 21.10 - 2019 Wk 12, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 2 | 2 | 24.60 | 21.10 - 2019 Wk 12 |
+| 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 2 | 2 | 24.60 | 21.10 - 2019 Wk 12 |
 
 ## Draft History
 

@@ -7,27 +7,27 @@ year: 2022
 
 # 2022 Season
 
-- **Champion:** Jeremy's Neat Team
-- **Runner-Up:** Michael's Marvelous Team
-- **Regular Season Top Seed:** Sharman’s Scorpions
-- **Toilet Bowl Winner:** varun’s victorious team
+- **Champion:** [Jeremy's Neat Team](../owners/jeremy.md)
+- **Runner-Up:** [Michael's Marvelous Team](../owners/michael.md)
+- **Regular Season Top Seed:** [Sharman's Scorpions](../owners/sharman.md)
+- **Toilet Bowl Winner:** [varun's victorious team](../owners/varun.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
 | 1 | Jeremy's Neat Team | Jeremy | 7-7 | 1788.44 | 1695.46 | 6 |
 | 2 | Michael's Marvelous Team | Michael | 5-9 | 1628.34 | 1801.56 | 8 |
-| 3 | L takes only | lokesh | 8-6 | 1648.82 | 1680.0 | 5 |
+| 3 | L takes only | Lokesh | 8-6 | 1648.82 | 1680.0 | 5 |
 | 4 | Roger That | Pranav | 10-4 | 1920.2 | 1619.5 | 2 |
 | 5 | Anish's Awesome Team | Anish | 6-8 | 1620.38 | 1764.36 | 7 |
-| 6 | Super Squirrels | Super | 8-6 | 1686.1 | 1566.4 | 4 |
-| 7 | Sharman’s Scorpions | Sharman | 11-3 | 1768.56 | 1535.26 | 1 |
+| 6 | Super Squirrels | Abhinav | 8-6 | 1686.1 | 1566.4 | 4 |
+| 7 | Sharman's Scorpions | Sharman | 11-3 | 1768.56 | 1535.26 | 1 |
 | 8 | Hill We Go… Again (feat Kyler) | Naren | 8-6 | 1794.4 | 1730.54 | 3 |
 | 9 | Tanmay's Hospital | Tanmay | 5-9 | 1460.74 | 1688.02 | - |
-| 10 | varun’s victorious team | Varun | 2-12 | 1510.86 | 1745.74 | - |
+| 10 | varun's victorious team | Varun | 2-12 | 1510.86 | 1745.74 | - |
 
 ## Playoff Bracket
 
@@ -39,7 +39,7 @@ flowchart LR
         W15G1["(3) Hill We Go… Again (feat Kyler) 124.88<br>✓ (6) Jeremy's Neat Team 148.64"]
         W15G2["✓ (2) Roger That 130.42<br>(7) Anish's Awesome Team 96.50"]
         W15G3["✓ (5) L takes only 147.40<br>(4) Super Squirrels 83.70"]
-        W15G4["(1) Sharman’s Scorpions 131.46<br>✓ (8) Michael's Marvelous Team 152.22"]
+        W15G4["(1) Sharman's Scorpions 131.46<br>✓ (8) Michael's Marvelous Team 152.22"]
     end
     subgraph RSemifinal["Semifinal"]
         W16G1["(2) Roger That 100.20<br>✓ (6) Jeremy's Neat Team 147.06"]
@@ -59,7 +59,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Jeremy's Neat Team"
     **Post-draft - week 1**
@@ -310,7 +310,7 @@ flowchart LR
     | BN | [Devin Singletary](../players/devin-singletary.md) | RB | 0.00 |
     | BN | [Lamar Jackson](../players/lamar-jackson.md) | QB | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -437,7 +437,7 @@ flowchart LR
     | IR | [Clyde Edwards-Helaire](../players/clyde-edwards-helaire.md) | RB | 0.00 |
     | BN | [Dawson Knox](../players/dawson-knox.md) | TE | 0.00 |
 
-??? note "varun’s victorious team"
+??? note "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -483,15 +483,28 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Jeremy's Neat Team
+- **League Champion:** [Jeremy's Neat Team](../owners/jeremy.md)
 - **Most Valuable Player:** [Jalen Hurts](../players/jalen-hurts.md) - 6 wins swung
-- **Finals MVP:** [Patrick Mahomes](../players/patrick-mahomes.md) - 26.52 pts ([Jeremy's Neat Team](../teams/jeremy-s-neat-team.md))
+- **Finals MVP:** [Patrick Mahomes](../players/patrick-mahomes.md) - 26.52 pts ([Jeremy's Neat Team](../owners/jeremy.md))
 - **Newcomer of the Year:** [Dameon Pierce](../players/dameon-pierce.md) - 2 wins swung
 - **Undrafted Player of the Year:** [Raheem Mostert](../players/raheem-mostert.md) - 3 wins swung
 - **Highest Single-Week Score:** Hill We Go… Again (feat Kyler) - 185.70 (Wk 9)
 - **Lowest Single-Week Score:** Michael's Marvelous Team - 45.80 (Wk 9)
-- **Best Draft Pick:** [DeVonta Smith](../players/devonta-smith.md) (WR) - drafted by [Tanmay's Hospital](../teams/tanmay-s-hospital.md) at pick 109, finished +31 spots at the position, 242.40 pts
-- **Biggest Bust:** [Jonathan Taylor](../players/jonathan-taylor.md) (RB) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 2, finished -24 spots at the position, 146.40 pts
+- **Best Draft Pick:** [DeVonta Smith](../players/devonta-smith.md) (WR) - drafted by [Tanmay's Hospital](../owners/tanmay.md) at pick 109, finished +31 spots at the position, 242.40 pts
+- **Biggest Bust:** [D'Andre Swift](../players/d-andre-swift.md) (RB) - drafted by [L takes only](../owners/lokesh.md) at pick 13, finished -15 spots at the position, 175.50 pts, played 13 of 17 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Lamar Jackson](../players/lamar-jackson.md) | 42.62 | Wk 2, [Super Squirrels](../owners/abhinav.md) |
+| RB | [Joe Mixon](../players/joe-mixon.md) | 55.10 | Wk 9, [Hill We Go… Again (feat Kyler)](../owners/naren.md) |
+| WR | [Stefon Diggs](../players/stefon-diggs.md) | 44.80 | Wk 2, [Super Squirrels](../owners/abhinav.md) |
+| TE | [T.J. Hockenson](../players/t-j-hockenson.md) | 39.90 | Wk 4, [Sharman's Scorpions](../owners/sharman.md) |
+| K | [Tyler Bass](../players/tyler-bass.md) | 23.00 | Wk 11, [Sharman's Scorpions](../owners/sharman.md) |
+| DEF | [Browns](../players/browns.md) | 30.00 | Wk 13, [Roger That](../owners/pranav.md) |
 
 ## Team of the Season
 
@@ -499,17 +512,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Jalen Hurts](../players/jalen-hurts.md) | QB | 6 | 162.66 | [L takes only](../teams/l-takes-only.md) |
-| RB | [Christian McCaffrey](../players/christian-mccaffrey.md) | RB | 5 | 134.96 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
-|  | [Saquon Barkley](../players/saquon-barkley.md) | RB | 5 | 90.50 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
-| WR | [Davante Adams](../players/davante-adams.md) | WR | 5 | 150.40 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-|  | [Mike Evans](../players/mike-evans.md) | WR | 5 | 97.00 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 3 | 56.70 | [Roger That](../teams/roger-that.md) |
-| W/R/T | [Tyreek Hill](../players/tyreek-hill.md) | WR | 4 | 121.60 | [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md) |
-| K | [Nick Folk](../players/nick-folk.md) | K | 3 | 38.00 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
-| DEF | [Cowboys](../players/cowboys.md) | DEF | 2 | 14.00 | [Hill We Go… Again (feat Kyler)](../teams/hill-we-go-again-feat-kyler.md), [Tanmay's Hospital](../teams/tanmay-s-hospital.md) |
+| QB | [Jalen Hurts](../players/jalen-hurts.md) | QB | 6 | 162.66 | <span class="wiki-new" title="This page has not been written yet">L takes only</span> |
+| RB | [Christian McCaffrey](../players/christian-mccaffrey.md) | RB | 5 | 134.96 | <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
+|  | [Saquon Barkley](../players/saquon-barkley.md) | RB | 5 | 90.50 | <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
+| WR | [Davante Adams](../players/davante-adams.md) | WR | 5 | 150.40 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+|  | [Mike Evans](../players/mike-evans.md) | WR | 5 | 97.00 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 3 | 56.70 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| W/R/T | [Tyreek Hill](../players/tyreek-hill.md) | WR | 4 | 121.60 | <span class="wiki-new" title="This page has not been written yet">Hill We Go… Again (feat Kyler)</span> |
+| K | [Nick Folk](../players/nick-folk.md) | K | 3 | 38.00 | <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
+| DEF | [Cowboys](../players/cowboys.md) | DEF | 2 | 14.00 | <span class="wiki-new" title="This page has not been written yet">Hill We Go… Again (feat Kyler)</span>, <span class="wiki-new" title="This page has not been written yet">Tanmay's Hospital</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

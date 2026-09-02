@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Michael Wilson has appeared on, se
 # Michael Wilson
 
 - **Position:** WR
-- **Seasons:** 2023-present
+- **Seasons:** 2023-2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,22 +14,24 @@ description: "Every Pine Hills fantasy roster Michael Wilson has appeared on, se
 - **Weeks Rostered:** 7 (6 started)
 - **Points in Lineup:** 115.10
 - **Points on the Bench:** 2.80
-- **Best Week:** 37.20 - 2025 Wk 14, [Super Squirrels](../teams/super-squirrels.md)
-- **Times Drafted:** Never drafted (added in-season)
+- **Best Week:** 37.20 - 2025 Wk 14, [Super Squirrels](../owners/abhinav.md)
+- **Times Drafted:** 1 (first: 2026 R8 P1129)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 2.80 (benched) - 2023 Wk 5 |
-| 2025 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 6 | 6 | 115.10 | 37.20 - 2025 Wk 14 |
+| 2023 | [Pukakke NaKupp](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 2.80 (benched) - 2023 Wk 5 |
+| 2025 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 6 | 6 | 115.10 | 37.20 - 2025 Wk 14 |
 
 ## Draft History
 
-_Never taken in a captured draft; added in-season every time._
+| Year | Round | Overall | Drafted By |
+|------|-------|---------|------------|
+| 2026 | 8 | 1129 | [micjes71](../owners/michael.md) |
 
 ## Related
 

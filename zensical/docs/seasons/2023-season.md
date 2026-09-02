@@ -7,27 +7,27 @@ year: 2023
 
 # 2023 Season
 
-- **Champion:** Super Squirrels
-- **Runner-Up:** BBigg MACKS
-- **Regular Season Top Seed:** Stroud Boys
-- **Toilet Bowl Winner:** Sharman’s Scorpions
+- **Champion:** [Super Squirrels](../owners/abhinav.md)
+- **Runner-Up:** [BBigg MACKS](../owners/naren.md)
+- **Regular Season Top Seed:** [Stroud Boys](../owners/tanmay.md)
+- **Toilet Bowl Winner:** [Sharman's Scorpions](../owners/sharman.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Super Squirrels | Super | 7-7 | 1588.64 | 1644.92 | 5 |
+| 1 | Super Squirrels | Abhinav | 7-7 | 1588.64 | 1644.92 | 5 |
 | 2 | BBigg MACKS | Naren | 11-3 | 1874.16 | 1444.54 | 2 |
 | 3 | Stroud Boys | Tanmay | 11-3 | 1888.52 | 1619.28 | 1 |
-| 4 | Ken Keenan Kum | lokesh | 8-6 | 1793.58 | 1771.36 | 3 |
+| 4 | Ken Keenan Kum | Lokesh | 8-6 | 1793.58 | 1771.36 | 3 |
 | 5 | Pukakke NaKupp | Anish | 8-6 | 1755.32 | 1761.32 | 4 |
 | 6 | Michael's Marvelous Team | Michael | 6-8 | 1562.06 | 1624.58 | 6 |
 | 7 | Roger That | Pranav | 5-9 | 1663.92 | 1709.82 | 7 |
 | 8 | Jeremy's Neat Team | Jeremy | 5-9 | 1602.5 | 1831.42 | 8 |
-| 9 | varun’s victorious team | Varun | 5-9 | 1506.58 | 1627.12 | - |
-| 10 | Sharman’s Scorpions | Sharman | 4-10 | 1365.16 | 1566.08 | - |
+| 9 | varun's victorious team | Varun | 5-9 | 1506.58 | 1627.12 | - |
+| 10 | Sharman's Scorpions | Sharman | 4-10 | 1365.16 | 1566.08 | - |
 
 ## Playoff Bracket
 
@@ -59,7 +59,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Super Squirrels"
     **Post-draft - week 1**
@@ -398,7 +398,7 @@ flowchart LR
     | BN | [Odell Beckham Jr.](../players/odell-beckham-jr.md) | WR | 4.30 |
     | BN | [Tee Higgins](../players/tee-higgins.md) | WR | 2.90 |
 
-??? note "varun’s victorious team"
+??? note "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -440,7 +440,7 @@ flowchart LR
     | IR | [Joe Burrow](../players/joe-burrow.md) | QB | 0.00 |
     | BN | [Ray-Ray McCloud III](../players/ray-ray-mccloud-iii.md) | WR | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -484,15 +484,29 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Super Squirrels
+- **League Champion:** [Super Squirrels](../owners/abhinav.md)
 - **Most Valuable Player:** [Josh Allen](../players/josh-allen.md) - 8 wins swung
-- **Finals MVP:** [Breece Hall](../players/breece-hall.md) - 27.60 pts ([Super Squirrels](../teams/super-squirrels.md))
+- **Finals MVP:** [Breece Hall](../players/breece-hall.md) - 27.60 pts ([Super Squirrels](../owners/abhinav.md))
 - **Newcomer of the Year:** [Puka Nacua](../players/puka-nacua.md) - 4 wins swung
 - **Undrafted Player of the Year:** [Puka Nacua](../players/puka-nacua.md) - 4 wins swung
 - **Highest Single-Week Score:** Stroud Boys - 193.44 (Wk 5)
-- **Lowest Single-Week Score:** Sharman’s Scorpions - 25.80 (Wk 13)
-- **Best Draft Pick:** [Mike Evans](../players/mike-evans.md) (WR) - drafted by [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) at pick 92, finished +28 spots at the position, 277.30 pts
-- **Biggest Bust:** [Nick Chubb](../players/nick-chubb.md) (RB) - drafted by [Roger That](../teams/roger-that.md) at pick 7, finished -31 spots at the position, 23.10 pts
+- **Lowest Single-Week Score:** Sharman's Scorpions - 25.80 (Wk 13)
+- **Best Draft Pick:** [Mike Evans](../players/mike-evans.md) (WR) - drafted by [Michael's Marvelous Team](../owners/michael.md) at pick 92, finished +28 spots at the position, 277.30 pts
+- **Biggest Bust:** [Austin Ekeler](../players/austin-ekeler.md) (RB) - drafted by [Sharman's Scorpions](../owners/sharman.md) at pick 4, finished -17 spots at the position, 173.50 pts, played 13 of 17 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Josh Allen](../players/josh-allen.md) | 40.66 | Wk 12, [Pukakke NaKupp](../owners/anish.md) |
+| RB | [Christian McCaffrey](../players/christian-mccaffrey.md) | 48.70 | Wk 4, [BBigg MACKS](../owners/naren.md) |
+| WR | [Ja'Marr Chase](../players/ja-marr-chase.md) | 52.20 | Wk 5, [Stroud Boys](../owners/tanmay.md) |
+| TE | [Travis Kelce](../players/travis-kelce.md) | 35.90 | Wk 7, [Ken Keenan Kum](../owners/lokesh.md) |
+| K (2-way tie) | [Dustin Hopkins](../players/dustin-hopkins.md) | 22.00 | Wk 7, [Stroud Boys](../owners/tanmay.md) |
+|  | [Brandon Aubrey](../players/brandon-aubrey.md) | 22.00 | Wk 14, [BBigg MACKS](../owners/naren.md) |
+| DEF | [Cowboys](../players/cowboys.md) | 37.00 | Wk 1, [Roger That](../owners/pranav.md) |
 
 ## Team of the Season
 
@@ -500,17 +514,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Josh Allen](../players/josh-allen.md) | QB | 8 | 210.22 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) |
-| RB | [Breece Hall](../players/breece-hall.md) | RB | 5 | 135.70 | [Super Squirrels](../teams/super-squirrels.md) |
-|  | [Derrick Henry](../players/derrick-henry.md) | RB | 5 | 66.38 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) |
-| WR | [Brandon Aiyuk](../players/brandon-aiyuk.md) | WR | 5 | 86.10 | [Super Squirrels](../teams/super-squirrels.md) |
-|  | [CeeDee Lamb](../players/ceedee-lamb.md) | WR | 4 | 124.40 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
-| TE | [T.J. Hockenson](../players/t-j-hockenson.md) | TE | 4 | 64.70 | [Super Squirrels](../teams/super-squirrels.md) |
-| W/R/T | [Tyreek Hill](../players/tyreek-hill.md) | WR | 4 | 103.70 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) |
-| K | [Jake Elliott](../players/jake-elliott.md) | K | 3 | 33.00 | [Super Squirrels](../teams/super-squirrels.md) |
-| DEF | [Eagles](../players/eagles.md) | DEF | 3 | 24.00 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) |
+| QB | [Josh Allen](../players/josh-allen.md) | QB | 8 | 210.22 | <span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span> |
+| RB | [Breece Hall](../players/breece-hall.md) | RB | 5 | 135.70 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+|  | [Derrick Henry](../players/derrick-henry.md) | RB | 5 | 66.38 | <span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span> |
+| WR | [Brandon Aiyuk](../players/brandon-aiyuk.md) | WR | 5 | 86.10 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+|  | [CeeDee Lamb](../players/ceedee-lamb.md) | WR | 4 | 124.40 | <span class="wiki-new" title="This page has not been written yet">Michael's Marvelous Team</span> |
+| TE | [T.J. Hockenson](../players/t-j-hockenson.md) | TE | 4 | 64.70 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+| W/R/T | [Tyreek Hill](../players/tyreek-hill.md) | WR | 4 | 103.70 | <span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span> |
+| K | [Jake Elliott](../players/jake-elliott.md) | K | 3 | 33.00 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+| DEF | [Eagles](../players/eagles.md) | DEF | 3 | 24.00 | <span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

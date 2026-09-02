@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster John Ross has appeared on, season 
 - **Weeks Rostered:** 3 (1 started)
 - **Points in Lineup:** 6.60
 - **Points on the Bench:** 23.40
-- **Best Week:** 21.20 (benched) - 2019 Wk 2, [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 21.20 (benched) - 2019 Wk 2, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | WR | 3 | 1 | 6.60 | 21.20 (benched) - 2019 Wk 2 |
+| 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 3 | 1 | 6.60 | 21.20 (benched) - 2019 Wk 2 |
 
 ## Draft History
 

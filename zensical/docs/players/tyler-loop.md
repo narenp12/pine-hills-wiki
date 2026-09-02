@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Tyler Loop has appeared on, season
 # Tyler Loop
 
 - **Position:** K
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Tyler Loop has appeared on, season
 - **Weeks Rostered:** 17 (15 started)
 - **Points in Lineup:** 133.00
 - **Points on the Bench:** 4.00
-- **Best Week:** 14.00 - 2025 Wk 10, [varun’s victorious team](../teams/varun-s-victorious-team.md)
+- **Best Week:** 14.00 - 2025 Wk 10, [varun's victorious team](../owners/varun.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | K | 17 | 15 | 133.00 | 14.00 - 2025 Wk 10 |
+| 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | K | 17 | 15 | 133.00 | 14.00 - 2025 Wk 10 |
 
 ## Draft History
 

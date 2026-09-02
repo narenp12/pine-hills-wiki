@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Frank Gore has appeared on, season
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 16.90
-- **Best Week:** 16.90 (benched) - 2019 Wk 3, [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 16.90 (benched) - 2019 Wk 3, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | RB | 1 | 0 | 0.00 | 16.90 (benched) - 2019 Wk 3 |
+| 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 1 | 0 | 0.00 | 16.90 (benched) - 2019 Wk 3 |
 
 ## Draft History
 

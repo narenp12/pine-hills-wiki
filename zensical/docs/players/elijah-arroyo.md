@@ -19,7 +19,7 @@ description: "Every Pine Hills fantasy roster Elijah Arroyo has appeared on, sea
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 _Drafted, but never appeared on a captured weekly roster._
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 13 | 156 | [Save Me](../teams/save-me.md) |
+| 2025 | 13 | 156 | [Save Me](../owners/naren.md) |
 
 ## Related
 

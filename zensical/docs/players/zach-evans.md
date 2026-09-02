@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Zach Evans has appeared on, season
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
-- **Best Week:** 0.00 (benched) - 2023 Wk 7, [Stroud Boys](../teams/stroud-boys.md)
+- **Best Week:** 0.00 (benched) - 2023 Wk 7, [Stroud Boys](../owners/tanmay.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Stroud Boys](../teams/stroud-boys.md) | [Tanmay](../owners/tanmay.md) | RB | 1 | 0 | 0.00 | 0.00 (benched) - 2023 Wk 7 |
+| 2023 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 1 | 0 | 0.00 | 0.00 (benched) - 2023 Wk 7 |
 
 ## Draft History
 

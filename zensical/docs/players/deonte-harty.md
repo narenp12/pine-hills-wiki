@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Deonte Harty has appeared on, seas
 - **Weeks Rostered:** 9 (4 started)
 - **Points in Lineup:** 78.40
 - **Points on the Bench:** 42.90
-- **Best Week:** 23.60 - 2021 Wk 13, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 23.60 - 2021 Wk 13, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | WR | 9 | 4 | 78.40 | 23.60 - 2021 Wk 13 |
+| 2021 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 9 | 4 | 78.40 | 23.60 - 2021 Wk 13 |
 
 ## Draft History
 

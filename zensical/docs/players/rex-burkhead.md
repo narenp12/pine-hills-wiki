@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Rex Burkhead has appeared on, seas
 - **Weeks Rostered:** 4 (1 started)
 - **Points in Lineup:** 6.00
 - **Points on the Bench:** 4.60
-- **Best Week:** 6.00 - 2020 Wk 4, [Aryan's Amazing Team](../teams/aryan-s-amazing-team.md)
+- **Best Week:** 6.00 - 2020 Wk 4, [Aryan's Amazing Team](../owners/aryan.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Aryan's Amazing Team](../teams/aryan-s-amazing-team.md) | [Aryan](../owners/aryan.md) | RB | 3 | 1 | 6.00 | 6.00 - 2020 Wk 4 |
-| 2020 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 3.20 (benched) - 2020 Wk 11 |
+| 2020 | [Aryan's Amazing Team](../owners/aryan.md) | [Aryan](../owners/aryan.md) | RB | 3 | 1 | 6.00 | 6.00 - 2020 Wk 4 |
+| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 3.20 (benched) - 2020 Wk 11 |
 
 ## Draft History
 

@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Jauan Jennings has appeared on, se
 # Jauan Jennings
 
 - **Position:** WR
-- **Seasons:** 2024-present
+- **Seasons:** 2024-2025
 - **Fantasy Teams:** 3
 
 ## Career Summary
@@ -14,25 +14,25 @@ description: "Every Pine Hills fantasy roster Jauan Jennings has appeared on, se
 - **Weeks Rostered:** 29 (21 started)
 - **Points in Lineup:** 234.00
 - **Points on the Bench:** 60.80
-- **Best Week:** 28.00 - 2024 Wk 14, [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md)
+- **Best Week:** 28.00 - 2024 Wk 14, [Kamara's a b*tch](../owners/naren.md)
 - **Times Drafted:** 1 (first: 2025 R8 P93)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) | [Naren](../owners/naren.md) | WR | 10 | 7 | 98.60 | 28.00 - 2024 Wk 14 |
-| 2024 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 2 | 1 | 11.80 | 11.80 - 2024 Wk 4 |
-| 2025 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | WR | 17 | 13 | 123.60 | 19.90 (benched) - 2025 Wk 2 |
+| 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 10 | 7 | 98.60 | 28.00 - 2024 Wk 14 |
+| 2024 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 2 | 1 | 11.80 | 11.80 - 2024 Wk 4 |
+| 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 13 | 123.60 | 19.90 (benched) - 2025 Wk 2 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 8 | 93 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
+| 2025 | 8 | 93 | [Sharman's Scorpions](../owners/sharman.md) |
 
 ## Related
 

@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Randy Bullock has appeared on, sea
 - **Weeks Rostered:** 2 (2 started)
 - **Points in Lineup:** 8.00
 - **Points on the Bench:** 0.00
-- **Best Week:** 7.00 - 2020 Wk 8, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 7.00 - 2020 Wk 8, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | K | 1 | 1 | 7.00 | 7.00 - 2020 Wk 8 |
-| 2021 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | K | 1 | 1 | 1.00 | 1.00 - 2021 Wk 11 |
+| 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | K | 1 | 1 | 7.00 | 7.00 - 2020 Wk 8 |
+| 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | K | 1 | 1 | 1.00 | 1.00 - 2021 Wk 11 |
 
 ## Draft History
 

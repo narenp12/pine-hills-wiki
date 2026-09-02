@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Eddy Pineiro has appeared on, seas
 # Eddy Pineiro
 
 - **Position:** K
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 2
 - **Awards:** Team of the Season 2025 · Undrafted Player of the Year 2025
 
@@ -15,18 +15,18 @@ description: "Every Pine Hills fantasy roster Eddy Pineiro has appeared on, seas
 - **Weeks Rostered:** 10 (9 started)
 - **Points in Lineup:** 90.00
 - **Points on the Bench:** 0.00
-- **Best Week:** 18.00 - 2025 Wk 6, [Save Me](../teams/save-me.md)
+- **Best Week:** 18.00 - 2025 Wk 6, [Save Me](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Save Me](../teams/save-me.md) | [Naren](../owners/naren.md) | K | 7 | 6 | 58.00 | 18.00 - 2025 Wk 6 |
-| 2025 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) | [Jeremy](../owners/jeremy.md) | K | 3 | 3 | 32.00 | 14.00 - 2025 Wk 15 (Quarterfinal) |
+| 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | K | 7 | 6 | 58.00 | 18.00 - 2025 Wk 6 |
+| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | K | 3 | 3 | 32.00 | 14.00 - 2025 Wk 15 (Quarterfinal) |
 
 ## Draft History
 

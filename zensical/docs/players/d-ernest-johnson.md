@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster D'Ernest Johnson has appeared on, 
 - **Weeks Rostered:** 3 (2 started)
 - **Points in Lineup:** 47.50
 - **Points on the Bench:** 5.20
-- **Best Week:** 24.80 - 2021 Wk 7, [Roger That](../teams/roger-that.md)
+- **Best Week:** 24.80 - 2021 Wk 7, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Herbs](../teams/the-herbs.md) | [Naren](../owners/naren.md) | RB | 2 | 1 | 22.70 | 22.70 - 2021 Wk 10 |
-| 2021 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 1 | 24.80 | 24.80 - 2021 Wk 7 |
+| 2021 | [The Herbs](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 2 | 1 | 22.70 | 22.70 - 2021 Wk 10 |
+| 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 1 | 24.80 | 24.80 - 2021 Wk 7 |
 
 ## Draft History
 

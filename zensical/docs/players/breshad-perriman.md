@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Breshad Perriman has appeared on, 
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 17.20
-- **Best Week:** 17.20 (benched) - 2019 Wk 16 (Final), [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md)
+- **Best Week:** 17.20 (benched) - 2019 Wk 16 (Final), [Ju Let The Dogs Out](../owners/naren.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 17.20 (benched) - 2019 Wk 16 (Final) |
+| 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 17.20 (benched) - 2019 Wk 16 (Final) |
 
 ## Draft History
 

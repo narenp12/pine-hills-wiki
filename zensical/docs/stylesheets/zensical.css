@@ -170,9 +170,22 @@
 /* ---------------------------------------------------------------------------
    LINKS / ACCENT
 --------------------------------------------------------------------------- */
-.md-typeset a,
-.md-typeset a:visited { color: var(--md-typeset-a-color); }
-.md-typeset a:hover { color: var(--md-accent-fg-color--light); }
+/* Buttons are excluded from the link colours on purpose.
+
+   A button is an <a>, so it matched `a:visited` - and that selector's
+   specificity (0,2,1) beats `.md-typeset .md-button--primary` (0,2,0), so a
+   visited button took the link colour instead of its own. The link colour is
+   `--md-typeset-a-color`, which is the same pine green as
+   `--md-accent-fg-color`, which is exactly what the primary button paints its
+   background with: green text on a green pill. The label vanished the moment
+   you had been to the page it points at, and came back on hover only because
+   `a:hover` repainted it a lighter green.
+
+   `:not(.md-button)` keeps the link rules off buttons entirely, which leaves
+   the button rules further down to set their own colours in every state. */
+.md-typeset a:not(.md-button),
+.md-typeset a:not(.md-button):visited { color: var(--md-typeset-a-color); }
+.md-typeset a:not(.md-button):hover { color: var(--md-accent-fg-color--light); }
 .md-nav__link--active,
 .md-nav__link--active .md-nav__icon {
   color: var(--md-accent-fg-color) !important;

@@ -7,25 +7,25 @@ year: 2021
 
 # 2021 Season
 
-- **Champion:** varun’s victorious team
-- **Runner-Up:** Super Squirrels
-- **Regular Season Top Seed:** Super Squirrels
-- **Toilet Bowl Winner:** Michael's Marvelous Team
+- **Champion:** [varun's victorious team](../owners/varun.md)
+- **Runner-Up:** [Super Squirrels](../owners/abhinav.md)
+- **Regular Season Top Seed:** [Super Squirrels](../owners/abhinav.md)
+- **Toilet Bowl Winner:** [Michael's Marvelous Team](../owners/michael.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | varun’s victorious team | Varun | 6-8 | 1807.58 | 1799.58 | 6 |
-| 2 | Super Squirrels | Super | 11-3 | 1980.66 | 1752.36 | 1 |
+| 1 | varun's victorious team | Varun | 6-8 | 1807.58 | 1799.58 | 6 |
+| 2 | Super Squirrels | Abhinav | 11-3 | 1980.66 | 1752.36 | 1 |
 | 3 | Roger That | Pranav | 7-7 | 1680.32 | 1643.08 | 5 |
 | 4 | Tanmay's Top-Notch Team | Tanmay | 8-6 | 1785.16 | 1642.12 | 2 |
 | 5 | The Herbs | Naren | 6-8 | 1772.12 | 1688.02 | 7 |
 | 6 | most likely injured | Aneesh | 6-8 | 1686.7 | 1794.56 | 8 |
-| 7 | The Johnson and Johnson team | lokesh | 8-6 | 1727.72 | 1760.48 | 3 |
-| 8 | Sharman’s Scorpions | Sharman | 8-6 | 1691.44 | 1778.26 | 4 |
+| 7 | The Johnson and Johnson team | Lokesh | 8-6 | 1727.72 | 1760.48 | 3 |
+| 8 | Sharman's Scorpions | Sharman | 8-6 | 1691.44 | 1778.26 | 4 |
 | 9 | Anish's Awesome Team | Anish | 6-8 | 1629.4 | 1731.14 | - |
 | 10 | Michael's Marvelous Team | Michael | 4-10 | 1607.88 | 1779.38 | - |
 
@@ -37,31 +37,31 @@ year: 2021
 flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
         W15G1["(7) The Herbs 79.34<br>✓ (2) Tanmay's Top-Notch Team 114.12"]
-        W15G2["✓ (5) Roger That 127.54<br>(4) Sharman’s Scorpions 123.16"]
-        W15G3["(3) The Johnson and Johnson team 78.60<br>✓ (6) varun’s victorious team 112.36"]
+        W15G2["✓ (5) Roger That 127.54<br>(4) Sharman's Scorpions 123.16"]
+        W15G3["(3) The Johnson and Johnson team 78.60<br>✓ (6) varun's victorious team 112.36"]
         W15G4["✓ (1) Super Squirrels 123.48<br>(8) most likely injured 103.36"]
     end
     subgraph RSemifinal["Semifinal"]
         W16G1["(5) Roger That 120.94<br>✓ (1) Super Squirrels 184.00"]
-        W16G2["(2) Tanmay's Top-Notch Team 63.98<br>✓ (6) varun’s victorious team 117.28"]
+        W16G2["(2) Tanmay's Top-Notch Team 63.98<br>✓ (6) varun's victorious team 117.28"]
     end
     subgraph RFinal["Final"]
-        W17G1["(1) Super Squirrels 136.74<br>✓ (6) varun’s victorious team 160.20"]
+        W17G1["(1) Super Squirrels 136.74<br>✓ (6) varun's victorious team 160.20"]
     end
     W15G1 -->|"Tanmay's Top-Notch Team"| W16G2
     W15G2 -->|"Roger That"| W16G1
-    W15G3 -->|"varun’s victorious team"| W16G2
+    W15G3 -->|"varun's victorious team"| W16G2
     W15G4 -->|"Super Squirrels"| W16G1
     W16G1 -->|"Super Squirrels"| W17G1
-    W16G2 -->|"varun’s victorious team"| W17G1
-    W17G1 --> CHAMP["🏆 varun’s victorious team"]
+    W16G2 -->|"varun's victorious team"| W17G1
+    W17G1 --> CHAMP["🏆 varun's victorious team"]
 ```
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "varun’s victorious team"
+??? note "varun's victorious team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -355,7 +355,7 @@ flowchart LR
     | BN | [Darren Waller](../players/darren-waller.md) | TE | 0.00 |
     | IR | [Derrick Henry](../players/derrick-henry.md) | RB | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -484,15 +484,29 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** varun’s victorious team
+- **League Champion:** [varun's victorious team](../owners/varun.md)
 - **Most Valuable Player:** [Cooper Kupp](../players/cooper-kupp.md) - 6 wins swung
-- **Finals MVP:** [Ja'Marr Chase](../players/ja-marr-chase.md) - 55.60 pts ([varun’s victorious team](../teams/varun-s-victorious-team.md))
+- **Finals MVP:** [Ja'Marr Chase](../players/ja-marr-chase.md) - 55.60 pts ([varun's victorious team](../owners/varun.md))
 - **Newcomer of the Year:** [Najee Harris](../players/najee-harris.md) - 5 wins swung
 - **Undrafted Player of the Year:** [Hunter Renfrow](../players/hunter-renfrow.md) - 3 wins swung
 - **Highest Single-Week Score:** Roger That - 196.28 (Wk 5)
 - **Lowest Single-Week Score:** Tanmay's Top-Notch Team - 63.98 (Wk 16)
-- **Best Draft Pick:** [Deebo Samuel Sr.](../players/deebo-samuel-sr.md) (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 102, finished +34 spots at the position, 317.50 pts
-- **Biggest Bust:** [Calvin Ridley](../players/calvin-ridley.md) (WR) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 15, finished -32 spots at the position, 71.10 pts
+- **Best Draft Pick:** [Deebo Samuel Sr.](../players/deebo-samuel-sr.md) (WR) - drafted by [Super Squirrels](../owners/abhinav.md) at pick 102, finished +34 spots at the position, 317.50 pts
+- **Biggest Bust:** [DK Metcalf](../players/dk-metcalf.md) (WR) - drafted by [The Herbs](../owners/naren.md) at pick 20, finished -7 spots at the position, 233.50 pts, played 16 of 17 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Justin Herbert](../players/justin-herbert.md) | 42.82 | Wk 5, [The Herbs](../owners/naren.md) |
+| RB | [Jonathan Taylor](../players/jonathan-taylor.md) | 53.40 | Wk 11, [varun's victorious team](../owners/varun.md) |
+| WR | [Tyreek Hill](../players/tyreek-hill.md) | 47.60 | Wk 4, [Tanmay's Top-Notch Team](../owners/tanmay.md) |
+| TE | [Mark Andrews](../players/mark-andrews.md) | 41.70 | Wk 5, [varun's victorious team](../owners/varun.md) |
+| K (2-way tie) | [Daniel Carlson](../players/daniel-carlson.md) | 21.00 | Wk 12, [Sharman's Scorpions](../owners/sharman.md) |
+|  | [Nick Folk](../players/nick-folk.md) | 21.00 | Wk 12, [The Herbs](../owners/naren.md) |
+| DEF | [Patriots](../players/patriots.md) | 28.00 | Wk 11, [The Johnson and Johnson team](../owners/lokesh.md) |
 
 ## Team of the Season
 
@@ -500,18 +514,18 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Matthew Stafford](../players/matthew-stafford.md) | QB | 6 | 142.82 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| RB | [Ezekiel Elliott](../players/ezekiel-elliott.md) | RB | 6 | 107.60 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-|  | [Najee Harris](../players/najee-harris.md) | RB | 5 | 104.50 | [Super Squirrels](../teams/super-squirrels.md) |
-| WR | [Cooper Kupp](../players/cooper-kupp.md) | WR | 6 | 184.30 | [Super Squirrels](../teams/super-squirrels.md) |
-|  | [Davante Adams](../players/davante-adams.md) | WR | 5 | 103.80 | [Roger That](../teams/roger-that.md) |
-| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 110.50 | [Roger That](../teams/roger-that.md) |
-| W/R/T | [CeeDee Lamb](../players/ceedee-lamb.md) | WR | 5 | 103.80 | [Roger That](../teams/roger-that.md) |
-| K (2-way tie) | [Ryan Succop](../players/ryan-succop.md) | K | 2 | 22.00 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-|  | [Matt Prater](../players/matt-prater.md) | K | 2 | 22.00 | [Roger That](../teams/roger-that.md) |
-| DEF | [Bills](../players/bills.md) | DEF | 2 | 35.00 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [The Herbs](../teams/the-herbs.md) |
+| QB | [Matthew Stafford](../players/matthew-stafford.md) | QB | 6 | 142.82 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| RB | [Ezekiel Elliott](../players/ezekiel-elliott.md) | RB | 6 | 107.60 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+|  | [Najee Harris](../players/najee-harris.md) | RB | 5 | 104.50 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+| WR | [Cooper Kupp](../players/cooper-kupp.md) | WR | 6 | 184.30 | <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+|  | [Davante Adams](../players/davante-adams.md) | WR | 5 | 103.80 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 110.50 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| W/R/T | [CeeDee Lamb](../players/ceedee-lamb.md) | WR | 5 | 103.80 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| K (2-way tie) | [Ryan Succop](../players/ryan-succop.md) | K | 2 | 22.00 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+|  | [Matt Prater](../players/matt-prater.md) | K | 2 | 22.00 | <span class="wiki-new" title="This page has not been written yet">Roger That</span> |
+| DEF | [Bills](../players/bills.md) | DEF | 2 | 35.00 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span>, <span class="wiki-new" title="This page has not been written yet">The Herbs</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

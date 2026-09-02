@@ -14,19 +14,19 @@ description: "Every Pine Hills fantasy roster Chris Thompson has appeared on, se
 - **Weeks Rostered:** 8 (3 started)
 - **Points in Lineup:** 24.90
 - **Points on the Bench:** 22.90
-- **Best Week:** 12.20 - 2018 Wk 5, [Curry’s legit team](../teams/curry-s-legit-team.md)
+- **Best Week:** 12.20 - 2018 Wk 5, [Curry's legit team](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | RB | 4 | 2 | 14.90 | 12.20 - 2018 Wk 5 |
-| 2019 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 3 | 1 | 10.00 | 10.00 - 2019 Wk 4 |
-| 2019 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 10.10 (benched) - 2019 Wk 2 |
+| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 4 | 2 | 14.90 | 12.20 - 2018 Wk 5 |
+| 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 3 | 1 | 10.00 | 10.00 - 2019 Wk 4 |
+| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 10.10 (benched) - 2019 Wk 2 |
 
 ## Draft History
 

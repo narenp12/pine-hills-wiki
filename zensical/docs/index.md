@@ -22,28 +22,29 @@ description: The collaborative history of the Pine Hills Fantasy Football League
   </div>
 </div>
 
-The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018**. This wiki records its seasons, franchises, managers, players, drafts and championships, computed from the league's captured Yahoo data.
+The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018**. This wiki records its seasons, teams, managers, players, drafts and championships, computed from the league's captured data - eight seasons on Yahoo, and Sleeper from 2026.
 
 ## Champions by Year
 
 <!-- champions-table:start -->
 | Year | Champion | Runner-Up | Top Seed |
 |------|----------|-----------|----------|
-| 2025 | Jeremy's Neat Team | Big black big back | Roger That |
-| 2024 | Stroud Boys | Jayesh's Great Team | Kamara’s a b*tch |
-| 2023 | Super Squirrels | BBigg MACKS | Stroud Boys |
-| 2022 | Jeremy's Neat Team | Michael's Marvelous Team | Sharman’s Scorpions |
-| 2021 | varun’s victorious team | Super Squirrels | Super Squirrels |
-| 2020 | Roger That | Imagine Losing | My team is Koo(l) |
-| 2019 | Curry’s legit team | Ju Let The Dogs Out | Ju Let The Dogs Out |
-| 2018 | Curry’s legit team | Anish's Awesome Team | Sharman’s Scorpions |
+| 2026 | _TBD_ | _TBD_ | _TBD_ |
+| 2025 | [Jeremy's Neat Team](owners/jeremy.md) | [Big black big back](owners/lokesh.md) | [Roger That](owners/pranav.md) |
+| 2024 | [Stroud Boys](owners/tanmay.md) | [Jayesh's Great Team](owners/jayesh.md) | [Kamara's a b*tch](owners/naren.md) |
+| 2023 | [Super Squirrels](owners/abhinav.md) | [BBigg MACKS](owners/naren.md) | [Stroud Boys](owners/tanmay.md) |
+| 2022 | [Jeremy's Neat Team](owners/jeremy.md) | [Michael's Marvelous Team](owners/michael.md) | [Sharman's Scorpions](owners/sharman.md) |
+| 2021 | [varun's victorious team](owners/varun.md) | [Super Squirrels](owners/abhinav.md) | [Super Squirrels](owners/abhinav.md) |
+| 2020 | [Roger That](owners/pranav.md) | [Imagine Losing](owners/om.md) | [My team is Koo(l)](owners/lokesh.md) |
+| 2019 | [Curry's legit team](owners/lokesh.md) | [Ju Let The Dogs Out](owners/naren.md) | [Ju Let The Dogs Out](owners/naren.md) |
+| 2018 | [Curry's legit team](owners/lokesh.md) | [Anish's Awesome Team](owners/anish.md) | [Sharman's Scorpions](owners/sharman.md) |
 <!-- champions-table:end -->
 
 ## Explore the Wiki
 
 - **[Seasons](seasons/index.md)**: Year-by-year breakdowns, standings, playoffs, and awards.
-- **[Teams](teams/index.md)**: Franchise histories, owners, and head-to-head records.
-- **[Owners](owners/index.md)**: Career totals that follow a manager across every franchise they have run.
+- **[Teams](teams/index.md)**: Every team name the league has used, and whose it was.
+- **[Owners](owners/index.md)**: The managers - career totals, rivalries, and every name they have played under.
 - **[Players](players/index.md)**: Every player ever rostered, and the teams that held them.
 - **[Records](records/index.md)**: All-time leaders, single-season feats, and dubious achievements.
 - **[Draft History](draft/index.md)**: Every pick, every reach, every steal.

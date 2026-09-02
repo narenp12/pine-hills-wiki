@@ -7,23 +7,23 @@ year: 2018
 
 # 2018 Season
 
-- **Champion:** Curry’s legit team
-- **Runner-Up:** Anish's Awesome Team
-- **Regular Season Top Seed:** Sharman’s Scorpions
-- **Toilet Bowl Winner:** Super Squirrels
+- **Champion:** [Curry's legit team](../owners/lokesh.md)
+- **Runner-Up:** [Anish's Awesome Team](../owners/anish.md)
+- **Regular Season Top Seed:** [Sharman's Scorpions](../owners/sharman.md)
+- **Toilet Bowl Winner:** [Super Squirrels](../owners/abhinav.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Curry’s legit team | lokesh | 4-7 | 1406.78 | 1614.6 | 5 |
+| 1 | Curry's legit team | Lokesh | 4-7 | 1406.78 | 1614.6 | 5 |
 | 2 | Anish's Awesome Team | Anish | 3-7 | 1523.54 | 1590.72 | 6 |
 | 3 | D4rthSi Dragons | Naren | 8-3 | 1736.5 | 1545.16 | 2 |
-| 4 | Sharman’s Scorpions | Sharman | 9-2 | 1754.04 | 1523.54 | 1 |
+| 4 | Sharman's Scorpions | Sharman | 9-2 | 1754.04 | 1523.54 | 1 |
 | 5 | Roger That | Pranav | 4-6 | 1632.38 | 1703.34 | 3 |
-| 6 | Super Squirrels | Super | 4-7 | 1450.44 | 1526.32 | 4 |
+| 6 | Super Squirrels | Abhinav | 4-7 | 1450.44 | 1526.32 | 4 |
 
 ## Playoff Bracket
 
@@ -33,27 +33,27 @@ year: 2018
 flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
         W14G1["(3) Roger That 100.70<br>✓ (6) Anish's Awesome Team 142.10"]
-        W14G2["✓ (5) Curry’s legit team 152.44<br>(4) Super Squirrels 112.28"]
+        W14G2["✓ (5) Curry's legit team 152.44<br>(4) Super Squirrels 112.28"]
     end
     subgraph RSemifinal["Semifinal"]
-        W15G1["(2) D4rthSi Dragons 127.56<br>✓ (5) Curry’s legit team 129.76"]
-        W15G2["✓ (6) Anish's Awesome Team 148.86<br>(1) Sharman’s Scorpions 98.12"]
+        W15G1["(2) D4rthSi Dragons 127.56<br>✓ (5) Curry's legit team 129.76"]
+        W15G2["✓ (6) Anish's Awesome Team 148.86<br>(1) Sharman's Scorpions 98.12"]
     end
     subgraph RFinal["Final"]
-        W16G1["(6) Anish's Awesome Team 120.74<br>✓ (5) Curry’s legit team 165.16"]
+        W16G1["(6) Anish's Awesome Team 120.74<br>✓ (5) Curry's legit team 165.16"]
     end
     W14G1 -->|"Anish's Awesome Team"| W15G2
-    W14G2 -->|"Curry’s legit team"| W15G1
-    W15G1 -->|"Curry’s legit team"| W16G1
+    W14G2 -->|"Curry's legit team"| W15G1
+    W15G1 -->|"Curry's legit team"| W16G1
     W15G2 -->|"Anish's Awesome Team"| W16G1
-    W16G1 --> CHAMP["🏆 Curry’s legit team"]
+    W16G1 --> CHAMP["🏆 Curry's legit team"]
 ```
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Curry’s legit team"
+??? note "Curry's legit team"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -176,7 +176,7 @@ flowchart LR
     | BN | [Brandin Cooks](../players/brandin-cooks.md) | WR | 9.20 |
     | BN | [Rob Gronkowski](../players/rob-gronkowski.md) | TE | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 3**
 
     | Slot | Player | Pos | Pts |
@@ -299,15 +299,28 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Curry’s legit team
+- **League Champion:** [Curry's legit team](../owners/lokesh.md)
 - **Most Valuable Player:** [Adam Thielen](../players/adam-thielen.md) - 6 wins swung
-- **Finals MVP:** [Deshaun Watson](../players/deshaun-watson.md) - 36.46 pts ([Curry’s legit team](../teams/curry-s-legit-team.md))
+- **Finals MVP:** [Deshaun Watson](../players/deshaun-watson.md) - 36.46 pts ([Curry's legit team](../owners/lokesh.md))
 - **Newcomer of the Year:** _NA_
 - **Undrafted Player of the Year:** [Eric Ebron](../players/eric-ebron.md) - 4 wins swung
 - **Highest Single-Week Score:** D4rthSi Dragons - 203.12 (Wk 11)
 - **Lowest Single-Week Score:** Super Squirrels - 77.12 (Wk 15)
-- **Best Draft Pick:** [Christian McCaffrey](../players/christian-mccaffrey.md) (RB) - drafted by [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) at pick 65, finished +15 spots at the position, 339.10 pts
-- **Biggest Bust:** [A.J. Green](../players/a-j-green.md) (WR) - drafted by [Super Squirrels](../teams/super-squirrels.md) at pick 18, finished -11 spots at the position, 100.30 pts, scored mostly for [D4rthSi Dragons](../teams/d4rthsi-dragons.md)
+- **Best Draft Pick:** [Christian McCaffrey](../players/christian-mccaffrey.md) (RB) - drafted by [Sharman's Scorpions](../owners/sharman.md) at pick 65, finished +15 spots at the position, 339.10 pts
+- **Biggest Bust:** [David Johnson](../players/david-johnson.md) (RB) - drafted by [Anish's Awesome Team](../owners/anish.md) at pick 3, finished -5 spots at the position, 211.00 pts, played 13 of 14 weeks, scored mostly for [D4rthSi Dragons](../owners/naren.md)
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Drew Brees](../players/drew-brees.md) | 40.54 | Wk 3, [Sharman's Scorpions](../owners/sharman.md) |
+| RB | [Christian McCaffrey](../players/christian-mccaffrey.md) | 46.70 | Wk 12, [Sharman's Scorpions](../owners/sharman.md) |
+| WR | [Tyreek Hill](../players/tyreek-hill.md) | 43.50 | Wk 11, [Roger That](../owners/pranav.md) |
+| TE | [Zach Ertz](../players/zach-ertz.md) | 40.50 | Wk 10, [Anish's Awesome Team](../owners/anish.md) |
+| K | [Stephen Gostkowski](../players/stephen-gostkowski.md) | 22.00 | Wk 6, [D4rthSi Dragons](../owners/naren.md) |
+| DEF | [Bears](../players/bears.md) | 28.00 | Wk 9, [Sharman's Scorpions](../owners/sharman.md) |
 
 ## Team of the Season
 
@@ -315,17 +328,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Drew Brees](../players/drew-brees.md) | QB | 5 | 116.56 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| RB | [Saquon Barkley](../players/saquon-barkley.md) | RB | 4 | 101.00 | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) |
-|  | [Ezekiel Elliott](../players/ezekiel-elliott.md) | RB | 4 | 93.40 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| WR | [Adam Thielen](../players/adam-thielen.md) | WR | 6 | 132.40 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-|  | [Antonio Brown](../players/antonio-brown.md) | WR | 5 | 136.00 | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) |
-| TE | [Eric Ebron](../players/eric-ebron.md) | TE | 4 | 78.70 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| W/R/T | [Davante Adams](../players/davante-adams.md) | WR | 3 | 83.70 | [Curry’s legit team](../teams/curry-s-legit-team.md) |
-| K | [Harrison Butker](../players/harrison-butker.md) | K | 3 | 31.00 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Curry’s legit team](../teams/curry-s-legit-team.md) |
-| DEF | [Bears](../players/bears.md) | DEF | 4 | 52.00 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
+| QB | [Drew Brees](../players/drew-brees.md) | QB | 5 | 116.56 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| RB | [Saquon Barkley](../players/saquon-barkley.md) | RB | 4 | 101.00 | <span class="wiki-new" title="This page has not been written yet">D4rthSi Dragons</span> |
+|  | [Ezekiel Elliott](../players/ezekiel-elliott.md) | RB | 4 | 93.40 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| WR | [Adam Thielen](../players/adam-thielen.md) | WR | 6 | 132.40 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+|  | [Antonio Brown](../players/antonio-brown.md) | WR | 5 | 136.00 | <span class="wiki-new" title="This page has not been written yet">D4rthSi Dragons</span> |
+| TE | [Eric Ebron](../players/eric-ebron.md) | TE | 4 | 78.70 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| W/R/T | [Davante Adams](../players/davante-adams.md) | WR | 3 | 83.70 | <span class="wiki-new" title="This page has not been written yet">Curry's legit team</span> |
+| K | [Harrison Butker](../players/harrison-butker.md) | K | 3 | 31.00 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span>, <span class="wiki-new" title="This page has not been written yet">Curry's legit team</span> |
+| DEF | [Bears](../players/bears.md) | DEF | 4 | 52.00 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

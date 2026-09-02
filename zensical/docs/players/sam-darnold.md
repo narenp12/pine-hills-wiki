@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Sam Darnold has appeared on, seaso
 # Sam Darnold
 
 - **Position:** QB
-- **Seasons:** 2019-present
+- **Seasons:** 2019-2025
 - **Fantasy Teams:** 4
 
 ## Career Summary
@@ -14,20 +14,20 @@ description: "Every Pine Hills fantasy roster Sam Darnold has appeared on, seaso
 - **Weeks Rostered:** 24 (19 started)
 - **Points in Lineup:** 320.14
 - **Points on the Bench:** 71.08
-- **Best Week:** 34.58 - 2024 Wk 14, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 34.58 - 2024 Wk 14, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) | [Naren](../owners/naren.md) | QB | 2 | 1 | 28.20 | 28.20 - 2019 Wk 12 |
-| 2021 | [The Herbs](../teams/the-herbs.md) | [Naren](../owners/naren.md) | QB | 3 | 1 | 3.48 | 16.08 (benched) - 2021 Wk 6 |
-| 2024 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | QB | 11 | 9 | 190.32 | 34.58 - 2024 Wk 14 |
-| 2025 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) | [Kaushal](../owners/kaushal.md) | QB | 8 | 8 | 98.14 | 23.26 - 2025 Wk 14 |
+| 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 2 | 1 | 28.20 | 28.20 - 2019 Wk 12 |
+| 2021 | [The Herbs](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 3 | 1 | 3.48 | 16.08 (benched) - 2021 Wk 6 |
+| 2024 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 11 | 9 | 190.32 | 34.58 - 2024 Wk 14 |
+| 2025 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 8 | 8 | 98.14 | 23.26 - 2025 Wk 14 |
 
 ## Draft History
 

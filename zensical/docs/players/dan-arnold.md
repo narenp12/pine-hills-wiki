@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Dan Arnold has appeared on, season
 - **Weeks Rostered:** 2 (2 started)
 - **Points in Lineup:** 1.90
 - **Points on the Bench:** 0.00
-- **Best Week:** 1.90 - 2021 Wk 12, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md)
+- **Best Week:** 1.90 - 2021 Wk 12, [Michael's Marvelous Team](../owners/michael.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | TE | 2 | 2 | 1.90 | 1.90 - 2021 Wk 12 |
+| 2021 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | TE | 2 | 2 | 1.90 | 1.90 - 2021 Wk 12 |
 
 ## Draft History
 

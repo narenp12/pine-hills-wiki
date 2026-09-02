@@ -7,22 +7,22 @@ year: 2019
 
 # 2019 Season
 
-- **Champion:** Curry’s legit team
-- **Runner-Up:** Ju Let The Dogs Out
-- **Regular Season Top Seed:** Ju Let The Dogs Out
-- **Toilet Bowl Winner:** Roger That
+- **Champion:** [Curry's legit team](../owners/lokesh.md)
+- **Runner-Up:** [Ju Let The Dogs Out](../owners/naren.md)
+- **Regular Season Top Seed:** [Ju Let The Dogs Out](../owners/naren.md)
+- **Toilet Bowl Winner:** [Roger That](../owners/pranav.md)
 
 ## Final Standings
 
-> **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
-| 1 | Curry’s legit team | lokesh | 8-5 | 1863.5 | 1661.14 | 2 |
+| 1 | Curry's legit team | Lokesh | 8-5 | 1863.5 | 1661.14 | 2 |
 | 2 | Ju Let The Dogs Out | Naren | 9-4 | 1766.38 | 1615.02 | 1 |
 | 3 | Kaushal's Potatoes | Kaushal | 8-5 | 1673.66 | 1575.2 | 3 |
-| 4 | Super Squirrels | Super | 7-6 | 1682.84 | 1654.48 | 4 |
-| 5 | Sharman’s Scorpions | Sharman | 6-7 | 1590.34 | 1603.0 | 6 |
+| 4 | Super Squirrels | Abhinav | 7-6 | 1682.84 | 1654.48 | 4 |
+| 5 | Sharman's Scorpions | Sharman | 6-7 | 1590.34 | 1603.0 | 6 |
 | 6 | Anish's Awesome Team | Anish | 7-6 | 1640.28 | 1762.64 | 5 |
 | 7 | CHOPSTIX | sahil | 5-8 | 1431.02 | 1653.92 | 7 |
 | 8 | Roger That | Pranav | 2-11 | 1622.96 | 1745.58 | 8 |
@@ -35,27 +35,27 @@ year: 2019
 flowchart LR
     subgraph RQuarterfinal["Quarterfinal"]
         W14G1["(5) Anish's Awesome Team 82.88<br>✓ (4) Super Squirrels 124.22"]
-        W14G2["(6) Sharman’s Scorpions 107.06<br>✓ (3) Kaushal's Potatoes 146.08"]
+        W14G2["(6) Sharman's Scorpions 107.06<br>✓ (3) Kaushal's Potatoes 146.08"]
     end
     subgraph RSemifinal["Semifinal"]
         W15G1["✓ (1) Ju Let The Dogs Out 169.10<br>(4) Super Squirrels 130.40"]
-        W15G2["✓ (2) Curry’s legit team 187.08<br>(3) Kaushal's Potatoes 136.92"]
+        W15G2["✓ (2) Curry's legit team 187.08<br>(3) Kaushal's Potatoes 136.92"]
     end
     subgraph RFinal["Final"]
-        W16G1["(1) Ju Let The Dogs Out 123.44<br>✓ (2) Curry’s legit team 156.92"]
+        W16G1["(1) Ju Let The Dogs Out 123.44<br>✓ (2) Curry's legit team 156.92"]
     end
     W14G1 -->|"Super Squirrels"| W15G1
     W14G2 -->|"Kaushal's Potatoes"| W15G2
     W15G1 -->|"Ju Let The Dogs Out"| W16G1
-    W15G2 -->|"Curry’s legit team"| W16G1
-    W16G1 --> CHAMP["🏆 Curry’s legit team"]
+    W15G2 -->|"Curry's legit team"| W16G1
+    W16G1 --> CHAMP["🏆 Curry's legit team"]
 ```
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
-??? note "Curry’s legit team"
+??? note "Curry's legit team"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -219,7 +219,7 @@ flowchart LR
     | BN | [Todd Gurley](../players/todd-gurley.md) | RB | 16.80 |
     | BN | [Dalvin Cook](../players/dalvin-cook.md) | RB | 0.00 |
 
-??? note "Sharman’s Scorpions"
+??? note "Sharman's Scorpions"
     **Post-draft - week 1**
 
     | Slot | Player | Pos | Pts |
@@ -385,15 +385,28 @@ flowchart LR
 
 ## Awards
 
-- **League Champion:** Curry’s legit team
+- **League Champion:** [Curry's legit team](../owners/lokesh.md)
 - **Most Valuable Player:** [Dalvin Cook](../players/dalvin-cook.md) - 6 wins swung
-- **Finals MVP:** [Michael Thomas](../players/michael-thomas.md) - 31.60 pts ([Curry’s legit team](../teams/curry-s-legit-team.md))
+- **Finals MVP:** [Michael Thomas](../players/michael-thomas.md) - 31.60 pts ([Curry's legit team](../owners/lokesh.md))
 - **Newcomer of the Year:** [Lamar Jackson](../players/lamar-jackson.md) - 3 wins swung
 - **Undrafted Player of the Year:** [Patriots](../players/patriots.md) - 4 wins swung
-- **Highest Single-Week Score:** Curry’s legit team - 218.24 (Wk 5)
+- **Highest Single-Week Score:** Curry's legit team - 218.24 (Wk 5)
 - **Lowest Single-Week Score:** Roger That - 42.72 (Wk 16)
-- **Best Draft Pick:** [Austin Ekeler](../players/austin-ekeler.md) (RB) - drafted by [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) at pick 116, finished +30 spots at the position, 291.10 pts
-- **Biggest Bust:** [JuJu Smith-Schuster](../players/juju-smith-schuster.md) (WR) - drafted by [Anish's Awesome Team](../teams/anish-s-awesome-team.md) at pick 15, finished -20 spots at the position, 106.40 pts
+- **Best Draft Pick:** [Austin Ekeler](../players/austin-ekeler.md) (RB) - drafted by [Ju Let The Dogs Out](../owners/naren.md) at pick 116, finished +30 spots at the position, 291.10 pts
+- **Biggest Bust:** [Odell Beckham Jr.](../players/odell-beckham-jr.md) (WR) - drafted by [Kaushal's Potatoes](../owners/kaushal.md) at pick 8, finished -16 spots at the position, 183.60 pts, played 15 of 16 weeks
+
+## Position Highs
+
+The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+| QB | [Deshaun Watson](../players/deshaun-watson.md) | 41.74 | Wk 5, [Kaushal's Potatoes](../owners/kaushal.md) |
+| RB | [Aaron Jones Sr.](../players/aaron-jones-sr.md) | 49.20 | Wk 5, [Curry's legit team](../owners/lokesh.md) |
+| WR | [Mike Evans](../players/mike-evans.md) | 45.00 | Wk 3, [Roger That](../owners/pranav.md) |
+| TE | [Darren Waller](../players/darren-waller.md) | 31.60 | Wk 7, [Curry's legit team](../owners/lokesh.md) |
+| K | [Harrison Butker](../players/harrison-butker.md) | 18.00 | Wk 9, [CHOPSTIX](../owners/sahil.md) |
+| DEF | [Patriots](../players/patriots.md) | 37.00 | Wk 2, [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Team of the Season
 
@@ -401,17 +414,17 @@ The best starting lineup the season produced, one selection per slot the league 
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
-| QB | [Lamar Jackson](../players/lamar-jackson.md) | QB | 3 | 80.44 | [Curry’s legit team](../teams/curry-s-legit-team.md) |
-| RB | [Dalvin Cook](../players/dalvin-cook.md) | RB | 6 | 151.10 | [CHOPSTIX](../teams/chopstix.md), [Super Squirrels](../teams/super-squirrels.md) |
-|  | [Alvin Kamara](../players/alvin-kamara.md) | RB | 5 | 107.80 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-| WR | [Amari Cooper](../players/amari-cooper.md) | WR | 4 | 103.40 | [CHOPSTIX](../teams/chopstix.md) |
-|  | [Julio Jones](../players/julio-jones.md) | WR | 4 | 82.60 | [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) |
-| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 71.80 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) |
-| W/R/T | [Leonard Fournette](../players/leonard-fournette.md) | RB | 4 | 84.20 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) |
-| K | [Greg Zuerlein](../players/greg-zuerlein.md) | K | 2 | 17.00 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
-| DEF | [Patriots](../players/patriots.md) | DEF | 4 | 98.00 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) |
+| QB | [Lamar Jackson](../players/lamar-jackson.md) | QB | 3 | 80.44 | <span class="wiki-new" title="This page has not been written yet">Curry's legit team</span> |
+| RB | [Dalvin Cook](../players/dalvin-cook.md) | RB | 6 | 151.10 | <span class="wiki-new" title="This page has not been written yet">CHOPSTIX</span>, <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span> |
+|  | [Alvin Kamara](../players/alvin-kamara.md) | RB | 5 | 107.80 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+| WR | [Amari Cooper](../players/amari-cooper.md) | WR | 4 | 103.40 | <span class="wiki-new" title="This page has not been written yet">CHOPSTIX</span> |
+|  | [Julio Jones](../players/julio-jones.md) | WR | 4 | 82.60 | <span class="wiki-new" title="This page has not been written yet">Ju Let The Dogs Out</span> |
+| TE | [Travis Kelce](../players/travis-kelce.md) | TE | 4 | 71.80 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
+| W/R/T | [Leonard Fournette](../players/leonard-fournette.md) | RB | 4 | 84.20 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
+| K | [Greg Zuerlein](../players/greg-zuerlein.md) | K | 2 | 17.00 | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span> |
+| DEF | [Patriots](../players/patriots.md) | DEF | 4 | 98.00 | <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3.
+> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
 
 ## The Story of the Year
 

@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Jamal Agnew has appeared on, seaso
 - **Weeks Rostered:** 3 (2 started)
 - **Points in Lineup:** 18.30
 - **Points on the Bench:** 27.00
-- **Best Week:** 27.00 (benched) - 2021 Wk 10, [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md)
+- **Best Week:** 27.00 (benched) - 2021 Wk 10, [The Johnson and Johnson team](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | WR | 3 | 2 | 18.30 | 27.00 (benched) - 2021 Wk 10 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 3 | 2 | 18.30 | 27.00 (benched) - 2021 Wk 10 |
 
 ## Draft History
 

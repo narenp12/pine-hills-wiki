@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Tony Jones has appeared on, season
 - **Weeks Rostered:** 1 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 2.70
-- **Best Week:** 2.70 (benched) - 2021 Wk 12, [Roger That](../teams/roger-that.md)
+- **Best Week:** 2.70 (benched) - 2021 Wk 12, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 2.70 (benched) - 2021 Wk 12 |
+| 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 2.70 (benched) - 2021 Wk 12 |
 
 ## Draft History
 

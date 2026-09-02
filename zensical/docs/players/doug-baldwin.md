@@ -19,7 +19,7 @@ description: "Every Pine Hills fantasy roster Doug Baldwin has appeared on, seas
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 _Drafted, but never appeared on a captured weekly roster._
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2018 | 10 | 59 | [D4rthSi Dragons](../teams/d4rthsi-dragons.md) |
+| 2018 | 10 | 59 | [D4rthSi Dragons](../owners/naren.md) |
 
 ## Related
 

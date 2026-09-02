@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Mike Boone has appeared on, season
 - **Weeks Rostered:** 3 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 17.20
-- **Best Week:** 11.50 (benched) - 2022 Wk 5, [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md)
+- **Best Week:** 11.50 (benched) - 2022 Wk 5, [Jeremy's Neat Team](../owners/jeremy.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 4.30 (benched) - 2019 Wk 16 (Final) |
-| 2022 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) | [Jeremy](../owners/jeremy.md) | RB | 2 | 0 | 0.00 | 11.50 (benched) - 2022 Wk 5 |
+| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 4.30 (benched) - 2019 Wk 16 (Final) |
+| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 2 | 0 | 0.00 | 11.50 (benched) - 2022 Wk 5 |
 
 ## Draft History
 

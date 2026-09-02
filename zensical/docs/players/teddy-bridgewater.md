@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Teddy Bridgewater has appeared on,
 - **Weeks Rostered:** 12 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 174.60
-- **Best Week:** 28.30 (benched) - 2020 Wk 9, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 28.30 (benched) - 2020 Wk 9, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | QB | 12 | 0 | 0.00 | 28.30 (benched) - 2020 Wk 9 |
+| 2020 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 12 | 0 | 0.00 | 28.30 (benched) - 2020 Wk 9 |
 
 ## Draft History
 

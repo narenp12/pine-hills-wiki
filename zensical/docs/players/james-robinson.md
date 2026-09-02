@@ -14,29 +14,29 @@ description: "Every Pine Hills fantasy roster James Robinson has appeared on, se
 - **Weeks Rostered:** 50 (26 started)
 - **Points in Lineup:** 390.30
 - **Points on the Bench:** 122.60
-- **Best Week:** 31.70 - 2020 Wk 7, [I have Hop(e)](../teams/i-have-hop-e.md)
+- **Best Week:** 31.70 - 2020 Wk 7, [I have Hop(e)](../owners/naren.md)
 - **Times Drafted:** 2 (first: 2021 R4 P31)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [I have Hop(e)](../teams/i-have-hop-e.md) | [Naren](../owners/naren.md) | RB | 11 | 8 | 152.40 | 31.70 - 2020 Wk 7 |
-| 2020 | [My team is Koo(l)](../teams/my-team-is-koo-l.md) | [lokesh](../owners/lokesh.md) | RB | 3 | 1 | 30.90 | 30.90 - 2020 Wk 3 |
-| 2020 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 2 | 2 | 24.70 | 14.70 - 2020 Wk 4 |
-| 2021 | [Tanmay's Top-Notch Team](../teams/tanmay-s-top-notch-team.md) | [Tanmay](../owners/tanmay.md) | RB | 10 | 8 | 127.90 | 25.40 - 2021 Wk 3 |
-| 2021 | [most likely injured](../teams/most-likely-injured.md) | [Aneesh](../owners/aneesh.md) | RB | 7 | 5 | 45.60 | 17.80 - 2021 Wk 15 (Quarterfinal) |
-| 2022 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 17 | 2 | 8.80 | 20.60 (benched) - 2022 Wk 3 |
+| 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 11 | 8 | 152.40 | 31.70 - 2020 Wk 7 |
+| 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 3 | 1 | 30.90 | 30.90 - 2020 Wk 3 |
+| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 2 | 2 | 24.70 | 14.70 - 2020 Wk 4 |
+| 2021 | [Tanmay's Top-Notch Team](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 10 | 8 | 127.90 | 25.40 - 2021 Wk 3 |
+| 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | RB | 7 | 5 | 45.60 | 17.80 - 2021 Wk 15 (Quarterfinal) |
+| 2022 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 17 | 2 | 8.80 | 20.60 (benched) - 2022 Wk 3 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2021 | 4 | 31 | [Tanmay's Top-Notch Team](../teams/tanmay-s-top-notch-team.md) |
-| 2022 | 14 | 135 | [Roger That](../teams/roger-that.md) |
+| 2021 | 4 | 31 | [Tanmay's Top-Notch Team](../owners/tanmay.md) |
+| 2022 | 14 | 135 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

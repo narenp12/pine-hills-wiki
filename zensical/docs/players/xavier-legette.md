@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Xavier Legette has appeared on, se
 - **Weeks Rostered:** 8 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 42.50
-- **Best Week:** 9.60 (benched) - 2024 Wk 12, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 9.60 (benched) - 2024 Wk 12, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 8 | 0 | 0.00 | 9.60 (benched) - 2024 Wk 12 |
+| 2024 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 8 | 0 | 0.00 | 9.60 (benched) - 2024 Wk 12 |
 
 ## Draft History
 

@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Rome Odunze has appeared on, seaso
 # Rome Odunze
 
 - **Position:** WR
-- **Seasons:** 2024-present
+- **Seasons:** 2024-2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,25 +14,26 @@ description: "Every Pine Hills fantasy roster Rome Odunze has appeared on, seaso
 - **Weeks Rostered:** 33 (15 started)
 - **Points in Lineup:** 129.20
 - **Points on the Bench:** 155.50
-- **Best Week:** 31.80 - 2025 Wk 2, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md)
-- **Times Drafted:** 2 (first: 2024 R10 P110)
+- **Best Week:** 31.80 - 2025 Wk 2, [Michael's Marvelous Team](../owners/michael.md)
+- **Times Drafted:** 3 (first: 2024 R10 P110)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) | [Naren](../owners/naren.md) | WR | 16 | 0 | 0.00 | 23.40 (benched) - 2024 Wk 3 |
-| 2025 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | WR | 17 | 15 | 129.20 | 31.80 - 2025 Wk 2 |
+| 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 16 | 0 | 0.00 | 23.40 (benched) - 2024 Wk 3 |
+| 2025 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | WR | 17 | 15 | 129.20 | 31.80 - 2025 Wk 2 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2024 | 10 | 110 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) |
-| 2025 | 6 | 71 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
+| 2024 | 10 | 110 | [Kamara's a b*tch](../owners/naren.md) |
+| 2025 | 6 | 71 | [Michael's Marvelous Team](../owners/michael.md) |
+| 2026 | 8 | 1122 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

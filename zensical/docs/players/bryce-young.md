@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Bryce Young has appeared on, seaso
 # Bryce Young
 
 - **Position:** QB
-- **Seasons:** 2024-present
+- **Seasons:** 2024-2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,24 +14,24 @@ description: "Every Pine Hills fantasy roster Bryce Young has appeared on, seaso
 - **Weeks Rostered:** 9 (1 started)
 - **Points in Lineup:** 16.92
 - **Points on the Bench:** 97.42
-- **Best Week:** 22.32 (benched) - 2025 Wk 2, [Roger That](../teams/roger-that.md)
+- **Best Week:** 22.32 (benched) - 2025 Wk 2, [Roger That](../owners/pranav.md)
 - **Times Drafted:** 1 (first: 2025 R12 P144)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Kamara’s a b*tch](../teams/kamara-s-a-b-tch.md) | [Naren](../owners/naren.md) | QB | 1 | 1 | 16.92 | 16.92 - 2024 Wk 17 (consolation) |
-| 2025 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | QB | 8 | 0 | 0.00 | 22.32 (benched) - 2025 Wk 2 |
+| 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 1 | 1 | 16.92 | 16.92 - 2024 Wk 17 (consolation) |
+| 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 8 | 0 | 0.00 | 22.32 (benched) - 2025 Wk 2 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 12 | 144 | [Roger That](../teams/roger-that.md) |
+| 2025 | 12 | 144 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

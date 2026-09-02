@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Ty Chandler has appeared on, seaso
 - **Weeks Rostered:** 4 (4 started)
 - **Points in Lineup:** 42.20
 - **Points on the Bench:** 0.00
-- **Best Week:** 24.70 - 2023 Wk 15 (Quarterfinal), [Roger That](../teams/roger-that.md)
+- **Best Week:** 24.70 - 2023 Wk 15 (Quarterfinal), [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 3 | 3 | 41.80 | 24.70 - 2023 Wk 15 (Quarterfinal) |
-| 2024 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | RB | 1 | 1 | 0.40 | 0.40 - 2024 Wk 7 |
+| 2023 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 3 | 3 | 41.80 | 24.70 - 2023 Wk 15 (Quarterfinal) |
+| 2024 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 1 | 1 | 0.40 | 0.40 - 2024 Wk 7 |
 
 ## Draft History
 

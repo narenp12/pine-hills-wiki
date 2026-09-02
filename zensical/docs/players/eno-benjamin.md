@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Eno Benjamin has appeared on, seas
 - **Weeks Rostered:** 6 (3 started)
 - **Points in Lineup:** 41.30
 - **Points on the Bench:** 12.40
-- **Best Week:** 23.30 - 2022 Wk 7, [L takes only](../teams/l-takes-only.md)
+- **Best Week:** 23.30 - 2022 Wk 7, [L takes only](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 7.70 (benched) - 2021 Wk 10 |
-| 2022 | [L takes only](../teams/l-takes-only.md) | [lokesh](../owners/lokesh.md) | RB | 5 | 3 | 41.30 | 23.30 - 2022 Wk 7 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 7.70 (benched) - 2021 Wk 10 |
+| 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 5 | 3 | 41.30 | 23.30 - 2022 Wk 7 |
 
 ## Draft History
 

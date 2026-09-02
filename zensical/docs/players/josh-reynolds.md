@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Josh Reynolds has appeared on, sea
 - **Weeks Rostered:** 3 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 36.30
-- **Best Week:** 21.10 (benched) - 2022 Wk 4, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 21.10 (benched) - 2022 Wk 4, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 0.00 (benched) - 2018 Wk 12 |
-| 2022 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | WR | 2 | 0 | 0.00 | 21.10 (benched) - 2022 Wk 4 |
+| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 0.00 (benched) - 2018 Wk 12 |
+| 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 2 | 0 | 0.00 | 21.10 (benched) - 2022 Wk 4 |
 
 ## Draft History
 

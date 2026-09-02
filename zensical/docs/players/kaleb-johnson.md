@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Kaleb Johnson has appeared on, sea
 # Kaleb Johnson
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,24 +14,24 @@ description: "Every Pine Hills fantasy roster Kaleb Johnson has appeared on, sea
 - **Weeks Rostered:** 7 (5 started)
 - **Points in Lineup:** 21.10
 - **Points on the Bench:** 0.40
-- **Best Week:** 13.00 - 2025 Wk 1, [Roger That](../teams/roger-that.md)
+- **Best Week:** 13.00 - 2025 Wk 1, [Roger That](../owners/pranav.md)
 - **Times Drafted:** 1 (first: 2025 R6 P72)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 5 | 5 | 21.10 | 13.00 - 2025 Wk 1 |
-| 2025 | [Big black big back](../teams/big-black-big-back.md) | [lokesh](../owners/lokesh.md) | RB | 2 | 0 | 0.00 | 0.40 (benched) - 2025 Wk 15 (Quarterfinal) |
+| 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 5 | 5 | 21.10 | 13.00 - 2025 Wk 1 |
+| 2025 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 2 | 0 | 0.00 | 0.40 (benched) - 2025 Wk 15 (Quarterfinal) |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 6 | 72 | [Roger That](../teams/roger-that.md) |
+| 2025 | 6 | 72 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

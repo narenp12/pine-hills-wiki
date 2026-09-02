@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Travis Fulgham has appeared on, se
 - **Weeks Rostered:** 6 (3 started)
 - **Points in Lineup:** 33.90
 - **Points on the Bench:** 5.40
-- **Best Week:** 19.80 - 2020 Wk 8, [My team is Koo(l)](../teams/my-team-is-koo-l.md)
+- **Best Week:** 19.80 - 2020 Wk 8, [My team is Koo(l)](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [My team is Koo(l)](../teams/my-team-is-koo-l.md) | [lokesh](../owners/lokesh.md) | WR | 6 | 3 | 33.90 | 19.80 - 2020 Wk 8 |
+| 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 6 | 3 | 33.90 | 19.80 - 2020 Wk 8 |
 
 ## Draft History
 

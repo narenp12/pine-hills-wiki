@@ -14,19 +14,19 @@ description: "Every Pine Hills fantasy roster Carlos Hyde has appeared on, seaso
 - **Weeks Rostered:** 5 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 40.40
-- **Best Week:** 14.00 (benched) - 2019 Wk 9, [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md)
+- **Best Week:** 14.00 (benched) - 2019 Wk 9, [Kaushal's Potatoes](../owners/kaushal.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 9.70 (benched) - 2018 Wk 5 |
-| 2019 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) | [Kaushal](../owners/kaushal.md) | RB | 3 | 0 | 0.00 | 14.00 (benched) - 2019 Wk 9 |
-| 2020 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 4.90 (benched) - 2020 Wk 12 |
+| 2018 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 9.70 (benched) - 2018 Wk 5 |
+| 2019 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | RB | 3 | 0 | 0.00 | 14.00 (benched) - 2019 Wk 9 |
+| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 4.90 (benched) - 2020 Wk 12 |
 
 ## Draft History
 

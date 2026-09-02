@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Paul Richardson has appeared on, s
 - **Weeks Rostered:** 1 (1 started)
 - **Points in Lineup:** 4.40
 - **Points on the Bench:** 0.00
-- **Best Week:** 4.40 - 2019 Wk 4, [Super Squirrels](../teams/super-squirrels.md)
+- **Best Week:** 4.40 - 2019 Wk 4, [Super Squirrels](../owners/abhinav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 1 | 1 | 4.40 | 4.40 - 2019 Wk 4 |
+| 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 1 | 1 | 4.40 | 4.40 - 2019 Wk 4 |
 
 ## Draft History
 

@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Rondale Moore has appeared on, sea
 - **Weeks Rostered:** 11 (6 started)
 - **Points in Lineup:** 47.90
 - **Points on the Bench:** 27.60
-- **Best Week:** 18.40 - 2022 Wk 10, [L takes only](../teams/l-takes-only.md)
+- **Best Week:** 18.40 - 2022 Wk 10, [L takes only](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | WR | 4 | 2 | 15.10 | 8.70 - 2021 Wk 6 |
-| 2022 | [L takes only](../teams/l-takes-only.md) | [lokesh](../owners/lokesh.md) | WR | 7 | 4 | 32.80 | 18.40 - 2022 Wk 10 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 4 | 2 | 15.10 | 8.70 - 2021 Wk 6 |
+| 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 7 | 4 | 32.80 | 18.40 - 2022 Wk 10 |
 
 ## Draft History
 

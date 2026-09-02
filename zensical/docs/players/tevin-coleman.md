@@ -14,27 +14,27 @@ description: "Every Pine Hills fantasy roster Tevin Coleman has appeared on, sea
 - **Weeks Rostered:** 16 (9 started)
 - **Points in Lineup:** 90.40
 - **Points on the Bench:** 89.80
-- **Best Week:** 37.80 (benched) - 2019 Wk 8, [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md)
+- **Best Week:** 37.80 (benched) - 2019 Wk 8, [Ju Let The Dogs Out](../owners/naren.md)
 - **Times Drafted:** 1 (first: 2019 R10 P73)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | RB | 3 | 2 | 23.40 | 12.70 - 2018 Wk 3 |
-| 2018 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 2 | 0 | 0.00 | 11.50 (benched) - 2018 Wk 11 |
-| 2018 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 1 | 1 | 9.30 | 9.30 - 2018 Wk 10 |
-| 2019 | [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) | [Naren](../owners/naren.md) | RB | 9 | 5 | 47.00 | 37.80 (benched) - 2019 Wk 8 |
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 1 | 10.70 | 10.70 - 2021 Wk 13 |
+| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 3 | 2 | 23.40 | 12.70 - 2018 Wk 3 |
+| 2018 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 2 | 0 | 0.00 | 11.50 (benched) - 2018 Wk 11 |
+| 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 1 | 1 | 9.30 | 9.30 - 2018 Wk 10 |
+| 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 9 | 5 | 47.00 | 37.80 (benched) - 2019 Wk 8 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 1 | 10.70 | 10.70 - 2021 Wk 13 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2019 | 10 | 73 | [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md) |
+| 2019 | 10 | 73 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

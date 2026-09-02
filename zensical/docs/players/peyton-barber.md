@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Peyton Barber has appeared on, sea
 - **Weeks Rostered:** 1 (1 started)
 - **Points in Lineup:** 2.50
 - **Points on the Bench:** 0.00
-- **Best Week:** 2.50 - 2021 Wk 4, [Anish's Awesome Team](../teams/anish-s-awesome-team.md)
+- **Best Week:** 2.50 - 2021 Wk 4, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | RB | 1 | 1 | 2.50 | 2.50 - 2021 Wk 4 |
+| 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 1 | 1 | 2.50 | 2.50 - 2021 Wk 4 |
 
 ## Draft History
 

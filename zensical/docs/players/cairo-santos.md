@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Cairo Santos has appeared on, seas
 # Cairo Santos
 
 - **Position:** K
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Cairo Santos has appeared on, seas
 - **Weeks Rostered:** 8 (8 started)
 - **Points in Lineup:** 74.00
 - **Points on the Bench:** 0.00
-- **Best Week:** 16.00 - 2025 Wk 11, [Roger That](../teams/roger-that.md)
+- **Best Week:** 16.00 - 2025 Wk 11, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | K | 8 | 8 | 74.00 | 16.00 - 2025 Wk 11 |
+| 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | K | 8 | 8 | 74.00 | 16.00 - 2025 Wk 11 |
 
 ## Draft History
 

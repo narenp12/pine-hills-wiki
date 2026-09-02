@@ -28,6 +28,7 @@ nav = [
   { Players = "players/index.md" },
   { Records = "records/index.md" },
   { Awards = "awards.md" },
+  { "Hall of Fame" = "hall-of-fame.md" },
   { "Draft History" = "draft/index.md" },
   { Playoffs = "playoffs.md" },
   { Champions = "champions.md" },
@@ -52,6 +53,10 @@ extra_javascript = [
 variant = "modern"
 # overrides/main.html adds the Open Graph / Twitter tags the base template omits.
 custom_dir = "overrides"
+# The pine tree from the header, in the browser tab. Without this key Zensical
+# falls back to assets/images/favicon.png, which is the theme's own default
+# icon and has nothing to do with this league.
+favicon = "assets/images/favicon.svg"
 features = [
   "navigation.instant",
   "navigation.instant.prefetch",

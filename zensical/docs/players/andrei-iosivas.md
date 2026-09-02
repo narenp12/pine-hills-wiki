@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Andrei Iosivas has appeared on, se
 # Andrei Iosivas
 
 - **Position:** WR
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Andrei Iosivas has appeared on, se
 - **Weeks Rostered:** 6 (1 started)
 - **Points in Lineup:** 3.70
 - **Points on the Bench:** 31.70
-- **Best Week:** 10.60 (benched) - 2025 Wk 12, [varun’s victorious team](../teams/varun-s-victorious-team.md)
+- **Best Week:** 10.60 (benched) - 2025 Wk 12, [varun's victorious team](../owners/varun.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [varun’s victorious team](../teams/varun-s-victorious-team.md) | [Varun](../owners/varun.md) | WR | 6 | 1 | 3.70 | 10.60 (benched) - 2025 Wk 12 |
+| 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 6 | 1 | 3.70 | 10.60 (benched) - 2025 Wk 12 |
 
 ## Draft History
 

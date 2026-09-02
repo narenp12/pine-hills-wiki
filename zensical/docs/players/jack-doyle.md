@@ -14,23 +14,23 @@ description: "Every Pine Hills fantasy roster Jack Doyle has appeared on, season
 - **Weeks Rostered:** 4 (2 started)
 - **Points in Lineup:** 19.90
 - **Points on the Bench:** 6.60
-- **Best Week:** 11.60 - 2018 Wk 12, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 11.60 - 2018 Wk 12, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** 1 (first: 2018 R4 P20)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | TE | 4 | 2 | 19.90 | 11.60 - 2018 Wk 12 |
+| 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | TE | 4 | 2 | 19.90 | 11.60 - 2018 Wk 12 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2018 | 4 | 20 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) |
+| 2018 | 4 | 20 | [Sharman's Scorpions](../owners/sharman.md) |
 
 ## Related
 

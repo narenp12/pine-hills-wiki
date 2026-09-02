@@ -16,6 +16,7 @@ across every player, drafted or not, and is listed on [Seasons](../seasons/index
 
 | Draft | Picks | Most Wins Swung |
 |-------|-------|-----------------|
+| [2026](2026-draft.md) | 150 | _TBD_ |
 | [2025](2025-draft.md) | 180 | [Ja'Marr Chase](../players/ja-marr-chase.md) - 6 (R1 P1) |
 | [2024](2024-draft.md) | 180 | [Jalen Hurts](../players/jalen-hurts.md) - 7 (R3 P35) |
 | [2023](2023-draft.md) | 150 | [Josh Allen](../players/josh-allen.md) - 8 (R4 P35) |

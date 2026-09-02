@@ -16,11 +16,11 @@ nobody has captured has no page.
 | Era | Platform | Seasons | In This Wiki |
 |-----|----------|---------|--------------|
 | Pine Hills | Yahoo Fantasy Football | 2018-2025 | 8 seasons (2018-2025) |
-| Pine Hills V2 | Sleeper | 2026-present | None captured |
+| Pine Hills V2 | Sleeper | 2026-present | 1 season (2026) |
 
 **Pine Hills.** Eight seasons on Yahoo. Every season, franchise, record and award on this wiki is derived from the Yahoo capture of these years.
 
-**Pine Hills V2.** The league moved to Sleeper for 2026. The draft has been held; no season data has been captured yet, so no 2026 pages are generated.
+**Pine Hills V2.** The league moved to Sleeper for 2026, as a new ten-team league rather than a continuation of the Yahoo one. Sleeper publishes a free read-only API, so this era needs no browser capture. The draft is in; the season has not kicked off, so 2026 carries a roster and a draft board but no record, no finish and no champion until games are played.
 
 ## Related
 

@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Donovan Peoples-Jones has appeared
 - **Weeks Rostered:** 6 (4 started)
 - **Points in Lineup:** 36.70
 - **Points on the Bench:** 30.30
-- **Best Week:** 22.00 (benched) - 2022 Wk 13, [L takes only](../teams/l-takes-only.md)
+- **Best Week:** 22.00 (benched) - 2022 Wk 13, [L takes only](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | WR | 1 | 1 | 0.00 | 0.00 - 2021 Wk 7 |
-| 2022 | [L takes only](../teams/l-takes-only.md) | [lokesh](../owners/lokesh.md) | WR | 5 | 3 | 36.70 | 22.00 (benched) - 2022 Wk 13 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 1 | 0.00 | 0.00 - 2021 Wk 7 |
+| 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 5 | 3 | 36.70 | 22.00 (benched) - 2022 Wk 13 |
 
 ## Draft History
 

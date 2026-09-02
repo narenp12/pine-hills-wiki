@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Keaton Mitchell has appeared on, s
 - **Weeks Rostered:** 7 (6 started)
 - **Points in Lineup:** 28.90
 - **Points on the Bench:** 0.00
-- **Best Week:** 10.90 - 2023 Wk 12, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md)
+- **Best Week:** 10.90 - 2023 Wk 12, [Michael's Marvelous Team](../owners/michael.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | RB | 6 | 6 | 28.90 | 10.90 - 2023 Wk 12 |
-| 2023 | [BBigg MACKS](../teams/bbigg-macks.md) | [Naren](../owners/naren.md) | RB | 1 | 0 | 0.00 | 0.00 (benched) - 2023 Wk 5 |
+| 2023 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 6 | 6 | 28.90 | 10.90 - 2023 Wk 12 |
+| 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 1 | 0 | 0.00 | 0.00 (benched) - 2023 Wk 5 |
 
 ## Draft History
 

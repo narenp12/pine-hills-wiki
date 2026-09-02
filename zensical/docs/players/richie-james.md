@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Richie James has appeared on, seas
 - **Weeks Rostered:** 2 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 54.00
-- **Best Week:** 33.40 (benched) - 2020 Wk 9, [Roger That](../teams/roger-that.md)
+- **Best Week:** 33.40 (benched) - 2020 Wk 9, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | WR | 1 | 0 | 0.00 | 33.40 (benched) - 2020 Wk 9 |
-| 2022 | [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) | [Jeremy](../owners/jeremy.md) | WR | 1 | 0 | 0.00 | 20.60 (benched) - 2022 Wk 17 (Final) |
+| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 1 | 0 | 0.00 | 33.40 (benched) - 2020 Wk 9 |
+| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 1 | 0 | 0.00 | 20.60 (benched) - 2022 Wk 17 (Final) |
 
 ## Draft History
 

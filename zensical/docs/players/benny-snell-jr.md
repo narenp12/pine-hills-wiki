@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Benny Snell Jr. has appeared on, s
 - **Weeks Rostered:** 5 (0 started)
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 15.50
-- **Best Week:** 12.30 (benched) - 2020 Wk 12, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 12.30 (benched) - 2020 Wk 12, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Imagine Losing](../teams/imagine-losing.md) | [Om](../owners/om.md) | RB | 3 | 0 | 0.00 | 1.10 (benched) - 2020 Wk 3 |
-| 2020 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | RB | 2 | 0 | 0.00 | 12.30 (benched) - 2020 Wk 12 |
+| 2020 | [Imagine Losing](../owners/om.md) | [Om](../owners/om.md) | RB | 3 | 0 | 0.00 | 1.10 (benched) - 2020 Wk 3 |
+| 2020 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 2 | 0 | 0.00 | 12.30 (benched) - 2020 Wk 12 |
 
 ## Draft History
 

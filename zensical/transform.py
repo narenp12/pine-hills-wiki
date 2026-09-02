@@ -254,6 +254,7 @@ def main() -> None:
     title_map = build_title_map(STAGE)
     print(f"[transform] title map size: {len(title_map)}")
     count = 0
+    written: set[str] = set()
     for f in sorted(STAGE.rglob("*.md")):
         rel = f.relative_to(STAGE).as_posix()
         out = transform(f.read_text(), title_map, rel)
@@ -269,10 +270,39 @@ def main() -> None:
             out = transform(merged, title_map, rel)
         dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_text(dash_normalize(out))
+        written.add(rel)
         count += 1
     print(f"[transform] wrote {count} pages -> {DST}")
+    prune_stale(written)
     print("[transform] NOTE: zensical/docs/stylesheets and zensical/docs/javascripts "
           "are hand-authored skin assets kept in git; this script never touches them.")
+
+
+# Pages in zensical/docs that are hand-authored rather than generated, and so
+# must survive a prune. index.md is the site's hero page; build.mjs documents it
+# as committed chrome that the generator never writes.
+HAND_AUTHORED = {"index.md"}
+
+
+def prune_stale(written: set[str]) -> None:
+    """Delete generated pages that this run did not write.
+
+    Without this the site keeps serving pages for things that no longer exist.
+    Renaming a manager in the bible (Yahoo's "Super" -> the real "Abhinav") adds
+    owners/abhinav.md but leaves owners/super.md behind, so the same person's
+    history is live at two URLs, one of them frozen and wrong.
+    """
+    stale = [
+        f
+        for f in sorted(DST.rglob("*.md"))
+        if f.relative_to(DST).as_posix() not in written
+        and f.relative_to(DST).as_posix() not in HAND_AUTHORED
+    ]
+    for f in stale:
+        f.unlink()
+        print(f"[transform] pruned stale {f.relative_to(DST).as_posix()}")
+    if stale:
+        print(f"[transform] pruned {len(stale)} stale pages")
 
 
 def inject_champions_table(committed: str, generated: str) -> str:

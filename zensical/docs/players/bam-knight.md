@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Bam Knight has appeared on, season
 # Bam Knight
 
 - **Position:** RB
-- **Seasons:** 2022-present
+- **Seasons:** 2022-2025
 - **Fantasy Teams:** 2
 
 ## Career Summary
@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster Bam Knight has appeared on, season
 - **Weeks Rostered:** 6 (5 started)
 - **Points in Lineup:** 33.40
 - **Points on the Bench:** 16.80
-- **Best Week:** 16.80 (benched) - 2022 Wk 13, [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 16.80 (benched) - 2022 Wk 13, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2022 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | RB | 5 | 4 | 26.70 | 16.80 (benched) - 2022 Wk 13 |
-| 2025 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 1 | 1 | 6.70 | 6.70 - 2025 Wk 9 |
+| 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 5 | 4 | 26.70 | 16.80 (benched) - 2022 Wk 13 |
+| 2025 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 1 | 1 | 6.70 | 6.70 - 2025 Wk 9 |
 
 ## Draft History
 

@@ -53,10 +53,13 @@ eras:
   - name: Pine Hills V2
     platform: Sleeper
     first_season: 2026
-    captured: false
+    captured: true
     note: >-
-      The league moved to Sleeper for 2026. The draft has been held; no season
-      data has been captured yet, so no 2026 pages are generated.
+      The league moved to Sleeper for 2026, as a new ten-team league rather than
+      a continuation of the Yahoo one. Sleeper publishes a free read-only API,
+      so this era needs no browser capture. The draft is in; the season has not
+      kicked off, so 2026 carries a roster and a draft board but no record, no
+      finish and no champion until games are played.
 
 # --- Owners -----------------------------------------------------------------
 # team name (as it appears in a season) -> owner name
@@ -64,11 +67,33 @@ owners:
   "Save Me": Naren
 
 # --- Owner aliases (same person, different spelling) -------------------------
-# canonical person -> list of spellings Yahoo has reported for them.
+# canonical person -> list of spellings the data has reported for them.
 # Casing is merged automatically ("lokesh" and "Lokesh" are already one person),
 # so this is only needed for genuinely different spellings or nicknames. The
 # canonical name here is what the owner page is titled and slugged from.
-owner_aliases: {}
+#
+# THIS BLOCK IS WHAT SPANS THE ERAS. Yahoo (2018-2025) reports a manager's first
+# name; Sleeper (2026-) reports the account handle instead, and the two never
+# match on their own. Every handle listed here folds into the person above it,
+# so one manager keeps one owner page across both platforms. A handle left out
+# of this block gets its own page, splitting that manager's history in half.
+owner_aliases:
+# Every 2026 Sleeper manager appears here, so all ten carry their Yahoo history
+# forward. Managers who did not move to Sleeper (Aneesh, Aryan, Jayesh, Jeremy,
+# Om, sahil) need no entry — their Yahoo name is already canonical.
+  # Yahoo reported these two managers under a name that is not their own. The
+  # canonical name is the real person, so that is what titles the owner page,
+  # and every platform spelling folds into it.
+  Abhinav: [Super, silversur4]
+  Lokesh: [lokesh, CurryMan123]
+  Anish: [anishattarde]
+  Kaushal: [kaushpotato]      # team name is "Kaushal's Potatoes"
+  Michael: [micjes71]
+  Naren: [D4rthSi]            # team name "SlidInTheDMs"
+  Pranav: [pranavnar]
+  Sharman: [sharwoman]
+  Tanmay: [bigbootytan]
+  Varun: [vchapa14]           # team name "all hail dallas"
 
 # --- Team images -------------------------------------------------------------
 # team name (as it appears in a season) -> image for that franchise.
@@ -103,6 +128,33 @@ player_positions:
   # Drafted as a WR in 2015, moved to RB in 2016 and taken as one in this
   # league's 2018 draft. nfl.com still lists him WR.
   "Ty Montgomery II": RB     # https://en.wikipedia.org/wiki/Ty_Montgomery
+
+# --- Player aliases (same player, different spelling) ------------------------
+# canonical player name -> list of spellings the platforms have reported.
+#
+# This is the player-level twin of `owner_aliases`, and it exists for the same
+# reason: Yahoo files a player under his full legal name ("Aaron Jones Sr.")
+# while Sleeper drops the generational suffix ("Aaron Jones"). Without a fold,
+# the platform move in 2026 gives one player two pages and splits his draft and
+# roster history down the middle.
+#
+# The canonical name on the left is what titles the player page, so it should be
+# the fuller, correct form. Every entry below was found by matching a 2026
+# Sleeper name against a 2018-2025 Yahoo name ignoring suffixes; team defenses
+# are handled in the scraper instead, which files them under the nickname the
+# Yahoo era used.
+player_aliases:
+  "Aaron Jones Sr.": ["Aaron Jones"]
+  "Brian Thomas Jr.": ["Brian Thomas"]
+  "Chris Godwin Jr.": ["Chris Godwin"]
+  "Deebo Samuel Sr.": ["Deebo Samuel"]
+  "Harold Fannin Jr.": ["Harold Fannin"]
+  "James Cook III": ["James Cook"]
+  "Kenneth Walker III": ["Kenneth Walker"]
+  "Kyle Pitts Sr.": ["Kyle Pitts"]
+  "Marvin Harrison Jr.": ["Marvin Harrison"]
+  "Michael Pittman Jr.": ["Michael Pittman"]
+  "Travis Etienne Jr.": ["Travis Etienne"]
 
 # --- Champions (playoff winners, NOT regular-season #1) ----------------------
 # All four fields are now DERIVED from the Yahoo v2 API and written into

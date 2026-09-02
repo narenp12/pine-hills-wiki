@@ -14,23 +14,23 @@ description: "Every Pine Hills fantasy roster Jamison Crowder has appeared on, s
 - **Weeks Rostered:** 17 (9 started)
 - **Points in Lineup:** 108.30
 - **Points on the Bench:** 70.70
-- **Best Week:** 27.00 - 2019 Wk 15 (consolation), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md)
+- **Best Week:** 27.00 - 2019 Wk 15 (consolation), [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry’s legit team](../teams/curry-s-legit-team.md) | [lokesh](../owners/lokesh.md) | WR | 3 | 1 | 9.50 | 14.50 (benched) - 2018 Wk 3 |
-| 2019 | [Sharman’s Scorpions](../teams/sharman-s-scorpions.md) | [Sharman](../owners/sharman.md) | WR | 7 | 6 | 84.40 | 27.00 - 2019 Wk 15 (consolation) |
-| 2019 | [Ju Let The Dogs Out](../teams/ju-let-the-dogs-out.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 8.00 (benched) - 2019 Wk 2 |
-| 2020 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | [Anish](../owners/anish.md) | WR | 3 | 1 | 11.80 | 26.40 (benched) - 2020 Wk 5 |
-| 2020 | [I have Hop(e)](../teams/i-have-hop-e.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 10.60 (benched) - 2020 Wk 9 |
-| 2020 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | WR | 1 | 1 | 2.60 | 2.60 - 2020 Wk 11 |
-| 2021 | [The Johnson and Johnson team](../teams/the-johnson-and-johnson-team.md) | [lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 8.40 (benched) - 2021 Wk 5 |
+| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 3 | 1 | 9.50 | 14.50 (benched) - 2018 Wk 3 |
+| 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 7 | 6 | 84.40 | 27.00 - 2019 Wk 15 (consolation) |
+| 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 8.00 (benched) - 2019 Wk 2 |
+| 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 3 | 1 | 11.80 | 26.40 (benched) - 2020 Wk 5 |
+| 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 10.60 (benched) - 2020 Wk 9 |
+| 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 1 | 1 | 2.60 | 2.60 - 2020 Wk 11 |
+| 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 8.40 (benched) - 2021 Wk 5 |
 
 ## Draft History
 

@@ -14,19 +14,19 @@ description: "Every Pine Hills fantasy roster Deon Jackson has appeared on, seas
 - **Weeks Rostered:** 3 (2 started)
 - **Points in Lineup:** 33.70
 - **Points on the Bench:** 3.80
-- **Best Week:** 28.10 - 2022 Wk 6, [L takes only](../teams/l-takes-only.md)
+- **Best Week:** 28.10 - 2022 Wk 6, [L takes only](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2022 | [L takes only](../teams/l-takes-only.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 1 | 28.10 | 28.10 - 2022 Wk 6 |
-| 2022 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 1 | 1 | 5.60 | 5.60 - 2022 Wk 9 |
-| 2023 | [Super Squirrels](../teams/super-squirrels.md) | [Super](../owners/super.md) | RB | 1 | 0 | 0.00 | 3.80 (benched) - 2023 Wk 1 |
+| 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 1 | 28.10 | 28.10 - 2022 Wk 6 |
+| 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 1 | 1 | 5.60 | 5.60 - 2022 Wk 9 |
+| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 1 | 0 | 0.00 | 3.80 (benched) - 2023 Wk 1 |
 
 ## Draft History
 

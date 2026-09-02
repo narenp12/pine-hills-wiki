@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Cam Skattebo has appeared on, seas
 # Cam Skattebo
 
 - **Position:** RB
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,23 +14,24 @@ description: "Every Pine Hills fantasy roster Cam Skattebo has appeared on, seas
 - **Weeks Rostered:** 8 (6 started)
 - **Points in Lineup:** 110.90
 - **Points on the Bench:** 16.80
-- **Best Week:** 31.00 - 2025 Wk 6, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md)
-- **Times Drafted:** 1 (first: 2025 R10 P119)
+- **Best Week:** 31.00 - 2025 Wk 6, [Michael's Marvelous Team](../owners/michael.md)
+- **Times Drafted:** 2 (first: 2025 R10 P119)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) | [Michael](../owners/michael.md) | RB | 8 | 6 | 110.90 | 31.00 - 2025 Wk 6 |
+| 2025 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 8 | 6 | 110.90 | 31.00 - 2025 Wk 6 |
 
 ## Draft History
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2025 | 10 | 119 | [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
+| 2025 | 10 | 119 | [Michael's Marvelous Team](../owners/michael.md) |
+| 2026 | 5 | 643 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

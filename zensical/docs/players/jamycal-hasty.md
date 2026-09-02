@@ -14,18 +14,18 @@ description: "Every Pine Hills fantasy roster JaMycal Hasty has appeared on, sea
 - **Weeks Rostered:** 2 (2 started)
 - **Points in Lineup:** 15.70
 - **Points on the Bench:** 0.00
-- **Best Week:** 10.30 - 2021 Wk 14, [Roger That](../teams/roger-that.md)
+- **Best Week:** 10.30 - 2021 Wk 14, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [My team is Koo(l)](../teams/my-team-is-koo-l.md) | [lokesh](../owners/lokesh.md) | RB | 1 | 1 | 5.40 | 5.40 - 2020 Wk 9 |
-| 2021 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | RB | 1 | 1 | 10.30 | 10.30 - 2021 Wk 14 |
+| 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 1 | 5.40 | 5.40 - 2020 Wk 9 |
+| 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 1 | 10.30 | 10.30 - 2021 Wk 14 |
 
 ## Draft History
 

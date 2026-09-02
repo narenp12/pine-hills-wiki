@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Joshua Dobbs has appeared on, seas
 - **Weeks Rostered:** 5 (3 started)
 - **Points in Lineup:** 51.56
 - **Points on the Bench:** 4.62
-- **Best Week:** 25.12 - 2023 Wk 10, [Roger That](../teams/roger-that.md)
+- **Best Week:** 25.12 - 2023 Wk 10, [Roger That](../owners/pranav.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Roger That](../teams/roger-that.md) | [Pranav](../owners/pranav.md) | QB | 5 | 3 | 51.56 | 25.12 - 2023 Wk 10 |
+| 2023 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 5 | 3 | 51.56 | 25.12 - 2023 Wk 10 |
 
 ## Draft History
 

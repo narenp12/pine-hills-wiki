@@ -6,7 +6,7 @@ description: "Every Pine Hills fantasy roster Jalen Coker has appeared on, seaso
 # Jalen Coker
 
 - **Position:** WR
-- **Seasons:** 2025-present
+- **Seasons:** 2025
 - **Fantasy Teams:** 1
 
 ## Career Summary
@@ -14,17 +14,17 @@ description: "Every Pine Hills fantasy roster Jalen Coker has appeared on, seaso
 - **Weeks Rostered:** 6 (2 started)
 - **Points in Lineup:** 23.60
 - **Points on the Bench:** 25.30
-- **Best Week:** 17.40 - 2025 Wk 13, [Indiana Jones](../teams/indiana-jones.md)
+- **Best Week:** 17.40 - 2025 Wk 13, [Indiana Jones](../owners/anish.md)
 - **Times Drafted:** Never drafted (added in-season)
 
 ## Team History
 
-One row per franchise per season. Weeks counts roster spots rather than games
+One row per team per season. Weeks counts roster spots rather than games
 played; lineup points exclude weeks spent on the bench.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Indiana Jones](../teams/indiana-jones.md) | [Anish](../owners/anish.md) | WR | 6 | 2 | 23.60 | 17.40 - 2025 Wk 13 |
+| 2025 | [Indiana Jones](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 6 | 2 | 23.60 | 17.40 - 2025 Wk 13 |
 
 ## Draft History
 
