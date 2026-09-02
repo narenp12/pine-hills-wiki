@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2023 | 7 | 68 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 8 | 91 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 6 | 809 | [micjes71](../owners/michael.md) |
+| 2026 | 6 | 59 | [micjes71](../owners/michael.md) |
 
 ## Related
 

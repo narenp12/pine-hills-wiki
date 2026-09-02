@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 2 | 17 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 3 | 28 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 3 | 330 | [pranavnar](../owners/pranav.md) |
+| 2026 | 3 | 30 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

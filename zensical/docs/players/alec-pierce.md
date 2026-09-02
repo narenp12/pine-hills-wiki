@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Alec Pierce has appeared on, seaso
 - **Points in Lineup:** 18.40
 - **Points on the Bench:** 57.60
 - **Best Week:** 18.40 - 2025 Wk 10, [Jeremy's Neat Team](../owners/jeremy.md)
-- **Times Drafted:** 1 (first: 2026 R11 P1605)
+- **Times Drafted:** 1 (first: 2026 R11 P105)
 
 ## Team History
 
@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 11 | 1605 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 11 | 105 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

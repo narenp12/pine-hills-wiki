@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 7 | 61 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 13 | 152 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 9 | 108 | [Save Me](../owners/naren.md) |
-| 2026 | 10 | 1447 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 10 | 97 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

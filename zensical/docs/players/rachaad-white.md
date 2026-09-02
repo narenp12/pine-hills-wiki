@@ -37,7 +37,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 8 | 73 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 4 | 43 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 13 | 145 | [Roger That](../owners/pranav.md) |
-| 2026 | 15 | 2249 | [all hail dallas](../owners/varun.md) |
+| 2026 | 15 | 149 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 2 | 15 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 4 | 40 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 8 | 1127 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 8 | 77 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

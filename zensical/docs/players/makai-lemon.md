@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Makai Lemon has appeared on, seaso
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R9 P1282)
+- **Times Drafted:** 1 (first: 2026 R9 P82)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 9 | 1282 | [micjes71](../owners/michael.md) |
+| 2026 | 9 | 82 | [micjes71](../owners/michael.md) |
 
 ## Related
 

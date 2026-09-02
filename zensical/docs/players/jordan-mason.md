@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 8 | 88 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 12 | 1761 | [pranavnar](../owners/pranav.md) |
+| 2026 | 12 | 111 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

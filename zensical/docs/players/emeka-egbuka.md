@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 7 | 78 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 4 | 486 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 4 | 36 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

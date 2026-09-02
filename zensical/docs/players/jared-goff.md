@@ -47,7 +47,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 14 | 131 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2024 | 11 | 123 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 10 | 117 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 14 | 2082 | [all hail dallas](../owners/varun.md) |
+| 2026 | 14 | 132 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

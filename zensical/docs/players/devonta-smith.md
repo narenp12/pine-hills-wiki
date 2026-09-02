@@ -40,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 25 | [Super Squirrels](../owners/abhinav.md) |
 | 2024 | 4 | 40 | [Stroud Boys](../owners/tanmay.md) |
 | 2025 | 4 | 45 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 4 | 482 | [all hail dallas](../owners/varun.md) |
+| 2026 | 4 | 32 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

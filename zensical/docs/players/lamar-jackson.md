@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 4 | 39 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 4 | 41 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 3 | 27 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 5 | 642 | [micjes71](../owners/michael.md) |
+| 2026 | 5 | 42 | [micjes71](../owners/michael.md) |
 
 ## Related
 

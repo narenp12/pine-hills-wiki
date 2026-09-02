@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 10 | 109 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 9 | 106 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 12 | 1768 | [silversur4](../owners/abhinav.md) |
+| 2026 | 12 | 118 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

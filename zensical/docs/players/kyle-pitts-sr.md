@@ -40,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 7 | 64 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2024 | 7 | 73 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 7 | 82 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 8 | 1126 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 8 | 76 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

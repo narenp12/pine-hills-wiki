@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 7 | 81 | [Stroud Boys](../owners/tanmay.md) |
 | 2025 | 3 | 30 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 7 | 968 | [sharwoman](../owners/sharman.md) |
+| 2026 | 7 | 68 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

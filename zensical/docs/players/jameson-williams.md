@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 15 | 142 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 11 | 128 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 6 | 63 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 7 | 961 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 7 | 61 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

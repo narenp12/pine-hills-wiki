@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 10 | 116 | [Jayesh's Great Team](../owners/jayesh.md) |
 | 2025 | 2 | 14 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 8 | 1121 | [pranavnar](../owners/pranav.md) |
+| 2026 | 8 | 71 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

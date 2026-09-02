@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Andy Borregales has appeared on, s
 - **Points in Lineup:** 18.00
 - **Points on the Bench:** 0.00
 - **Best Week:** 18.00 - 2025 Wk 12, [Save Me](../owners/naren.md)
-- **Times Drafted:** 1 (first: 2026 R15 P2248)
+- **Times Drafted:** 1 (first: 2026 R15 P148)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 15 | 2248 | [sharwoman](../owners/sharman.md) |
+| 2026 | 15 | 148 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

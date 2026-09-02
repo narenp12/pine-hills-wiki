@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Will Reichard has appeared on, sea
 - **Points in Lineup:** 74.00
 - **Points on the Bench:** 0.00
 - **Best Week:** 16.00 - 2025 Wk 17 (consolation), [Indiana Jones](../owners/anish.md)
-- **Times Drafted:** 1 (first: 2026 R15 P2250)
+- **Times Drafted:** 1 (first: 2026 R15 P150)
 
 ## Team History
 
@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 15 | 2250 | [pranavnar](../owners/pranav.md) |
+| 2026 | 15 | 150 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

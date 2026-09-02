@@ -38,7 +38,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 2 | 20 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 4 | 37 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 5 | 49 | [Roger That](../owners/pranav.md) |
-| 2026 | 5 | 648 | [sharwoman](../owners/sharman.md) |
+| 2026 | 5 | 48 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

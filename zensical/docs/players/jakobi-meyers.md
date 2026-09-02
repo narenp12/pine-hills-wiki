@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 13 | 154 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 8 | 90 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 13 | 1921 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 13 | 121 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

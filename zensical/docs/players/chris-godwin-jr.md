@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 7 | 63 | [BBigg MACKS](../owners/naren.md) |
 | 2024 | 7 | 80 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 11 | 124 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 10 | 1449 | [micjes71](../owners/michael.md) |
+| 2026 | 10 | 99 | [micjes71](../owners/michael.md) |
 
 ## Related
 

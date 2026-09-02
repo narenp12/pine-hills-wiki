@@ -44,7 +44,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | 15 | 120 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2024 | 11 | 130 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 14 | 167 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 11 | 1603 | [silversur4](../owners/abhinav.md) |
+| 2026 | 11 | 103 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

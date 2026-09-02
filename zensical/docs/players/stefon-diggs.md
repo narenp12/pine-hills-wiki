@@ -48,7 +48,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 2 | 11 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2024 | 5 | 49 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 8 | 89 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 10 | 1448 | [silversur4](../owners/abhinav.md) |
+| 2026 | 10 | 98 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

@@ -49,7 +49,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | 14 | 137 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 14 | 166 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 12 | 134 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 13 | 1929 | [all hail dallas](../owners/varun.md) |
+| 2026 | 13 | 129 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

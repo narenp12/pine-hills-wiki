@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Jadarian Price has appeared on, se
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R7 P967)
+- **Times Drafted:** 1 (first: 2026 R7 P67)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 7 | 967 | [anishattarde](../owners/anish.md) |
+| 2026 | 7 | 67 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

@@ -46,7 +46,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 15 | 179 | [Kamara's a b*tch](../owners/naren.md) |
-| 2026 | 11 | 1608 | [sharwoman](../owners/sharman.md) |
+| 2026 | 11 | 108 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

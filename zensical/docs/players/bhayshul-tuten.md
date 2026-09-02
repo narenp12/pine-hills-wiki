@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 10 | 114 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 7 | 963 | [silversur4](../owners/abhinav.md) |
+| 2026 | 7 | 63 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

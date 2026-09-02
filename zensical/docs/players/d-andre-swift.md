@@ -43,7 +43,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 7 | 62 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 7 | 74 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 6 | 61 | [Save Me](../owners/naren.md) |
-| 2026 | 6 | 810 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 6 | 60 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

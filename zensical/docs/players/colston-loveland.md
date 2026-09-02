@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 11 | 130 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 4 | 490 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 4 | 40 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

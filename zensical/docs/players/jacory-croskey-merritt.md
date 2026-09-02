@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 11 | 125 | [Jayesh's Great Team](../owners/jayesh.md) |
-| 2026 | 12 | 1763 | [sharwoman](../owners/sharman.md) |
+| 2026 | 12 | 113 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

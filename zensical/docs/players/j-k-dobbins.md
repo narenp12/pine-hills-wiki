@@ -40,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 5 | 43 | [BBigg MACKS](../owners/naren.md) |
 | 2024 | 15 | 178 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 8 | 96 | [Roger That](../owners/pranav.md) |
-| 2026 | 9 | 1281 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 9 | 81 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

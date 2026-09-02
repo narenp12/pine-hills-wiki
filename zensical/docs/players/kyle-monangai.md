@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Kyle Monangai has appeared on, sea
 - **Points in Lineup:** 63.60
 - **Points on the Bench:** 2.40
 - **Best Week:** 22.80 - 2025 Wk 9, [Super Squirrels](../owners/abhinav.md)
-- **Times Drafted:** 1 (first: 2026 R10 P1450)
+- **Times Drafted:** 1 (first: 2026 R10 P100)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 10 | 1450 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 10 | 100 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

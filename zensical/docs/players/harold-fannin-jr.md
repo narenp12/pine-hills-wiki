@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Harold Fannin Jr. has appeared on,
 - **Points in Lineup:** 32.80
 - **Points on the Bench:** 58.50
 - **Best Week:** 19.50 (benched) - 2025 Wk 16 (Semifinal), [Save Me](../owners/naren.md)
-- **Times Drafted:** 1 (first: 2026 R7 P966)
+- **Times Drafted:** 1 (first: 2026 R7 P66)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 7 | 966 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 7 | 66 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

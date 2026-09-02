@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 21 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 3 | 26 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 2 | 16 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 4 | 483 | [sharwoman](../owners/sharman.md) |
+| 2026 | 4 | 33 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

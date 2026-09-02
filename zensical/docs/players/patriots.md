@@ -53,7 +53,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | 14 | 131 | [Tanmay's Top-Notch Team](../owners/tanmay.md) |
 | 2022 | 13 | 129 | [Tanmay's Hospital](../owners/tanmay.md) |
 | 2023 | 14 | 138 | [BBigg MACKS](../owners/naren.md) |
-| 2026 | 15 | 2241 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 15 | 141 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

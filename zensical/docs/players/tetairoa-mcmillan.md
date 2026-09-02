@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 5 | 56 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 4 | 488 | [silversur4](../owners/abhinav.md) |
+| 2026 | 4 | 38 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

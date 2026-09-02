@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 3 | 25 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 2 | 17 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 2 | 162 | [all hail dallas](../owners/varun.md) |
+| 2026 | 2 | 12 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Michael Wilson has appeared on, se
 - **Points in Lineup:** 115.10
 - **Points on the Bench:** 2.80
 - **Best Week:** 37.20 - 2025 Wk 14, [Super Squirrels](../owners/abhinav.md)
-- **Times Drafted:** 1 (first: 2026 R8 P1129)
+- **Times Drafted:** 1 (first: 2026 R8 P79)
 
 ## Team History
 
@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 8 | 1129 | [micjes71](../owners/michael.md) |
+| 2026 | 8 | 79 | [micjes71](../owners/michael.md) |
 
 ## Related
 

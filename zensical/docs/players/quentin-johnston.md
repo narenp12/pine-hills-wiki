@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2023 | 13 | 129 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 12 | 1770 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 12 | 120 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

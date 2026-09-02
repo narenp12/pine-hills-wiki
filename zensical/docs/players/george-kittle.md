@@ -47,7 +47,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 6 | 54 | [Roger That](../owners/pranav.md) |
 | 2024 | 6 | 61 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 3 | 25 | [Roger That](../owners/pranav.md) |
-| 2026 | 9 | 1287 | [anishattarde](../owners/anish.md) |
+| 2026 | 9 | 87 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

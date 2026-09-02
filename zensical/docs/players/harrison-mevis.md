@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Harrison Mevis has appeared on, se
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R15 P2243)
+- **Times Drafted:** 1 (first: 2026 R15 P143)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 15 | 2243 | [silversur4](../owners/abhinav.md) |
+| 2026 | 15 | 143 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

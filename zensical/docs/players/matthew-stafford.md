@@ -46,7 +46,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | 12 | 114 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2024 | 13 | 149 | [Jayesh's Great Team](../owners/jayesh.md) |
 | 2025 | 15 | 174 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 10 | 1444 | [anishattarde](../owners/anish.md) |
+| 2026 | 10 | 94 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

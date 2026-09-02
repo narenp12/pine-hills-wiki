@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 13 | 150 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 4 | 41 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 7 | 962 | [micjes71](../owners/michael.md) |
+| 2026 | 7 | 62 | [micjes71](../owners/michael.md) |
 
 ## Related
 

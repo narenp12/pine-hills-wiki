@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 5 | 54 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 7 | 84 | [Save Me](../owners/naren.md) |
-| 2026 | 3 | 329 | [all hail dallas](../owners/varun.md) |
+| 2026 | 3 | 29 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

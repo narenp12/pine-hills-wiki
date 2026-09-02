@@ -49,7 +49,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 14 | 133 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 15 | 180 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 15 | 178 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 15 | 2247 | [anishattarde](../owners/anish.md) |
+| 2026 | 15 | 147 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

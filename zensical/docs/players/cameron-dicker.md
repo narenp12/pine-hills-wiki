@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 14 | 158 | [Kamara's a b*tch](../owners/naren.md) |
 | 2025 | 12 | 139 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 11 | 1604 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 11 | 104 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

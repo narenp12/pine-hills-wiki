@@ -284,6 +284,23 @@ def test_overall_pick_handles_a_short_final_round():
     assert [p["overall"] for p in season["draft"]["draft_results"]] == [1, 2, 3, 4]
 
 
+def test_overall_pick_leaves_sleeper_numbering_alone():
+    """Sleeper's `pick_no` is already the overall number, so offsetting it by the
+    round size would push round 2 of a three-team draft into the 4s and beyond."""
+    from scripts.generate import annotate_overall_picks
+
+    season = {"draft": {"draft_results": [
+        {"round": 1, "pick": 1, "player": "A", "position": "RB", "team": "T1"},
+        {"round": 1, "pick": 2, "player": "B", "position": "RB", "team": "T2"},
+        {"round": 1, "pick": 3, "player": "C", "position": "RB", "team": "T3"},
+        {"round": 2, "pick": 4, "player": "D", "position": "RB", "team": "T3"},
+        {"round": 2, "pick": 5, "player": "E", "position": "RB", "team": "T2"},
+        {"round": 2, "pick": 6, "player": "F", "position": "RB", "team": "T1"},
+    ]}}
+    annotate_overall_picks(season)
+    assert [p["overall"] for p in season["draft"]["draft_results"]] == [1, 2, 3, 4, 5, 6]
+
+
 def test_draft_award_ranks_by_overall_not_round_pick():
     """Round 2 pick 1 is a LATER pick than round 1 pick 3, so it must rank as
     one — sorting on the within-round number inverts the draft order."""

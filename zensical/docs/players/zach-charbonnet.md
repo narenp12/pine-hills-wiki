@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 11 | 109 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 13 | 147 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 9 | 100 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 13 | 1927 | [anishattarde](../owners/anish.md) |
+| 2026 | 13 | 127 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

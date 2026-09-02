@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Carnell Tate has appeared on, seas
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R8 P1125)
+- **Times Drafted:** 1 (first: 2026 R8 P75)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 8 | 1125 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 8 | 75 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

@@ -46,7 +46,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 14 | 132 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 10 | 119 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 5 | 60 | [Save Me](../owners/naren.md) |
-| 2026 | 8 | 1124 | [anishattarde](../owners/anish.md) |
+| 2026 | 8 | 74 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

@@ -38,7 +38,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 5 | 44 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2024 | 4 | 46 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 3 | 36 | [Save Me](../owners/naren.md) |
-| 2026 | 2 | 167 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 2 | 17 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

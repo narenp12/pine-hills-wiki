@@ -43,7 +43,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 4 | 34 | [Roger That](../owners/pranav.md) |
 | 2024 | 3 | 36 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 4 | 43 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 8 | 1130 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 8 | 80 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

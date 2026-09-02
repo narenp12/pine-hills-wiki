@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 15 | 180 | [Save Me](../owners/naren.md) |
-| 2026 | 14 | 2084 | [anishattarde](../owners/anish.md) |
+| 2026 | 14 | 134 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

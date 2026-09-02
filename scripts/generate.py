@@ -33,6 +33,7 @@ import math
 import os
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 # Normalize dashes in generated Markdown. Em-dash (—) and en-dash (–) are banned
@@ -2205,15 +2206,27 @@ def annotate_overall_picks(season_data: dict) -> None:
     inverts the draft order outright, ranking round 2 pick 1 ahead of round 1
     pick 5.
 
-    Round size is the widest round in the season, since the last round can be
-    short (a forfeited or auto-skipped pick); taking the short one would number
-    every later round too low.
+    Round size is the widest round in the season, counted as picks per round,
+    since the last round can be short (a forfeited or auto-skipped pick); taking
+    the short one would number every later round too low.
+
+    Sleeper (2026-) numbers picks the other way: `pick_no` is already the overall
+    number, so a pick above the round size means the season needs no offset at
+    all. Offsetting one of those would push round 2 of a ten-team draft into the
+    160s.
     """
     picks = (season_data.get("draft") or {}).get("draft_results") or []
     if not picks:
         return
-    round_size = max((int(p.get("pick") or 0) for p in picks), default=0)
+    per_round = Counter(int(p.get("round") or 0) for p in picks)
+    round_size = max(per_round.values(), default=0)
     if round_size <= 0:
+        return
+    if any(int(p.get("pick") or 0) > round_size for p in picks):
+        for pick in picks:
+            within = int(pick.get("pick") or 0)
+            if within > 0:
+                pick["overall"] = within
         return
     for pick in picks:
         round_number = int(pick.get("round") or 0)

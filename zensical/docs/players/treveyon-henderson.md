@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 4 | 47 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 6 | 806 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 6 | 56 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

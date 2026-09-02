@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 10 | 113 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 8 | 87 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 8 | 1128 | [silversur4](../owners/abhinav.md) |
+| 2026 | 8 | 78 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

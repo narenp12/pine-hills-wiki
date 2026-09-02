@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Wan'Dale Robinson has appeared on,
 - **Points in Lineup:** 152.10
 - **Points on the Bench:** 130.30
 - **Best Week:** 30.60 - 2025 Wk 12, [Indiana Jones](../owners/anish.md)
-- **Times Drafted:** 1 (first: 2026 R11 P1607)
+- **Times Drafted:** 1 (first: 2026 R11 P107)
 
 ## Team History
 
@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 11 | 1607 | [anishattarde](../owners/anish.md) |
+| 2026 | 11 | 107 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

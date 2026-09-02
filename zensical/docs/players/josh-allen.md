@@ -47,7 +47,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 4 | 35 | [Pukakke NaKupp](../owners/anish.md) |
 | 2024 | 3 | 30 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 3 | 29 | [Jayesh's Great Team](../owners/jayesh.md) |
-| 2026 | 3 | 321 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 3 | 21 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

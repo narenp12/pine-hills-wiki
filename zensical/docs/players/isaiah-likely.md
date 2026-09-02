@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 15 | 175 | [Joe Sheisty](../owners/anish.md) |
-| 2026 | 12 | 1767 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 12 | 117 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

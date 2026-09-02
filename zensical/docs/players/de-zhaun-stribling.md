@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster De'Zhaun Stribling has appeared on
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R14 P2085)
+- **Times Drafted:** 1 (first: 2026 R14 P135)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 14 | 2085 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 14 | 135 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

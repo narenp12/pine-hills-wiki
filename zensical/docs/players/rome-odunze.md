@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 10 | 110 | [Kamara's a b*tch](../owners/naren.md) |
 | 2025 | 6 | 71 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 8 | 1122 | [all hail dallas](../owners/varun.md) |
+| 2026 | 8 | 72 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

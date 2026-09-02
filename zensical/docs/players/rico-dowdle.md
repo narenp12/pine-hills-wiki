@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 11 | 127 | [Joe Sheisty](../owners/anish.md) |
-| 2026 | 9 | 1283 | [silversur4](../owners/abhinav.md) |
+| 2026 | 9 | 83 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

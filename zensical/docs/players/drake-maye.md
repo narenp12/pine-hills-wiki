@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 9 | 104 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 6 | 805 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 6 | 55 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

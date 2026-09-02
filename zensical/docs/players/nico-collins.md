@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 2 | 24 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 1 | 6 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 2 | 169 | [micjes71](../owners/michael.md) |
+| 2026 | 2 | 19 | [micjes71](../owners/michael.md) |
 
 ## Related
 

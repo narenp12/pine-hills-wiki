@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 12 | 112 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 5 | 55 | [Joe Sheisty](../owners/anish.md) |
 | 2025 | 5 | 52 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 5 | 644 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 5 | 44 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

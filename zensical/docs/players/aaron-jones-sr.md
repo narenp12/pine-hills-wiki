@@ -49,7 +49,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 26 | [Pukakke NaKupp](../owners/anish.md) |
 | 2024 | 5 | 58 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 6 | 70 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 13 | 1925 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 13 | 125 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

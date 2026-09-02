@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 10 | 115 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 5 | 50 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 14 | 2088 | [silversur4](../owners/abhinav.md) |
+| 2026 | 14 | 138 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

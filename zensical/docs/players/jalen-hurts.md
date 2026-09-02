@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 30 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2024 | 3 | 35 | [Kamara's a b*tch](../owners/naren.md) |
 | 2025 | 3 | 34 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 7 | 965 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 7 | 65 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

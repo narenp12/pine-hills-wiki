@@ -43,7 +43,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 5 | 41 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 7 | 79 | [Joe Sheisty](../owners/anish.md) |
 | 2025 | 5 | 55 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 6 | 808 | [silversur4](../owners/abhinav.md) |
+| 2026 | 6 | 58 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

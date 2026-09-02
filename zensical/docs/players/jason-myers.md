@@ -43,7 +43,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2021 | 15 | 150 | [Tanmay's Top-Notch Team](../owners/tanmay.md) |
-| 2026 | 13 | 1926 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 13 | 126 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

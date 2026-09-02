@@ -40,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 8 | 79 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 4 | 44 | [Jayesh's Great Team](../owners/jayesh.md) |
 | 2025 | 3 | 31 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 2 | 161 | [pranavnar](../owners/pranav.md) |
+| 2026 | 2 | 11 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

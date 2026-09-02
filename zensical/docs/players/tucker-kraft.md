@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 7 | 76 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 6 | 801 | [pranavnar](../owners/pranav.md) |
+| 2026 | 6 | 51 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

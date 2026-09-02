@@ -38,7 +38,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 22 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 2 | 19 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 9 | 99 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 5 | 641 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 5 | 41 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

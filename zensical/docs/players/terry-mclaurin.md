@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 6 | 52 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 5 | 50 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 4 | 42 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 6 | 804 | [anishattarde](../owners/anish.md) |
+| 2026 | 6 | 54 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

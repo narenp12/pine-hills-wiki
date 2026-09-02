@@ -58,7 +58,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 11 | 102 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 8 | 89 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 14 | 160 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 12 | 1769 | [micjes71](../owners/michael.md) |
+| 2026 | 12 | 119 | [micjes71](../owners/michael.md) |
 
 ## Related
 

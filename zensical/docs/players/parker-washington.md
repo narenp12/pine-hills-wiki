@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Parker Washington has appeared on,
 - **Points in Lineup:** 31.40
 - **Points on the Bench:** 81.90
 - **Best Week:** 26.90 (benched) - 2025 Wk 10, [Indiana Jones](../owners/anish.md)
-- **Times Drafted:** 1 (first: 2026 R8 P1123)
+- **Times Drafted:** 1 (first: 2026 R8 P73)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 8 | 1123 | [sharwoman](../owners/sharman.md) |
+| 2026 | 8 | 73 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

@@ -47,7 +47,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | 15 | 148 | [L takes only](../owners/lokesh.md) |
 | 2024 | 11 | 126 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 14 | 161 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 15 | 2245 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 15 | 145 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

@@ -52,7 +52,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | 15 | 150 | [Super Squirrels](../owners/abhinav.md) |
 | 2023 | 8 | 74 | [Roger That](../owners/pranav.md) |
 | 2024 | 8 | 93 | [Roger That](../owners/pranav.md) |
-| 2026 | 12 | 1762 | [all hail dallas](../owners/varun.md) |
+| 2026 | 12 | 112 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

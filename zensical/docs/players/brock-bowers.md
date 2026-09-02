@@ -34,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 9 | 106 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 2 | 23 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 3 | 322 | [micjes71](../owners/michael.md) |
+| 2026 | 3 | 22 | [micjes71](../owners/michael.md) |
 
 ## Related
 

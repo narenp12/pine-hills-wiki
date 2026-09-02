@@ -48,7 +48,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 10 | 92 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 2 | 22 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 3 | 35 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 7 | 964 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 7 | 64 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

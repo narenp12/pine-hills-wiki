@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 12 | 141 | [Roger That](../owners/pranav.md) |
-| 2026 | 11 | 1602 | [micjes71](../owners/michael.md) |
+| 2026 | 11 | 102 | [micjes71](../owners/michael.md) |
 
 ## Related
 

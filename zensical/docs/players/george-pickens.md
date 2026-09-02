@@ -39,7 +39,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 11 | 103 | [BBigg MACKS](../owners/naren.md) |
 | 2024 | 6 | 62 | [Kamara's a b*tch](../owners/naren.md) |
 | 2025 | 5 | 51 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 3 | 328 | [sharwoman](../owners/sharman.md) |
+| 2026 | 3 | 28 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

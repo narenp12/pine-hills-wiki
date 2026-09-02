@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | 14 | 138 | [Anish's Awesome Team](../owners/anish.md) |
 | 2021 | 8 | 72 | [varun's victorious team](../owners/varun.md) |
 | 2022 | 10 | 99 | [Anish's Awesome Team](../owners/anish.md) |
-| 2026 | 10 | 1441 | [pranavnar](../owners/pranav.md) |
+| 2026 | 10 | 91 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

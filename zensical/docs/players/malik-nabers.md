@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 4 | 42 | [Joe Sheisty](../owners/anish.md) |
 | 2025 | 1 | 11 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 3 | 323 | [silversur4](../owners/abhinav.md) |
+| 2026 | 3 | 23 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

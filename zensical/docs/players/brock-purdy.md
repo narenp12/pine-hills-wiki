@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 14 | 136 | [Super Squirrels](../owners/abhinav.md) |
 | 2024 | 7 | 84 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 7 | 81 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 13 | 1928 | [sharwoman](../owners/sharman.md) |
+| 2026 | 13 | 128 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

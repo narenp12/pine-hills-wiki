@@ -41,7 +41,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 7 | 65 | [Super Squirrels](../owners/abhinav.md) |
 | 2024 | 12 | 136 | [Stroud Boys](../owners/tanmay.md) |
 | 2025 | 12 | 142 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 11 | 1606 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 11 | 106 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

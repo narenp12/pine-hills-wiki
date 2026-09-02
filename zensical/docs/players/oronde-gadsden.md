@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Oronde Gadsden has appeared on, se
 - **Points in Lineup:** 40.90
 - **Points on the Bench:** 0.00
 - **Best Week:** 18.70 - 2025 Wk 8, [Save Me](../owners/naren.md)
-- **Times Drafted:** 1 (first: 2026 R14 P2090)
+- **Times Drafted:** 1 (first: 2026 R14 P140)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 14 | 2090 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 14 | 140 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

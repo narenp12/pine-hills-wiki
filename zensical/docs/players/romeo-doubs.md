@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 13 | 151 | [Joe Sheisty](../owners/anish.md) |
-| 2026 | 13 | 1930 | [pranavnar](../owners/pranav.md) |
+| 2026 | 13 | 130 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

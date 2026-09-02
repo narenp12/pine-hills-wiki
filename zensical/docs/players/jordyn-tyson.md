@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Jordyn Tyson has appeared on, seas
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R9 P1288)
+- **Times Drafted:** 1 (first: 2026 R9 P88)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 9 | 1288 | [sharwoman](../owners/sharman.md) |
+| 2026 | 9 | 88 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

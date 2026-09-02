@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 9 | 97 | [Roger That](../owners/pranav.md) |
-| 2026 | 14 | 2087 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 14 | 137 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

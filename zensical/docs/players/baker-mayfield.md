@@ -40,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | 15 | 146 | [Anish's Awesome Team](../owners/anish.md) |
 | 2024 | 14 | 165 | [Roger That](../owners/pranav.md) |
 | 2025 | 7 | 83 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 15 | 2244 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 15 | 144 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

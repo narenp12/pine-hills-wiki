@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 10 | 91 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2024 | 5 | 60 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 5 | 58 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 5 | 649 | [all hail dallas](../owners/varun.md) |
+| 2026 | 5 | 49 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

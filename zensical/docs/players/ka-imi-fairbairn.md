@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | 10 | 95 | [Imagine Losing](../owners/om.md) |
 | 2024 | 9 | 101 | [Jayesh's Great Team](../owners/jayesh.md) |
 | 2025 | 15 | 169 | [Roger That](../owners/pranav.md) |
-| 2026 | 14 | 2086 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 14 | 136 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

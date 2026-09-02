@@ -33,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 12 | 135 | [Kaushal's Potatoes](../owners/kaushal.md) |
-| 2026 | 9 | 1289 | [all hail dallas](../owners/varun.md) |
+| 2026 | 9 | 89 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

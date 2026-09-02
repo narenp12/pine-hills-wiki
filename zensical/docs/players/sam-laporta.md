@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 14 | 135 | [Pukakke NaKupp](../owners/anish.md) |
 | 2024 | 3 | 32 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 6 | 62 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 6 | 802 | [all hail dallas](../owners/varun.md) |
+| 2026 | 6 | 52 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

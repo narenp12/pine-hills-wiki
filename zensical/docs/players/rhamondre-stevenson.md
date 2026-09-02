@@ -41,7 +41,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 29 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 6 | 65 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 10 | 109 | [Save Me](../owners/naren.md) |
-| 2026 | 9 | 1284 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 9 | 84 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

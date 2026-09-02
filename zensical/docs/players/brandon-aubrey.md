@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 8 | 94 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 14 | 164 | [Jayesh's Great Team](../owners/jayesh.md) |
-| 2026 | 10 | 1442 | [all hail dallas](../owners/varun.md) |
+| 2026 | 10 | 92 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

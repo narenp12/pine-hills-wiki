@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 2 | 13 | [Save Me](../owners/naren.md) |
-| 2026 | 2 | 166 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 2 | 16 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

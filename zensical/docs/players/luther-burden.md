@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Luther Burden has appeared on, sea
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R5 P650)
+- **Times Drafted:** 1 (first: 2026 R5 P50)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 5 | 650 | [pranavnar](../owners/pranav.md) |
+| 2026 | 5 | 50 | [pranavnar](../owners/pranav.md) |
 
 ## Related
 

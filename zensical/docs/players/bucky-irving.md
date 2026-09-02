@@ -32,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 2 | 21 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 4 | 489 | [micjes71](../owners/michael.md) |
+| 2026 | 4 | 39 | [micjes71](../owners/michael.md) |
 
 ## Related
 

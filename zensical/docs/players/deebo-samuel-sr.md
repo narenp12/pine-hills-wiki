@@ -42,7 +42,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 5 | 42 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 3 | 28 | [Roger That](../owners/pranav.md) |
 | 2025 | 9 | 103 | [Stroud Boys](../owners/tanmay.md) |
-| 2026 | 14 | 2089 | [micjes71](../owners/michael.md) |
+| 2026 | 14 | 139 | [micjes71](../owners/michael.md) |
 
 ## Related
 

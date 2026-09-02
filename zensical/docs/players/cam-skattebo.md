@@ -31,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 10 | 119 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 5 | 643 | [silversur4](../owners/abhinav.md) |
+| 2026 | 5 | 43 | [silversur4](../owners/abhinav.md) |
 
 ## Related
 

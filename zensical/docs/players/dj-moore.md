@@ -49,7 +49,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 6 | 59 | [Stroud Boys](../owners/tanmay.md) |
 | 2024 | 3 | 33 | [Stroud Boys](../owners/tanmay.md) |
 | 2025 | 5 | 57 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 6 | 807 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 6 | 57 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

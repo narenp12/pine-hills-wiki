@@ -44,7 +44,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 10 | 98 | [BBigg MACKS](../owners/naren.md) |
 | 2024 | 6 | 71 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 7 | 74 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 7 | 969 | [all hail dallas](../owners/varun.md) |
+| 2026 | 7 | 69 | [all hail dallas](../owners/varun.md) |
 
 ## Related
 

@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster KC Concepcion has appeared on, sea
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R12 P1764)
+- **Times Drafted:** 1 (first: 2026 R12 P114)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 12 | 1764 | [anishattarde](../owners/anish.md) |
+| 2026 | 12 | 114 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

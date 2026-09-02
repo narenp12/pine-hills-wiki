@@ -35,7 +35,7 @@ played; lineup points exclude weeks spent on the bench.
 |------|-------|---------|------------|
 | 2024 | 4 | 47 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 2 | 24 | [Roger That](../owners/pranav.md) |
-| 2026 | 3 | 324 | [Kaushal's Potatoes](../owners/kaushal.md) |
+| 2026 | 3 | 24 | [Kaushal's Potatoes](../owners/kaushal.md) |
 
 ## Related
 

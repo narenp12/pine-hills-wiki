@@ -39,7 +39,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 3 | 23 | [BBigg MACKS](../owners/naren.md) |
 | 2024 | 2 | 23 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 8 | 86 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 3 | 327 | [anishattarde](../owners/anish.md) |
+| 2026 | 3 | 27 | [anishattarde](../owners/anish.md) |
 
 ## Related
 

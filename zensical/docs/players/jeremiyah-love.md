@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Jeremiyah Love has appeared on, se
 - **Points in Lineup:** 0.00
 - **Points on the Bench:** 0.00
 - **Best Week:** _TBD_
-- **Times Drafted:** 1 (first: 2026 R3 P325)
+- **Times Drafted:** 1 (first: 2026 R3 P25)
 
 ## Team History
 
@@ -28,7 +28,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 3 | 325 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 3 | 25 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

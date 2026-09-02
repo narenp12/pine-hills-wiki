@@ -47,7 +47,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 2 | 17 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2024 | 2 | 21 | [Roger That](../owners/pranav.md) |
 | 2025 | 4 | 37 | [Save Me](../owners/naren.md) |
-| 2026 | 5 | 645 | [CurryMan123](../owners/lokesh.md) |
+| 2026 | 5 | 45 | [CurryMan123](../owners/lokesh.md) |
 
 ## Related
 

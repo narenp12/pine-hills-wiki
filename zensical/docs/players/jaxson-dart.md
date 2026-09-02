@@ -15,7 +15,7 @@ description: "Every Pine Hills fantasy roster Jaxson Dart has appeared on, seaso
 - **Points in Lineup:** 19.42
 - **Points on the Bench:** 116.32
 - **Best Week:** 27.24 (benched) - 2025 Wk 9, [Jeremy's Neat Team](../owners/jeremy.md)
-- **Times Drafted:** 1 (first: 2026 R11 P1601)
+- **Times Drafted:** 1 (first: 2026 R11 P101)
 
 ## Team History
 
@@ -30,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 11 | 1601 | [bigbootytan](../owners/tanmay.md) |
+| 2026 | 11 | 101 | [bigbootytan](../owners/tanmay.md) |
 
 ## Related
 

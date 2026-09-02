@@ -43,7 +43,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 2 | 14 | [Roger That](../owners/pranav.md) |
 | 2024 | 1 | 10 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 2 | 15 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 2 | 163 | [sharwoman](../owners/sharman.md) |
+| 2026 | 2 | 13 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 

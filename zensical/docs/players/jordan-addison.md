@@ -36,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 11 | 108 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 11 | 122 | [varun's victorious team](../owners/varun.md) |
 | 2025 | 8 | 92 | [Jayesh's Great Team](../owners/jayesh.md) |
-| 2026 | 12 | 1765 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 12 | 115 | [SlidInTheDMs](../owners/naren.md) |
 
 ## Related
 

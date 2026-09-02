@@ -45,7 +45,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | 4 | 32 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 5 | 51 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 7 | 75 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 14 | 2083 | [sharwoman](../owners/sharman.md) |
+| 2026 | 14 | 133 | [sharwoman](../owners/sharman.md) |
 
 ## Related
 
