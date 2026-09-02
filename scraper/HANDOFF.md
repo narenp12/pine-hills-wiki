@@ -131,9 +131,20 @@ cargo run -- --from-v2 dump/v2 --seasons 2018-2025 --out ../raw
 cd .. && python3 scripts/generate.py
 ```
 `harvest_v2.py` is resumable — any file already on disk that parses is skipped, so
-a re-run only fetches what is missing. `--from-v2` MERGES: it replaces standings /
-matchups / champions and preserves everything else in `raw/<year>.json`, notably the
-draft picks, which the v2 harvest does not fetch.
+a re-run only fetches what is missing. It issues two calls per week (scoreboard +
+roster); a cold run over all eight seasons is ~262 requests and roughly 25
+minutes at the 5s spacing. Roster payloads are ~1.8 MB each, so `dump/v2` grows
+to a few hundred MB — it is gitignored.
+
+`--from-v2` MERGES: it replaces standings / matchups / champions / weeks and
+preserves everything else in `raw/<year>.json`, notably the draft picks, which
+the v2 harvest does not fetch.
+
+**`raw/` is gitignored** (a bare `raw/` entry in the root `.gitignore`), so
+`raw/*.json` is untracked. A fresh clone or worktree therefore has no season
+files, and `--from-v2` would merge onto `{}` and destroy every draft pick — the
+`picks_before == picks_after` guard cannot catch that, because 0 equals 0. Copy
+`raw/*.json` in before rebuilding, and use `git add -f` to commit results.
 
 ## Gaps CLOSED by the v2 pipeline
 - **Every team's owner** — was blank for all but your own team, now populated from
@@ -143,6 +154,14 @@ draft picks, which the v2 harvest does not fetch.
   playoff-adjusted rank; 7 of 8 seasons previously rendered `_TBD_`.
 - **Real playoff seeds** — the generator was printing the standings row position
   as the seed, which is wrong (2025's champion entered as the 5 seed).
+- **Weekly rosters with player points** — every team's lineup for all 131 weeks,
+  bench and IR rows included, in `weeks[wk].rosters` as
+  `{name, position, slot, points}`. One nested call per week
+  (`teams/roster;week=N/players/stats;type=week;week=N`) covers all 12 teams;
+  the shape is confirmed and recorded in `scripts/probe_rosters.py`. This fills
+  the season-page roster blocks, backfills the draft-pick positions that were
+  blank for all eight seasons, and supplies both the player record book and the
+  computed draft-value awards.
 - **The real playoff bracket.** Was a fixed 4-team seed skeleton that never
   happened; now derived per season from the captured weekly matchups, with real
   scores, who beat whom, and first-round byes. All 8 seasons verified to parse
@@ -159,15 +178,10 @@ involving teams already known to be in the bracket. Byes need no special case: a
 team with one simply appears for the first time in a later round.
 
 ## Known gaps (NOT faked)
-- **Rosters** not captured. The v2 endpoint `league/<key>/teams/roster;week=N` is
-  confirmed working (one request per week covers the whole league) but is not part
-  of the harvest yet. `content/rosters/` pages remain scaffolding.
 - **`PLAYOFF_SEEDS = 4` is still hardcoded** in `generate.py` and is wrong for
   this league (2025 ran an 8-team playoff). It no longer affects the bracket,
   which uses real data, but it still drives the "top N qualify" copy on
   `playoffs.md` and the `made_playoffs` flag on team pages.
-- **Weekly high/low score awards** are still `_TBD_` even though every week's
-  scores are now in `matchups`.
 - `content/seasons/2016-season.md` is pre-existing placeholder scaffolding
   (committed in `fbfaf2f`) for a season this league never had — it contains
   "Example FC" dummy data and should be deleted or rewritten.

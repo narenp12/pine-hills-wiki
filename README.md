@@ -22,6 +22,10 @@ Two details the small sample forces:
 
 **Rivalries are the deliberate exception to the phase split.** Team and owner pages both carry a head-to-head table counting every meeting, bracket games included, with the playoff record shown in its own column. The books split by phase so a regular-season score cannot win a Finals record; a rivalry is the opposite case, where the playoff meetings are the ones that define it. Owner rivalries are keyed person-to-person, so they survive both sides renaming their franchise.
 
+**Players are a third key, alongside the person and the franchise.** Every week's rosters are captured with each player's lineup slot and that week's points, so Records carries a player book: highest regular-season week, highest playoff week, highest season total, highest-scoring benched player, and most weeks rostered. It splits by phase like every other book, and each mark names the fantasy team that had the player rostered and the bracket round when there was one, so a Final reads as a Final rather than a generic postseason week. Slot data is what makes the bench mark possible at all.
+
+Two season awards are **computed rather than voted**, and print their formula beside the result so they read as arithmetic. Best Draft Pick is the largest positive gap between where a player was drafted and where they finished on season points among players at the same position; Biggest Bust is the inverse, restricted to the first three rounds. Both name the drafting team, and say so when the points were actually scored for someone else after a trade or waiver claim.
+
 Games can end level. Yahoo drops a drawn game from the standings W-L entirely, so the matchup log is the only place it survives: ties are counted, shown as W-L-T when non-zero, rated as half a win, and listed in the record book on their own, since a tie has no winner and belongs to neither margin record. Weeks that hold both bracket and consolation games are split by reading each season's bracket, so regular-season, playoff and consolation play never contaminate each other, and playoff qualification is read from the bracket rather than assumed from a seed cutoff (the field has grown from six teams to eight).
 
 ## Sections
@@ -29,10 +33,10 @@ Games can end level. Yahoo drops a drawn game from the standings W-L entirely, s
 | Section | Contents |
 |---------|----------|
 | Home | League summary and the champions-by-year table |
-| Seasons | One page per year: standings, playoff bracket, awards |
+| Seasons | One page per year: standings, playoff bracket, awards, post-draft and end-of-season rosters |
 | Teams | One page per franchise: infobox, season log, rivalries |
 | Owners | One page per manager: career totals across every franchise they have run |
-| Records | Regular season only: single-season and single-game leaders by franchise, career records by manager |
+| Records | Regular season only: single-season and single-game leaders by franchise, career records by manager, and a player book keyed to the player |
 | Draft History | One draft board per year |
 | Playoffs | The postseason record book: format, field by year, championships, playoff and Finals records, career playoff leaders, per-manager ledger |
 | Champions | List of champions, runners-up, and top seeds |
