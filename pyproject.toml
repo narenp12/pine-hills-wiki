@@ -24,5 +24,24 @@ yahoo-api = [
 dev = [
     "pillow>=12.3.0",
     "pytest>=9.1.1",
+    "pytest-cov>=7.0",
     "zensical>=0.0.57",
 ]
+
+# Coverage is not in pytest addopts on purpose: it roughly doubles the runtime
+# of a suite that is otherwise fast enough to run on every save. Ask for it:
+#   uv run pytest --cov
+[tool.coverage.run]
+# zensical/ is listed as a directory, not as transform.py: the tests load that
+# script through importlib under another module name, and naming the file
+# directly makes coverage warn that the module was never imported.
+source = ["scripts", "zensical"]
+omit = ["**/__pycache__/*", "zensical/site/*", "zensical/.stage/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+# Rendered-HTML behaviour (zensical/overrides/partials/actions.html) is covered
+# by tests/test_edit_actions.py, which this number cannot see - it measures
+# executed Python lines, and a Jinja template has none.
+exclude_also = ["if __name__ == .__main__.:"]

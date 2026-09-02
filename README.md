@@ -97,6 +97,16 @@ uv run pytest -q
 
 Covers franchise aggregation, season and root-index rendering, champion fallbacks, bible parse errors, owner name merging and career aggregation, team-image path resolution, infobox injection, and the matchup layer (phase splitting, head-to-head, streaks, single-game records, bracket-derived playoff membership).
 
+`tests/test_edit_actions.py` is the exception: it builds the site and asserts on rendered HTML, because the page-action behaviour lives in a Jinja override rather than in Python. That build adds about eight seconds to the suite.
+
+For a coverage report over `scripts/` and `zensical/transform.py`:
+
+```bash
+uv run pytest --cov -q
+```
+
+Coverage is deliberately not in `addopts` - it roughly doubles the runtime of a suite that is otherwise quick enough to run on every save. The number measures executed Python lines only, so it credits nothing for the template assertions above.
+
 ## Adding new data
 
 1. **Update the league bible** (`raw/bible.yaml`) with franchise aliases, owner aliases, franchise notes, team images, or lore. Champions and owners are derived from the data and must not be hand-edited.
