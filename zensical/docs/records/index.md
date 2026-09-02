@@ -138,14 +138,13 @@ Every game a manager has played, regular season, playoffs and consolation alike.
 
 ## Players
 
-> Player records are keyed to the **player**, not the manager or the franchise. Regular season and postseason keep separate books, the same split the team records use. Bench marks count a player who scored while sitting.
+> Player records are keyed to the **player**, not the manager or the franchise. This book is **regular season only**, the same split the team records use - the playoff and Finals player books live on [Playoffs](../playoffs.md). Bench marks count a player who scored while sitting. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
-| Highest Regular-Season Week | Tyreek Hill | 57.90 (WR) | 2020 Wk 12, [My team is Koo(l)](../teams/my-team-is-koo-l.md) |
-| Highest Playoff Week | Ja'Marr Chase | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](../teams/varun-s-victorious-team.md) |
-| Highest Season Total | Christian McCaffrey | 448.40 | 2019, [Super Squirrels](../teams/super-squirrels.md) |
+| Highest Week | Tyreek Hill | 57.90 (WR) | 2020 Wk 12, [My team is Koo(l)](../teams/my-team-is-koo-l.md) |
 | Highest-Scoring Benched Player | Josh Allen | 51.88 (QB) | 2024 Wk 14, [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md) |
+| Highest Season Total | Christian McCaffrey | 354.10 | 2019, [Super Squirrels](../teams/super-squirrels.md) |
 | Most Weeks Rostered (tied) | Travis Kelce | 131 weeks | [Roger That](../teams/roger-that.md), [Kaushal's Potatoes](../teams/kaushal-s-potatoes.md), [Ken Keenan Kum](../teams/ken-keenan-kum.md) +4 more |
 | Most Weeks Rostered (tied) | Davante Adams | 131 weeks | [Roger That](../teams/roger-that.md), [Sharman’s Scorpions](../teams/sharman-s-scorpions.md), [Curry’s legit team](../teams/curry-s-legit-team.md) +2 more |
 | Most Weeks Rostered (tied) | Mike Evans | 131 weeks | [Anish's Awesome Team](../teams/anish-s-awesome-team.md), [Michael's Marvelous Team](../teams/michael-s-marvelous-team.md), [Jeremy's Neat Team](../teams/jeremy-s-neat-team.md) +4 more |

@@ -65,6 +65,24 @@ The title game only.
 | Most Points in a Finals Loss | [Super Squirrels](teams/super-squirrels.md) | 136.74 - 160.20 vs [varun’s victorious team](teams/varun-s-victorious-team.md) | 2021 Wk 17 |
 | Fewest Points in a Finals Win | [Jeremy's Neat Team](teams/jeremy-s-neat-team.md) | 116.02 - 101.70 vs [Big black big back](teams/big-black-big-back.md) | 2025 Wk 17 |
 
+## Playoff Player Records
+
+Keyed to the **player**, not the manager. Bracket games only - consolation play runs in the same weeks and is excluded. Each mark names the fantasy team that had the player rostered. The regular-season player book lives on [Records](records/index.md).
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+| Highest Week | Ja'Marr Chase | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
+| Highest-Scoring Benched Player | Aaron Rodgers | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
+
+## Finals Player Records
+
+The title game only.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+| Highest Week | Ja'Marr Chase | 55.60 (WR) | 2021 Wk 17 (Final), [varun’s victorious team](teams/varun-s-victorious-team.md) |
+| Highest-Scoring Benched Player | Aaron Rodgers | 42.88 (QB) | 2018 Wk 16 (Final), [Curry’s legit team](teams/curry-s-legit-team.md) |
+
 ## Career Playoff Leaders
 
 By manager, not franchise. Rates qualify at 3 playoff games - one full bracket run - and carry their sample, so a thin one is visible rather than hidden.

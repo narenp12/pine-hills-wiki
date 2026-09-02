@@ -657,14 +657,39 @@ def build_player_log(seasons: dict) -> list:
     return log
 
 
-def player_book_rows(player_log: list) -> list[str]:
-    """The five player books as table rows.
+def player_pool(player_log: list, scope: str) -> list:
+    """The rows belonging to one book.
+
+    `FINALS_ROUND` is a round, not a phase: the title game only. Every other
+    scope is a phase. Consolation games run in the same weeks as the bracket, so
+    filtering on the week would drag them in — this filters on what the bracket
+    actually said.
+    """
+    if scope == FINALS_ROUND:
+        return [row for row in player_log if row.get("round") == FINALS_ROUND]
+    return [row for row in player_log if row["phase"] == scope]
+
+
+def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
+    """One phase's player book as table rows.
+
+    Called once per scope so the books stay apart the way the team books do: a
+    huge October week cannot become a Finals record. `scope` is `PHASE_REGULAR`,
+    `PHASE_PLAYOFF`, or `FINALS_ROUND`.
+
+    Season totals and weeks-rostered appear only in the regular-season book.
+    They are whole-season and career marks, so repeating them inside the Finals
+    book would say nothing about the Finals.
 
     Ties are listed and marked, never arbitrated — the same rule the team books
-    follow. Bench marks read the whole log; every other book reads starters only,
-    since a benched score is not a lineup result.
+    follow. Bench marks read the whole pool; every other book reads starters
+    only, since a benched score is not a lineup result.
     """
-    started = [row for row in player_log if row["started"]]
+    pool = player_pool(player_log, scope)
+    started = [row for row in pool if row["started"]]
+    # A scoped book already says which phase it covers in its heading, so the
+    # row labels do not repeat it.
+    career_marks = scope == PHASE_REGULAR
 
     def holders_rows(label, items, key, value, when) -> list[str]:
         holders = top_holders(items, key)
@@ -727,32 +752,26 @@ def player_book_rows(player_log: list) -> list[str]:
 
     table = []
     table += holders_rows(
-        "Highest Regular-Season Week",
-        [r for r in started if r["phase"] == PHASE_REGULAR],
-        lambda r: r["points"], points_value, week_when,
-    )
-    table += holders_rows(
-        "Highest Playoff Week",
-        [r for r in started if r["phase"] == PHASE_PLAYOFF],
-        lambda r: r["points"], points_value, week_when,
-    )
-    table += holders_rows(
-        "Highest Season Total", totals,
-        lambda r: r["points"],
-        lambda r: f"{r['points']:.2f}",
-        lambda r: f"{r['year']}, {wikilink(r['team'])}",
+        "Highest Week", started, lambda r: r["points"], points_value, week_when,
     )
     table += holders_rows(
         "Highest-Scoring Benched Player",
-        [r for r in player_log if not r["started"]],
+        [r for r in pool if not r["started"]],
         lambda r: r["points"], points_value, week_when,
     )
-    table += holders_rows(
-        "Most Weeks Rostered", weeks_rows,
-        lambda r: r["weeks"],
-        lambda r: f"{r['weeks']} weeks",
-        teams_when,
-    )
+    if career_marks:
+        table += holders_rows(
+            "Highest Season Total", totals,
+            lambda r: r["points"],
+            lambda r: f"{r['points']:.2f}",
+            lambda r: f"{r['year']}, {wikilink(r['team'])}",
+        )
+        table += holders_rows(
+            "Most Weeks Rostered", weeks_rows,
+            lambda r: r["weeks"],
+            lambda r: f"{r['weeks']} weeks",
+            teams_when,
+        )
     return table
 
 
@@ -1812,8 +1831,9 @@ def gen_records_index(
     season_records: dict,
     owner_aggregates: dict,
     owner_game_stats: dict,
+    player_log: list,
 ) -> str:
-    player_rows = player_book_rows(build_player_log(seasons))
+    player_rows = player_book_rows(player_log)
 
     # single-season leaders, straight off the standings
     def season_row(label: str, key: str, value) -> str:
@@ -1968,7 +1988,7 @@ Every game a manager has played, regular season, playoffs and consolation alike.
 
 ## Players
 
-> Player records are keyed to the **player**, not the manager or the franchise. Regular season and postseason keep separate books, the same split the team records use. Bench marks count a player who scored while sitting.
+> Player records are keyed to the **player**, not the manager or the franchise. This book is **regular season only**, the same split the team records use — the playoff and Finals player books live on {wikilink('Playoffs')}. Bench marks count a player who scored while sitting. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
@@ -2329,9 +2349,17 @@ def gen_playoffs_page(
     matchup_stats: dict,
     owner_aggregates: dict,
     owner_game_stats: dict,
+    player_log: list,
 ) -> str:
     sizes = playoff_field_sizes(matchup_stats)
     books = matchup_stats["books"]
+
+    # Postseason player books live here, next to the team ones, rather than on
+    # Records — Records is the regular-season book. The log is passed in rather
+    # than built here: this function's first parameter is named `seasons` but is
+    # handed a list of years, so it has no season data of its own to read.
+    playoff_player_rows = player_book_rows(player_log, PHASE_PLAYOFF)
+    finals_player_rows = player_book_rows(player_log, FINALS_ROUND)
 
     # Titles belong to the person, not the franchise name they were flying that
     # year: lokesh's two came under one team, Naren's franchises change yearly.
@@ -2474,6 +2502,22 @@ The title game only.
 |--------|--------|-------|------|
 {chr(10).join(single_game_rows(books[FINALS_ROUND], "Finals"))}
 
+## Playoff Player Records
+
+Keyed to the **player**, not the manager. Bracket games only — consolation play runs in the same weeks and is excluded. Each mark names the fantasy team that had the player rostered. The regular-season player book lives on {wikilink('Records')}.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+{chr(10).join(playoff_player_rows)}
+
+## Finals Player Records
+
+The title game only.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+{chr(10).join(finals_player_rows)}
+
 ## Career Playoff Leaders
 
 By manager, not franchise. Rates qualify at {MIN_PLAYOFF_GAMES_FOR_RATE} playoff games - one full bracket run - and carry their sample, so a thin one is visible rather than hidden.
@@ -2554,6 +2598,8 @@ def main():
         seasons, bible, owner_map, matchup_stats["playoff_teams"]
     )
     season_records = build_season_records(seasons, bible)
+    # One pass over every roster row, shared by the Records and Playoffs books.
+    player_log = build_player_log(seasons)
     owner_game_stats = build_owner_game_stats(seasons, owner_map, matchup_stats)
     print(f"  scanned {len(matchup_stats['log']) // 2} matchups")
 
@@ -2625,7 +2671,7 @@ def main():
 
     # records index
     rp = CONTENT / "records" / "index.md"
-    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats)))
+    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats, player_log)))
     print(f"  wrote {rp.relative_to(ROOT)}")
 
     # teams index
@@ -2648,7 +2694,7 @@ def main():
     cp.write_text(dash_normalize(gen_champions_page(all_years, bible)))
     print(f"  wrote {cp.relative_to(ROOT)}")
     pp = CONTENT / "playoffs.md"
-    pp.write_text(dash_normalize(gen_playoffs_page(all_years, bible, matchup_stats, owner_aggregates, owner_game_stats)))
+    pp.write_text(dash_normalize(gen_playoffs_page(all_years, bible, matchup_stats, owner_aggregates, owner_game_stats, player_log)))
     print(f"  wrote {pp.relative_to(ROOT)}")
 
     # root index — rewrite only the champions table, bounded by markers

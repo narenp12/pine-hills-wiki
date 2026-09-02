@@ -132,10 +132,11 @@ def test_player_log_marks_started():
 def test_player_book_rows_cover_every_record():
     from scripts.generate import build_player_log, player_book_rows
 
+    # Labels are unscoped now: the section heading says which book it is, the
+    # same way single_game_rows works for the team books.
     rows = player_book_rows(build_player_log(two_week_season()))
     joined = "\n".join(rows)
-    assert "Highest Regular-Season Week" in joined
-    assert "Highest Playoff Week" in joined
+    assert "Highest Week" in joined
     assert "Highest Season Total" in joined
     # The benched 40.0 outscored every starter that week; it belongs to the
     # bench book and to no other.
@@ -197,9 +198,12 @@ def test_player_book_names_the_fantasy_team_and_round():
         "teams": [{"name": "Team A", "score": 110.0, "is_winner": True},
                   {"name": "Team B", "score": 95.0, "is_winner": False}],
     }]}
-    rows = player_book_rows(build_player_log(season))
+    from scripts.generate import PHASE_PLAYOFF
 
-    playoff_row = [r for r in rows if "Highest Playoff Week" in r][0]
+    rows = player_book_rows(build_player_log(season), PHASE_PLAYOFF)
+    rows += player_book_rows(build_player_log(season))
+
+    playoff_row = [r for r in rows if "Highest Week" in r][0]
     # The specific round beats the generic "(playoffs)" tag, and the fantasy
     # team that rostered the player is named.
     assert "(Final)" in playoff_row
@@ -298,3 +302,89 @@ def test_draft_award_ranks_by_overall_not_round_pick():
     best, bust = draft_value_awards(season)
     assert "D" in best and "pick 4" in best
     assert "A" in bust
+
+
+def finals_season():
+    """One regular week, one semifinal week, one Final — plus a consolation game
+    running in the same week as the Final."""
+    return {2025: {
+        "standings": {"teams": [{"name": "Team A", "rank": 1}, {"name": "Team B", "rank": 2}]},
+        "matchups": {
+            "1": [{"teams": [{"name": "Team A", "score": 100.0, "is_winner": True},
+                             {"name": "Team B", "score": 90.0, "is_winner": False}]}],
+            "16": [{"teams": [{"name": "Team A", "score": 120.0, "is_winner": True},
+                              {"name": "Team B", "score": 80.0, "is_winner": False}]}],
+            "17": [{"teams": [{"name": "Team A", "score": 130.0, "is_winner": True},
+                              {"name": "Team B", "score": 110.0, "is_winner": False}],},
+                   {"teams": [{"name": "Team C", "score": 60.0, "is_winner": True},
+                              {"name": "Team D", "score": 50.0, "is_winner": False}]}],
+        },
+        "bracket": {"games": [
+            {"id": "W16G1", "week": 16, "round": "Semifinal", "advances_to": "W17G1",
+             "teams": [{"name": "Team A", "score": 120.0, "is_winner": True},
+                       {"name": "Team B", "score": 80.0, "is_winner": False}]},
+            {"id": "W17G1", "week": 17, "round": "Final",
+             "teams": [{"name": "Team A", "score": 130.0, "is_winner": True},
+                       {"name": "Team B", "score": 110.0, "is_winner": False}]},
+        ]},
+        "weeks": {
+            "1":  {"rosters": {"Team A": {"players": [
+                {"name": "Regular Guy", "position": "RB", "slot": "RB", "points": 40.0}]}}},
+            "16": {"rosters": {"Team A": {"players": [
+                {"name": "Semi Guy", "position": "RB", "slot": "RB", "points": 60.0}]}}},
+            "17": {"rosters": {
+                "Team A": {"players": [
+                    {"name": "Finals Guy", "position": "RB", "slot": "RB", "points": 50.0},
+                    {"name": "Finals Bench", "position": "WR", "slot": "BN", "points": 70.0}]},
+                # Consolation team playing the same week — must not reach either
+                # postseason book.
+                "Team C": {"players": [
+                    {"name": "Toilet Guy", "position": "RB", "slot": "RB", "points": 99.0}]},
+            }},
+        },
+    }}
+
+
+def test_finals_player_book_is_finals_only():
+    from scripts.generate import FINALS_ROUND, build_player_log, player_book_rows
+
+    rows = player_book_rows(build_player_log(finals_season()), FINALS_ROUND)
+    joined = "\n".join(rows)
+    assert "Finals Guy" in joined
+    # The semifinal is a playoff game but not a Final; the consolation game in
+    # the same week as the Final is neither.
+    assert "Semi Guy" not in joined
+    assert "Toilet Guy" not in joined
+
+
+def test_playoff_player_book_spans_the_bracket_but_not_consolation():
+    from scripts.generate import PHASE_PLAYOFF, build_player_log, player_book_rows
+
+    rows = player_book_rows(build_player_log(finals_season()), PHASE_PLAYOFF)
+    joined = "\n".join(rows)
+    # Highest playoff week is the semifinal's 60.0, not the Final's 50.0.
+    assert "Semi Guy" in joined
+    assert "Toilet Guy" not in joined
+
+
+def test_regular_player_book_excludes_postseason():
+    from scripts.generate import PHASE_REGULAR, build_player_log, player_book_rows
+
+    rows = player_book_rows(build_player_log(finals_season()), PHASE_REGULAR)
+    # Weeks rostered counts time on a roster regardless of phase, so it lists
+    # postseason players by design; the single-week marks must not.
+    weekly = [r for r in rows if "Most Weeks Rostered" not in r]
+    joined = "\n".join(weekly)
+    assert "Regular Guy" in joined
+    assert "Semi Guy" not in joined
+    assert "Finals Guy" not in joined
+
+
+def test_scoped_books_drop_the_career_marks():
+    """Season totals and weeks-rostered are career/whole-season marks; repeating
+    them inside the Finals book would say nothing about the Finals."""
+    from scripts.generate import FINALS_ROUND, PHASE_REGULAR, build_player_log, player_book_rows
+
+    log = build_player_log(finals_season())
+    assert "Most Weeks Rostered" in "\n".join(player_book_rows(log, PHASE_REGULAR))
+    assert "Most Weeks Rostered" not in "\n".join(player_book_rows(log, FINALS_ROUND))
