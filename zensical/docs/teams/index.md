@@ -1,14 +1,14 @@
 ---
 title: Teams
 icon: lucide/users
-description: Every team name in Pine Hills Fantasy Football League history and the manager behind it.
+description: Every team name in Pine Hills Fantasy League history and the manager behind it.
 ---
 
 # Teams
 
-Every team name the league has ever seen. A name is not a franchise here: 29 of 42 names (69%) were used for a single season and then dropped.
+Every team name used in the league. A name is not a franchise here: 29 of 42 names (69%) were used for a single season and then dropped.
 
-The history therefore belongs to the manager rather than to the name. Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
+Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
 
 ## Every Team Name
 

@@ -1,6 +1,6 @@
 ---
 title: "sahil"
-description: "Career record and team names of sahil in the Pine Hills Fantasy Football League."
+description: "Career record and team names of sahil in the Pine Hills Fantasy League."
 ---
 
 # sahil

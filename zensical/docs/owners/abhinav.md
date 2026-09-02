@@ -1,6 +1,6 @@
 ---
 title: "Abhinav"
-description: "Career record and team names of Abhinav in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Abhinav in the Pine Hills Fantasy League."
 ---
 
 # Abhinav

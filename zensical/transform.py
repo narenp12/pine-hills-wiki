@@ -30,6 +30,47 @@ REPO = Path(__file__).resolve().parent.parent
 STAGE = REPO / "zensical" / ".stage"   # raw generated Markdown (gitignored)
 DST = REPO / "zensical" / "docs"        # final Zensical sources
 
+# Shorthand the tables use in column headers and lineup-slot cells. Zensical's
+# default extension set includes `abbr`, and the theme has `content.tooltips`
+# on, so a definition here renders as a hover tooltip wherever the term appears.
+# Defining them per page rather than in the config keeps the whole thing out of
+# zensical.toml, where declaring one markdown_extensions key would silently
+# replace the entire default set.
+GLOSSARY = {
+    "PHFL": "Pine Hills Fantasy League",
+    "PF": "Points For - total points a team scored",
+    "PA": "Points Against - total points scored against a team",
+    "W/R/T": "Flex slot - a receiver, back or tight end may start in it",
+    "BN": "Bench - rostered that week, but not in the starting lineup",
+    "IR": "Injured Reserve",
+    "QB": "Quarterback",
+    "RB": "Running back",
+    "WR": "Wide receiver",
+    "TE": "Tight end",
+    "DEF": "Team defense",
+    "MVP": "Most Valuable Player",
+}
+# Whole-token match: "PA" must not fire inside "PART", and "TE" must not fire
+# inside a player's name. Slashes are excluded on both sides so "W/R/T" matches
+# as one token while "R" and "T" alone never do.
+_GLOSSARY_RES = {
+    term: re.compile(rf"(?<![\w/]){re.escape(term)}(?![\w/])")
+    for term in GLOSSARY
+}
+
+
+def with_glossary(md: str) -> str:
+    """Append `*[TERM]: definition` lines for the shorthand this page uses.
+
+    Only terms the page actually contains are defined, so a player page does not
+    carry a definition of PF it never uses.
+    """
+    used = [term for term, rx in _GLOSSARY_RES.items() if rx.search(md)]
+    if not used:
+        return md
+    defs = "\n".join(f"*[{term}]: {GLOSSARY[term]}" for term in used)
+    return f"{md.rstrip()}\n\n{defs}\n"
+
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 TITLE_CLEAN = re.compile(r"\s+")
 # Headings are authored with a leading emoji ("# 🏈 2025 Season"). Strip any
@@ -269,7 +310,7 @@ def main() -> None:
             merged = inject_champions_table(dst.read_text(), out)
             out = transform(merged, title_map, rel)
         dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_text(dash_normalize(out))
+        dst.write_text(with_glossary(dash_normalize(out)))
         written.add(rel)
         count += 1
     print(f"[transform] wrote {count} pages -> {DST}")

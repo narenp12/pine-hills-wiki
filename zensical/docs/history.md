@@ -1,15 +1,15 @@
 ---
 title: History
 icon: lucide/milestone
-description: The eras of the Pine Hills Fantasy Football League and the platforms it has run on.
+description: The eras of the Pine Hills Fantasy League and the platforms it has run on.
 ---
 
 # History
 
-The league has not run on one platform throughout, and which platform a season
-ran on decides what this wiki can say about it. Every page here is derived from
-data captured off the platform of its era; a season the league has played but
-nobody has captured has no page.
+The league has run on more than one platform, and the platform a season ran on
+determines what this wiki records about it. Every page is derived from data
+captured from the platform of its era; a season the league played but nobody
+captured has no page.
 
 ## Eras
 
@@ -20,7 +20,7 @@ nobody has captured has no page.
 
 **Pine Hills.** Eight seasons on Yahoo. Every season, franchise, record and award on this wiki is derived from the Yahoo capture of these years.
 
-**Pine Hills V2.** The league moved to Sleeper for 2026, as a new ten-team league rather than a continuation of the Yahoo one. Sleeper publishes a free read-only API, so this era needs no browser capture. The draft is in; the season has not kicked off, so 2026 carries a roster and a draft board but no record, no finish and no champion until games are played.
+**Pine Hills V2.** The league moved to Sleeper for 2026, as a new ten-team league rather than a continuation of the Yahoo one. Sleeper publishes a free read-only API, so this era needs no browser capture. The draft is captured; the season has not begun, so 2026 carries a roster and a draft board but no record, finish or champion.
 
 ## Related
 

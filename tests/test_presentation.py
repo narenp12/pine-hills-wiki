@@ -78,7 +78,7 @@ def test_lore_entries_of_a_missing_block():
 
 def test_lore_block_is_a_collapsible_admonition_with_indented_body():
     out = lore_blocks(lore_entries(bible_with_lore(), "incidents"), "empty")
-    assert '??? quote "2022 - The Vetoed Trade"' in out
+    assert '??? note "2022 - The Vetoed Trade"' in out
     assert "    **Involved:** [[Roger That]]" in out
     # Zensical drops un-indented content out of the admonition block.
     assert "    Line one." in out

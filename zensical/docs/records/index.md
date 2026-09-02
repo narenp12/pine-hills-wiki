@@ -1,7 +1,7 @@
 ---
 title: Records
 icon: lucide/chart-bar
-description: All-time records, single-season feats, and dubious achievements of the Pine Hills Fantasy Football League.
+description: All-time, single-season and single-game records of the Pine Hills Fantasy League.
 ---
 
 # Records
@@ -17,7 +17,7 @@ League records across 8 seasons and 615 captured matchups. Every mark on this pa
 | Best Regular-Season Record | [Sharman's Scorpions](../owners/sharman.md) | 9-2 (81.8%) | 2018 |
 | Worst Regular-Season Record (2-way tie) | [varun's victorious team](../owners/varun.md), [Roger That](../owners/pranav.md) | 2-12 (14.3%) | 2022, 2024 |
 
-## Single-Game Records
+## Single-Game Records (Regular Season)
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -32,7 +32,9 @@ League records across 8 seasons and 615 captured matchups. Every mark on this pa
 
 ## Career Records
 
-Career totals follow the manager, not the team name. Rate marks qualify at 11 games, one full regular season, and carry their sample size.
+Career totals follow the manager, not the team name. Rate marks carry their sample size.[^rate]
+
+[^rate]: A rate mark qualifies at 11 games, one full regular season - the shortest the league has played. A higher bar would drop every manager who played a single season.
 
 | Record | Owner | Value |
 |--------|-------|-------|
@@ -41,9 +43,9 @@ Career totals follow the manager, not the team name. Rate marks qualify at 11 ga
 | Best Scoring Average | [Naren](../owners/naren.md) | 129.89 pts/game (107 games) |
 | Worst Scoring Average | [Jayesh](../owners/jayesh.md) | 99.45 pts/game (28 games) |
 
-## Outright Marks
+## Single-Game Records (All Phases)
 
-Single-game marks across every phase. A mark that also appears in the regular-season book above is the outright record as well.
+Regular season, playoffs and consolation play together.
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -137,9 +139,9 @@ Every game a manager has played, in all phases.
 | [Aneesh](../owners/aneesh.md) | 17 | 7-10 | 41.2% | 2043.00 | 2173.70 | 120.18 |
 | [Aryan](../owners/aryan.md) | 13 | 6-7 | 46.2% | 1538.10 | 1652.80 | 118.32 |
 
-## Players
+## Player Records
 
-> Keyed to the player rather than the manager or team, and regular season only; the playoff and Finals player books are on [Playoffs](../playoffs.md). Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
+Regular season only; the playoff and Finals player books are on [Playoffs](../playoffs.md). Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
@@ -155,7 +157,7 @@ Every game a manager has played, in all phases.
 
 ### Single-Week Highs by Position
 
-> Highest Week above is a league-wide mark, and a receiver or a back has always held it. Split by position, the same measure surfaces the marks it hides: the best day a kicker or a defense has had in the league. Regular season, starters only.
+Highest single week at each position. Regular season, starters only.
 
 | Pos | Player | Points | When |
 |-----|--------|--------|------|
@@ -178,3 +180,10 @@ Championships, playoff and Finals single-game records, career playoff leaders an
 ## Related
 
 - [Seasons](../seasons/index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Lore](../lore.md) · [Champions](../champions.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense
+*[MVP]: Most Valuable Player

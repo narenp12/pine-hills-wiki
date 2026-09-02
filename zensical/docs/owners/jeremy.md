@@ -1,6 +1,6 @@
 ---
 title: "Jeremy"
-description: "Career record and team names of Jeremy in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Jeremy in the Pine Hills Fantasy League."
 ---
 
 # Jeremy

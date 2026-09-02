@@ -1,6 +1,6 @@
 ---
 title: "Michael"
-description: "Career record and team names of Michael in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Michael in the Pine Hills Fantasy League."
 ---
 
 # Michael

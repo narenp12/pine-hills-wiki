@@ -191,3 +191,9 @@ description: "Pine Hills FF 2024 draft board."
 ## Related
 
 - [Draft History](index.md) · [2024 Season](../seasons/2024-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

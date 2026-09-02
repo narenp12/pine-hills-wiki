@@ -131,3 +131,9 @@ description: "Pine Hills FF 2019 draft board."
 ## Related
 
 - [Draft History](index.md) · [2019 Season](../seasons/2019-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

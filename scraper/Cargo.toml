@@ -2,7 +2,7 @@
 name = "phf-scraper"
 version = "0.1.0"
 edition = "2024"
-description = "Free, no-key scraper for Pine Hills Yahoo Fantasy Football history. Reuses your logged-in Chrome session via CDP, parses rendered HTML, and emits raw/<year>.json for the Quartz wiki."
+description = "Free, no-key scraper for Pine Hills Yahoo Fantasy Football history. Reuses your logged-in Chrome session via CDP, parses rendered HTML, and emits raw/<year>.json for the wiki."
 
 [dependencies]
 # Browser automation over the Chrome DevTools Protocol. Best-maintained Rust

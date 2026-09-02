@@ -1,6 +1,6 @@
 ---
 title: "Om"
-description: "Career record and team names of Om in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Om in the Pine Hills Fantasy League."
 ---
 
 # Om

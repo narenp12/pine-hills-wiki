@@ -1,6 +1,6 @@
 ---
 title: "Anish"
-description: "Career record and team names of Anish in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Anish in the Pine Hills Fantasy League."
 ---
 
 # Anish

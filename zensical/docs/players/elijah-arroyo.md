@@ -33,3 +33,5 @@ _Drafted, but never appeared on a captured weekly roster._
 ## Related
 
 - [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)
+
+*[TE]: Tight end

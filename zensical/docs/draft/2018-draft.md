@@ -101,3 +101,9 @@ description: "Pine Hills FF 2018 draft board."
 ## Related
 
 - [Draft History](index.md) · [2018 Season](../seasons/2018-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

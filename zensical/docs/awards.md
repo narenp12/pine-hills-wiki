@@ -1,17 +1,15 @@
 ---
 title: Awards
 icon: lucide/award
-description: Every computed award in the Pine Hills Fantasy Football League, by season and by career.
+description: Every computed award in the Pine Hills Fantasy League, by season and by career.
 ---
 
 # Awards
 
-Every award the league hands out is computed from the captured data; none is
-voted on. Four of the seven rank players by *wins swung*: games their team won
-by a smaller margin than the player scored from the starting lineup, so removing
-the player from that lineup flips the result. Points piled up in losses win
-nothing, and a bench week is not a lineup result. The remaining three measure
-something else, and each says so below.
+Every league award is computed from the captured data; none is voted on. Four of
+the seven rank players by *wins swung*: games their team won by a smaller margin
+than the player scored from the starting lineup. The remaining three use other
+measures, defined below.
 
 - **Most Valuable Player.** The most wins swung in a season, league-wide.
 - **Finals MVP.** The top scorer in the title game's winning lineup. One game
@@ -23,15 +21,13 @@ something else, and each says so below.
 - **Undrafted Player of the Year.** The most wins swung by a player nobody took
   in that year's draft.
 - **Team of the Season.** Each starting slot goes to the player who swung the
-  most wins playing it, in the lineup shape the league actually started that
-  year.
+  most wins playing it, in the lineup shape the league started that year.
 - **Best Draft Pick.** The largest gain of draft slot on finish, within a
   position: taken late at the position, finished high on season points.
-- **Biggest Bust.** The same measure inverted, restricted to rounds 1-3 -
-  a fourteenth-round miss is not a bust, it is a fourteenth-round pick - and to
-  players who scored in at least 75% of the season's
-  weeks: a first-rounder who tore something in September lost a year, he did
-  not bust.
+- **Biggest Bust.** The same measure inverted, restricted to rounds 1-3,
+  so a late-round miss cannot qualify, and to players who scored in at least
+  75% of the season's weeks, so an
+  injury-shortened season is not counted as a bust.
 
 Ties are listed rather than arbitrated.
 
@@ -51,7 +47,7 @@ Ties are listed rather than arbitrated.
 
 ## Draft Awards
 
-Both compare, within a position, where a player was taken against where they finished on season points. **Best Draft Pick** is the largest gain on the slot; **Biggest Bust** is the largest shortfall, restricted to rounds 1-3 so a late-round miss cannot win an award nobody would give it, and to players who scored in at least 75% of the season's weeks so an injury cannot win it either.
+Both compare, within a position, where a player was taken against where they finished on season points. **Best Draft Pick** is the largest gain on the slot; **Biggest Bust** is the largest shortfall, restricted to rounds 1-3 so a late-round miss cannot qualify, and to players who scored in at least 75% of the season's weeks so an injury-shortened season cannot either.
 
 | Season | Best Draft Pick | Biggest Bust |
 |--------|-----------------|--------------|
@@ -193,3 +189,11 @@ Both compare, within a position, where a player was taken against where they fin
 ## Related
 
 - [Seasons](seasons/index.md) · [Players](players/index.md) · [Records](records/index.md) · [Champions](champions.md)
+
+*[W/R/T]: Flex slot - a receiver, back or tight end may start in it
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense
+*[MVP]: Most Valuable Player

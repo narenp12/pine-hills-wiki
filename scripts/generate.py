@@ -2433,19 +2433,17 @@ def gen_season(
 
     if played:
         standings_note = (
-            "**Finish** is the final playoff-adjusted rank, so it does not follow "
-            "W-L order: a team can win the title from a lower seed. **Playoff "
-            "Seed** is the seed the team entered the playoffs with; a dash means "
-            "it did not qualify."
+            "**Finish** is the final playoff-adjusted rank, not W-L order. "
+            "**Playoff Seed** is the seed the team entered the playoffs with; a "
+            "dash means it did not qualify."
         )
     else:
         # Say plainly that the table is a roll call, not a result. Without this
         # a column of dashes reads as missing data rather than a season that has
         # not started.
         standings_note = (
-            "This season has not kicked off. The league and its draft are on "
-            "record; no game has been played, so there is no finish, seed or "
-            "result to report yet."
+            "The season has not begun. The league and its draft are on record; "
+            "no game has been played, so no finish, seed or result exists yet."
         )
 
     # No bracket, no section: a heading over an empty block reads as data that
@@ -2454,7 +2452,7 @@ def gen_season(
         f"""
 ## Playoff Bracket
 
-> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
+Seeds in parentheses; ✓ marks the winner. Consolation games are excluded; a team appearing first in a later round had a bye.
 
 {bracket}
 """
@@ -2464,7 +2462,7 @@ def gen_season(
 
     md = f"""---
 title: "{year} Season"
-description: "Pine Hills Fantasy Football League — {year} season."
+description: "Pine Hills Fantasy League — {year} season."
 season: {year}
 year: {year}
 {status_line}---
@@ -2478,7 +2476,7 @@ year: {year}
 
 ## {"Final Standings" if played else "Teams"}
 
-> {standings_note}
+{standings_note}
 
 | Finish | Team | Owner | W–L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
@@ -2486,7 +2484,7 @@ year: {year}
 {bracket_section}
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
+Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 {roster_blocks}
 
@@ -2504,7 +2502,7 @@ year: {year}
 
 ## Position Highs
 
-The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+Highest single week at each position. Regular season, starters only.
 
 | Pos | Player | Points | When |
 |-----|--------|--------|------|
@@ -2512,17 +2510,13 @@ The biggest single week at each position, regular season, starters only. The lea
 
 ## Team of the Season
 
-The best starting lineup the season produced, one selection per slot the league actually starts. A slot is won the same way the MVP is: by wins swung, the games a team won by less than the player scored from the starting lineup. The flex takes the best eligible player the position slots did not already claim.
+Each starting slot goes to the player who swung the most wins in it; the flex takes the best eligible player the position slots did not claim.
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
 {chr(10).join(team_of_the_season_rows(all_league))}
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-{BUST_MAX_ROUND} and to players who scored in at least {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks, so a lost year is not counted as a bad pick.
-
-## The Story of the Year
-
-_TBD — add the defining moments._
+Every award is computed rather than voted. Full definitions are on {wikilink('Awards')}.
 
 ## Related
 
@@ -2835,7 +2829,7 @@ def gen_records_index(
     md = f"""---
 title: Records
 icon: lucide/chart-bar
-description: All-time records, single-season feats, and dubious achievements of the Pine Hills Fantasy Football League.
+description: All-time, single-season and single-game records of the Pine Hills Fantasy League.
 ---
 
 # Records
@@ -2848,7 +2842,7 @@ League records across {sum(1 for d in seasons.values() if season_has_games(d))} 
 |--------|--------|-------|------|
 {chr(10).join(season_rows)}
 
-## Single-Game Records
+## Single-Game Records (Regular Season)
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -2856,15 +2850,17 @@ League records across {sum(1 for d in seasons.values() if season_has_games(d))} 
 
 ## Career Records
 
-Career totals follow the manager, not the team name. Rate marks qualify at {MIN_GAMES_FOR_AVERAGE} games, one full regular season, and carry their sample size.
+Career totals follow the manager, not the team name. Rate marks carry their sample size.[^rate]
+
+[^rate]: A rate mark qualifies at {MIN_GAMES_FOR_AVERAGE} games, one full regular season - the shortest the league has played. A higher bar would drop every manager who played a single season.
 
 | Record | Owner | Value |
 |--------|-------|-------|
 {chr(10).join(career_rows)}
 
-## Outright Marks
+## Single-Game Records (All Phases)
 
-Single-game marks across every phase. A mark that also appears in the regular-season book above is the outright record as well.
+Regular season, playoffs and consolation play together.
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -2894,9 +2890,9 @@ Every game a manager has played, in all phases.
 |-------|-------|--------|------|------------|----------------|-----|
 {chr(10).join(total_rows)}
 
-## Players
+## Player Records
 
-> Keyed to the player rather than the manager or team, and regular season only; the playoff and Finals player books are on {wikilink('Playoffs')}. Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
+Regular season only; the playoff and Finals player books are on {wikilink('Playoffs')}. Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
@@ -2904,7 +2900,7 @@ Every game a manager has played, in all phases.
 
 ### Single-Week Highs by Position
 
-> Highest Week above is a league-wide mark, and a receiver or a back has always held it. Split by position, the same measure surfaces the marks it hides: the best day a kicker or a defense has had in the league. Regular season, starters only.
+Highest single week at each position. Regular season, starters only.
 
 | Pos | Player | Points | When |
 |-----|--------|--------|------|
@@ -2992,8 +2988,8 @@ def gen_owner_page(
     seasons_entered = record["seasons_count"]
     if name_count > 1 and name_count == seasons_entered:
         naming_note = (
-            f"A new name every season - {name_count} names in {seasons_entered} "
-            f"seasons, never the same one twice."
+            f"A different name in each season: {name_count} names in "
+            f"{seasons_entered} seasons, none of them repeated."
         )
     elif name_count == 1:
         naming_note = "One name throughout."
@@ -3002,7 +2998,7 @@ def gen_owner_page(
 
     return f"""---
 title: "{owner}"
-description: "Career record and team names of {owner} in the Pine Hills Fantasy Football League."
+description: "Career record and team names of {owner} in the Pine Hills Fantasy League."
 ---
 
 # {owner}
@@ -3073,7 +3069,7 @@ def gen_owners_index(owner_aggregates: dict, latest_year) -> str:
     return f"""---
 title: Owners
 icon: lucide/user
-description: The managers of the Pine Hills Fantasy Football League and every team name they have played under.
+description: The managers of the Pine Hills Fantasy League and every team name they have played under.
 ---
 
 # Owners
@@ -3427,7 +3423,7 @@ def gen_players_index(player_index: dict, latest_year) -> str:
     return f"""---
 title: Players
 icon: material/football
-description: Every NFL player rostered in the Pine Hills Fantasy Football League, and the fantasy teams that held them.
+description: Every NFL player rostered in the Pine Hills Fantasy League, and the fantasy teams that held them.
 ---
 
 # Players
@@ -3485,14 +3481,14 @@ def gen_teams_index(team_seasons: dict, bible: dict, latest_year=None) -> str:
     md = f"""---
 title: Teams
 icon: lucide/users
-description: Every team name in Pine Hills Fantasy Football League history and the manager behind it.
+description: Every team name in Pine Hills Fantasy League history and the manager behind it.
 ---
 
 # Teams
 
-Every team name the league has ever seen. A name is not a franchise here: {one_season} of {len(team_seasons)} names ({share}) were used for a single season and then dropped.
+Every team name used in the league. A name is not a franchise here: {one_season} of {len(team_seasons)} names ({share}) were used for a single season and then dropped.
 
-The history therefore belongs to the manager rather than to the name. Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
+Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
 
 ## Every Team Name
 
@@ -3516,16 +3512,14 @@ def gen_seasons_index(seasons: dict, bible: dict, mvps: dict) -> str:
     md = f"""---
 title: Seasons
 icon: lucide/calendar
-description: Year-by-year history of the Pine Hills Fantasy Football League.
+description: Year-by-year history of the Pine Hills Fantasy League.
 ---
 
 # Seasons
 
 Every completed season of the league, with its champion and MVP. A season page carries the final
-standings, playoff bracket, draft board, weekly rosters and computed awards.
-
-The MVP is the player who swung the most wins that season: games their team won by less than the
-player scored from the starting lineup.
+standings, playoff bracket, draft board, weekly rosters and computed awards. The MVP is defined
+on {wikilink('Awards')}.
 
 ## Season Index
 
@@ -3535,17 +3529,6 @@ player scored from the starting lineup.
 
 """
     return md
-
-
-def gen_root_index(seasons: dict, bible: dict) -> list[str]:
-    rows = []
-    for year in sorted(seasons, reverse=True):
-        champion, runner_up, top_seed, _ = champ_fields(bible, year)
-        rows.append(
-            f"| {year} | {champ_cell(champion)} | {champ_cell(runner_up)} "
-            f"| {champ_cell(top_seed)} |"
-        )
-    return rows
 
 
 def gen_champions_page(seasons: dict, bible: dict, finals_mvps: dict) -> str:
@@ -3561,7 +3544,7 @@ def gen_champions_page(seasons: dict, bible: dict, finals_mvps: dict) -> str:
     md = f"""---
 title: Champions
 icon: lucide/trophy
-description: List of Pine Hills Fantasy Football League champions by season.
+description: List of Pine Hills Fantasy League champions by season.
 ---
 
 # Champions
@@ -3599,10 +3582,18 @@ regular-season top seed. The Finals MVP is the top scorer in the title game's wi
 
 
 def lore_entries(bible: dict, key: str) -> list:
-    """The bible's lore entries of one kind, oldest first, junk dropped."""
+    """The bible's lore entries of one kind, oldest first, junk dropped.
+
+    An undated entry sorts last rather than first: `year` is optional, and
+    sorting a missing one as 0 would file every curse ahead of the league's
+    first season.
+    """
     entries = (bible.get("lore", {}) or {}).get(key) or []
     entries = [entry for entry in entries if isinstance(entry, dict) and entry.get("title")]
-    return sorted(entries, key=lambda entry: (entry.get("year") or 0, entry["title"]))
+    return sorted(
+        entries,
+        key=lambda entry: (entry.get("year") is None, entry.get("year") or 0, entry["title"]),
+    )
 
 
 def lore_blocks(entries: list, empty: str) -> str:
@@ -3619,12 +3610,26 @@ def lore_blocks(entries: list, empty: str) -> str:
     for entry in entries:
         year = entry.get("year")
         heading = f"{year} - {entry['title']}" if year else entry["title"]
-        out.append(f'??? quote "{heading}"')
+        out.append(f'??? note "{heading}"')
         out.append("")
         # Who it happened to, when the bible names them. Franchise and manager
         # names are linked, so a curse reads as part of that team's history.
         involved = entry.get("involved") or []
         if involved:
+            # A name that matches no team and no manager still renders, as a red
+            # link. That is correct for a page not written yet, but for lore it
+            # is almost always a typo, and a silent red link is exactly what a
+            # contributor cannot see. Name it at build time instead.
+            known_owners = set(_TEAM_OWNERS.values())
+            for name in involved:
+                name = str(name).strip()
+                if name and name not in _TEAM_OWNERS and name not in known_owners:
+                    print(
+                        f"  ! lore entry {entry['title']!r} names {name!r} in "
+                        f"`involved`, which is neither a team nor a manager - it "
+                        f"will render as a red link. Check the spelling.",
+                        file=sys.stderr,
+                    )
             names = ", ".join(team_link(str(name)) for name in involved)
             out.append(f"    **Involved:** {names}")
             out.append("")
@@ -3649,7 +3654,7 @@ def gen_lore_page(bible: dict) -> str:
     return f"""---
 title: Lore
 icon: lucide/scroll-text
-description: Incidents, curses and infamous moments of the Pine Hills Fantasy Football League.
+description: Incidents and curses of the Pine Hills Fantasy League, contributed by the community.
 ---
 
 # Lore
@@ -3711,37 +3716,29 @@ def gen_hall_of_fame(members: list, latest_year=None) -> str:
     return f"""---
 title: Hall of Fame
 icon: lucide/landmark
-description: The Pine Hills Fantasy Football League Hall of Fame, computed from the league's own awards and records.
+description: The Pine Hills Fantasy League Hall of Fame, computed from the league's own awards and records.
 ---
 
 # Hall of Fame
 
-The players who mattered most across the league's captured seasons. Induction is
-computed, not voted, on the awards and records the rest of this wiki already
-hands out - a plaque here says nothing a season page does not.
+The most decorated players of the league's captured seasons. Induction is
+computed rather than voted, from the {wikilink('Awards')} and {wikilink('Records')}
+pages, and is recomputed on each build.
 
 ## Who Gets In
 
-A player is inducted on either of two résumés:
+A player is inducted on either of two criteria:
 
 - **{HALL_MAJORS_ALONE} or more major awards.** MVP, Finals MVP, Team of the Season,
   Newcomer of the Year, Undrafted Player of the Year and Best Draft Pick each
-  count once per season won. Biggest Bust is an award this league hands out and
-  a player page prints, but it argues against a career rather than for one, so
-  the Hall does not read it.
-- **A league record, plus at least {HALL_MAJORS_WITH_RECORD} major award.** Holding a
-  mark in the {wikilink('Records')} book is a career's worth of evidence on its own,
-  but a single week should not be the whole case, so an award has to back it.
+  count once per season won. Biggest Bust is excluded.
+- **A league record, plus at least {HALL_MAJORS_WITH_RECORD} major award.** A mark in
+  the {wikilink('Records')} book does not qualify on its own.
 
-Ties in a record are shared, so both holders qualify on it. Everything is
-recomputed from the captured data each build: a class is a consequence of the
-seasons, not a list anybody maintains.
+Ties in a record are shared, so both holders qualify on it.
 
-**Defenses are judged one season at a time.** A defense is not a person, and the
-unit that starts for a manager in one year has almost nothing to do with the one
-that shares its name three years later, so a defense is inducted as a season -
-the 2019 Patriots - on what that season alone won. Every other position is a
-player with one career, judged across all of it.
+Defenses are inducted as a single season - the 2019 Patriots - on that season
+alone. Every other position is inducted on a whole career.
 
 ## The Inaugural Class
 
@@ -3837,17 +3834,15 @@ def gen_awards_page(
     return f"""---
 title: Awards
 icon: lucide/award
-description: Every computed award in the Pine Hills Fantasy Football League, by season and by career.
+description: Every computed award in the Pine Hills Fantasy League, by season and by career.
 ---
 
 # Awards
 
-Every award the league hands out is computed from the captured data; none is
-voted on. Four of the seven rank players by *wins swung*: games their team won
-by a smaller margin than the player scored from the starting lineup, so removing
-the player from that lineup flips the result. Points piled up in losses win
-nothing, and a bench week is not a lineup result. The remaining three measure
-something else, and each says so below.
+Every league award is computed from the captured data; none is voted on. Four of
+the seven rank players by *wins swung*: games their team won by a smaller margin
+than the player scored from the starting lineup. The remaining three use other
+measures, defined below.
 
 - **Most Valuable Player.** The most wins swung in a season, league-wide.
 - **Finals MVP.** The top scorer in the title game's winning lineup. One game
@@ -3859,15 +3854,13 @@ something else, and each says so below.
 - **Undrafted Player of the Year.** The most wins swung by a player nobody took
   in that year's draft.
 - **Team of the Season.** Each starting slot goes to the player who swung the
-  most wins playing it, in the lineup shape the league actually started that
-  year.
+  most wins playing it, in the lineup shape the league started that year.
 - **Best Draft Pick.** The largest gain of draft slot on finish, within a
   position: taken late at the position, finished high on season points.
-- **Biggest Bust.** The same measure inverted, restricted to rounds 1-{BUST_MAX_ROUND} -
-  a fourteenth-round miss is not a bust, it is a fourteenth-round pick - and to
-  players who scored in at least {int(BUST_MIN_AVAILABILITY * 100)}% of the season's
-  weeks: a first-rounder who tore something in September lost a year, he did
-  not bust.
+- **Biggest Bust.** The same measure inverted, restricted to rounds 1-{BUST_MAX_ROUND},
+  so a late-round miss cannot qualify, and to players who scored in at least
+  {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks, so an
+  injury-shortened season is not counted as a bust.
 
 Ties are listed rather than arbitrated.
 
@@ -3879,7 +3872,7 @@ Ties are listed rather than arbitrated.
 
 ## Draft Awards
 
-Both compare, within a position, where a player was taken against where they finished on season points. **Best Draft Pick** is the largest gain on the slot; **Biggest Bust** is the largest shortfall, restricted to rounds 1-{BUST_MAX_ROUND} so a late-round miss cannot win an award nobody would give it, and to players who scored in at least {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks so an injury cannot win it either.
+Both compare, within a position, where a player was taken against where they finished on season points. **Best Draft Pick** is the largest gain on the slot; **Biggest Bust** is the largest shortfall, restricted to rounds 1-{BUST_MAX_ROUND} so a late-round miss cannot qualify, and to players who scored in at least {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks so an injury-shortened season cannot either.
 
 | Season | Best Draft Pick | Biggest Bust |
 |--------|-----------------|--------------|
@@ -3964,15 +3957,15 @@ def gen_history_page(bible: dict, seasons: dict) -> str:
     return f"""---
 title: History
 icon: lucide/milestone
-description: The eras of the Pine Hills Fantasy Football League and the platforms it has run on.
+description: The eras of the Pine Hills Fantasy League and the platforms it has run on.
 ---
 
 # History
 
-The league has not run on one platform throughout, and which platform a season
-ran on decides what this wiki can say about it. Every page here is derived from
-data captured off the platform of its era; a season the league has played but
-nobody has captured has no page.
+The league has run on more than one platform, and the platform a season ran on
+determines what this wiki records about it. Every page is derived from data
+captured from the platform of its era; a season the league played but nobody
+captured has no page.
 
 ## Eras
 
@@ -4007,9 +4000,8 @@ description: Every draft in Pine Hills history, pick by pick.
 
 Every league draft by year. A draft page lists the full board, pick by pick.
 
-The last column names the player from that draft who swung the most wins: games their team won
-by less than the player scored from the starting lineup. A season's MVP is the same measure taken
-across every player, drafted or not, and is listed on {wikilink('Seasons')}.
+The last column names the player from that draft class who swung the most wins, the measure
+defined on {wikilink('Awards')}. A season's MVP applies it to every player, drafted or not.
 
 ## Drafts by Year
 
@@ -4141,7 +4133,7 @@ def gen_playoffs_page(
     md = f"""---
 title: Playoffs
 icon: lucide/swords
-description: Pine Hills Fantasy Football League playoff format, champions, and Finals history.
+description: Pine Hills Fantasy League playoff format, champions, and Finals history.
 ---
 
 # Playoffs
@@ -4206,7 +4198,9 @@ The title game only.
 
 ## Career Playoff Leaders
 
-By manager. Rate marks qualify at {MIN_PLAYOFF_GAMES_FOR_RATE} playoff games, one full bracket run, and carry their sample size.
+By manager. Rate marks carry their sample size.[^playoffrate]
+
+[^playoffrate]: A rate mark qualifies at {MIN_PLAYOFF_GAMES_FOR_RATE} playoff games, one full bracket run. At four, the league's best postseason scoring average disappears from the page.
 
 | Record | Owner | Value |
 |--------|-------|-------|

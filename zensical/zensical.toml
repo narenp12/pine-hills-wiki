@@ -1,13 +1,13 @@
-# Pine Hills Fantasy Football League — Zensical edition
+# Pine Hills Fantasy League — Zensical edition
 # See skills/zensical-setup for the authoritative config reference.
 
 [project]
-site_name = "Pine Hills Fantasy Football League"
+site_name = "Pine Hills Fantasy League"
 site_url = "https://narenp12.github.io/pine-hills-wiki"   # required for instant nav
-site_description = "The collaborative history of the Pine Hills Fantasy Football League."
+site_description = "The collaborative history of the Pine Hills Fantasy League."
 site_author = "Pine Hills League"
 # Plain hyphen, per the project's no-en/em-dash rule (zensical/transform.py).
-copyright = "&copy; 2018-2026 Pine Hills Fantasy Football League"
+copyright = "&copy; 2018-2026 Pine Hills Fantasy League"
 repo_url = "https://github.com/narenp12/pine-hills-wiki"
 repo_name = "narenp12/pine-hills-wiki"
 docs_dir = "docs"

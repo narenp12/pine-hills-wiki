@@ -33,3 +33,5 @@ _Never taken in a captured draft; added in-season every time._
 ## Related
 
 - [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)
+
+*[RB]: Running back

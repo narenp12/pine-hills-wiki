@@ -161,3 +161,9 @@ description: "Pine Hills FF 2023 draft board."
 ## Related
 
 - [Draft History](index.md) · [2023 Season](../seasons/2023-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

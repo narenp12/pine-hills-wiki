@@ -1,6 +1,6 @@
 ---
 title: "Lokesh"
-description: "Career record and team names of Lokesh in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Lokesh in the Pine Hills Fantasy League."
 ---
 
 # Lokesh

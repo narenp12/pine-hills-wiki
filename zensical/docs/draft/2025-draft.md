@@ -191,3 +191,9 @@ description: "Pine Hills FF 2025 draft board."
 ## Related
 
 - [Draft History](index.md) · [2025 Season](../seasons/2025-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

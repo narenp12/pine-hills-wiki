@@ -8,9 +8,8 @@ description: Every draft in Pine Hills history, pick by pick.
 
 Every league draft by year. A draft page lists the full board, pick by pick.
 
-The last column names the player from that draft who swung the most wins: games their team won
-by less than the player scored from the starting lineup. A season's MVP is the same measure taken
-across every player, drafted or not, and is listed on [Seasons](../seasons/index.md).
+The last column names the player from that draft class who swung the most wins, the measure
+defined on [Awards](../awards.md). A season's MVP applies it to every player, drafted or not.
 
 ## Drafts by Year
 
@@ -26,3 +25,4 @@ across every player, drafted or not, and is listed on [Seasons](../seasons/index
 | [2019](2019-draft.md) | 120 | [Dalvin Cook](../players/dalvin-cook.md) - 6 (R2 P16) |
 | [2018](2018-draft.md) | 90 | [Adam Thielen](../players/adam-thielen.md) - 6 (R9 P53) |
 
+*[MVP]: Most Valuable Player

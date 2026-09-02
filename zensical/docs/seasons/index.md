@@ -1,16 +1,14 @@
 ---
 title: Seasons
 icon: lucide/calendar
-description: Year-by-year history of the Pine Hills Fantasy Football League.
+description: Year-by-year history of the Pine Hills Fantasy League.
 ---
 
 # Seasons
 
 Every completed season of the league, with its champion and MVP. A season page carries the final
-standings, playoff bracket, draft board, weekly rosters and computed awards.
-
-The MVP is the player who swung the most wins that season: games their team won by less than the
-player scored from the starting lineup.
+standings, playoff bracket, draft board, weekly rosters and computed awards. The MVP is defined
+on [Awards](../awards.md).
 
 ## Season Index
 
@@ -26,3 +24,4 @@ player scored from the starting lineup.
 | [2019](2019-season.md) | Curry's legit team | [Dalvin Cook](../players/dalvin-cook.md) - 6 wins swung |
 | [2018](2018-season.md) | Curry's legit team | [Adam Thielen](../players/adam-thielen.md) - 6 wins swung |
 
+*[MVP]: Most Valuable Player

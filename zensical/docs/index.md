@@ -1,16 +1,16 @@
 ---
-description: The collaborative history of the Pine Hills Fantasy Football League, established 2018.
+description: The collaborative history of the Pine Hills Fantasy League, established 2018.
 ---
 <!-- No `title:` here on purpose: the theme appends the site name to page
-     titles, so `title: Pine Hills Fantasy Football League` rendered as
-     "Pine Hills Fantasy Football League - Pine Hills Fantasy Football League".
+     titles, so `title: Pine Hills Fantasy League` rendered as
+     "Pine Hills Fantasy League - Pine Hills Fantasy League".
      The nav label comes from the `nav` table in zensical.toml. -->
 
 
 <div class="ph-hero">
   <div class="ph-hero__lead">
-    <h1>Pine Hills Fantasy Football League</h1>
-    <p>A record of every season, franchise, champion, player and game in the Pine Hills Fantasy Football League since 2018.</p>
+    <h1>Pine Hills Fantasy League</h1>
+    <p>A record of every season, franchise, champion, player and game in the Pine Hills Fantasy League since 2018.</p>
     <a href="seasons/" class="md-button md-button--primary">Browse Seasons</a>
     <a href="teams/" class="md-button">Explore Teams</a>
     <a href="records/" class="md-button">All-Time Records</a>
@@ -22,7 +22,7 @@ description: The collaborative history of the Pine Hills Fantasy Football League
   </div>
 </div>
 
-The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018**. This wiki records its seasons, teams, managers, players, drafts and championships, computed from the league's captured data - eight seasons on Yahoo, and Sleeper from 2026.
+The **Pine Hills Fantasy League** (**PHFL**) is a fantasy football league founded in 2018. This wiki records its seasons, teams, managers, players, drafts and championships, computed from captured league data: eight seasons on Yahoo, and Sleeper from 2026.
 
 ## Champions by Year
 
@@ -40,15 +40,15 @@ The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018*
 | 2018 | [Curry's legit team](owners/lokesh.md) | [Anish's Awesome Team](owners/anish.md) | [Sharman's Scorpions](owners/sharman.md) |
 <!-- champions-table:end -->
 
-## Explore the Wiki
+## Contents
 
-- **[Seasons](seasons/index.md)**: Year-by-year breakdowns, standings, playoffs, and awards.
-- **[Teams](teams/index.md)**: Every team name the league has used, and whose it was.
-- **[Owners](owners/index.md)**: The managers - career totals, rivalries, and every name they have played under.
-- **[Players](players/index.md)**: Every player ever rostered, and the teams that held them.
-- **[Records](records/index.md)**: All-time leaders, single-season feats, and dubious achievements.
-- **[Draft History](draft/index.md)**: Every pick, every reach, every steal.
-- **[Lore](lore.md)**: The controversies, the curses, the group-chat meltdowns.
+- **[Seasons](seasons/index.md)**: Standings, playoff brackets and awards, year by year.
+- **[Teams](teams/index.md)**: Every team name used in the league, and the manager behind it.
+- **[Owners](owners/index.md)**: Managers, with career totals, rivalries and every name they have played under.
+- **[Players](players/index.md)**: Every player rostered, and the teams that held them.
+- **[Records](records/index.md)**: All-time, single-season and single-game records.
+- **[Draft History](draft/index.md)**: Every draft board, pick by pick.
+- **[Lore](lore.md)**: Incidents and curses, contributed by the community.
 
 ## Quick Links
 
@@ -57,3 +57,7 @@ The **Pine Hills Fantasy Football League (PHFFL)** has been played since **2018*
 ---
 
 *Built with [Zensical](https://zensical.org). Results are derived from Yahoo Fantasy Football; lore and other unrecorded facts are community-contributed.*
+
+*[PHFL]: Pine Hills Fantasy League
+
+*[PHFL]: Pine Hills Fantasy League

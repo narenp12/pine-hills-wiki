@@ -1,37 +1,29 @@
 ---
 title: Hall of Fame
 icon: lucide/landmark
-description: The Pine Hills Fantasy Football League Hall of Fame, computed from the league's own awards and records.
+description: The Pine Hills Fantasy League Hall of Fame, computed from the league's own awards and records.
 ---
 
 # Hall of Fame
 
-The players who mattered most across the league's captured seasons. Induction is
-computed, not voted, on the awards and records the rest of this wiki already
-hands out - a plaque here says nothing a season page does not.
+The most decorated players of the league's captured seasons. Induction is
+computed rather than voted, from the [Awards](awards.md) and [Records](records/index.md)
+pages, and is recomputed on each build.
 
 ## Who Gets In
 
-A player is inducted on either of two résumés:
+A player is inducted on either of two criteria:
 
 - **3 or more major awards.** MVP, Finals MVP, Team of the Season,
   Newcomer of the Year, Undrafted Player of the Year and Best Draft Pick each
-  count once per season won. Biggest Bust is an award this league hands out and
-  a player page prints, but it argues against a career rather than for one, so
-  the Hall does not read it.
-- **A league record, plus at least 1 major award.** Holding a
-  mark in the [Records](records/index.md) book is a career's worth of evidence on its own,
-  but a single week should not be the whole case, so an award has to back it.
+  count once per season won. Biggest Bust is excluded.
+- **A league record, plus at least 1 major award.** A mark in
+  the [Records](records/index.md) book does not qualify on its own.
 
-Ties in a record are shared, so both holders qualify on it. Everything is
-recomputed from the captured data each build: a class is a consequence of the
-seasons, not a list anybody maintains.
+Ties in a record are shared, so both holders qualify on it.
 
-**Defenses are judged one season at a time.** A defense is not a person, and the
-unit that starts for a manager in one year has almost nothing to do with the one
-that shares its name three years later, so a defense is inducted as a season -
-the 2019 Patriots - on what that season alone won. Every other position is a
-player with one career, judged across all of it.
+Defenses are inducted as a single season - the 2019 Patriots - on that season
+alone. Every other position is inducted on a whole career.
 
 ## The Inaugural Class
 
@@ -178,3 +170,10 @@ player with one career, judged across all of it.
 ## Related
 
 - [Awards](awards.md) · [Records](records/index.md) · [Players](players/index.md) · [Champions](champions.md) · [Seasons](seasons/index.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense
+*[MVP]: Most Valuable Player

@@ -1,6 +1,6 @@
-# Pine Hills Fantasy Football League Wiki
+# Pine Hills Fantasy League Wiki
 
-A static, Markdown-driven encyclopedia of the Pine Hills Fantasy Football League (est. 2018). The site is built with **Zensical** from raw Yahoo data (`raw/*.json`) plus a hand-maintained *league bible* (`raw/bible.yaml`) of facts the data cannot supply.
+A static, Markdown-driven encyclopedia of the Pine Hills Fantasy League (est. 2018). The site is built with **Zensical** from raw Yahoo data (`raw/*.json`) plus a hand-maintained *league bible* (`raw/bible.yaml`) of facts the data cannot supply.
 
 **Never fabricate** is the governing rule: anything derivable from the captured data is computed (records, points, finishes, playoff seeds, draft boards, owners, champions), anything else comes from the bible, and anything missing from both renders as `_TBD_` rather than a guess. `_NA_` is the separate case for a question that does not apply - a fact nobody should go looking for, rather than one still to be recorded.
 
@@ -11,20 +11,20 @@ Two rules shape where a record lands, both borrowed from how the NBA keeps its b
 - **Regular season and postseason never mix.** Records lives on regular-season games; Playoffs carries its own single-game book, a Finals-only book on top of that, career playoff leaders, and the ledger. A huge October week is a regular-season record and nothing else.
 - **Careers belong to people, franchises own single events.** Championships, career records and everything postseason are keyed to the **person**, since a franchise-keyed career splits a serial renamer into eight short ones. A single game or single season stays with the franchise that played it.
 
-Alongside the split books, Records carries **Outright Marks** (every game, phase ignored), **Blowouts** and **Nailbiters** (every game past a margin threshold, not just the single extreme), and **All-Time Totals** (career games, W-L-T, points), so "best regular season" and "most, full stop" are answerable separately.
+Alongside the split books, Records carries **Single-Game Records (All Phases)** (every game, phase ignored), **Blowouts** and **Nailbiters** (every game past a margin threshold, not just the single extreme), and **All-Time Totals** (career games, W-L-T, points), so the best regular season and the best across all phases are answerable separately.
 
-The two margin thresholds come from the actual spread rather than round-number instinct: across every captured game the median margin is 23.4 and the 90th percentile 61.2, so `BLOWOUT_MARGIN = 80` is the top ~3% of games and `NAILBITER_MARGIN = 1` the bottom ~4%. Both land near 20 rows; retune the constants in `generate.py` if the league drifts.
+The two margin thresholds come from the observed spread rather than round numbers: across every captured game the median margin is 23.4 and the 90th percentile 61.2, so `BLOWOUT_MARGIN = 80` is the top ~3% of games and `NAILBITER_MARGIN = 1` the bottom ~4%. Both land near 20 rows; retune the constants in `generate.py` if the league drifts.
 
 Two details the small sample forces:
 
-- **Records are shared, never arbitrated.** Every holder tied at the top is listed. The first row carries the label and the count (`Most Weeks Rostered (6-way tie)`) and the rest run under it with a blank label cell, so the holders read as one group; "tie" on its own stays reserved for a game that actually ended level. Two different games really are both decided by 0.02, and two managers really do both have two titles.
+- **Records are shared, never arbitrated.** Every holder tied at the top is listed. The first row carries the label and the count (`Most Weeks Rostered (6-way tie)`) and the rest run under it with a blank label cell, so the holders read as one group; `Tie` on its own stays reserved for a game that ended level. Two different games are both decided by 0.02, and two managers both have two titles.
 - **Rate minimums are one complete unit of play** - a full regular season (11 games, the shortest captured one) and a full bracket run (3). Anything higher drops managers who played exactly one, and at four playoff games the league's best postseason scoring average disappears from the page. Every rate is printed with its sample size so a thin one is visible rather than hidden.
 
 **Rivalries are the deliberate exception to the phase split.** Team and owner pages both carry a head-to-head table counting every meeting, bracket games included, with the playoff record shown in its own column. The books split by phase so a regular-season score cannot win a Finals record; a rivalry is the opposite case, where the playoff meetings are the ones that define it. Owner rivalries are keyed person-to-person, so they survive both sides renaming their franchise.
 
 **Players are a third key, alongside the person and the franchise.** Every week's rosters are captured with each player's lineup slot and that week's points, so Records carries a player book: highest regular-season week, highest playoff week, highest season total, highest-scoring benched player, and most weeks rostered. It splits by phase like every other book, and each mark names the fantasy team that had the player rostered and the bracket round when there was one, so a Final reads as a Final rather than a generic postseason week. Slot data is what makes the bench mark possible at all.
 
-Season awards are **computed rather than voted**, and print their formula beside the result so they read as arithmetic. MVP, Finals MVP, Newcomer of the Year, Undrafted Player of the Year and Team of the Season are described under [MVP awards](#mvp-awards) below. Best Draft Pick is the largest positive gap between where a player was drafted and where they finished on season points among players at the same position; Biggest Bust is the inverse, restricted to the first three rounds. Both name the drafting team, and say so when the points were actually scored for someone else after a trade or waiver claim.
+Season awards are **computed rather than voted**, and print their formula beside the result so they read as arithmetic. MVP, Finals MVP, Newcomer of the Year, Undrafted Player of the Year and Team of the Season are described under [MVP awards](#mvp-awards) below. Best Draft Pick is the largest positive gap between where a player was drafted and where they finished on season points among players at the same position; Biggest Bust is the inverse, restricted to the first three rounds. Both name the drafting team, and say so when the points were scored for someone else after a trade or waiver claim.
 
 Games can end level. Yahoo drops a drawn game from the standings W-L entirely, so the matchup log is the only place it survives: ties are counted, shown as W-L-T when non-zero, rated as half a win, and listed in the record book on their own, since a tie has no winner and belongs to neither margin record. Weeks that hold both bracket and consolation games are split by reading each season's bracket, so regular-season, playoff and consolation play never contaminate each other, and playoff qualification is read from the bracket rather than assumed from a seed cutoff (the field has grown from six teams to eight).
 
@@ -47,7 +47,7 @@ Games can end level. Yahoo drops a drawn game from the standings W-L entirely, s
 
 ## Project layout
 
-- `raw/` - source data: JSON season files and `bible.yaml`. **Gitignored**, so it exists only on machines that have run the scraper.
+- `raw/` - source data: JSON season files and `bible.yaml`. **Committed**, so the pipeline runs from a plain checkout without the scraper.
 - `scraper/` - Rust capture tool that writes `raw/<year>.json` from Yahoo.
 - `scripts/` - Python generation pipeline:
   - `generate.py` loads the season JSON and the bible, computes franchise and owner aggregates, and emits Markdown into `zensical/.stage/`.
@@ -61,7 +61,7 @@ Games can end level. Yahoo drops a drawn game from the standings W-L entirely, s
   - `site/` is the built HTML. Gitignored.
 - `tests/` - pytest suite over the generator and transform helpers.
 
-Generated Markdown under `zensical/docs/` **is committed**. Because `raw/` is not, CI has no season JSON to work from and builds straight from those committed pages.
+Generated Markdown under `zensical/docs/` **is committed** as well, so a diff shows what a data or generator change did to the pages. CI regenerates it from `raw/` on every build, so the committed pages must be kept in step: re-run the pipeline and commit the result alongside any change to `raw/` or `scripts/`.
 
 ## Development workflow
 
@@ -154,13 +154,13 @@ Both MVP awards are computed, never voted, and both are derived entirely from ca
 
 **Finals MVP** is the top scorer in the title game's winning lineup. One game leaves nothing to rank by wins, so this is the ordinary sporting definition. A season with no captured Final has no Finals MVP rather than a guessed one. It appears on the season page, in the Champions table, and on the player's page.
 
-**Team of the Season** applies the same measure per position: each starting slot goes to the player who swung the most wins playing it. The lineup shape is read off the rosters rather than hardcoded - whatever most team-weeks actually started that year - so a season that adds a flex or drops a kicker selects a team matching its own rules. Fixed slots fill first and the flex takes the best eligible player left, so a flex-worthy back cannot cost the team its second running back. It appears on the season page and on each selected player's page.
+**Team of the Season** applies the same measure per position: each starting slot goes to the player who swung the most wins playing it. The lineup shape is read off the rosters rather than hardcoded - whatever most team-weeks started that year - so a season that adds a flex or drops a kicker selects a team matching its own rules. Fixed slots fill first and the flex takes the best eligible player left, so a flex-worthy back cannot cost the team its second running back. It appears on the season page and on each selected player's page.
 
 **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft - waiver claims and free-agent adds only. A season with no captured draft has no award rather than one that flatters the whole league.
 
-**Newcomer of the Year** is the same measure among players making their first appearance on a Pine Hills roster. The first captured season shows `_NA_`, not `_TBD_`: every player in it is new, so the award does not apply rather than being unrecorded. It is deliberately *not* called Rookie of the Year: the captured data records no NFL service time, so a veteran claimed off waivers debuts here the year he arrives. In practice the two nearly coincide - six of the seven awarded seasons went to a genuine NFL rookie, the exception being 2019 Lamar Jackson, an NFL rookie in 2018 whom nobody in this league rostered until 2019. A true Rookie of the Year would need NFL debut years recorded in the bible. The first captured season has no award, since every player is new that year.
+**Newcomer of the Year** is the same measure among players making their first appearance on a Pine Hills roster. The first captured season shows `_NA_`, not `_TBD_`: every player in it is new, so the award does not apply rather than being unrecorded. It is deliberately *not* called Rookie of the Year: the captured data records no NFL service time, so a veteran claimed off waivers debuts here on arrival. In practice the two nearly coincide - six of the seven awarded seasons went to a genuine NFL rookie, the exception being 2019 Lamar Jackson, an NFL rookie in 2018 whom nobody in this league rostered until 2019. A true Rookie of the Year would need NFL debut years recorded in the bible.
 
-All of it is collected on the **Awards** page - every season's winners in one table, each season's Team of the Season in a collapsed block, and the career leaders. A career leaderboard is printed only for an award somebody has actually won twice; eight players tied on one apiece is not a leaderboard, and the by-season table already said it.
+All of it is collected on the **Awards** page - every season's winners in one table, each season's Team of the Season in a collapsed block, and the career leaders. A career leaderboard is printed only for an award somebody has won twice; eight players tied on one apiece is not a leaderboard, and the by-season table already covers it.
 
 Ties are listed rather than arbitrated, the same rule the record books follow: a slot is marked `(N-way tie)` only when more players are tied than the slot has places, so two backs filling two RB slots is not a tie. The Draft History index applies the same wins-swung measure scoped to one draft class, so a late-round pick that decided games is visible next to where it was taken.
 
@@ -183,7 +183,7 @@ eras:
 
 Omit `last_season` while an era is still running. The History page's "In This Wiki" column counts the seasons actually present in `raw/`, so an era whose data has not landed yet reads "None captured" rather than implying pages that do not exist.
 
-The 2018-2025 seasons on this wiki are the Yahoo era. The league moved to Sleeper for 2026 as **Pine Hills V2**; nothing from it is captured yet, and the scraper in `scraper/` targets Yahoo, so ingesting Sleeper is future work.
+The 2018-2025 seasons on this wiki are the Yahoo era. The league moved to Sleeper for 2026 as **Pine Hills V2**, a new ten-team league rather than a continuation. Sleeper publishes a free read-only API, so 2026 needs no browser capture and lands in `raw/2026.json` directly; the scraper in `scraper/` remains Yahoo-only. The 2026 draft is captured; no game has been played, so the season carries a roster and a draft board but no record, finish or champion.
 
 ### Lore
 
@@ -216,7 +216,7 @@ lore:
 - **Icons, not emoji** - page headings carry no decoration. The nine section landmarks declare a Lucide icon in front matter (`icon: lucide/calendar`), which the theme renders in the nav; a leaf page gets none, because 600 identical footballs are decoration rather than navigation. Players is the one Material icon (`material/football`) - Lucide has no American football.
 - **Shared records** are labelled once with their count (`Most Weeks Rostered (6-way tie)`) and the remaining holders run underneath in rows whose label cell is blank. "Tie" on its own is reserved for a game that actually ended level. `tablesort.js` leaves a grouped table unsorted, since sorting it would strand the continuation rows away from the label that names them.
 - **Overflow lists** (`+5 more` in a table cell) fold into a `<details>` that names everyone. A count that lists nobody is a dead end when the names are right there in the data.
-- **`md_in_html` is not active** in this Zensical build, so Markdown inside a raw HTML block ships literally. Card grids (`<div class="grid cards" markdown>`) and the hero panel cannot contain Markdown; write raw HTML there, or keep the content in plain Markdown outside the block.
+- **`md_in_html` is active**, so a raw HTML block carrying the `markdown` attribute renders Markdown inside it. Card grids (`<div class="grid cards" markdown>`) take bold, links and lists; a block without the attribute ships its contents literally, which is what the hero panel relies on.
 
 ## Deploy
 
@@ -224,4 +224,4 @@ lore:
 
 ---
 
-*Built with love for the Pine Hills community - see the source for details and feel free to contribute!*
+Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -1,0 +1,85 @@
+name: Submit lore
+description: Add an incident or a curse to the wiki's Lore page - no cloning, no code
+title: "Lore: "
+labels: [lore]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The Lore page records league history the scoreboard does not: disputed
+        trades, curses, group-chat arguments worth remembering. Nothing here is
+        derived from the captured data, so this form is the only way it gets in.
+
+        Fill this in and a maintainer copies it into `raw/bible.yaml` and
+        rebuilds. You do not need to clone anything.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      description: Incidents are one-off events. Curses are recurring patterns.
+      options:
+        - Incident
+        - Curse
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: A short name for it, the way people refer to it.
+      placeholder: The Vetoed Trade
+    validations:
+      required: true
+
+  - type: input
+    id: year
+    attributes:
+      label: Season
+      description: >-
+        The season it happened, if it was one season. Leave blank for a curse or
+        anything spanning years - undated entries are listed last.
+      placeholder: "2022"
+    validations:
+      required: false
+
+  - type: input
+    id: involved
+    attributes:
+      label: Teams or managers involved
+      description: >-
+        Comma-separated. Each name must match a team or manager the wiki already
+        knows, or it renders as a broken link - copy them exactly from the
+        [Teams](https://narenp12.github.io/pine-hills-wiki/teams/) or
+        [Owners](https://narenp12.github.io/pine-hills-wiki/owners/) page.
+        Optional.
+      placeholder: Roger That, Naren
+    validations:
+      required: false
+
+  - type: textarea
+    id: story
+    attributes:
+      label: What happened
+      description: >-
+        Write it the way you would tell it. Multiple paragraphs are fine. State
+        what happened rather than who was right - the wiki records the incident,
+        it does not settle it.
+      placeholder: |
+        Roger That and Save Me agreed a trade on the Thursday. The commissioner
+        vetoed it that night, and the group chat ran to four hundred messages
+        before the weekend.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: accuracy
+    attributes:
+      label: Accuracy
+      options:
+        - label: >-
+            This happened, and the people named in it are named accurately. I
+            understand the wiki never invents lore, so anything unverifiable is
+            left out rather than guessed at.
+          required: true

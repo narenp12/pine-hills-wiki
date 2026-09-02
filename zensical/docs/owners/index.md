@@ -1,7 +1,7 @@
 ---
 title: Owners
 icon: lucide/user
-description: The managers of the Pine Hills Fantasy Football League and every team name they have played under.
+description: The managers of the Pine Hills Fantasy League and every team name they have played under.
 ---
 
 # Owners

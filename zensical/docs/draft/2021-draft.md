@@ -161,3 +161,9 @@ description: "Pine Hills FF 2021 draft board."
 ## Related
 
 - [Draft History](index.md) · [2021 Season](../seasons/2021-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

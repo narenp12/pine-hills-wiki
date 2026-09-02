@@ -46,3 +46,5 @@ played; lineup points exclude weeks spent on the bench.
 ## Related
 
 - [Players](index.md) · [Teams](../teams/index.md) · [Draft History](../draft/index.md) · [Records](../records/index.md)
+
+*[WR]: Wide receiver

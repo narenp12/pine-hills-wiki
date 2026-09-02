@@ -25,7 +25,7 @@ INK = "#1b1f1a"
 MUTED = "#5b625b"
 PINE = "#15633d"
 
-TITLE = "Pine Hills Fantasy Football League"
+TITLE = "Pine Hills Fantasy League"
 TAGLINE = "The collaborative history of the league, kept by the league."
 STATS = [("8", "SEASONS"), ("33", "FRANCHISES"), ("527", "MATCHUPS")]
 

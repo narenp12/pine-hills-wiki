@@ -1,5 +1,5 @@
 # =============================================================================
-# Pine Hills Fantasy Football League — "League Bible"
+# Pine Hills Fantasy League — "League Bible"
 # -----------------------------------------------------------------------------
 # The single source of truth for HUMAN-ONLY facts that cannot be derived from
 # the captured Yahoo data.
@@ -28,7 +28,7 @@
 # =============================================================================
 
 league:
-  name: Pine Hills Fantasy Football League
+  name: Pine Hills Fantasy League
   established: 2018
 
 # --- Eras --------------------------------------------------------------------
@@ -57,9 +57,9 @@ eras:
     note: >-
       The league moved to Sleeper for 2026, as a new ten-team league rather than
       a continuation of the Yahoo one. Sleeper publishes a free read-only API,
-      so this era needs no browser capture. The draft is in; the season has not
-      kicked off, so 2026 carries a roster and a draft board but no record, no
-      finish and no champion until games are played.
+      so this era needs no browser capture. The draft is captured; the season
+      has not begun, so 2026 carries a roster and a draft board but no record,
+      finish or champion.
 
 # --- Owners -----------------------------------------------------------------
 # team name (as it appears in a season) -> owner name

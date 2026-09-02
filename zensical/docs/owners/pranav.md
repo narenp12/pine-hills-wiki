@@ -1,6 +1,6 @@
 ---
 title: "Pranav"
-description: "Career record and team names of Pranav in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Pranav in the Pine Hills Fantasy League."
 ---
 
 # Pranav

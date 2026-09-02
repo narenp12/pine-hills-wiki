@@ -161,3 +161,9 @@ description: "Pine Hills FF 2026 draft board."
 ## Related
 
 - [Draft History](index.md) · [2026 Season](../seasons/2026-season.md)
+
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense

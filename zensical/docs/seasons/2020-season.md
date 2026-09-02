@@ -1,6 +1,6 @@
 ---
 title: "2020 Season"
-description: "Pine Hills Fantasy Football League - 2020 season."
+description: "Pine Hills Fantasy League - 2020 season."
 season: 2020
 year: 2020
 ---
@@ -14,7 +14,7 @@ year: 2020
 
 ## Final Standings
 
-> **Finish** is the final playoff-adjusted rank, so it does not follow W-L order: a team can win the title from a lower seed. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
+**Finish** is the final playoff-adjusted rank, not W-L order. **Playoff Seed** is the seed the team entered the playoffs with; a dash means it did not qualify.
 
 | Finish | Team | Owner | W-L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
@@ -31,7 +31,7 @@ year: 2020
 
 ## Playoff Bracket
 
-> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
+Seeds in parentheses; ✓ marks the winner. Consolation games are excluded; a team appearing first in a later round had a bye.
 
 ```mermaid
 flowchart LR
@@ -59,7 +59,7 @@ flowchart LR
 
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
+Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 ??? note "Roger That"
     **Post-draft - week 1**
@@ -489,7 +489,7 @@ flowchart LR
 
 ## Position Highs
 
-The biggest single week at each position, regular season, starters only. The league-wide high above is almost always a receiver or a back; this is where a kicker's or a defense's best day is visible.
+Highest single week at each position. Regular season, starters only.
 
 | Pos | Player | Points | When |
 |-----|--------|--------|------|
@@ -502,7 +502,7 @@ The biggest single week at each position, regular season, starters only. The lea
 
 ## Team of the Season
 
-The best starting lineup the season produced, one selection per slot the league actually starts. A slot is won the same way the MVP is: by wins swung, the games a team won by less than the player scored from the starting lineup. The flex takes the best eligible player the position slots did not already claim.
+Each starting slot goes to the player who swung the most wins in it; the flex takes the best eligible player the position slots did not claim.
 
 | Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
 |------|--------|-----|------------|----------------|-------------|
@@ -516,12 +516,20 @@ The best starting lineup the season produced, one selection per slot the league 
 | K | [Jason Sanders](../players/jason-sanders.md) | K | 3 | 39.00 | <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> |
 | DEF | [Colts](../players/colts.md) | DEF | 4 | 50.00 | <span class="wiki-new" title="This page has not been written yet">Imagine Losing</span> |
 
-> Every award here is computed, not voted. **MVP** is the player who swung the most wins: games their team won by less than the player scored from the starting lineup. **Finals MVP** is the top scorer in the title game's winning lineup. **Newcomer of the Year** is the same wins-swung measure among players making their first appearance on a Pine Hills roster - a league debut, not an NFL rookie season, which the captured data does not record. **Undrafted Player of the Year** is the same measure among players nobody took in that year's draft. **Best Draft Pick** and **Biggest Bust** compare, within a position, where a player was taken against where they finished on season points; Bust is restricted to rounds 1-3 and to players who scored in at least 75% of the season's weeks, so a lost year is not counted as a bad pick.
-
-## The Story of the Year
-
-_TBD - add the defining moments._
+Every award is computed rather than voted. Full definitions are on [Awards](../awards.md).
 
 ## Related
 
 - [Seasons](index.md) · [2020 Draft](../draft/2020-draft.md) · [Teams](../teams/index.md) · [Records](../records/index.md) · [Lore](../lore.md) · [Playoffs](../playoffs.md)
+
+*[PF]: Points For - total points a team scored
+*[PA]: Points Against - total points scored against a team
+*[W/R/T]: Flex slot - a receiver, back or tight end may start in it
+*[BN]: Bench - rostered that week, but not in the starting lineup
+*[IR]: Injured Reserve
+*[QB]: Quarterback
+*[RB]: Running back
+*[WR]: Wide receiver
+*[TE]: Tight end
+*[DEF]: Team defense
+*[MVP]: Most Valuable Player

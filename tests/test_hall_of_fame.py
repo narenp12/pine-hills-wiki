@@ -159,7 +159,7 @@ def test_the_page_names_a_defense_by_its_season():
     assert "### 2019 Patriots (DEF)" in page
     # The link still points at the defense's own page, under the season label.
     assert "[[Patriots|2019 Patriots]]" in page
-    assert "judged one season at a time" in page
+    assert "inducted as a single season" in page
 
 
 def test_an_empty_hall_says_so_rather_than_printing_a_headless_table():

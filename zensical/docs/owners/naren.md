@@ -1,6 +1,6 @@
 ---
 title: "Naren"
-description: "Career record and team names of Naren in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Naren in the Pine Hills Fantasy League."
 ---
 
 # Naren
@@ -39,7 +39,7 @@ description: "Career record and team names of Naren in the Pine Hills Fantasy Fo
 
 ## Team Names
 
-A new name every season - 9 names in 9 seasons, never the same one twice.
+A different name in each season: 9 names in 9 seasons, none of them repeated.
 
 | Team | Seasons | Record |
 |------|---------|--------|

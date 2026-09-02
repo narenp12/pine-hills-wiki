@@ -1,7 +1,7 @@
 ---
 title: Playoffs
 icon: lucide/swords
-description: Pine Hills Fantasy Football League playoff format, champions, and Finals history.
+description: Pine Hills Fantasy League playoff format, champions, and Finals history.
 ---
 
 # Playoffs
@@ -87,7 +87,9 @@ The title game only.
 
 ## Career Playoff Leaders
 
-By manager. Rate marks qualify at 3 playoff games, one full bracket run, and carry their sample size.
+By manager. Rate marks carry their sample size.[^playoffrate]
+
+[^playoffrate]: A rate mark qualifies at 3 playoff games, one full bracket run. At four, the league's best postseason scoring average disappears from the page.
 
 | Record | Owner | Value |
 |--------|-------|-------|
@@ -138,3 +140,6 @@ Every manager who has reached a bracket. Consolation play is excluded.
 ## Related
 
 - [Champions](champions.md) · [Seasons](seasons/index.md) · [Records](records/index.md) · [Lore](lore.md)
+
+*[QB]: Quarterback
+*[WR]: Wide receiver

@@ -1,7 +1,7 @@
 ---
 title: Lore
 icon: lucide/scroll-text
-description: Incidents, curses and infamous moments of the Pine Hills Fantasy Football League.
+description: Incidents and curses of the Pine Hills Fantasy League, contributed by the community.
 ---
 
 # Lore

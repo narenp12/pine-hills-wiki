@@ -1,7 +1,7 @@
 ---
 title: Champions
 icon: lucide/trophy
-description: List of Pine Hills Fantasy Football League champions by season.
+description: List of Pine Hills Fantasy League champions by season.
 ---
 
 # Champions
@@ -35,3 +35,5 @@ regular-season top seed. The Finals MVP is the top scorer in the title game's wi
 ## Related
 
 - [Seasons](seasons/index.md) · [Playoffs](playoffs.md) · [Records](records/index.md) · [Teams](teams/index.md)
+
+*[MVP]: Most Valuable Player
