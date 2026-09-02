@@ -101,6 +101,11 @@ def load_raw():
             print(f"  ! skipping {f.name}: missing key {e} in JSON")
         except OSError as e:
             print(f"  ! skipping {f.name}: unable to read file - {e}")
+    # Draft picks carry no position of their own; rosters do. Fill them once
+    # here so every consumer — draft boards and the draft-value awards — sees
+    # the same data.
+    for season_data in seasons.values():
+        backfill_draft_positions(season_data)
     return seasons
 
 
@@ -1084,6 +1089,29 @@ def team_roster_blocks(season_data: dict, teams: list[dict]) -> str:
             out.extend("    " + line for line in roster_table(roster))
             out.append("")
     return "\n".join(out) if out else "_TBD — no roster data captured for this season._"
+
+
+def backfill_draft_positions(season_data: dict) -> None:
+    """Fill blank draft-pick positions from that season's roster data, in place.
+
+    Yahoo's draft-results table never carried a position column, so every season
+    shipped with `position: ""`. Rosters have it. Unmatched picks stay blank — an
+    unrostered player's position is not in the captured data, and guessing it
+    would be fabrication.
+    """
+    picks = (season_data.get("draft") or {}).get("draft_results") or []
+    if not picks:
+        return
+    positions = {}
+    for week in (season_data.get("weeks") or {}).values():
+        for roster in ((week or {}).get("rosters") or {}).values():
+            for player in roster.get("players") or []:
+                name, position = player.get("name"), player.get("position")
+                if name and position:
+                    positions.setdefault(name, position)
+    for pick in picks:
+        if not pick.get("position"):
+            pick["position"] = positions.get(pick.get("player"), "")
 
 
 def roster_cell(year: int, season_data: dict) -> str:

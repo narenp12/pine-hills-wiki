@@ -63,3 +63,22 @@ def test_season_log_roster_cells():
     assert "2018 Season" in roster_cell(2018, with_data)
     # No data means no link — the old code linked to pages that were never generated.
     assert roster_cell(2018, {"weeks": {}}) == "_TBD_"
+
+
+def test_backfill_positions():
+    from scripts.generate import backfill_draft_positions
+
+    season = {
+        "draft": {"draft_results": [
+            {"pick": 1, "player": "Starter QB", "position": ""},
+            {"pick": 2, "player": "Never Rostered", "position": ""},
+        ]},
+        "weeks": {"1": {"rosters": {"Team A": {"players": [
+            {"name": "Starter QB", "position": "QB", "slot": "QB", "points": 20.0},
+        ]}}}},
+    }
+    backfill_draft_positions(season)
+    picks = season["draft"]["draft_results"]
+    assert picks[0]["position"] == "QB"
+    # Never fabricate: an unmatched pick stays blank rather than getting a guess.
+    assert picks[1]["position"] == ""
