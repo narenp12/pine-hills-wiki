@@ -15,18 +15,21 @@ Design principle — NEVER FABRICATE:
 Builds / rewrites (into WIKI_CONTENT_DIR, default zensical/.stage, which
 zensical/transform.py turns into zensical/docs):
   seasons/<year>-season.md     (standings, playoffs stub, awards)
-  teams/<slug>.md              (franchise page + season log)
+  players/<slug>.md            (player page + team history)
+  players/index.md             (every rostered player, by position)
   records/index.md             (all-time + single-season leaders)
-  teams/index.md               (franchise table)
+  teams/index.md               (every team name -> the manager who used it)
   seasons/index.md             (champions-by-year table)
   index.md                     (root champions table)
   champions.md                 (NBA-style "List of champions")
+  lore.md                      (community lore, from the bible's `lore` block)
   playoffs.md                  (NBA-style "Playoffs / Finals")
 
 Run:  python scripts/generate.py   (or with WIKI_CONTENT_DIR set)
 """
 
 import json
+import math
 import os
 import re
 import sys
@@ -52,8 +55,11 @@ END_SEASON_WEEK = 18
 PLAYOFF_START_WEEK = 14
 PLAYOFF_END_WEEK = 18
 INITIAL_WORST_PF = 1e9
-# Franchises listed inline in the owners table before it spills to "+N more".
+# Franchises listed inline in a table cell before the rest fold into a
+# "+N more" disclosure. Three fits a column without wrapping on a laptop; the
+# player books get two, since their rows already carry a score and a date.
 OWNER_INDEX_TEAMS_SHOWN = 3
+PLAYER_BOOK_TEAMS_SHOWN = 2
 
 
 def dash_normalize(text: str) -> str:
@@ -76,6 +82,11 @@ CONTENT = Path(_content_env).resolve() if _content_env else ROOT / "zensical" / 
 BIBLE_PATH = RAW / "bible.yaml"
 
 TBD = "_TBD_"
+# Not the same as _TBD_. TBD means the fact is missing and could still be
+# recorded; NA means the question does not apply, so nobody should go looking.
+# The first captured season has no Newcomer of the Year because every player in
+# it is new, which is a fact about the award rather than a gap in the data.
+NA = "_NA_"
 
 # Team images are hand-supplied: Yahoo's capture carries no logo URL. Files live
 # under zensical/docs/<TEAM_IMAGE_DIR>/ and are mapped to a team in the bible's
@@ -89,6 +100,28 @@ TEAM_IMAGE_DIR = "assets/teams"
 def slug(s: str) -> str:
     s = re.sub(r"[^a-zA-Z0-9]+", "-", s.lower()).strip("-")
     return s or "team"
+
+
+def warn_slug_collisions(kind: str, names) -> None:
+    """Warn when two different names would be written to the same page.
+
+    `slug()` strips punctuation and case, so two names that differ only there
+    ("Kaushal's Potatoes" vs "Kaushal’s Potatoes") share a path and the second
+    write silently destroys the first one's page. That went unnoticed until an
+    audit compared a page against its own history, so it gets a loud warning:
+    the collision is a data problem to fold, not something to paper over.
+    """
+    by_slug = {}
+    for name in names:
+        by_slug.setdefault(slug(name), []).append(name)
+    for path, collided in sorted(by_slug.items()):
+        if len(collided) > 1:
+            joined = ", ".join(repr(n) for n in sorted(collided))
+            print(
+                f"  ! {kind} slug collision: {joined} all write {path}.md — "
+                f"only the last survives. Fold them to one spelling.",
+                file=sys.stderr,
+            )
 
 
 def load_raw():
@@ -105,6 +138,10 @@ def load_raw():
             print(f"  ! skipping {f.name}: missing key {e} in JSON")
         except OSError as e:
             print(f"  ! skipping {f.name}: unable to read file - {e}")
+    # One spelling per name, before anything keys on one. Two spellings of one
+    # franchise slug to the same page, so the later one silently overwrites the
+    # earlier one's history.
+    seasons = {year: normalize_apostrophes(d) for year, d in seasons.items()}
     # Draft picks carry no position of their own; rosters do. Fill them once
     # here so every consumer — draft boards and the draft-value awards — sees
     # the same data.
@@ -137,12 +174,111 @@ def wikilink(title: str, label=None) -> str:
     return f"[[{title}]]" if label is None else f"[[{title}|{label}]]"
 
 
+# Team name -> canonical manager, filled once in main().
+#
+# A team name is not a franchise in this league. 69% of the names ever used
+# lasted exactly one season; Naren has used nine names in nine years and never
+# repeated one. What persists across seasons is the manager, so a manager gets
+# the page and a team name is a label he wore that year. Every team name still
+# appears verbatim wherever it did before - the record book names the
+# team-season, as it should - but the link under it goes to the person.
+_TEAM_OWNERS: dict = {}
+
+
+def set_team_owners(mapping: dict) -> None:
+    """Register the team-name -> manager map used by `team_link`."""
+    _TEAM_OWNERS.clear()
+    _TEAM_OWNERS.update(mapping)
+
+
+def team_link(name, label=None) -> str:
+    """Link a team name at the manager who used it, still showing the name.
+
+    Falls back to an ordinary wikilink for anything that is not a known team, so
+    the mixed franchise/manager lists in the lore block keep working.
+    """
+    name = str(name or "").strip()
+    if not name:
+        return TBD
+    owner = _TEAM_OWNERS.get(name)
+    return wikilink(owner, label or name) if owner else wikilink(label or name)
+
+
+def shared_label(label: str, holders: int) -> str:
+    """Label a record more than one holder shares.
+
+    "Tie" belongs to a game that actually ended level, so a record several
+    holders share says how many share it instead of borrowing the scoreline's
+    word. The count is the fact worth printing: six players sharing a mark reads
+    very differently from two.
+    """
+    return label if holders < 2 else f"{label} ({holders}-way tie)"
+
+
+def shared_label_cells(label: str, holders: int) -> list[str]:
+    """The label cell for each of a shared record's rows.
+
+    The first row carries the label and the count; the rest are blank, so the
+    eye reads the holders as one group rather than as N repetitions of the same
+    sentence. `tablesort.js` skips any table with a blank leading cell, since
+    sorting one would scatter a group away from the label that heads it.
+    """
+    if holders < 2:
+        return [label]
+    return [shared_label(label, holders)] + [""] * (holders - 1)
+
+
+def more_list(names: list, shown: int) -> str:
+    """An inline list that keeps its overflow reachable.
+
+    A bare "+4 more" is a dead end: the names exist in the data and the reader
+    has no way to reach them. The overflow goes into a `<details>` they can open
+    in place, which still works as a disclosure widget with JavaScript off.
+
+    The revealed names are wrapped and labelled deliberately. A browser slots
+    `<details>` content into a block box whatever the element's own `display`
+    is, so the overflow cannot be made to flow inline after the summary - it
+    always starts a new line. Left unstyled that reads as a broken line break,
+    so it is presented as what it is: an indented continuation, under a toggle
+    that swaps to "show less" while it is open.
+    """
+    if not names:
+        return TBD
+    if len(names) <= shown:
+        return ", ".join(names)
+    rest = names[shown:]
+    return (
+        f"{', '.join(names[:shown])} "
+        f'<details class="more"><summary>'
+        f'<span class="more-show">+{len(rest)} more</span>'
+        f'<span class="more-hide">show less</span>'
+        f"</summary>"
+        f'<span class="more-list">{", ".join(rest)}</span></details>'
+    )
+
+
 def standings_teams(season_data: dict) -> list[dict]:
     """Extract the list of team standings from a season JSON."""
     standings = season_data.get("standings", {}) or {}
     standings = standings.get("standings", standings) if isinstance(standings, dict) else standings
     teams = standings.get("teams", []) if isinstance(standings, dict) else []
     return teams
+
+
+def season_has_games(season_data: dict) -> bool:
+    """Has a single game been played in this season?
+
+    A platform hands out rosters, a schedule and a draft long before kickoff, so
+    "the season exists in raw/" and "the season has results" are different
+    questions. Everything that reports a finish, a seed or a bracket has to ask
+    this one first, or it will report the pre-season as a result.
+    """
+    if season_data.get("matchups") or (season_data.get("playoffs") or {}).get("weeks"):
+        return True
+    return any(
+        team.get("wins") or team.get("losses") or team.get("points_for")
+        for team in standings_teams(season_data)
+    )
 
 
 def build_name_to_canonical(bible: dict) -> dict:
@@ -235,7 +371,11 @@ def build_aggregates(seasons: dict, playoff_teams=None) -> dict:
             franchise["pf"] += points_for
             franchise["pa"] += points_against
             rank = int(team.get("rank", DEFAULT_RANK))
-            franchise["finishes"].append((rank, year))
+            # Rank 0 means the season has no finish yet, not a finish ahead of
+            # 1st. Recording it would hand every 2026 team the best finish in
+            # league history before a game is played.
+            if rank > 0:
+                franchise["finishes"].append((rank, year))
             if made_playoffs(year, team_name, rank, playoff_teams):
                 franchise["playoff_appears"] += 1
             if points_for > franchise["best_pf_season"][0]:
@@ -334,6 +474,18 @@ def apply_derived_owners(bible: dict, seasons: dict) -> dict:
             if name and owner:
                 owners[name] = owner
     return bible
+
+
+def champ_cell(name: str) -> str:
+    """Render a champion / runner-up / top-seed name for a table.
+
+    A title is won by a manager, not by the name he happened to be playing under
+    that August. The name is what gets printed - "Stroud Boys won 2024" is how
+    anyone would say it - but the link goes to the person, so a manager's titles
+    read as one career rather than as several unconnected names.
+    """
+    name = str(name or "").strip()
+    return team_link(name) if name and name != TBD else TBD
 
 
 def champ_fields(bible: dict, year: int) -> tuple[str, str, str, str]:
@@ -444,7 +596,9 @@ def build_owner_aggregates(
             record["pf"] += float(team.get("points_for", 0) or 0)
             record["pa"] += float(team.get("points_against", 0) or 0)
             record["seasons_count"] += 1
-            record["finishes"].append((rank, year))
+            # See build_aggregates: rank 0 is "no finish yet", not first place.
+            if rank > 0:
+                record["finishes"].append((rank, year))
             if reached_playoffs:
                 record["playoff_appears"] += 1
             if champion and champion in (team_name, canonical_team):
@@ -670,8 +824,8 @@ def player_pool(player_log: list, scope: str) -> list:
     return [row for row in player_log if row["phase"] == scope]
 
 
-def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
-    """One phase's player book as table rows.
+def player_book_marks(player_log: list, scope: str = PHASE_REGULAR) -> list[dict]:
+    """One phase's player marks as data: label, holders, and how to print them.
 
     Called once per scope so the books stay apart the way the team books do: a
     huge October week cannot become a Finals record. `scope` is `PHASE_REGULAR`,
@@ -684,22 +838,17 @@ def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
     Ties are listed and marked, never arbitrated — the same rule the team books
     follow. Bench marks read the whole pool; every other book reads starters
     only, since a benched score is not a lineup result.
+
+    The record book renders these as table rows and the player pages render the
+    same marks as a line on the holder's own page. Returning the marks rather
+    than the markup is what keeps those two from disagreeing about who holds
+    what.
     """
     pool = player_pool(player_log, scope)
     started = [row for row in pool if row["started"]]
     # A scoped book already says which phase it covers in its heading, so the
     # row labels do not repeat it.
     career_marks = scope == PHASE_REGULAR
-
-    def holders_rows(label, items, key, value, when) -> list[str]:
-        holders = top_holders(items, key)
-        if not holders:
-            return [f"| {label} | {TBD} | {TBD} | {TBD} |"]
-        shared = " (tied)" if len(holders) > 1 else ""
-        return [
-            f"| {label}{shared} | {row['player']} | {value(row)} | {when(row)} |"
-            for row in holders
-        ]
 
     def week_when(row) -> str:
         """When and for whom: "2024 Wk 16 (Final), Stroud Boys".
@@ -710,7 +859,7 @@ def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
         whoever actually had them rostered.
         """
         tag = f" ({row['round']})" if row.get("round") else PHASE_LABELS[row["phase"]]
-        return f"{row['year']} Wk {row['week']}{tag}, {wikilink(row['team'])}"
+        return f"{row['year']} Wk {row['week']}{tag}, {team_link(row['team'])}"
 
     def points_value(row) -> str:
         return f"{row['points']:.2f} ({row['position'] or '—'})"
@@ -745,34 +894,637 @@ def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
     ]
 
     def teams_when(row) -> str:
-        names = [wikilink(t) for t in row["teams"]]
-        if len(names) <= 3:
-            return ", ".join(names)
-        return f"{', '.join(names[:3])} +{len(names) - 3} more"
+        return more_list([wikilink(t) for t in row["teams"]], PLAYER_BOOK_TEAMS_SHOWN)
 
-    table = []
-    table += holders_rows(
-        "Highest Week", started, lambda r: r["points"], points_value, week_when,
-    )
-    table += holders_rows(
-        "Highest-Scoring Benched Player",
-        [r for r in pool if not r["started"]],
-        lambda r: r["points"], points_value, week_when,
-    )
+    def mark(label, items, key, value, when) -> dict:
+        return {
+            "label": label,
+            "holders": top_holders(items, key),
+            "value": value,
+            "when": when,
+        }
+
+    marks = [
+        mark("Highest Week", started, lambda r: r["points"], points_value, week_when),
+        mark(
+            "Highest-Scoring Benched Player",
+            [r for r in pool if not r["started"]],
+            lambda r: r["points"], points_value, week_when,
+        ),
+    ]
     if career_marks:
-        table += holders_rows(
+        marks.append(mark(
             "Highest Season Total", totals,
             lambda r: r["points"],
             lambda r: f"{r['points']:.2f}",
-            lambda r: f"{r['year']}, {wikilink(r['team'])}",
-        )
-        table += holders_rows(
+            lambda r: f"{r['year']}, {team_link(r['team'])}",
+        ))
+        marks.append(mark(
             "Most Weeks Rostered", weeks_rows,
             lambda r: r["weeks"],
             lambda r: f"{r['weeks']} weeks",
             teams_when,
+        ))
+    return marks
+
+
+def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
+    """One phase's player book as table rows, off `player_book_marks`."""
+    table = []
+    for entry in player_book_marks(player_log, scope):
+        holders = entry["holders"]
+        if not holders:
+            table.append(f"| {entry['label']} | {TBD} | {TBD} | {TBD} |")
+            continue
+        cells = shared_label_cells(entry["label"], len(holders))
+        table.extend(
+            f"| {cell} | {wikilink(row['player'])} | {entry['value'](row)} "
+            f"| {entry['when'](row)} |"
+            for cell, row in zip(cells, holders)
         )
     return table
+
+
+# --------------------------------------------------------------------------- #
+# player index: one career record per player, across every roster they sat on
+# --------------------------------------------------------------------------- #
+# Positions, in the order a league page reads them. Anything Yahoo reports that
+# is not on the list still gets a section, appended after these.
+POSITION_ORDER = ["QB", "RB", "WR", "TE", "K", "DEF"]
+# Franchises listed inline in the players index before it spills to "+N more".
+PLAYER_INDEX_TEAMS_SHOWN = 2
+
+
+def position_week_highs(player_log: list, scope: str = PHASE_REGULAR, year=None) -> list:
+    """The best single week at each position: [(position, [holder, ...]), ...].
+
+    The league-wide "Highest Week" is always a WR or an RB, which is what makes
+    it a poor record: a kicker's best day and a defense's best day cannot be
+    seen through it. Splitting by position is what puts them on the page.
+
+    Scoped by phase like every other book, so a playoff week never lands in the
+    regular-season table, and optionally by year for a single season page.
+    Starters only - a benched score is not a lineup result, and the bench has
+    its own record in the player book.
+    """
+    rows = [
+        row for row in player_pool(player_log, scope)
+        if row["started"] and (year is None or row["year"] == year)
+    ]
+    by_position = {}
+    for row in rows:
+        by_position.setdefault(row["position"] or "", []).append(row)
+    ordered = [p for p in POSITION_ORDER if p in by_position]
+    ordered += sorted(p for p in by_position if p and p not in POSITION_ORDER)
+    return [
+        (position, top_holders(by_position[position], lambda r: r["points"]))
+        for position in ordered
+    ]
+
+
+def position_week_rows(highs: list, when) -> list[str]:
+    """One table row per position, `when` deciding how much of the date to name.
+
+    The records book needs the year; a season page already is the year and says
+    so in its heading, so it spends the column on the week and the roster.
+    """
+    rows = []
+    for position, holders in highs:
+        if not holders:
+            continue
+        cells = shared_label_cells(position, len(holders))
+        rows.extend(
+            f"| {cell} | {wikilink(row['player'])} | {row['points']:.2f} | {when(row)} |"
+            for cell, row in zip(cells, holders)
+        )
+    return rows or [f"| {TBD} | {TBD} | {TBD} | {TBD} |"]
+
+
+def _week_id(row) -> tuple:
+    """What makes one roster week unique, for matching a row against itself."""
+    return (row["player"], row["year"], row["week"], row["team"])
+
+
+def player_record_marks(player_log: list, scope: str = PHASE_REGULAR) -> dict:
+    """{player: [{"text": "Highest Week - 57.90 (WR)", "year": 2020}]}.
+
+    The books name the holder of each mark; a player page needs the same fact
+    from the other end, so that the best week it already prints can say it is
+    also a league record. Reading the marks rather than re-deriving them is what
+    stops the two pages from crediting different players.
+
+    The year is the season the mark was set, and is None for a mark that spans
+    seasons rather than belonging to one - weeks rostered is a career total, not
+    something a single year did.
+    """
+    marks, league_weeks = {}, set()
+    for entry in player_book_marks(player_log, scope):
+        for row in entry["holders"]:
+            marks.setdefault(row["player"], []).append({
+                "text": f"{entry['label']} - {entry['value'](row)}",
+                "year": row.get("year"),
+            })
+            if entry["label"] == "Highest Week":
+                league_weeks.add(_week_id(row))
+    for position, holders in position_week_highs(player_log, scope):
+        for row in holders:
+            # The league-wide holder is a receiver or a back, and his page has
+            # just said so. Repeating it as a positional mark says nothing.
+            if _week_id(row) in league_weeks:
+                continue
+            marks.setdefault(row["player"], []).append({
+                "text": f"Highest {position} Week - {row['points']:.2f}",
+                "year": row["year"],
+            })
+    return marks
+
+
+def player_record_lines(player_log: list, scope: str = PHASE_REGULAR) -> dict:
+    """{player: ["Highest Week - 57.90 (WR)", ...]}, marks as prose."""
+    return {
+        player: [mark["text"] for mark in marks]
+        for player, marks in player_record_marks(player_log, scope).items()
+    }
+
+
+def player_season_highs(player_log: list, scope: str = PHASE_REGULAR) -> dict:
+    """{player: {position: [year, ...]}} - the seasons a player's week led his
+    position.
+
+    The season pages each print their own year's position highs; this is that
+    table read down the years instead of across, so a player page can say which
+    seasons he owned. It is deliberately not a league record and not an award:
+    nobody voted, and leading a position for one year is not a career mark.
+    """
+    held = {}
+    for year in sorted({row["year"] for row in player_pool(player_log, scope)}):
+        for position, holders in position_week_highs(player_log, scope, year=year):
+            for row in holders:
+                positions = held.setdefault(row["player"], {})
+                positions.setdefault(position, []).append(year)
+    return held
+
+
+def player_season_high_line(highs: dict) -> str:
+    """"QB 2019, 2023 · TE 2021", or "" for a player who never led a season."""
+    return " · ".join(
+        f"{position} {', '.join(str(year) for year in years)}"
+        for position, years in sorted(
+            (highs or {}).items(),
+            key=lambda kv: (POSITION_ORDER.index(kv[0])
+                            if kv[0] in POSITION_ORDER else len(POSITION_ORDER), kv[0]),
+        )
+    )
+
+
+def draft_picks_by_player(seasons: dict) -> dict:
+    """{player: [pick, ...]} across every captured draft, earliest year first.
+
+    Reads the same shape the draft boards do, including the `overall` number
+    `annotate_overall_picks` backfills, so a player page and the board it links
+    to quote the same pick.
+    """
+    picks = {}
+    for year in sorted(seasons):
+        draft = seasons[year].get("draft") or {}
+        rows = draft.get("draft_results", draft.get("results", []))
+        if isinstance(rows, dict):
+            rows = rows.get("draft_results", [])
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            name = str(row.get("player") or "").strip()
+            if not name:
+                continue
+            picks.setdefault(name, []).append(
+                {
+                    "year": year,
+                    "round": row.get("round"),
+                    "overall": row.get("overall", row.get("pick")),
+                    "team": str(row.get("team") or "").strip(),
+                    "position": str(row.get("position") or "").strip(),
+                }
+            )
+    return picks
+
+
+def team_owners_by_year(seasons: dict, owner_map: dict) -> dict:
+    """{(year, team name): canonical owner} from the standings block."""
+    owners = {}
+    for year, season_data in seasons.items():
+        for team in standings_teams(season_data):
+            name = str(team.get("name") or "").strip()
+            owner = str(team.get("owner") or "").strip()
+            if name and owner:
+                owners[(year, name)] = canonical_owner(owner, owner_map)
+    return owners
+
+
+def _empty_player_bucket() -> dict:
+    """The counters a player record and each of its stints both carry."""
+    return {
+        "weeks": 0,
+        "starts": 0,
+        "points": 0.0,
+        "bench_points": 0.0,
+        "best": None,
+        "positions": {},
+    }
+
+
+def _add_player_week(bucket: dict, row: dict) -> None:
+    """Fold one roster-week into a bucket.
+
+    Lineup points and bench points are kept apart: a player who scored 30 from
+    the bench did not score them for the team, and a career page that adds the
+    two together would credit a manager for points they never fielded.
+    """
+    bucket["weeks"] += 1
+    if row["started"]:
+        bucket["starts"] += 1
+        bucket["points"] += row["points"]
+    else:
+        bucket["bench_points"] += row["points"]
+    best = bucket["best"]
+    # The best week is the biggest score of either kind; whether it was started
+    # is on the row, so the page can say so.
+    if best is None or row["points"] > best["points"]:
+        bucket["best"] = row
+    position = row["position"]
+    if position:
+        bucket["positions"][position] = bucket["positions"].get(position, 0) + 1
+
+
+def player_positions(bucket: dict) -> list:
+    """Positions a player was listed at, most-played first.
+
+    Yahoo re-files a handful of players (Taysom Hill, Cordarrelle Patterson)
+    mid-career, so a player can hold two honestly. Both are kept rather than
+    picking one and quietly dropping the other.
+    """
+    return sorted(bucket["positions"], key=lambda p: (-bucket["positions"][p], p))
+
+
+def build_player_index(seasons: dict, player_log: list, owner_map: dict) -> dict:
+    """Return {player: career record}, one entry per player ever rostered.
+
+    Built from the same `player_log` the record books read, so a player page can
+    never disagree with the leaderboards that link to it. Stints are keyed by
+    (year, team): a player who changed hands mid-season gets one row per
+    manager, which is the whole point of a team history.
+
+    Players who were drafted and then cut before the first captured roster still
+    get a record, so the draft boards have somewhere to link.
+    """
+    owners = team_owners_by_year(seasons, owner_map)
+    drafts = draft_picks_by_player(seasons)
+
+    index = {}
+    for row in player_log:
+        record = index.get(row["player"])
+        if record is None:
+            record = _empty_player_bucket()
+            record.update({"name": row["player"], "years": set(), "teams": {}, "stints": {}})
+            index[row["player"]] = record
+        _add_player_week(record, row)
+        record["years"].add(row["year"])
+        record["teams"][row["team"]] = record["teams"].get(row["team"], 0) + 1
+
+        key = (row["year"], row["team"])
+        stint = record["stints"].get(key)
+        if stint is None:
+            stint = _empty_player_bucket()
+            stint.update(
+                {
+                    "year": row["year"],
+                    "team": row["team"],
+                    "owner": owners.get(key, ""),
+                }
+            )
+            record["stints"][key] = stint
+        _add_player_week(stint, row)
+
+    for name, picks in drafts.items():
+        record = index.get(name)
+        if record is None:
+            record = _empty_player_bucket()
+            record.update({"name": name, "years": set(), "teams": {}, "stints": {}})
+            for pick in picks:
+                if pick["position"]:
+                    record["positions"][pick["position"]] = (
+                        record["positions"].get(pick["position"], 0) + 1
+                    )
+            index[name] = record
+        record["drafts"] = picks
+
+    for record in index.values():
+        record.setdefault("drafts", [])
+        record["years"] = sorted(record["years"])
+    return index
+
+
+def build_decisive_wins(player_log: list, game_log: list) -> dict:
+    """{(year, player): record} of the wins each player swung, across every phase.
+
+    A win is "swung" when the player was in the starting lineup, their team won,
+    and they outscored the margin of victory: take the player out of that lineup
+    and the result flips. It is the narrowest defensible reading of contributing
+    to a win, and unlike raw points it cannot credit a player who piled up
+    yardage in games their team lost by forty.
+
+    Each record carries the position and the franchises the swung wins came for,
+    so the same pass answers the MVP award and the per-position team of the
+    season. Ties are excluded - nothing was won to swing.
+    """
+    margins = {
+        (row["year"], row["week"], row["team"]): row["margin"]
+        for row in game_log
+        if row["won"] and not row["tied"]
+    }
+    decisive = {}
+    for row in player_log:
+        if not row["started"]:
+            continue
+        margin = margins.get((row["year"], row["week"], row["team"]))
+        if margin is None or row["points"] <= margin:
+            continue
+        record = decisive.setdefault(
+            (row["year"], row["player"]),
+            {"player": row["player"], "wins": 0, "points": 0.0, "positions": {}, "teams": {}},
+        )
+        record["wins"] += 1
+        record["points"] += row["points"]
+        if row["position"]:
+            record["positions"][row["position"]] = (
+                record["positions"].get(row["position"], 0) + 1
+            )
+        record["teams"][row["team"]] = record["teams"].get(row["team"], 0) + 1
+    return decisive
+
+
+# Which positions a flex slot will accept. Yahoo's slot vocabulary; anything
+# not listed here is a fixed-position slot that only takes its own position.
+FLEX_SLOTS = {
+    "W/R": ("RB", "WR"),
+    "W/T": ("WR", "TE"),
+    "W/R/T": ("RB", "WR", "TE"),
+    "Q/W/R/T": ("QB", "RB", "WR", "TE"),
+}
+
+
+def season_lineup_shape(season_data: dict) -> list:
+    """The season's starting lineup, slot by slot, read off the rosters.
+
+    Discovered rather than assumed: the shape is whatever most team-weeks
+    actually started that year, so a season that added a flex or dropped a
+    kicker selects a team matching its own rules. Bench and IR are not slots
+    anyone is selected into.
+    """
+    shapes = {}
+    for week_data in (season_data.get("weeks") or {}).values():
+        for roster in ((week_data or {}).get("rosters") or {}).values():
+            counts = {}
+            for player in roster.get("players") or []:
+                slot = player.get("slot") or ""
+                if slot and slot not in BENCH_SLOTS:
+                    counts[slot] = counts.get(slot, 0) + 1
+            if counts:
+                key = tuple(sorted(counts.items()))
+                shapes[key] = shapes.get(key, 0) + 1
+    if not shapes:
+        return []
+    # The modal lineup, not the largest: one team with an illegal roster in one
+    # week should not redefine the league's shape.
+    modal = max(shapes.items(), key=lambda kv: (kv[1], kv[0]))[0]
+    order = {slot: index for index, slot in enumerate(ROSTER_SLOT_ORDER)}
+    slots = []
+    for slot, count in sorted(modal, key=lambda kv: order.get(kv[0], len(order))):
+        slots.extend([slot] * count)
+    return slots
+
+
+def top_n_holders(rows: list, key, count: int) -> list:
+    """The best `count` rows, plus anyone tied with the last of them.
+
+    An All-Pro team names co-selections rather than breaking a tie with a
+    coin toss, which is also the rule the record books here follow.
+    """
+    if not rows or count < 1:
+        return []
+    ranked = sorted(rows, key=key, reverse=True)
+    if len(ranked) <= count:
+        return ranked
+    cutoff = key(ranked[count - 1])
+    return [row for row in ranked if key(row) >= cutoff]
+
+
+def team_of_the_season(year: int, season_data: dict, decisive: dict) -> list:
+    """Fill every starting slot with the players who swung the most wins there.
+
+    The league's own lineup decides the shape, and each slot is won on the same
+    measure as the MVP award, restricted to the players who played that
+    position. Fixed slots are filled first and the flex takes the best player
+    left who is eligible for it, so a flex-worthy back cannot cost a team its
+    second running back.
+    """
+    pool = {}
+    for (row_year, player), record in decisive.items():
+        if row_year != year or not record["positions"]:
+            continue
+        # A player Yahoo re-filed mid-season is selected where they played most.
+        position = player_positions(record)[0]
+        pool.setdefault(position, []).append(dict(record, position=position))
+
+    rank = lambda row: (row["wins"], row["points"])  # noqa: E731
+    slots = season_lineup_shape(season_data)
+    # Fixed slots first: the flex should take what is left over, not compete for
+    # a place a position slot was going to fill anyway.
+    counts = {}
+    for slot in slots:
+        counts[slot] = counts.get(slot, 0) + 1
+
+    selected = []
+    taken = set()
+    for slot in [s for s in dict.fromkeys(slots) if s not in FLEX_SLOTS]:
+        holders = top_n_holders(pool.get(slot, []), rank, counts[slot])
+        if holders:
+            taken.update(row["player"] for row in holders)
+            selected.append({"slot": slot, "slots": counts[slot], "holders": holders})
+    for slot in [s for s in dict.fromkeys(slots) if s in FLEX_SLOTS]:
+        eligible = [
+            row
+            for position in FLEX_SLOTS[slot]
+            for row in pool.get(position, [])
+            if row["player"] not in taken
+        ]
+        holders = top_n_holders(eligible, rank, counts[slot])
+        if holders:
+            taken.update(row["player"] for row in holders)
+            selected.append({"slot": slot, "slots": counts[slot], "holders": holders})
+
+    order = {slot: index for index, slot in enumerate(ROSTER_SLOT_ORDER)}
+    selected.sort(key=lambda entry: order.get(entry["slot"], len(order)))
+    return selected
+
+
+def team_of_the_season_rows(selected: list) -> list:
+    """The selection as table rows, one per slot."""
+    rows = []
+    for entry in selected:
+        # Two backs filling two RB slots is not a tie; more holders than slots
+        # is. The label carries the count only in that case, and only on the
+        # first row, the same way a shared record is labelled.
+        extra = len(entry["holders"]) > entry.get("slots", 1)
+        for index, row in enumerate(entry["holders"]):
+            label = entry["slot"] if index == 0 else ""
+            if index == 0 and extra:
+                label = f"{entry['slot']} ({len(entry['holders'])}-way tie)"
+            teams = sorted(row["teams"], key=lambda team: -row["teams"][team])
+            rows.append(
+                f"| {label} | {wikilink(row['player'])} | {row['position']} "
+                f"| {row['wins']} | {row['points']:.2f} "
+                f"| {more_list([wikilink(t) for t in teams], PLAYER_BOOK_TEAMS_SHOWN)} |"
+            )
+    return rows or [f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"]
+
+
+def season_mvp(year: int, decisive: dict) -> list:
+    """The season's MVP: the player who swung the most wins.
+
+    League-wide, not per franchise, and not the season's top scorer - points
+    piled up in losses win nothing. Ties are listed rather than arbitrated.
+    """
+    rows = [
+        record for (row_year, _), record in decisive.items() if row_year == year
+    ]
+    return top_holders(rows, lambda row: (row["wins"], row["points"]))
+
+
+def league_debut_years(player_log: list) -> dict:
+    """{player: the first season they appear on any captured roster}.
+
+    This is a debut in *this league*, which is not the same thing as an NFL
+    rookie season - the captured data carries no NFL service time. A veteran
+    signed off waivers in 2023 debuts here in 2023. The award named from this is
+    labelled accordingly.
+    """
+    debuts = {}
+    for row in player_log:
+        player = row["player"]
+        if player not in debuts or row["year"] < debuts[player]:
+            debuts[player] = row["year"]
+    return debuts
+
+
+def award_from_pool(year: int, decisive: dict, eligible) -> list:
+    """The most wins swung among the players `eligible` admits."""
+    rows = [
+        record
+        for (row_year, player), record in decisive.items()
+        if row_year == year and eligible(player)
+    ]
+    return top_holders(rows, lambda row: (row["wins"], row["points"]))
+
+
+def newcomer_of_the_year(year: int, decisive: dict, debuts: dict, first_year: int) -> list:
+    """The best season by a player making their first appearance in the league.
+
+    Not a rookie award: it counts a first Pine Hills roster spot, not a first
+    NFL season, because nothing in the captured data records NFL service time.
+    The first captured season is skipped - every player is new that year, so the
+    award would say nothing.
+    """
+    if year <= first_year:
+        return []
+    return award_from_pool(year, decisive, lambda player: debuts.get(player) == year)
+
+
+def undrafted_player_of_the_year(year: int, season_data: dict, decisive: dict) -> list:
+    """The best season by a player nobody took in that year's draft.
+
+    Waiver claims and free-agent adds only: a player who went undrafted and then
+    decided games is the whole point of the award. A season with no captured
+    draft has no award rather than one that flatters every player in the league.
+    """
+    picks = (season_data.get("draft") or {}).get("draft_results") or []
+    if not picks:
+        return []
+    drafted = {pick.get("player") for pick in picks if pick.get("player")}
+    return award_from_pool(year, decisive, lambda player: player not in drafted)
+
+
+def finals_mvp(year: int, player_log: list, game_log: list) -> list:
+    """The Finals MVP: the top scorer in the title game's winning lineup.
+
+    One game decides it, so "wins swung" has nothing to rank - the title game is
+    the only game there is. This is the ordinary sporting definition instead:
+    the best performance on the team that lifted the trophy. A season with no
+    captured Final has no Finals MVP rather than a guessed one.
+    """
+    winners = {
+        (row["year"], row["week"], row["team"])
+        for row in game_log
+        if row["year"] == year and row.get("round") == FINALS_ROUND and row["won"]
+    }
+    if not winners:
+        return []
+    lineup = [
+        row
+        for row in player_log
+        if row["started"] and (row["year"], row["week"], row["team"]) in winners
+    ]
+    return top_holders(lineup, lambda row: row["points"])
+
+
+def mvp_cell(holders: list, value) -> str:
+    """One table cell naming every holder of an MVP award."""
+    if not holders:
+        return TBD
+    return ", ".join(f"{wikilink(row['player'])} - {value(row)}" for row in holders)
+
+
+def season_mvp_cell(holders: list) -> str:
+    return mvp_cell(holders, lambda row: f"{row['wins']} wins swung")
+
+
+def finals_mvp_cell(holders: list) -> str:
+    return mvp_cell(
+        holders, lambda row: f"{row['points']:.2f} pts ({team_link(row['team'])})"
+    )
+
+
+def draft_pick_label(pick: dict) -> str:
+    """Where a player went, as "R4 P41"."""
+    parts = []
+    if pick.get("round"):
+        parts.append(f"R{pick['round']}")
+    if pick.get("overall"):
+        parts.append(f"P{pick['overall']}")
+    return " ".join(parts) or TBD
+
+
+def top_draft_contributor(year: int, season_data: dict, decisive: dict) -> str:
+    """The player from this draft who swung the most wins, and where they went.
+
+    Answers the question the draft board cannot: of everyone taken that year,
+    who actually decided games. Ties are listed rather than arbitrated, the same
+    rule the record books follow.
+    """
+    picks = (season_data.get("draft") or {}).get("draft_results") or []
+    scored = [
+        dict(decisive[(year, pick["player"])], pick=pick)
+        for pick in picks
+        if pick.get("player") and (year, pick["player"]) in decisive
+    ]
+    if not scored:
+        return TBD
+    holders = top_holders(scored, lambda row: (row["wins"], row["points"]))
+    return ", ".join(
+        f"{wikilink(row['player'])} - {row['wins']} ({draft_pick_label(row['pick'])})"
+        for row in holders
+    )
 
 
 def games_by_margin(log: list, threshold: float, above: bool) -> list:
@@ -1230,9 +1982,10 @@ def roster_table(roster: dict) -> list[str]:
 
     rows = ["| Slot | Player | Pos | Pts |", "|------|--------|-----|-----|"]
     for player in sorted(players, key=sort_key):
+        name = player.get("name")
         rows.append(
             f"| {player.get('slot') or '—'} "
-            f"| {player.get('name') or TBD} "
+            f"| {wikilink(name) if name else TBD} "
             f"| {player.get('position') or '—'} "
             f"| {_fmt_score(player.get('points'))} |"
         )
@@ -1271,6 +2024,13 @@ def team_roster_blocks(season_data: dict, teams: list[dict]) -> str:
 
 
 BUST_MAX_ROUND = 3
+# Share of the season's weeks a player must actually have scored in before he
+# can be called a bust. The captured data carries no injury field, so this is
+# the proxy: a torn ACL in week 2 leaves a player last at his position on season
+# points, which the gap alone reads as a scouting failure rather than as a
+# missed year. Calibrated against the seasons in raw/: 0.8 also throws out real
+# busts who missed three or four games, 0.7 keeps letting injuries win.
+BUST_MIN_AVAILABILITY = 0.75
 
 
 def weekly_score_awards(season_data: dict) -> tuple[str, str]:
@@ -1292,34 +2052,45 @@ def weekly_score_awards(season_data: dict) -> tuple[str, str]:
     )
 
 
-def draft_value_awards(season_data: dict) -> tuple[str, str]:
-    """Best Draft Pick and Biggest Bust, by draft-slot-versus-finish gap.
+def draft_value_scored(season_data: dict) -> tuple[list, dict]:
+    """Every drafted player scored on draft slot versus finish.
 
     Within each position, picks are ranked by draft order and players by season
     points. The gap is (draft rank) - (finish rank): positive means the player
-    finished better than where they were taken. Best pick is the largest gap;
-    bust is the smallest, restricted to the first three rounds so a late-round
-    miss cannot win an award nobody would give it.
+    finished better than where they were taken.
 
-    Computed, not voted — and the season page prints the formula next to the
-    result so it reads as arithmetic rather than a verdict.
+    Also returns how many weeks each team rostered each player, since the points
+    are not always scored by the team that drafted him - a mid-season trade or
+    waiver claim moves him.
+
+    Both draft-award callers read this one function, so the ranking and the
+    availability gate cannot drift apart between the prose and the winners.
     """
     picks = (season_data.get("draft") or {}).get("draft_results") or []
-    totals = {}
-    # Where the points were actually scored, which is not always the team that
-    # drafted the player — a mid-season trade or waiver claim moves them.
+    weeks = season_data.get("weeks") or {}
+    totals, weeks_played, ir_weeks = {}, {}, {}
     weeks_by_team = {}
-    for week in (season_data.get("weeks") or {}).values():
+    for week in weeks.values():
         for team_name, roster in ((week or {}).get("rosters") or {}).items():
             for player in roster.get("players") or []:
                 name = player.get("name")
                 if not name:
                     continue
-                totals[name] = totals.get(name, 0.0) + float(player.get("points") or 0.0)
+                points = float(player.get("points") or 0.0)
+                totals[name] = totals.get(name, 0.0) + points
+                # The captured data carries no injury field, so availability is
+                # inferred: a week a player scored in is a week he suited up. An
+                # IR slot says it outright, but only sometimes - 2018 has no IR
+                # slot at all, and an owner who never moves an injured player
+                # off the bench leaves nothing behind but the unscored weeks.
+                if points > 0:
+                    weeks_played[name] = weeks_played.get(name, 0) + 1
+                if player.get("slot") == "IR":
+                    ir_weeks[name] = ir_weeks.get(name, 0) + 1
                 teams = weeks_by_team.setdefault(name, {})
                 teams[team_name] = teams.get(team_name, 0) + 1
     if not picks or not totals:
-        return (TBD, TBD)
+        return ([], weeks_by_team)
 
     by_position = {}
     for pick in picks:
@@ -1333,6 +2104,7 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
     def pick_order(p) -> int:
         return int(p.get("overall") or p.get("pick") or 0)
 
+    needed = math.ceil(BUST_MIN_AVAILABILITY * len(weeks))
     scored = []
     for position, position_picks in by_position.items():
         draft_order = sorted(position_picks, key=pick_order)
@@ -1343,6 +2115,7 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
         finish_rank = {p["player"]: i for i, p in enumerate(finish_order, 1)}
         for pick in position_picks:
             name = pick["player"]
+            played = weeks_played.get(name, 0)
             scored.append({
                 "player": name,
                 "position": position,
@@ -1351,30 +2124,76 @@ def draft_value_awards(season_data: dict) -> tuple[str, str]:
                 "pick": pick_order(pick),
                 "gap": draft_rank[name] - finish_rank[name],
                 "points": totals.get(name, 0.0),
+                "weeks_played": played,
+                "weeks": len(weeks),
+                "available": played >= needed and not ir_weeks.get(name),
             })
+    return (scored, weeks_by_team)
+
+
+def best_and_bust(scored: list) -> tuple:
+    """(best pick row, biggest bust row) out of `draft_value_scored` rows.
+
+    Best pick is the largest gap. Bust is the smallest, restricted to the first
+    three rounds so a late-round miss cannot win an award nobody would give it,
+    and to players who were available for most of the season: a first-rounder
+    who tore something in September finishes last at his position on season
+    points, which the gap alone would read as a scouting failure rather than as
+    a year he never got to play. Either can be None when the data is too thin.
+    """
     if not scored:
+        return (None, None)
+    best = max(scored, key=lambda r: (r["gap"], r["points"]))
+    early = [
+        r for r in scored
+        if 0 < r["round"] <= BUST_MAX_ROUND and r["available"]
+    ]
+    bust = min(early, key=lambda r: (r["gap"], -r["points"])) if early else None
+    return (best, bust)
+
+
+def draft_value_awards(season_data: dict) -> tuple[str, str]:
+    """Best Draft Pick and Biggest Bust as prose for a table cell.
+
+    Computed, not voted - and the season page prints the formula next to the
+    result so it reads as arithmetic rather than a verdict.
+    """
+    scored, weeks_by_team = draft_value_scored(season_data)
+    best, bust = best_and_bust(scored)
+    if not best:
         return (TBD, TBD)
 
-    def line(row) -> str:
+    def line(row, availability: bool = False) -> str:
         """Name the drafting team explicitly, and the roster the points came
         from when a trade or waiver claim moved the player mid-season."""
         rostered = weeks_by_team.get(row["player"]) or {}
         primary = max(rostered, key=lambda t: rostered[t], default="")
         where = ""
         if primary and primary != row["team"]:
-            where = f", scored mostly for {wikilink(primary)}"
+            where = f", scored mostly for {team_link(primary)}"
+        # The bust line carries the weeks played, since availability is what
+        # keeps the award about the pick rather than about a hospital visit.
+        played = ""
+        if availability and row["weeks"]:
+            played = f", played {row['weeks_played']} of {row['weeks']} weeks"
         return (
-            f"{row['player']} ({row['position']}) — drafted by {wikilink(row['team'])} "
+            f"{wikilink(row['player'])} ({row['position']}) — drafted by {team_link(row['team'])} "
             f"at pick {row['pick']}, finished {row['gap']:+d} spots at the position, "
-            f"{_fmt_score(row['points'])} pts{where}"
+            f"{_fmt_score(row['points'])} pts{played}{where}"
         )
 
-    best = max(scored, key=lambda r: (r["gap"], r["points"]))
-    early = [r for r in scored if 0 < r["round"] <= BUST_MAX_ROUND]
-    if not early:
-        return (line(best), TBD)
-    bust = min(early, key=lambda r: (r["gap"], -r["points"]))
-    return (line(best), line(bust))
+    return (line(best), line(bust, availability=True) if bust else TBD)
+
+
+def draft_value_winners(season_data: dict) -> tuple:
+    """(best pick, biggest bust) as the winning rows rather than as prose.
+
+    `draft_value_awards` renders the same two picks for a table cell. This
+    returns who won, so the two can be carried onto the winners' player pages
+    and into the career leaderboard like every other award.
+    """
+    scored, _ = draft_value_scored(season_data)
+    return best_and_bust(scored)
 
 
 def annotate_overall_picks(season_data: dict) -> None:
@@ -1427,6 +2246,86 @@ def backfill_draft_positions(season_data: dict) -> None:
             pick["position"] = positions.get(pick.get("player"), "")
 
 
+def apply_bible_positions(seasons: dict, bible: dict) -> None:
+    """Fill the draft positions the rosters could not, from the bible, in place.
+
+    `backfill_draft_positions` leaves a pick blank when the player never reached
+    a captured weekly roster - drafted, then cut before week one. The bible's
+    `player_positions` block is the hand-sourced fallback for exactly those, and
+    it is applied second so captured data always wins over a typed value.
+    """
+    positions = bible.get("player_positions", {}) or {}
+    if not positions:
+        return
+    for season_data in seasons.values():
+        for pick in (season_data.get("draft") or {}).get("draft_results") or []:
+            if not pick.get("position"):
+                pick["position"] = str(positions.get(pick.get("player"), "") or "")
+
+
+def normalize_apostrophes(node):
+    """Rewrite curly apostrophes to ASCII in every name, recursively, in place.
+
+    Both platforms mix the two: Yahoo reported "Kaushal's Potatoes" for four
+    seasons and "Sharman’s Scorpions" for eight, and Sleeper reports
+    "Kaushal’s Potatoes". `slug()` strips punctuation, so the two spellings of
+    one franchise produce the SAME page path while counting as two different
+    teams - the second one written silently overwrote the first, taking four
+    seasons of history off the page with it.
+
+    Folding them at load is what makes one franchise one franchise. ASCII is the
+    house style here anyway; `dash_normalize` does the same job for dashes.
+    """
+    if isinstance(node, str):
+        return node.replace("’", "'")
+    if isinstance(node, list):
+        return [normalize_apostrophes(v) for v in node]
+    if isinstance(node, dict):
+        return {normalize_apostrophes(k): normalize_apostrophes(v) for k, v in node.items()}
+    return node
+
+
+def build_player_alias_map(bible: dict) -> dict:
+    """Map every reported player spelling -> the canonical one.
+
+    The twin of `build_owner_map`, for players. Yahoo files a player under his
+    full legal name ("Aaron Jones Sr."); Sleeper drops the suffix. Folding them
+    is what keeps one player on one page across the 2026 platform move.
+    """
+    alias_map = {}
+    for canonical_name, variants in (bible.get("player_aliases") or {}).items():
+        canonical_name = str(canonical_name).strip()
+        if not canonical_name:
+            continue
+        for variant in variants or []:
+            variant = str(variant).strip()
+            if variant and variant != canonical_name:
+                alias_map[variant] = canonical_name
+    return alias_map
+
+
+def apply_player_aliases(seasons: dict, bible: dict) -> None:
+    """Rewrite every reported player name to its canonical spelling, in place.
+
+    Applied once at load, before anything indexes a player, so draft boards,
+    rosters, records and player pages all agree on the name.
+    """
+    alias_map = build_player_alias_map(bible)
+    if not alias_map:
+        return
+    for season_data in seasons.values():
+        for pick in (season_data.get("draft") or {}).get("draft_results") or []:
+            name = pick.get("player")
+            if name in alias_map:
+                pick["player"] = alias_map[name]
+        for week in (season_data.get("weeks") or {}).values():
+            for roster in (week.get("rosters") or {}).values():
+                for player in roster.get("players") or []:
+                    name = player.get("name")
+                    if name in alias_map:
+                        player["name"] = alias_map[name]
+
+
 def roster_cell(year: int, season_data: dict) -> str:
     """Season-log cell: a link to the year's roster blocks, or _TBD_.
 
@@ -1439,7 +2338,12 @@ def roster_cell(year: int, season_data: dict) -> str:
     return wikilink(f"{year} Season")
 
 
-def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> str:
+def gen_season(
+    year: int, season_data: dict, bible: dict, aggregates: dict,
+    mvp: list = (), finals: list = (), all_league: list = (),
+    newcomer: list = (), undrafted: list = (), first_season: int = None,
+    owner_map: dict = None, player_log: list = None,
+) -> str:
     teams = standings_teams(season_data)
     owners = get_owners(bible)
     champion, runner_up, top_seed, toilet_bowl_winner = champ_fields(bible, year)
@@ -1449,12 +2353,22 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
     # Seeds are omitted per-team for non-qualifiers, so decide once per season
     # whether this data has real seeds at all before falling back to guessing.
     has_real_seeds = any(t.get("playoff_seed") for t in teams)
+    # A season the league has not started yet still has a full team list: Sleeper
+    # hands out rosters and a draft months before kickoff. With no games played
+    # there is no finish and no seed to report, and the standings-position
+    # fallbacks below would invent both, so they are switched off.
+    played = season_has_games(season_data)
     for position, team in enumerate(sorted(teams, key=lambda x: int(x.get("rank", DEFAULT_RANK))), 1):
         rank = int(team.get("rank", position))
         team_name = team.get("name", "?")
-        # Yahoo knows the owner of every team; the bible is only a fallback for
-        # seasons captured before the v2 API path existed.
+        # The platform knows the owner of every team; the bible is only a
+        # fallback for seasons captured before the v2 API path existed. Fold it
+        # through the alias map so this cell names the same person as the owner
+        # page it refers to: Yahoo reported "lokesh" and Sleeper reports
+        # "CurryMan123" for a manager whose page is titled "Lokesh".
         owner = team.get("owner") or owners.get(team_name, "") or TBD
+        if owner != TBD and owner_map:
+            owner = canonical_owner(owner, owner_map)
         wins = team.get("wins", 0)
         losses = team.get("losses", 0)
         points_for = team.get("points_for", "?")
@@ -1467,17 +2381,22 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
         if real_seed:
             seed = real_seed
             seeded.append((int(real_seed), team_name))
-        elif has_real_seeds:
+        elif has_real_seeds or not played:
             # This season HAS seed data, so a missing seed means the team simply
-            # did not make the playoffs.
+            # did not make the playoffs — or no game has been played yet, in
+            # which case nobody has a seed to report.
             seed = "—"
         elif position <= PLAYOFF_SEEDS:
             seed = position
             seeded.append((position, team_name))
         else:
             seed = "—"
+        # Rank 0 is the scraper's "no finish known". Before kickoff that is every
+        # team, and printing a column of zeroes reads as a result rather than an
+        # absence.
+        finish = rank if rank else "—"
         rows.append(
-            f"| {rank} | {team_name} | {owner} | {wins}–{losses} | {points_for} | {points_against} | {seed} |"
+            f"| {finish} | {team_name} | {owner} | {wins}–{losses} | {points_for} | {points_against} | {seed} |"
         )
 
     # Prefer the real bracket derived from captured matchups; the seeding
@@ -1488,65 +2407,116 @@ def gen_season(year: int, season_data: dict, bible: dict, aggregates: dict) -> s
         if t.get("name") and t.get("playoff_seed")
     }
     bracket = real_bracket(season_data.get("bracket") or {}, seeds_by_team)
-    if not bracket:
+    if not bracket and played:
+        # The seeding skeleton shows the FORMAT, which is only meaningful once
+        # there are seeds to put in it. Drawing it for a season that has not
+        # kicked off would stage a bracket nobody has qualified for.
         bracket = playoff_bracket(seeded, champion)
 
     roster_blocks = team_roster_blocks(season_data, teams)
     high_week, low_week = weekly_score_awards(season_data)
+    # The season's best week at each position. A season page is already one
+    # year, so the column names the week and the roster rather than the date.
+    position_highs = position_week_rows(
+        position_week_highs(player_log or [], year=year),
+        lambda row: f"Wk {row['week']}, {team_link(row['team'])}",
+    )
     best_pick, biggest_bust = draft_value_awards(season_data)
+
+    # Every player is new in the league's first captured season, so the award
+    # does not apply rather than being unrecorded.
+    newcomer_cell = NA if year == first_season else season_mvp_cell(newcomer)
 
     # Flag the page as unfinished while the bible has no champion for the year.
     # `status` renders the badge configured in zensical.toml.
     status_line = "status: incomplete\n" if champion == TBD else ""
 
+    if played:
+        standings_note = (
+            "**Finish** is the final playoff-adjusted rank, not W-L order. "
+            "**Playoff Seed** is the seed the team entered the playoffs with; a "
+            "dash means it did not qualify."
+        )
+    else:
+        # Say plainly that the table is a roll call, not a result. Without this
+        # a column of dashes reads as missing data rather than a season that has
+        # not started.
+        standings_note = (
+            "The season has not begun. The league and its draft are on record; "
+            "no game has been played, so no finish, seed or result exists yet."
+        )
+
+    # No bracket, no section: a heading over an empty block reads as data that
+    # failed to load rather than a postseason that has not happened.
+    bracket_section = (
+        f"""
+## Playoff Bracket
+
+Seeds in parentheses; ✓ marks the winner. Consolation games are excluded; a team appearing first in a later round had a bye.
+
+{bracket}
+"""
+        if bracket
+        else ""
+    )
+
     md = f"""---
 title: "{year} Season"
-description: "Pine Hills Fantasy Football League — {year} season."
+description: "Pine Hills Fantasy League — {year} season."
 season: {year}
 year: {year}
 {status_line}---
 
-# 🏈 {year} Season
+# {year} Season
 
-- **Champion:** {champion}
-- **Runner-Up:** {runner_up}
-- **Regular Season Top Seed:** {top_seed}
-- **Toilet Bowl Winner:** {toilet_bowl_winner}
+- **Champion:** {champ_cell(champion)}
+- **Runner-Up:** {champ_cell(runner_up)}
+- **Regular Season Top Seed:** {champ_cell(top_seed)}
+- **Toilet Bowl Winner:** {champ_cell(toilet_bowl_winner)}
 
-## Final Standings
+## {"Final Standings" if played else "Teams"}
 
-> Auto-generated from Yahoo. **Finish** is Yahoo's final playoff-adjusted rank, so it does not follow W–L order — a team can win the title from a lower seed. **Playoff Seed** is the seed the team actually entered the playoffs with; — means it did not qualify.
+{standings_note}
 
 | Finish | Team | Owner | W–L | PF | PA | Playoff Seed |
 |--------|------|-------|-----|----|----|--------------|
 {chr(10).join(rows)}
-
-## Playoff Bracket
-
-> The actual championship bracket, from captured weekly matchups. Seeds in parentheses; ✓ marks the winner. Consolation games are excluded, and a team that appears first in a later round had a bye.
-
-{bracket}
-
+{bracket_section}
 ## Team Rosters
 
-> Post-draft and end-of-season lineups as Yahoo recorded them. Bench and IR rows are included; points are that week's score.
+Post-draft and end-of-season lineups as the league's platform recorded them. Bench and IR rows are included; points are that week's score.
 
 {roster_blocks}
 
 ## Awards
 
-- 🏆 **League Champion:** {champion}
-- 💥 **Highest Single-Week Score:** {high_week}
-- 📉 **Lowest Single-Week Score:** {low_week}
-- 🔥 **Biggest Bust:** {biggest_bust}
-- 🎯 **Best Draft Pick:** {best_pick}
-- 🍗 **"Poultry Controversy" Nominee:** {TBD}
+- **League Champion:** {champ_cell(champion)}
+- **Most Valuable Player:** {season_mvp_cell(mvp)}
+- **Finals MVP:** {finals_mvp_cell(finals)}
+- **Newcomer of the Year:** {newcomer_cell}
+- **Undrafted Player of the Year:** {season_mvp_cell(undrafted)}
+- **Highest Single-Week Score:** {high_week}
+- **Lowest Single-Week Score:** {low_week}
+- **Best Draft Pick:** {best_pick}
+- **Biggest Bust:** {biggest_bust}
 
-> Best Draft Pick and Biggest Bust are computed, not voted: within each position, the gap between where a player was drafted and where they finished on season points. Bust is restricted to rounds 1-{BUST_MAX_ROUND}.
+## Position Highs
 
-## The Story of the Year
+Highest single week at each position. Regular season, starters only.
 
-_TBD — add the defining moments._
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+{chr(10).join(position_highs)}
+
+## Team of the Season
+
+Each starting slot goes to the player who swung the most wins in it; the flex takes the best eligible player the position slots did not claim.
+
+| Slot | Player | Pos | Wins Swung | Points in Them | Rostered By |
+|------|--------|-----|------------|----------------|-------------|
+{chr(10).join(team_of_the_season_rows(all_league))}
+
+Every award is computed rather than voted. Full definitions are on {wikilink('Awards')}.
 
 ## Related
 
@@ -1633,130 +2603,11 @@ def rivalry_rows(head_to_head: dict) -> list:
             else "-"
         )
         rows.append(
-            f"| {wikilink(stats['name'])} "
+            f"| {team_link(stats['name'])} "
             f"| {record_str(stats['wins'], stats['losses'], stats['ties'])} "
             f"| {postseason} | {stats['pf']:.2f} / {stats['pa']:.2f} | {rout} | {closest} |"
         )
     return rows
-
-
-def gen_team_page(
-    name: str,
-    years_data: list,
-    bible: dict,
-    aggregates: dict,
-    owner_map: dict,
-    matchup_stats: dict,
-    seasons: dict,
-) -> str:
-    """Generate a franchise page.
-    years_data: list of (year, wins, losses, rank, made_playoffs, owner).
-    """
-    owners = get_owners(bible)
-    franchise_notes = (bible.get("franchise_notes", {}) or {}).get(name, {})
-    joined_year = franchise_notes.get("joined", TBD) if isinstance(franchise_notes, dict) else TBD
-    status = franchise_notes.get("status", "Active") if isinstance(franchise_notes, dict) else "Active"
-    owner_name = owners.get(name, "") or ""
-    owner = wikilink(canonical_owner(owner_name, owner_map)) if owner_name else TBD
-
-    # Optional hand-supplied logo/photo. Emitted as Markdown so the path is
-    # rewritten by the engine even if transform.py never promotes it into the
-    # infobox; omitted entirely when the bible has no entry for this team.
-    image_src = team_image_src(name, get_team_images(bible))
-    image_line = f"- **Image:** ![{name}]({image_src})\n" if image_src else ""
-
-    franchise_stats = aggregates.get(name)
-    if franchise_stats:
-        regular_season_titles = sum(1 for (r, y) in franchise_stats["finishes"] if r == 1)
-        runner_up_finishes = sum(1 for (r, y) in franchise_stats["finishes"] if r == 2)
-        pf_str = f"{franchise_stats['pf']:.2f}"
-        pa_str = f"{franchise_stats['pa']:.2f}"
-        win_pct_str = f"{franchise_stats['wpct']*100:.1f}%"
-    else:
-        regular_season_titles = runner_up_finishes = 0
-        pf_str = pa_str = win_pct_str = TBD
-
-    titles = franchise_titles(bible, (franchise_stats or {}).get("names", [name]))
-    titles_str = f"{len(titles)} ({', '.join(str(y) for y in titles)})" if titles else "0"
-
-    game_stats = matchup_stats.get("teams", {}).get(name, {})
-    rivalries = rivalry_rows(game_stats.get("head_to_head", {})) or [
-        f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"
-    ]
-    playoff_wins = game_stats.get("playoff_wins", 0)
-    playoff_losses = game_stats.get("playoff_losses", 0)
-    playoff_record = f"{playoff_wins}-{playoff_losses}" if (playoff_wins or playoff_losses) else TBD
-    # Appearances come from the bracket itself. build_aggregates now reads the
-    # same bracket membership, so the fallback agrees rather than reverting to a
-    # four-team cutoff this league outgrew.
-    playoff_years = game_stats.get("playoff_years")
-    appearances = (
-        len(playoff_years)
-        if playoff_years is not None
-        else (franchise_stats["playoff_appears"] if franchise_stats else TBD)
-    )
-    scoring = scoring_rows(game_stats)
-
-    rows = []
-    for (year, wins, losses, rank, made_playoffs, _) in sorted(years_data, key=lambda x: x[0]):
-        # Both cells point at the same place: the season page's roster blocks.
-        # These previously linked to per-team roster pages the generator never
-        # wrote, so every row shipped two dead links.
-        roster_link = roster_cell(year, seasons.get(year) or {})
-        rows.append(
-            f"| {year} | {wins}–{losses} | {rank} | {'Yes' if made_playoffs else 'No'} | {roster_link} | {roster_link} | {TBD} |"
-        )
-
-    md = f"""---
-title: "{name}"
-description: "Franchise history for {name} in the Pine Hills Fantasy Football League."
----
-
-# 🏈 {name}
-
-{image_line}- **Owner:** {owner}
-- **Joined:** {joined_year}
-- **Status:** {status}
-
-## Franchise Summary
-
-- **Championships:** {titles_str}
-- **Regular-Season 1-Seeds:** {regular_season_titles}
-- **Runner-Up Finishes (regular season):** {runner_up_finishes}
-- **Playoff Appearances:** {appearances} / {franchise_stats['seasons_count'] if franchise_stats else TBD} seasons
-- **Playoff Record:** {playoff_record}
-- **All-Time Record:** {franchise_stats['wins'] if franchise_stats else TBD}–{franchise_stats['losses'] if franchise_stats else TBD} ({win_pct_str})
-- **All-Time Points For / Against:** {pf_str} / {pa_str}
-
-## Season Log
-
-| Year | W–L | Finish | Playoffs? | Post-Draft Roster | End-of-Season Roster | Note |
-|------|-----|--------|-----------|-------------------|----------------------|------|
-{chr(10).join(rows)}
-
-## Scoring
-
-| Split | Value |
-|-------|-------|
-{chr(10).join(scoring)}
-
-## Rivalries
-
-Every meeting, playoffs included, most-played opponents first.
-
-| Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
-|----------|-----------|----------|----------------------|--------------|-----------------|
-{chr(10).join(rivalries)}
-
-## Signature Moments
-
-_TBD._
-
-## Related
-
-- {wikilink('Teams')} · {wikilink('Owners')} · {wikilink('Seasons')} · {wikilink('Records')} · {wikilink('Lore')}
-"""
-    return md
 
 
 def game_when(row: dict, tag: bool = True) -> str:
@@ -1770,7 +2621,7 @@ def game_when(row: dict, tag: bool = True) -> str:
 
 def game_line(row: dict) -> str:
     """A score with its opponent: "218.24 - 120.00 vs [[Roger That]]"."""
-    return f"{row['score']:.2f} - {row['opponent_score']:.2f} vs {wikilink(row['opponent'])}"
+    return f"{row['score']:.2f} - {row['opponent_score']:.2f} vs {team_link(row['opponent'])}"
 
 
 def single_game_rows(book: dict, scope: str = "") -> list:
@@ -1784,16 +2635,16 @@ def single_game_rows(book: dict, scope: str = "") -> list:
     tag = not scope  # a scoped book already says which phase it covers
 
     def rows_for(label: str, key: str, value) -> list:
-        """One table row per holder. A shared record is listed, not arbitrated,
-        with "(tied)" on each line so the sharing is obvious."""
+        """One table row per holder. A shared record is listed, not arbitrated:
+        the first row says how many share it and the rest run under it."""
         holders = book.get(key) or []
         if not holders:
             return [f"| {label} | {TBD} | {TBD} | {TBD} |"]
-        shared = " (tied)" if len(holders) > 1 else ""
+        cells = shared_label_cells(label, len(holders))
         return [
-            f"| {label}{shared} | {wikilink(row['team'])} | {value(row)} "
+            f"| {cell} | {team_link(row['team'])} | {value(row)} "
             f"| {game_when(row, tag)} |"
-            for row in holders
+            for cell, row in zip(cells, holders)
         ]
 
     def score_value(row) -> str:
@@ -1802,7 +2653,7 @@ def single_game_rows(book: dict, scope: str = "") -> list:
     def margin_value(row) -> str:
         return (
             f"{row['margin']:.2f} ({row['score']:.2f} - {row['opponent_score']:.2f} "
-            f"vs {wikilink(row['opponent'])})"
+            f"vs {team_link(row['opponent'])})"
         )
 
     table = []
@@ -1816,12 +2667,55 @@ def single_game_rows(book: dict, scope: str = "") -> list:
     # simply has not happened.
     if book.get("ties"):
         table += [
-            f"| {scope}Tie | {wikilink(row['team'])} | {row['score']:.2f} - "
-            f"{row['opponent_score']:.2f} vs {wikilink(row['opponent'])} "
+            f"| {scope}Tie | {team_link(row['team'])} | {row['score']:.2f} - "
+            f"{row['opponent_score']:.2f} vs {team_link(row['opponent'])} "
             f"| {game_when(row, tag)} |"
             for row in book["ties"]
         ]
     return table
+
+
+# Career award tallies for the Records book. Newcomer of the Year is absent on
+# purpose: a player can only ever debut once, so "most" is not a question.
+AWARD_LEADERBOARDS = [
+    ("Most MVP Awards", "mvp"),
+    ("Most Finals MVP Awards", "finals"),
+    ("Most Team of the Season Selections", "all_league"),
+    ("Most Undrafted Player of the Year Awards", "undrafted"),
+    ("Most Best Draft Pick Awards", "best_pick"),
+    ("Most Biggest Bust Awards", "bust"),
+]
+
+
+def award_leader_rows(player_awards: dict) -> list:
+    """Career award leaders as table rows, one block per award.
+
+    Reads the same per-player award record the player pages print, so a page and
+    the leaderboard cannot disagree. Ties are labelled once and listed under it,
+    the same way every shared record here is.
+    """
+    rows = []
+    for label, key in AWARD_LEADERBOARDS:
+        holders = top_holders(
+            [
+                {"player": player, "years": awards[key]}
+                for player, awards in player_awards.items()
+                if awards.get(key)
+            ],
+            lambda row: len(row["years"]),
+        )
+        # An award nobody has won twice has no leader: listing eight players
+        # tied on one apiece says nothing the by-season table did not.
+        if not holders or len(holders[0]["years"]) < 2:
+            continue
+        holders.sort(key=lambda row: (-len(row["years"]), row["player"]))
+        cells = shared_label_cells(label, len(holders))
+        rows.extend(
+            f"| {cell} | {wikilink(row['player'])} | {len(row['years'])} "
+            f"| {', '.join(str(year) for year in row['years'])} |"
+            for cell, row in zip(cells, holders)
+        )
+    return rows
 
 
 def gen_records_index(
@@ -1832,18 +2726,26 @@ def gen_records_index(
     owner_aggregates: dict,
     owner_game_stats: dict,
     player_log: list,
+    player_awards: dict = None,
 ) -> str:
     player_rows = player_book_rows(player_log)
+    # Same marks the season pages carry, taken over every captured year.
+    position_high_rows = position_week_rows(
+        position_week_highs(player_log),
+        lambda row: f"{row['year']} Wk {row['week']}, {team_link(row['team'])}",
+    )
 
     # single-season leaders, straight off the standings
     def season_row(label: str, key: str, value) -> str:
         entries = season_records.get(key) or []
         if not entries:
             return f"| {label} | {TBD} | {TBD} | {TBD} |"
-        shared = " (tied)" if len(entries) > 1 else ""
-        names = ", ".join(wikilink(entry["team"]) for entry in entries)
+        names = ", ".join(team_link(entry["team"]) for entry in entries)
         years = ", ".join(str(entry["year"]) for entry in entries)
-        return f"| {label}{shared} | {names} | {value(entries[0])} | {years} |"
+        return (
+            f"| {shared_label(label, len(entries))} | {names} "
+            f"| {value(entries[0])} | {years} |"
+        )
 
     points = lambda e: f"{e['pf']:.2f}"  # noqa: E731
     record = lambda e: f"{e['wins']}-{e['losses']} ({e['wpct']*100:.1f}%)"  # noqa: E731
@@ -1865,8 +2767,7 @@ def gen_records_index(
         if not holders:
             return f"| {label} | {TBD} | {TBD} |"
         names = ", ".join(wikilink(owner) for owner, _ in sorted(holders))
-        shared = " (tied)" if len(holders) > 1 else ""
-        return f"| {label}{shared} | {names} | {value(holders[0][1])} |"
+        return f"| {shared_label(label, len(holders))} | {names} | {value(holders[0][1])} |"
 
     by_wins = top_holders(list(owner_aggregates.items()), lambda kv: kv[1]["wins"])
     by_streak = top_holders(
@@ -1885,8 +2786,8 @@ def gen_records_index(
         # neither, and the score already says who came out ahead.
         return [
             f"| {row['margin']:.2f}{' (tie)' if row['tied'] else ''} "
-            f"| {wikilink(row['team'])} | {row['score']:.2f} - "
-            f"{row['opponent_score']:.2f} | {wikilink(row['opponent'])} | {game_when(row)} |"
+            f"| {team_link(row['team'])} | {row['score']:.2f} - "
+            f"{row['opponent_score']:.2f} | {team_link(row['opponent'])} | {game_when(row)} |"
             for row in games
         ] or [f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"]
 
@@ -1927,12 +2828,13 @@ def gen_records_index(
 
     md = f"""---
 title: Records
-description: All-time records, single-season feats, and dubious achievements of the Pine Hills Fantasy Football League.
+icon: lucide/chart-bar
+description: All-time, single-season and single-game records of the Pine Hills Fantasy League.
 ---
 
-# 📊 Records
+# Records
 
-The ledger of greatness and shame, computed from {len(matchup_stats.get('log', [])) // 2} captured matchups across {len(seasons)} seasons. Everything here is regular season. The postseason keeps its own record book on {wikilink('Playoffs')}.
+League records across {sum(1 for d in seasons.values() if season_has_games(d))} seasons and {len(matchup_stats.get('log', [])) // 2} captured matchups. Every mark on this page is regular season; postseason records are on {wikilink('Playoffs')}.
 
 ## Single-Season Records
 
@@ -1940,7 +2842,7 @@ The ledger of greatness and shame, computed from {len(matchup_stats.get('log', [
 |--------|--------|-------|------|
 {chr(10).join(season_rows)}
 
-## Single-Game Records
+## Single-Game Records (Regular Season)
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -1948,15 +2850,17 @@ The ledger of greatness and shame, computed from {len(matchup_stats.get('log', [
 
 ## Career Records
 
-By manager: a career follows the person, not whichever franchise name they were flying that year. Rates carry their sample size, since one full season qualifies and several managers have played exactly that.
+Career totals follow the manager, not the team name. Rate marks carry their sample size.[^rate]
+
+[^rate]: A rate mark qualifies at {MIN_GAMES_FOR_AVERAGE} games, one full regular season - the shortest the league has played. A higher bar would drop every manager who played a single season.
 
 | Record | Owner | Value |
 |--------|-------|-------|
 {chr(10).join(career_rows)}
 
-## Outright Marks
+## Single-Game Records (All Phases)
 
-Every game ever played, phase ignored - the league's single-game marks with nothing held back. When the regular-season book above shows the same game, that game is the outright record too.
+Regular season, playoffs and consolation play together.
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -1964,7 +2868,7 @@ Every game ever played, phase ignored - the league's single-game marks with noth
 
 ## Blowouts
 
-Every game won by {BLOWOUT_MARGIN:.0f} or more, across all {len(log) // 2} captured games. Phase is tagged where it is not a regular-season week.
+Games decided by {BLOWOUT_MARGIN:.0f} points or more. Phase is tagged where it is not a regular-season week.
 
 | Margin | Team | Score | Opponent | When |
 |--------|------|-------|----------|------|
@@ -1972,7 +2876,7 @@ Every game won by {BLOWOUT_MARGIN:.0f} or more, across all {len(log) // 2} captu
 
 ## Nailbiters
 
-Every game decided by {NAILBITER_MARGIN:.0f} point or less, a tie included - it is the closest a game can be.
+Games decided by {NAILBITER_MARGIN:.0f} point or less, ties included.
 
 | Margin | Team | Score | Opponent | When |
 |--------|------|-------|----------|------|
@@ -1980,31 +2884,35 @@ Every game decided by {NAILBITER_MARGIN:.0f} point or less, a tie included - it 
 
 ## All-Time Totals
 
-Every game a manager has played, regular season, playoffs and consolation alike. The books above ask who was best; this asks who has played the most and scored the most.
+Every game a manager has played, in all phases.
 
 | Owner | Games | Record | Win% | Points For | Points Against | Avg |
 |-------|-------|--------|------|------------|----------------|-----|
 {chr(10).join(total_rows)}
 
-## Players
+## Player Records
 
-> Player records are keyed to the **player**, not the manager or the franchise. This book is **regular season only**, the same split the team records use — the playoff and Finals player books live on {wikilink('Playoffs')}. Bench marks count a player who scored while sitting. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
+Regular season only; the playoff and Finals player books are on {wikilink('Playoffs')}. Bench marks count a player who scored while benched. Weeks rostered spans every phase, since it counts time on a roster rather than a result.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
 {chr(10).join(player_rows)}
 
+### Single-Week Highs by Position
+
+Highest single week at each position. Regular season, starters only.
+
+| Pos | Player | Points | When |
+|-----|--------|--------|------|
+{chr(10).join(position_high_rows)}
+
+## Player Awards
+
+MVP, Finals MVP, Team of the Season, Newcomer of the Year and Undrafted Player of the Year, season by season and by career, are on {wikilink('Awards')}.
+
 ## Postseason
 
-Kept in its own book, so a big regular-season week is never a Finals record. Championships, playoff and Finals single-game records, career playoff leaders and the per-manager ledger all live on {wikilink('Playoffs')}.
-
-## 🍗 The "Poultry Controversy" Board
-
-A hall of fame for the league's most infamous moments — bad beats, vetoed trades, and questionable lineup decisions.
-
-| Year | Incident | Accused |
-|------|----------|---------|
-| {TBD} | {TBD} | {TBD} |
+Championships, playoff and Finals single-game records, career playoff leaders and the per-manager ledger are on {wikilink('Playoffs')}.
 
 ## Related
 
@@ -2034,6 +2942,9 @@ def gen_owner_page(
     win_pct_str = f"{record['wpct']*100:.1f}%"
     titles = record["titles"]
     titles_str = f"{len(titles)} ({', '.join(str(y) for y in titles)})" if titles else "0"
+    # `finishes` holds only seasons that actually finished, so it doubles as the
+    # denominator for playoff appearances: a season still being played is not
+    # one the manager missed the playoffs in.
     best_rank, best_year = record["finishes"][0] if record["finishes"] else (TBD, TBD)
     playoff_wins = game_stats.get("playoff_wins", 0)
     playoff_losses = game_stats.get("playoff_losses", 0)
@@ -2047,36 +2958,59 @@ def gen_owner_page(
 
     season_rows = []
     for (year, team_name, _canonical, wins, losses, rank, made_playoffs) in record["rows"]:
+        # A season still in progress has no finish and no answer to "made the
+        # playoffs" yet; a printed 0 and "No" would both be claims about a
+        # season nobody has played.
+        finish = rank if rank else "—"
+        playoffs_cell = ("Yes" if made_playoffs else "No") if rank else "—"
+        # Plain text: this is the manager's own page, so linking the name here
+        # would only point back at the page the reader is already on.
         season_rows.append(
-            f"| {year} | {wikilink(team_name)} | {wins}-{losses} | {rank} | {'Yes' if made_playoffs else 'No'} |"
+            f"| {year} | {team_name} | {wins}-{losses} | {finish} | {playoffs_cell} |"
         )
 
     franchise_rows = []
     for franchise in sorted(record["teams"].values(), key=lambda f: min(f["years"])):
-        # A thumbnail here is the same opt-in bible entry the team page uses; the
-        # cell is just the link when the franchise has no image.
+        # A thumbnail here is the same opt-in bible entry the Teams index uses;
+        # the cell is just the name when there is no image.
         image_src = team_image_src(franchise["name"], images)
         thumb = f"![{franchise['name']}]({image_src}){{ .team-thumb }} " if image_src else ""
         franchise_rows.append(
-            f"| {thumb}{wikilink(franchise['name'])} | {_year_range(franchise['years'], latest_year)} "
+            f"| {thumb}{franchise['name']} | {_year_range(franchise['years'], latest_year)} "
             f"| {franchise['wins']}-{franchise['losses']} |"
         )
 
+    # How restless a manager is with the naming is a real fact about him, and
+    # nothing on the site surfaced it while every name had its own page.
+    name_count = len(record["teams"])
+    # Every season he has been in the league, decided or not: a name is chosen
+    # in August, so an in-progress season still counts toward the naming habit.
+    seasons_entered = record["seasons_count"]
+    if name_count > 1 and name_count == seasons_entered:
+        naming_note = (
+            f"A different name in each season: {name_count} names in "
+            f"{seasons_entered} seasons, none of them repeated."
+        )
+    elif name_count == 1:
+        naming_note = "One name throughout."
+    else:
+        naming_note = f"{name_count} names across {season_span}."
+
     return f"""---
 title: "{owner}"
-description: "Career record and franchises of {owner} in the Pine Hills Fantasy Football League."
+description: "Career record and team names of {owner} in the Pine Hills Fantasy League."
 ---
 
-# 🧑 {owner}
+# {owner}
 
-- **Franchises:** {len(record['teams'])}
+- **Team Names:** {len(record['teams'])}
 - **Seasons:** {season_span}
 - **Status:** {status}
 
 ## Career Summary
 
 - **Championships:** {titles_str}
-- **Playoff Appearances:** {appearances} / {record['seasons_count']} seasons
+- **Playoff Appearances:** {appearances} / {len(record['finishes'])} seasons
 - **Playoff Record:** {playoff_record}
 - **Best Finish:** {best_rank} ({best_year})
 - **All-Time Record:** {record['wins']}-{record['losses']} ({win_pct_str})
@@ -2088,7 +3022,9 @@ description: "Career record and franchises of {owner} in the Pine Hills Fantasy 
 |-------|-------|
 {chr(10).join(scoring)}
 
-## Franchises
+## Team Names
+
+{naming_note}
 
 | Team | Seasons | Record |
 |------|---------|--------|
@@ -2096,7 +3032,7 @@ description: "Career record and franchises of {owner} in the Pine Hills Fantasy 
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than team name, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|
@@ -2122,10 +3058,9 @@ def gen_owners_index(owner_aggregates: dict, latest_year) -> str:
         team_names = [
             f["name"] for f in sorted(record["teams"].values(), key=lambda f: min(f["years"]))
         ]
-        shown = [wikilink(name) for name in team_names[:OWNER_INDEX_TEAMS_SHOWN]]
-        if len(team_names) > OWNER_INDEX_TEAMS_SHOWN:
-            shown.append(f"+{len(team_names) - OWNER_INDEX_TEAMS_SHOWN} more")
-        franchises = ", ".join(shown)
+        franchises = more_list(
+            [wikilink(name) for name in team_names], OWNER_INDEX_TEAMS_SHOWN
+        )
         rows.append(
             f"| {wikilink(owner)} | {franchises} | {_year_range(record['years'], latest_year)} "
             f"| {record['wins']}-{record['losses']} | {record['wpct']*100:.1f}% | {len(record['titles'])} |"
@@ -2133,150 +3068,492 @@ def gen_owners_index(owner_aggregates: dict, latest_year) -> str:
 
     return f"""---
 title: Owners
-description: The managers of the Pine Hills Fantasy Football League and the franchises they have run.
+icon: lucide/user
+description: The managers of the Pine Hills Fantasy League and every team name they have played under.
 ---
 
-# 🧑 Owners
+# Owners
 
-Every manager in Pine Hills history. A person keeps one page no matter how many
-times they rename or replace their franchise, so career totals here span every
-team they have run. Names come straight from Yahoo; spelling variants are merged
-through `owner_aliases` in the league bible.
+Every manager in league history. Career totals span every team a manager
+has run, so renaming a team does not start a new record.
 
 ## Managers
 
-| Owner | Franchises | Seasons | All-Time Record | Win% | Titles |
+| Owner | Team Names | Seasons | All-Time Record | Win% | Titles |
 |-------|-----------|---------|-----------------|------|--------|
 {chr(10).join(rows)}
 
 ## Related
 
-- {wikilink('Teams')} · {wikilink('Seasons')} · {wikilink('Records')} · {wikilink('Champions')}
+- {wikilink('Teams')} · {wikilink('Players')} · {wikilink('Seasons')} · {wikilink('Records')} · {wikilink('Champions')}
 """
 
 
-def gen_teams_index(aggregates: dict, bible: dict, owner_map: dict) -> str:
-    owners = get_owners(bible)
+def player_week_label(row: dict) -> str:
+    """When a roster-week happened: "2024 Wk 16 (Final)".
+
+    The bracket round beats the phase tag when the game had one, the same rule
+    the player book follows, so a Final reads as a Final rather than as a
+    generic postseason week.
+    """
+    if row.get("round"):
+        return f"{row['year']} Wk {row['week']} ({row['round']})"
+    return f"{row['year']} Wk {row['week']}{PHASE_LABELS[row['phase']]}"
+
+
+def player_best_week(row: dict, with_team: bool = True) -> str:
+    """The best-week cell: score, when, and (optionally) for whom."""
+    if row is None:
+        return TBD
+    bench = "" if row["started"] else " (benched)"
+    when = player_week_label(row)
+    if with_team:
+        when = f"{when}, {team_link(row['team'])}"
+    return f"{row['points']:.2f}{bench} - {when}"
+
+
+def player_draft_line(picks: list) -> str:
+    """Summary line for the lead: how many times, and where they went first."""
+    if not picks:
+        return "Never drafted (added in-season)"
+    first = picks[0]
+    where = f"R{first['round']}" if first.get("round") else TBD
+    if first.get("overall"):
+        where += f" P{first['overall']}"
+    return f"{len(picks)} (first: {first['year']} {where})"
+
+
+def build_player_awards(
+    season_mvps: dict, finals_mvps: dict, all_league: dict,
+    newcomers: dict = None, undrafted_awards: dict = None,
+    seasons: dict = None,
+) -> dict:
+    """{player: {"mvp": [...], "finals": [...], "all_league": [...]}} by year.
+
+    A player page that does not mention an MVP season or a team of the season
+    selection is missing the most notable thing about it, so the awards are
+    inverted here once rather than re-derived per page.
+    """
+    awards = {}
+    selections = {
+        year: [row for entry in selected for row in entry["holders"]]
+        for year, selected in all_league.items()
+    }
+    newcomers = newcomers or {}
+    undrafted_awards = undrafted_awards or {}
+    # Best Draft Pick and Biggest Bust are computed awards like the rest, so the
+    # winners carry them on their own pages and into the career leaderboard.
+    best_picks, busts = {}, {}
+    for year, season_data in (seasons or {}).items():
+        best, bust = draft_value_winners(season_data)
+        if best:
+            best_picks[year] = [best]
+        if bust:
+            busts[year] = [bust]
+    for key, source in (
+        ("mvp", season_mvps), ("finals", finals_mvps), ("all_league", selections),
+        ("newcomer", newcomers), ("undrafted", undrafted_awards),
+        ("best_pick", best_picks), ("bust", busts),
+    ):
+        for year, holders in source.items():
+            for row in holders:
+                awards.setdefault(row["player"], {}).setdefault(key, []).append(year)
+    for player in awards:
+        for key in awards[player]:
+            awards[player][key].sort()
+    return awards
+
+
+def player_awards_line(awards: dict) -> str:
+    """"MVP 2020, 2023 · Finals MVP 2024", or "" when the player has none."""
+    parts = []
+    for label, key in (
+        ("MVP", "mvp"), ("Finals MVP", "finals"), ("Team of the Season", "all_league"),
+        ("Newcomer of the Year", "newcomer"),
+        ("Undrafted Player of the Year", "undrafted"),
+        ("Best Draft Pick", "best_pick"), ("Biggest Bust", "bust"),
+    ):
+        years = awards.get(key) or []
+        if years:
+            parts.append(f"{label} {', '.join(str(year) for year in years)}")
+    return " · ".join(parts)
+
+
+# The awards that argue for a career. Biggest Bust is an award this league
+# hands out and a player page prints, but it is the opposite of a case for
+# induction, so the Hall reads the other six.
+HALL_MAJOR_AWARDS = [
+    ("MVP", "mvp"),
+    ("Finals MVP", "finals"),
+    ("Team of the Season", "all_league"),
+    ("Newcomer of the Year", "newcomer"),
+    ("Undrafted Player of the Year", "undrafted"),
+    ("Best Draft Pick", "best_pick"),
+]
+# Two ways in, the way a Hall of Fame ballot actually reads: sustained
+# decoration, or a league record backed by at least one award. The second
+# clause is what lets a career like Patrick Mahomes' in - one Finals MVP, but
+# he holds a league mark and has more career points than anyone.
+HALL_MAJORS_ALONE = 3
+HALL_MAJORS_WITH_RECORD = 1
+# A defense is not a person. "Patriots" on a 2019 roster and "Patriots" on a
+# 2023 one are different units that happen to share a name, so a defense is
+# judged one season at a time and inducted as that season: the 2019 Patriots,
+# not the Patriots. Every other position is a player with one career.
+HALL_SEASON_UNIT_POSITIONS = {"DEF"}
+
+
+def _hall_candidate(name: str, record: dict, awards: dict, marks: list, highs: dict,
+                    year=None) -> dict:
+    """One résumé to judge: a whole career, or a defense's single season.
+
+    Passing `year` narrows every credential to that season - the awards won in
+    it, the records set in it, and the points scored in it. A career mark like
+    weeks rostered carries no year and so belongs to no single season unit.
+    """
+    if year is None:
+        years = sorted(record["years"])
+        points, starts = record["points"], record["starts"]
+        teams = len(record["teams"])
+        credential_years = lambda won: won  # noqa: E731
+    else:
+        years = [year]
+        stints = [s for s in record["stints"].values() if s["year"] == year]
+        points = sum(s["points"] for s in stints)
+        starts = sum(s["starts"] for s in stints)
+        teams = len(stints)
+        credential_years = lambda won: [y for y in won if y == year]  # noqa: E731
+        marks = [mark for mark in marks if mark["year"] == year]
+        highs = {
+            position: [y for y in seasons if y == year]
+            for position, seasons in (highs or {}).items()
+        }
+        highs = {position: seasons for position, seasons in highs.items() if seasons}
+
+    credentials, majors = [], 0
+    for label, key in HALL_MAJOR_AWARDS:
+        won = credential_years(awards.get(key) or [])
+        if won:
+            majors += len(won)
+            credentials.append(f"{label} {', '.join(str(y) for y in won)}")
+    return {
+        "player": name,
+        "display": f"{year} {name}" if year is not None else name,
+        "positions": player_positions(record) or [TBD],
+        "years": years,
+        "points": points,
+        "starts": starts,
+        "teams": teams,
+        "majors": majors,
+        "credentials": credentials,
+        "records": [mark["text"] for mark in marks],
+        "season_highs": player_season_high_line(highs),
+    }
+
+
+def hall_of_fame_class(
+    player_index: dict, player_awards: dict, record_marks: dict, season_highs: dict,
+) -> list:
+    """The inductees, best résumé first.
+
+    Computed from the awards and records the rest of the wiki already hands out,
+    so nobody is here on anyone's say-so: the case printed under each name is
+    the same case that got them in.
+    """
+    members = []
+    for name, record in (player_index or {}).items():
+        # Drafted-and-cut players have a record but never a roster week, and a
+        # career that never happened cannot be a Hall of Fame career.
+        if not record.get("years"):
+            continue
+        awards = (player_awards or {}).get(name) or {}
+        marks = (record_marks or {}).get(name) or []
+        highs = (season_highs or {}).get(name) or {}
+        positions = set(player_positions(record) or [])
+        seasons = (
+            sorted(record["years"])
+            if positions & HALL_SEASON_UNIT_POSITIONS
+            else [None]
+        )
+        for year in seasons:
+            candidate = _hall_candidate(name, record, awards, marks, highs, year)
+            if (candidate["majors"] >= HALL_MAJORS_ALONE
+                    or (candidate["records"]
+                        and candidate["majors"] >= HALL_MAJORS_WITH_RECORD)):
+                members.append(candidate)
+    # Decoration first, then records, then the points that back them up.
+    members.sort(key=lambda m: (-m["majors"], -len(m["records"]), -m["points"]))
+    return members
+
+
+def gen_player_page(
+    name: str, record: dict, latest_year, awards: dict = None, records: list = None,
+    season_highs: dict = None,
+) -> str:
+    """Generate a player page: every fantasy roster this player has sat on.
+
+    The table is the point of the page. A player who spent eight years on one
+    roster and one who was churned by six managers look nothing alike here, and
+    neither reads that way from a team page.
+    """
+    positions = player_positions(record) or [TBD]
+    # Only players who actually won something carry the line; an empty
+    # "Awards: -" on 590 pages would be noise.
+    won = player_awards_line(awards or {})
+    awards_line = f"{chr(10)}- **Awards:** {won}" if won else ""
+    # Same rule for records: the handful of pages that hold one say so, and the
+    # rest do not carry an empty bullet. Regular season, matching the book.
+    held = " · ".join(records or [])
+    records_line = f"{chr(10)}- **League Records:** {held}" if held else ""
+    # The seasons this player's week led his position, which is a smaller claim
+    # than a league record and is kept on its own line so it reads as one.
+    led = player_season_high_line(season_highs or {})
+    season_highs_line = f"{chr(10)}- **Season Position Highs:** {led}" if led else ""
+
+    stints = sorted(
+        record["stints"].values(), key=lambda s: (s["year"], -s["weeks"], s["team"])
+    )
+    stint_rows = [
+        f"| {stint['year']} | {team_link(stint['team'])} "
+        f"| {wikilink(stint['owner']) if stint['owner'] else TBD} "
+        f"| {'/'.join(player_positions(stint)) or '-'} "
+        f"| {stint['weeks']} | {stint['starts']} | {stint['points']:.2f} "
+        f"| {player_best_week(stint['best'], with_team=False)} |"
+        for stint in stints
+    ]
+    draft_rows = [
+        f"| {pick['year']} | {pick['round'] or TBD} | {pick['overall'] or TBD} "
+        f"| {team_link(pick['team']) if pick['team'] else TBD} |"
+        for pick in record["drafts"]
+    ]
+
+    team_history = (
+        "\n".join(
+            [
+                "| Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |",
+                "|--------|------|-------|-----|-------|--------|---------------|-----------|",
+            ]
+            + stint_rows
+        )
+        if stint_rows
+        # The six draft-only players: taken in a draft, cut before the first
+        # captured roster. Saying so is more useful than an empty table.
+        else "_Drafted, but never appeared on a captured weekly roster._"
+    )
+    draft_history = (
+        "\n".join(
+            ["| Year | Round | Overall | Drafted By |", "|------|-------|---------|------------|"]
+            + draft_rows
+        )
+        if draft_rows
+        else "_Never taken in a captured draft; added in-season every time._"
+    )
+
+    return f"""---
+title: "{name}"
+description: "Every Pine Hills fantasy roster {name} has appeared on, season by season."
+---
+
+# {name}
+
+- **Position:** {" / ".join(positions)}
+- **Seasons:** {_year_range(record["years"], latest_year)}
+- **Fantasy Teams:** {len(record["teams"])}{awards_line}
+
+## Career Summary
+
+- **Weeks Rostered:** {record["weeks"]} ({record["starts"]} started)
+- **Points in Lineup:** {record["points"]:.2f}
+- **Points on the Bench:** {record["bench_points"]:.2f}
+- **Best Week:** {player_best_week(record["best"])}
+- **Times Drafted:** {player_draft_line(record["drafts"])}{records_line}{season_highs_line}
+
+## Team History
+
+One row per team per season. Weeks counts roster spots rather than games
+played; lineup points exclude weeks spent on the bench.
+
+{team_history}
+
+## Draft History
+
+{draft_history}
+
+## Related
+
+- {wikilink('Players')} · {wikilink('Teams')} · {wikilink('Draft History')} · {wikilink('Records')}
+"""
+
+
+def gen_players_index(player_index: dict, latest_year) -> str:
+    """Generate the players index: every player, grouped by position."""
+    by_position = {}
+    for name, record in player_index.items():
+        primary = (player_positions(record) or ["Other"])[0]
+        by_position.setdefault(primary, []).append(record)
+
+    ordered = [p for p in POSITION_ORDER if p in by_position]
+    ordered += sorted(p for p in by_position if p not in POSITION_ORDER)
+
+    sections = []
+    for position in ordered:
+        rows = []
+        # Most weeks rostered first: the players the league actually kept lead
+        # their own section, and the one-week fill-ins fall to the bottom.
+        for record in sorted(
+            by_position[position], key=lambda r: (-r["weeks"], r["name"])
+        ):
+            team_names = sorted(record["teams"], key=lambda t: -record["teams"][t])
+            shown = [team_link(t) for t in team_names[:PLAYER_INDEX_TEAMS_SHOWN]]
+            if len(team_names) > PLAYER_INDEX_TEAMS_SHOWN:
+                shown.append(f"+{len(team_names) - PLAYER_INDEX_TEAMS_SHOWN} more")
+            rows.append(
+                f"| {wikilink(record['name'])} | {_year_range(record['years'], latest_year)} "
+                f"| {len(record['teams'])} | {', '.join(shown) or TBD} "
+                f"| {record['weeks']} | {record['starts']} | {record['points']:.2f} |"
+            )
+        sections.append(
+            f"""### {position} ({len(rows)})
+
+| Player | Seasons | Teams | Rostered By | Weeks | Starts | Lineup Points |
+|--------|---------|-------|-------------|-------|--------|---------------|
+{chr(10).join(rows)}"""
+        )
+
+    return f"""---
+title: Players
+icon: material/football
+description: Every NFL player rostered in the Pine Hills Fantasy League, and the fantasy teams that held them.
+---
+
+# Players
+
+Every player who has appeared on a league roster, drawn from the weekly roster
+captures. A player page carries the teams that held them, the seasons, weeks
+rostered, and points scored in the lineup.
+
+Weeks counts roster spots rather than games played: a player benched all season
+still occupied one.
+
+## Players by Position
+
+{chr(10).join(f"{section}{chr(10)}" for section in sections)}
+## Related
+
+- {wikilink('Teams')} · {wikilink('Owners')} · {wikilink('Draft History')} · {wikilink('Records')}
+"""
+
+
+def gen_teams_index(team_seasons: dict, bible: dict, latest_year=None) -> str:
+    """The directory of every team name the league has ever seen.
+
+    Not a list of franchises: a team name here lasts a median of one season, so
+    the page answers "whose team was that?" rather than pretending each name is
+    an institution. The manager is the entity with a history, and the name links
+    to him.
+    """
     champs = get_champions(bible)
     championship_counts = {}
     for year, champ_data in champs.items():
         if isinstance(champ_data, dict) and champ_data.get("champion"):
-            championship_counts[champ_data["champion"]] = championship_counts.get(champ_data["champion"], 0) + 1
-
-    # Latest season in the data: a franchise still active in it reads "present"
-    # rather than the open-ended "2018–" the table used to show.
-    latest_year = max(
-        (max(f["years"]) for f in aggregates.values() if f.get("years")), default=None
-    )
+            championship_counts[champ_data["champion"]] = (
+                championship_counts.get(champ_data["champion"], 0) + 1
+            )
 
     images = get_team_images(bible)
     rows = []
-    for canonical_name, franchise in sorted(aggregates.items(), key=lambda x: x[0].lower()):
-        # pick a representative name (prefer the one that appears latest)
-        representative_name = franchise["names"][-1]
-        owner_name = owners.get(representative_name, "") or ""
-        owner = wikilink(canonical_owner(owner_name, owner_map)) if owner_name else TBD
-        year_range = _year_range(franchise["years"], latest_year)
-        titles = championship_counts.get(representative_name, 0)
-        # A thumbnail rides in the Team cell rather than a column of its own: an
-        # extra column would be blank for every franchise with no image yet.
-        image_src = team_image_src(representative_name, images)
-        thumb = f"![{representative_name}]({image_src}){{ .team-thumb }} " if image_src else ""
-        # The team name is the link; a separate "Page" column repeated it and
-        # forced both columns to wrap to three lines each on narrow screens.
+    for name in sorted(team_seasons, key=str.lower):
+        years = sorted(team_seasons[name])
+        owner = _TEAM_OWNERS.get(name)
+        image_src = team_image_src(name, images)
+        thumb = f"![{name}]({image_src}){{ .team-thumb }} " if image_src else ""
+        titles = championship_counts.get(name, 0)
+        # The name is plain text and the manager carries the link: linking both
+        # cells would put two links to the same page on every row.
         rows.append(
-            f"| {thumb}{wikilink(representative_name)} | {owner} | {year_range} | {titles} |"
+            f"| {thumb}{name} | {wikilink(owner) if owner else TBD} "
+            f"| {_year_range(years, latest_year)} | {len(years)} | {titles} |"
         )
+
+    one_season = sum(1 for years in team_seasons.values() if len(years) == 1)
+    share = f"{one_season / len(team_seasons):.0%}" if team_seasons else "0%"
 
     md = f"""---
 title: Teams
-description: Franchise histories and owners of the Pine Hills Fantasy Football League.
+icon: lucide/users
+description: Every team name in Pine Hills Fantasy League history and the manager behind it.
 ---
 
-# 👥 Teams
+# Teams
 
-Every franchise in Pine Hills history. Each team page tracks the owner, season-by-season results, championships, and head-to-head records. Standings-derived stats are computed automatically; owners and titles come from the league bible. For career totals that follow a person across every team they have run, see {wikilink('Owners')}.
+Every team name used in the league. A name is not a franchise here: {one_season} of {len(team_seasons)} names ({share}) were used for a single season and then dropped.
 
-## Active & Historical Franchises
+Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
 
-| Team | Owner | Seasons | Titles |
-|------|-------|---------|--------|
+## Every Team Name
+
+| Team | Manager | Years | Seasons | Titles |
+|------|---------|-------|---------|--------|
 {chr(10).join(rows)}
 
-## Team Pages Should Include
-
-- **Owner & tenure** — who runs it, what years.
-- **Championships** — years won, runner-up finishes.
-- **Season log** — W–L and finish per year.
-- **Rivalries** — head-to-head record vs. nemesis teams.
-- **Signature moments** — the trade that defined them, the meltdown, the heater.
-
-> Building a new team page? Start from {wikilink('Team Template')}.
 """
     return md
 
 
-def gen_seasons_index(seasons: dict, bible: dict) -> str:
+def gen_seasons_index(seasons: dict, bible: dict, mvps: dict) -> str:
     rows = []
     for year in sorted(seasons, reverse=True):
         champion = champ_year(bible, year).get("champion") or TBD
-        rows.append(f"| {year} | {champion} | {TBD} | {wikilink(f'{year} Season')} |")
+        rows.append(
+            f"| {wikilink(f'{year} Season', year)} | {champion} "
+            f"| {season_mvp_cell(mvps.get(year, []))} |"
+        )
     # include 2018/2019 placeholders if referenced
     md = f"""---
 title: Seasons
-description: Year-by-year history of the Pine Hills Fantasy Football League.
+icon: lucide/calendar
+description: Year-by-year history of the Pine Hills Fantasy League.
 ---
 
-# 📅 Seasons
+# Seasons
 
-Every completed season of the Pine Hills Fantasy Football League. Click a year for the full breakdown — standings, playoff bracket, draft, awards, and the story of the year.
+Every completed season of the league, with its champion and MVP. A season page carries the final
+standings, playoff bracket, draft board, weekly rosters and computed awards. The MVP is defined
+on {wikilink('Awards')}.
 
 ## Season Index
 
-| Year | Champion | Notable Story | Page |
-|------|----------|---------------|------|
+| Year | Champion | Most Valuable Player |
+|------|----------|----------------------|
 {chr(10).join(rows)}
 
-## How Seasons Are Documented
-
-Each season page follows a standard template:
-
-1. **Final Standings** — regular season record, points for/against, playoff seed.
-2. **Playoff Results** — bracket, champion, consolation winner.
-3. **Draft Recap** — link to that year's {wikilink('Draft History')} page.
-4. **Awards** — champion, top scorer, biggest bust, "Poultry Controversy" nominee.
-5. **Lore** — the defining moments worth remembering.
-
-> Want to fill one in? Copy the template from {wikilink('Season Template')} and edit away.
 """
     return md
 
 
-def gen_root_index(seasons: dict, bible: dict) -> list[str]:
+def gen_champions_page(seasons: dict, bible: dict, finals_mvps: dict) -> str:
     rows = []
     for year in sorted(seasons, reverse=True):
         champion, runner_up, top_seed, _ = champ_fields(bible, year)
-        rows.append(f"| {year} | {champion} | {runner_up} | {top_seed} |")
-    return rows
-
-
-def gen_champions_page(seasons: dict, bible: dict) -> str:
-    rows = []
-    for year in sorted(seasons, reverse=True):
-        champion, runner_up, top_seed, _ = champ_fields(bible, year)
-        rows.append(f"| {year} | {champion} | {runner_up} | {top_seed} | {wikilink(f'{year} Season')} |")
+        rows.append(
+            f"| {wikilink(f'{year} Season', year)} | {champ_cell(champion)} "
+            f"| {champ_cell(runner_up)} | {champ_cell(top_seed)} "
+            f"| {finals_mvp_cell(finals_mvps.get(year, []))} |"
+        )
 
     md = f"""---
 title: Champions
-description: List of Pine Hills Fantasy Football League champions by season.
+icon: lucide/trophy
+description: List of Pine Hills Fantasy League champions by season.
 ---
 
-# 🏆 Champions
+# Champions
 
-The complete list of Pine Hills Fantasy Football League champions, year by year. The champion is the playoff winner (not the regular-season top seed). Records are maintained in the league bible (`raw/bible.yaml`).
+Every champion in league history. The champion is the winner of the playoff bracket, not the
+regular-season top seed. The Finals MVP is the top scorer in the title game's winning lineup.
 
-| Year | Champion | Runner-Up | Regular Season Top Seed | Season |
-|------|----------|-----------|-------------------------|--------|
+| Year | Champion | Runner-Up | Regular Season Top Seed | Finals MVP |
+|------|----------|-----------|-------------------------|------------|
 {chr(10).join(rows)}
 
 ## Most Titles
@@ -2304,33 +3581,434 @@ The complete list of Pine Hills Fantasy Football League champions, year by year.
     return md
 
 
-def gen_draft_index(seasons: dict, bible: dict) -> str:
+def lore_entries(bible: dict, key: str) -> list:
+    """The bible's lore entries of one kind, oldest first, junk dropped.
+
+    An undated entry sorts last rather than first: `year` is optional, and
+    sorting a missing one as 0 would file every curse ahead of the league's
+    first season.
+    """
+    entries = (bible.get("lore", {}) or {}).get(key) or []
+    entries = [entry for entry in entries if isinstance(entry, dict) and entry.get("title")]
+    return sorted(
+        entries,
+        key=lambda entry: (entry.get("year") is None, entry.get("year") or 0, entry["title"]),
+    )
+
+
+def lore_blocks(entries: list, empty: str) -> str:
+    """Render lore entries as collapsible admonitions.
+
+    One entry can be a sentence or six paragraphs, and a table would truncate
+    the long ones while padding the short. A collapsed admonition per entry
+    keeps the page scannable - the reader sees every title at once and opens the
+    one they want.
+    """
+    if not entries:
+        return empty
+    out = []
+    for entry in entries:
+        year = entry.get("year")
+        heading = f"{year} - {entry['title']}" if year else entry["title"]
+        out.append(f'??? note "{heading}"')
+        out.append("")
+        # Who it happened to, when the bible names them. Franchise and manager
+        # names are linked, so a curse reads as part of that team's history.
+        involved = entry.get("involved") or []
+        if involved:
+            # A name that matches no team and no manager still renders, as a red
+            # link. That is correct for a page not written yet, but for lore it
+            # is almost always a typo, and a silent red link is exactly what a
+            # contributor cannot see. Name it at build time instead.
+            known_owners = set(_TEAM_OWNERS.values())
+            for name in involved:
+                name = str(name).strip()
+                if name and name not in _TEAM_OWNERS and name not in known_owners:
+                    print(
+                        f"  ! lore entry {entry['title']!r} names {name!r} in "
+                        f"`involved`, which is neither a team nor a manager - it "
+                        f"will render as a red link. Check the spelling.",
+                        file=sys.stderr,
+                    )
+            names = ", ".join(team_link(str(name)) for name in involved)
+            out.append(f"    **Involved:** {names}")
+            out.append("")
+        for line in str(entry.get("story") or TBD).strip().splitlines():
+            out.append(f"    {line}".rstrip())
+        out.append("")
+    return "\n".join(out)
+
+
+def gen_lore_page(bible: dict) -> str:
+    """Generate the Lore page from the bible's `lore` block.
+
+    Lore is the one part of this wiki no scraper can produce: vetoed trades,
+    curses, the reason a franchise is named what it is. The page is generated so
+    it always exists and every `[[Lore]]` link resolves, but its content comes
+    only from `raw/bible.yaml` - an empty block prints the invitation to fill it
+    in, never an invented incident.
+    """
+    incidents = lore_entries(bible, "incidents")
+    curses = lore_entries(bible, "curses")
+
+    return f"""---
+title: Lore
+icon: lucide/scroll-text
+description: Incidents and curses of the Pine Hills Fantasy League, contributed by the community.
+---
+
+# Lore
+
+League history the scoreboard does not record: disputed trades, curses, and
+other incidents. Entries are community-contributed and none are derived from the
+captured data.
+
+## Incidents
+
+{lore_blocks(incidents, "_No incidents recorded. Entries are added under `lore.incidents` in the league bible._")}
+
+## Curses
+
+{lore_blocks(curses, "_No curses recorded. Entries are added under `lore.curses` in the league bible._")}
+
+## Related
+
+- {wikilink('Seasons')} · {wikilink('Teams')} · {wikilink('Records')} · {wikilink('Champions')}
+"""
+
+
+def gen_hall_of_fame(members: list, latest_year=None) -> str:
+    """Generate the Hall of Fame: the inaugural class, one plaque per member.
+
+    The class is computed from the awards and records the rest of the wiki
+    hands out, so the page can print the case beside the name. No ballot, no
+    committee, and nothing here that a season page does not already say.
+    """
+    summary = [
+        f"| {wikilink(member['player'], member['display'])} "
+        f"| {'/'.join(member['positions'])} "
+        f"| {_year_range(member['years'], latest_year)} "
+        f"| {member['points']:.2f} | {member['majors']} |"
+        for member in members
+    ] or [f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"]
+
+    plaques = []
+    for member in members:
+        lines = [
+            f"### {member['display']} ({'/'.join(member['positions'])})",
+            "",
+            f"- **Seasons:** {_year_range(member['years'], latest_year)} "
+            f"({len(member['years'])})",
+            # A defense is in for one season, so calling its total a career
+            # would be the very conflation the season-unit rule exists to avoid.
+            f"- **{'Season' if len(member['years']) == 1 else 'Career'} Lineup "
+            f"Points:** {member['points']:.2f} over {member['starts']} starts",
+            f"- **Fantasy Teams:** {member['teams']}",
+            f"- **The Case:** {' · '.join(member['credentials'])}",
+        ]
+        if member["records"]:
+            lines.append(f"- **League Records:** {' · '.join(member['records'])}")
+        if member["season_highs"]:
+            lines.append(f"- **Season Position Highs:** {member['season_highs']}")
+        lines.append("")
+        plaques.append("\n".join(lines))
+
+    return f"""---
+title: Hall of Fame
+icon: lucide/landmark
+description: The Pine Hills Fantasy League Hall of Fame, computed from the league's own awards and records.
+---
+
+# Hall of Fame
+
+The most decorated players of the league's captured seasons. Induction is
+computed rather than voted, from the {wikilink('Awards')} and {wikilink('Records')}
+pages, and is recomputed on each build.
+
+## Who Gets In
+
+A player is inducted on either of two criteria:
+
+- **{HALL_MAJORS_ALONE} or more major awards.** MVP, Finals MVP, Team of the Season,
+  Newcomer of the Year, Undrafted Player of the Year and Best Draft Pick each
+  count once per season won. Biggest Bust is excluded.
+- **A league record, plus at least {HALL_MAJORS_WITH_RECORD} major award.** A mark in
+  the {wikilink('Records')} book does not qualify on its own.
+
+Ties in a record are shared, so both holders qualify on it.
+
+Defenses are inducted as a single season - the 2019 Patriots - on that season
+alone. Every other position is inducted on a whole career.
+
+## The Inaugural Class
+
+| Player | Pos | Seasons | Lineup Points | Major Awards |
+|--------|-----|---------|---------------|--------------|
+{chr(10).join(summary)}
+
+## Plaques
+
+{chr(10).join(plaques) if plaques else "_No player has yet met the standard._"}
+
+## Related
+
+- {wikilink('Awards')} · {wikilink('Records')} · {wikilink('Players')} · {wikilink('Champions')} · {wikilink('Seasons')}
+"""
+
+
+def gen_awards_page(
+    seasons: dict,
+    season_mvps: dict,
+    finals_mvps: dict,
+    newcomers: dict,
+    undrafted_awards: dict,
+    all_league_teams: dict,
+    player_awards: dict,
+    first_season: int,
+) -> str:
+    """Generate the Awards page: every computed award, by season and by career.
+
+    The season pages each hand out their own year's awards; this is the place
+    the whole run can be read at once, which is the only way a repeat winner is
+    visible at all.
+    """
+    season_rows = []
+    for year in sorted(seasons, reverse=True):
+        # Every player is new in the first captured season, so the newcomer
+        # award does not apply rather than being unrecorded.
+        newcomer = NA if year == first_season else season_mvp_cell(newcomers.get(year, []))
+        season_rows.append(
+            f"| {wikilink(f'{year} Season', year)} "
+            f"| {season_mvp_cell(season_mvps.get(year, []))} "
+            f"| {finals_mvp_cell(finals_mvps.get(year, []))} "
+            f"| {newcomer} "
+            f"| {season_mvp_cell(undrafted_awards.get(year, []))} |"
+        )
+
+    # Best Draft Pick and Biggest Bust are computed the same way every other
+    # award here is, so they belong on this page rather than only on the season
+    # pages. They get their own table because they rank draft slot against
+    # finish rather than wins swung, and because a seven-column By Season table
+    # is unreadable.
+    draft_rows = []
+    for year in sorted(seasons, reverse=True):
+        best_pick, biggest_bust = draft_value_awards(seasons[year])
+        draft_rows.append(
+            f"| {wikilink(f'{year} Season', year)} | {best_pick} | {biggest_bust} |"
+        )
+
+    # One collapsed block per season: nine tables stacked flat would bury the
+    # rest of the page, and the reader almost always wants one year.
+    lineups = []
+    for year in sorted(seasons, reverse=True):
+        selected = all_league_teams.get(year) or []
+        if not selected:
+            continue
+        lineups.append(f'??? note "{year}"')
+        lineups.append("")
+        lineups.append("    | Slot | Player | Pos | Wins Swung | Rostered By |")
+        lineups.append("    |------|--------|-----|------------|-------------|")
+        for entry in selected:
+            extra = len(entry["holders"]) > entry.get("slots", 1)
+            for index, row in enumerate(entry["holders"]):
+                label = entry["slot"] if index == 0 else ""
+                if index == 0 and extra:
+                    label = f"{entry['slot']} ({len(entry['holders'])}-way tie)"
+                teams = sorted(row["teams"], key=lambda team: -row["teams"][team])
+                lineups.append(
+                    f"    | {label} | {wikilink(row['player'])} | {row['position']} "
+                    f"| {row['wins']} "
+                    f"| {more_list([wikilink(t) for t in teams], PLAYER_BOOK_TEAMS_SHOWN)} |"
+                )
+        lineups.append("")
+
+    career = award_leader_rows(player_awards or {})
+    career_block = (
+        "\n".join(
+            ["| Award | Player | Won | Years |", "|-------|--------|-----|-------|"] + career
+        )
+        if career
+        else "_No award has been won twice by the same player._"
+    )
+
+    return f"""---
+title: Awards
+icon: lucide/award
+description: Every computed award in the Pine Hills Fantasy League, by season and by career.
+---
+
+# Awards
+
+Every league award is computed from the captured data; none is voted on. Four of
+the seven rank players by *wins swung*: games their team won by a smaller margin
+than the player scored from the starting lineup. The remaining three use other
+measures, defined below.
+
+- **Most Valuable Player.** The most wins swung in a season, league-wide.
+- **Finals MVP.** The top scorer in the title game's winning lineup. One game
+  leaves nothing to rank by wins, so this is the ordinary sporting definition.
+- **Newcomer of the Year.** The most wins swung by a player in their first
+  season on a Pine Hills roster. A league debut, not an NFL rookie season: the
+  captured data records no NFL service time. The first captured season has no
+  award, since every player in it is new.
+- **Undrafted Player of the Year.** The most wins swung by a player nobody took
+  in that year's draft.
+- **Team of the Season.** Each starting slot goes to the player who swung the
+  most wins playing it, in the lineup shape the league started that year.
+- **Best Draft Pick.** The largest gain of draft slot on finish, within a
+  position: taken late at the position, finished high on season points.
+- **Biggest Bust.** The same measure inverted, restricted to rounds 1-{BUST_MAX_ROUND},
+  so a late-round miss cannot qualify, and to players who scored in at least
+  {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks, so an
+  injury-shortened season is not counted as a bust.
+
+Ties are listed rather than arbitrated.
+
+## By Season
+
+| Season | MVP | Finals MVP | Newcomer of the Year | Undrafted Player of the Year |
+|--------|-----|------------|----------------------|------------------------------|
+{chr(10).join(season_rows) if season_rows else f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"}
+
+## Draft Awards
+
+Both compare, within a position, where a player was taken against where they finished on season points. **Best Draft Pick** is the largest gain on the slot; **Biggest Bust** is the largest shortfall, restricted to rounds 1-{BUST_MAX_ROUND} so a late-round miss cannot qualify, and to players who scored in at least {int(BUST_MIN_AVAILABILITY * 100)}% of the season's weeks so an injury-shortened season cannot either.
+
+| Season | Best Draft Pick | Biggest Bust |
+|--------|-----------------|--------------|
+{chr(10).join(draft_rows) if draft_rows else f"| {TBD} | {TBD} | {TBD} |"}
+
+## Team of the Season
+
+{chr(10).join(lineups) if lineups else "_No selections recorded._"}
+
+## Career Leaders
+
+{career_block}
+
+## Related
+
+- {wikilink('Seasons')} · {wikilink('Players')} · {wikilink('Records')} · {wikilink('Champions')}
+"""
+
+
+def get_eras(bible: dict) -> list:
+    """The league's eras from the bible, oldest first, unusable entries dropped."""
+    eras = [
+        era
+        for era in (bible.get("eras") or [])
+        if isinstance(era, dict) and era.get("first_season")
+    ]
+    return sorted(eras, key=lambda era: int(era["first_season"]))
+
+
+def era_seasons(era: dict, latest_year=None) -> str:
+    """An era's span: "2018-2025", or "2026-present" while it is still running."""
+    first = int(era["first_season"])
+    last = era.get("last_season")
+    if last:
+        return str(first) if int(last) == first else f"{first}-{int(last)}"
+    if latest_year is not None and latest_year > first:
+        return f"{first}-present"
+    return f"{first}-present"
+
+
+def gen_history_page(bible: dict, seasons: dict) -> str:
+    """Generate the League History page from the bible's `eras` block.
+
+    The platform a season ran on decides whether this wiki has data for it, so
+    the eras are what explain the shape of everything else: why the record books
+    start in 2018, and why a season the league has actually played may have no
+    page. Nothing here is derived - an era is a fact about the league that no
+    capture reports.
+    """
+    eras = get_eras(bible)
+    captured = sorted(seasons)
+    latest = max(captured) if captured else None
+
+    rows = []
+    for era in eras:
+        first = int(era["first_season"])
+        last = int(era["last_season"]) if era.get("last_season") else None
+        in_wiki = [
+            year for year in captured if year >= first and (last is None or year <= last)
+        ]
+        # What the wiki holds for the era, counted rather than claimed: an era
+        # flagged `captured` whose seasons never landed still reads honestly.
+        if len(in_wiki) > 1:
+            held = f"{len(in_wiki)} seasons ({in_wiki[0]}-{in_wiki[-1]})"
+        elif in_wiki:
+            held = f"1 season ({in_wiki[0]})"
+        else:
+            held = "None captured"
+        rows.append(
+            f"| {era.get('name') or TBD} | {era.get('platform') or TBD} "
+            f"| {era_seasons(era, latest)} | {held} |"
+        )
+    if not rows:
+        rows = [f"| {TBD} | {TBD} | {TBD} | {TBD} |"]
+
+    notes = []
+    for era in eras:
+        note = str(era.get("note") or "").strip()
+        if note:
+            notes.append(f"**{era.get('name') or TBD}.** {note}")
+
+    return f"""---
+title: History
+icon: lucide/milestone
+description: The eras of the Pine Hills Fantasy League and the platforms it has run on.
+---
+
+# History
+
+The league has run on more than one platform, and the platform a season ran on
+determines what this wiki records about it. Every page is derived from data
+captured from the platform of its era; a season the league played but nobody
+captured has no page.
+
+## Eras
+
+| Era | Platform | Seasons | In This Wiki |
+|-----|----------|---------|--------------|
+{chr(10).join(rows)}
+
+{(chr(10) + chr(10)).join(notes) if notes else ""}
+
+## Related
+
+- {wikilink('Seasons')} · {wikilink('Teams')} · {wikilink('Records')} · {wikilink('Lore')}
+"""
+
+
+def gen_draft_index(seasons: dict, bible: dict, decisive: dict) -> str:
     rows = []
     for year in sorted(seasons, reverse=True):
-        rows.append(f"| {year} | {wikilink(f'{year} Draft')} | {TBD} |")
+        season_data = seasons[year] if isinstance(seasons, dict) else {}
+        picks = (season_data.get("draft") or {}).get("draft_results") or []
+        rows.append(
+            f"| {wikilink(f'{year} Draft', year)} | {len(picks) or TBD} "
+            f"| {top_draft_contributor(year, season_data, decisive)} |"
+        )
     md = f"""---
 title: Draft History
+icon: lucide/target
 description: Every draft in Pine Hills history, pick by pick.
 ---
 
-# 🎯 Draft History
+# Draft History
 
-The annual rite. Every pick, every reach, every steal. Each draft page lists the full board plus notable reaches and values.
+Every league draft by year. A draft page lists the full board, pick by pick.
+
+The last column names the player from that draft class who swung the most wins, the measure
+defined on {wikilink('Awards')}. A season's MVP applies it to every player, drafted or not.
 
 ## Drafts by Year
 
-| Year | Draft Page | Notable Pick |
-|------|-----------|--------------|
+| Draft | Picks | Most Wins Swung |
+|-------|-------|-----------------|
 {chr(10).join(rows)}
 
-## What a Draft Page Includes
-
-- **Full pick-by-pick board** — round, overall pick, team, player, position.
-- **Reach / Steal flags** — picks that aged well or badly.
-- **Link to post-draft rosters** — see each team's {wikilink('Roster Template')} post-draft roster.
-- **Notable storylines** — the auto-drafter, the guy who fell, the panic pick.
-
-> Documenting a draft? Use the {wikilink('Draft Template')}.
 """
     return md
 
@@ -2403,8 +4081,7 @@ def gen_playoffs_page(
         if not holders:
             return f"| {label} | {TBD} | {TBD} |"
         names = ", ".join(wikilink(owner) for owner, _ in sorted(holders))
-        shared = " (tied)" if len(holders) > 1 else ""
-        return f"| {label}{shared} | {names} | {value(holders[0][1])} |"
+        return f"| {shared_label(label, len(holders))} | {names} | {value(holders[0][1])} |"
 
     contenders = [kv for kv in owner_game_stats.items() if kv[1]["playoff_years"]]
     by_playoff_wins = top_holders(contenders, lambda kv: kv[1]["playoff_wins"])
@@ -2455,12 +4132,13 @@ def gen_playoffs_page(
 
     md = f"""---
 title: Playoffs
-description: Pine Hills Fantasy Football League playoff format, champions, and Finals history.
+icon: lucide/swords
+description: Pine Hills Fantasy League playoff format, champions, and Finals history.
 ---
 
-# 🏆 Playoffs
+# Playoffs
 
-The Pine Hills Fantasy Football League postseason. The bracket decides the title; the regular-season #1 is not the champion unless it wins it.
+The league postseason. The title is decided by the bracket: the regular-season top seed is champion only by winning it.
 
 ## Format
 
@@ -2475,12 +4153,12 @@ The Pine Hills Fantasy Football League postseason. The bracket decides the title
 """
     for year in sorted(seasons, reverse=True):
         champion, _, _, _ = champ_fields(bible, year)
-        md += f"| {wikilink(f'{year} Season', str(year))} | {sizes.get(year, TBD)} | {champion} |\n"
+        md += f"| {wikilink(f'{year} Season', str(year))} | {sizes.get(year, TBD)} | {champ_cell(champion)} |\n"
 
     md += f"""
 ## All-Time Championships
 
-By manager: the trophy follows the person, not the team name they were flying that year.
+Titles follow the manager, not the team name.
 
 | Owner | Titles | Years | Won With |
 |-------|--------|-------|----------|
@@ -2488,7 +4166,7 @@ By manager: the trophy follows the person, not the team name they were flying th
 
 ## Playoff Records
 
-Bracket games only. The postseason keeps its own book: a 200-point week in October is a regular-season record and nothing more. Regular-season records live on {wikilink('Records')}.
+Bracket games only. Regular-season records are on {wikilink('Records')}.
 
 | Record | Holder | Value | When |
 |--------|--------|-------|------|
@@ -2504,7 +4182,7 @@ The title game only.
 
 ## Playoff Player Records
 
-Keyed to the **player**, not the manager. Bracket games only — consolation play runs in the same weeks and is excluded. Each mark names the fantasy team that had the player rostered. The regular-season player book lives on {wikilink('Records')}.
+Keyed to the player rather than the manager. Bracket games only; consolation play runs in the same weeks and is excluded. Each mark names the team that had the player rostered. The regular-season player book is on {wikilink('Records')}.
 
 | Record | Player | Mark | When |
 |--------|--------|------|------|
@@ -2520,7 +4198,9 @@ The title game only.
 
 ## Career Playoff Leaders
 
-By manager, not franchise. Rates qualify at {MIN_PLAYOFF_GAMES_FOR_RATE} playoff games - one full bracket run - and carry their sample, so a thin one is visible rather than hidden.
+By manager. Rate marks carry their sample size.[^playoffrate]
+
+[^playoffrate]: A rate mark qualifies at {MIN_PLAYOFF_GAMES_FOR_RATE} playoff games, one full bracket run. At four, the league's best postseason scoring average disappears from the page.
 
 | Record | Owner | Value |
 |--------|-------|-------|
@@ -2541,7 +4221,7 @@ Every manager who has reached a bracket. Consolation play is excluded.
 """
     for year in sorted(seasons, reverse=True):
         champion, runner_up, _, _ = champ_fields(bible, year)
-        md += f"| {year} | {champion} | {runner_up} | {wikilink(f'{year} Season')} |\n"
+        md += f"| {year} | {champ_cell(champion)} | {champ_cell(runner_up)} | {wikilink(f'{year} Season')} |\n"
 
     md += f"""
 
@@ -2565,7 +4245,10 @@ def gen_root_index(years: list[int], bible: dict) -> list[str]:
     rows = []
     for year in sorted(years, reverse=True):
         champion, runner_up, top_seed, _ = champ_fields(bible, year)
-        rows.append(f"| {year} | {champion} | {runner_up} | {top_seed} |")
+        rows.append(
+            f"| {year} | {champ_cell(champion)} | {champ_cell(runner_up)} "
+            f"| {champ_cell(top_seed)} |"
+        )
     return header + rows
 
 
@@ -2582,14 +4265,39 @@ def main():
     # the fallback for seasons the scraper could not derive.
     bible = apply_derived_champions(bible, seasons)
     bible = apply_derived_owners(bible, seasons)
+    # One player, one name, before anything indexes him. Yahoo and Sleeper spell
+    # the same player differently, so this has to run ahead of every consumer.
+    apply_player_aliases(seasons, bible)
+    # Draft positions the rosters could not fill: the players cut before week one.
+    apply_bible_positions(seasons, bible)
 
     (CONTENT / "seasons").mkdir(parents=True, exist_ok=True)
     (CONTENT / "teams").mkdir(parents=True, exist_ok=True)
     (CONTENT / "owners").mkdir(parents=True, exist_ok=True)
+    (CONTENT / "players").mkdir(parents=True, exist_ok=True)
     (CONTENT / "draft").mkdir(parents=True, exist_ok=True)
     (CONTENT / "records").mkdir(parents=True, exist_ok=True)
 
+    first_captured = min(seasons)
     owner_map = build_owner_map(bible, seasons)
+    # Every team name in league history, pointed at the manager who used it, so
+    # `team_link` can resolve a name to a person. No name in this league has ever
+    # belonged to two managers, so the map is unambiguous.
+    set_team_owners(
+        {
+            team.get("name"): canonical_owner(team.get("owner") or "", owner_map)
+            for year in sorted(seasons)
+            for team in standings_teams(seasons[year])
+            if team.get("name") and team.get("owner")
+        }
+    )
+    # name -> the years it was used, for the Teams directory and each manager's
+    # naming history.
+    team_seasons: dict = {}
+    for year in sorted(seasons):
+        for team in standings_teams(seasons[year]):
+            if team.get("name"):
+                team_seasons.setdefault(team["name"], []).append(year)
     # The matchup log has to come first: bracket membership is what tells both
     # the franchise and the owner aggregates who actually made the playoffs.
     matchup_stats = build_matchup_stats(seasons, bible)
@@ -2600,6 +4308,29 @@ def main():
     season_records = build_season_records(seasons, bible)
     # One pass over every roster row, shared by the Records and Playoffs books.
     player_log = build_player_log(seasons)
+    player_index = build_player_index(seasons, player_log, owner_map)
+    # MVP awards: one pass over the roster weeks joined to the matchup log, then
+    # sliced per season for the pages that name a winner.
+    decisive_wins = build_decisive_wins(player_log, matchup_stats["log"])
+    season_mvps = {year: season_mvp(year, decisive_wins) for year in seasons}
+    finals_mvps = {
+        year: finals_mvp(year, player_log, matchup_stats["log"]) for year in seasons
+    }
+    all_league_teams = {
+        year: team_of_the_season(year, seasons[year], decisive_wins) for year in seasons
+    }
+    debuts = league_debut_years(player_log)
+    newcomers = {
+        year: newcomer_of_the_year(year, decisive_wins, debuts, first_captured)
+        for year in seasons
+    }
+    undrafted_awards = {
+        year: undrafted_player_of_the_year(year, seasons[year], decisive_wins)
+        for year in seasons
+    }
+    player_awards = build_player_awards(
+        season_mvps, finals_mvps, all_league_teams, newcomers, undrafted_awards, seasons
+    )
     owner_game_stats = build_owner_game_stats(seasons, owner_map, matchup_stats)
     print(f"  scanned {len(matchup_stats['log']) // 2} matchups")
 
@@ -2611,7 +4342,17 @@ def main():
         d = seasons[year]
         # season page
         sp = CONTENT / "seasons" / f"{year}-season.md"
-        sp.write_text(dash_normalize(gen_season(year, d, bible, aggregates)))
+        sp.write_text(
+            dash_normalize(
+                gen_season(
+                    year, d, bible, aggregates,
+                    season_mvps.get(year, []), finals_mvps.get(year, []),
+                    all_league_teams.get(year, []),
+                    newcomers.get(year, []), undrafted_awards.get(year, []),
+                    first_captured, owner_map, player_log,
+                )
+            )
+        )
         print(f"  wrote {sp.relative_to(ROOT)}")
 
         # team pages data
@@ -2637,29 +4378,29 @@ def main():
                     dlines.append(
                         # The column is "Overall", so print the overall number:
                         # Yahoo's `pick` restarts at 1 every round.
-                        f"| {p.get('overall', p.get('pick','?'))} | {p.get('round','?')} | {p.get('team','?')} | {p.get('player','?')} | {p.get('position','?')} |"
+                        f"| {p.get('overall', p.get('pick','?'))} | {p.get('round','?')} | {p.get('team','?')} "
+                        f"| {wikilink(p['player']) if p.get('player') else '?'} | {p.get('position','?')} |"
                     )
         dp = CONTENT / "draft" / f"{year}-draft.md"
         dp.write_text(
             dash_normalize(
                 f"---\ntitle: \"{year} Draft\"\ndescription: \"Pine Hills FF {year} draft board.\"\n---\n\n"
-                f"# 🎯 {year} Draft\n\n" + "\n".join(dlines) +
+                f"# {year} Draft\n\n" + "\n".join(dlines) +
                 f"\n\n## Related\n\n- {wikilink('Draft History')} · {wikilink(f'{year} Season')}\n"
             )
         )
         print(f"  wrote {dp.relative_to(ROOT)}")
 
-    # team pages
-    for name, ydata in team_years.items():
-        tp = CONTENT / "teams" / f"{slug(name)}.md"
-        tp.write_text(dash_normalize(gen_team_page(name, ydata, bible, aggregates, owner_map, matchup_stats, seasons)))
-        print(f"  wrote {tp.relative_to(ROOT)}")
+    # No per-team pages. A team name is a per-season label, not a franchise with
+    # a history of its own (see `team_link`), so its history lives on the page of
+    # the manager who used it. The Teams index stays as the directory of names.
 
     all_years = sorted(seasons.keys())
     latest_year = max(all_years) if all_years else None
 
     # owner (manager) pages
     images = get_team_images(bible)
+    warn_slug_collisions("owner", owner_aggregates)
     for owner, record in owner_aggregates.items():
         op = CONTENT / "owners" / f"{slug(owner)}.md"
         op.write_text(dash_normalize(gen_owner_page(owner, record, latest_year, images, owner_game_stats.get(owner, {}))))
@@ -2669,66 +4410,113 @@ def main():
     oip.write_text(dash_normalize(gen_owners_index(owner_aggregates, latest_year)))
     print(f"  wrote {oip.relative_to(ROOT)}")
 
+    # player pages — one per player ever rostered (or drafted and cut)
+    warn_slug_collisions("player", player_index)
+    # The record book, keyed by holder, so a page can name the marks it holds.
+    # The Hall needs the year each mark was set; the pages only need the prose.
+    record_marks = player_record_marks(player_log)
+    player_records = {
+        player: [mark["text"] for mark in marks] for player, marks in record_marks.items()
+    }
+    season_position_highs = player_season_highs(player_log)
+    for player_name, record in player_index.items():
+        pp = CONTENT / "players" / f"{slug(player_name)}.md"
+        pp.write_text(
+            dash_normalize(
+                gen_player_page(
+                    player_name, record, latest_year,
+                    player_awards.get(player_name, {}),
+                    player_records.get(player_name, []),
+                    season_position_highs.get(player_name, {}),
+                )
+            )
+        )
+    print(f"  wrote {len(player_index)} pages -> {(CONTENT / 'players').relative_to(ROOT)}")
+
+    pip = CONTENT / "players" / "index.md"
+    pip.write_text(dash_normalize(gen_players_index(player_index, latest_year)))
+    print(f"  wrote {pip.relative_to(ROOT)}")
+
     # records index
     rp = CONTENT / "records" / "index.md"
-    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats, player_log)))
+    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats, player_log, player_awards)))
     print(f"  wrote {rp.relative_to(ROOT)}")
 
     # teams index
     tip = CONTENT / "teams" / "index.md"
-    tip.write_text(dash_normalize(gen_teams_index(aggregates, bible, owner_map)))
+    tip.write_text(dash_normalize(gen_teams_index(team_seasons, bible, latest_year)))
     print(f"  wrote {tip.relative_to(ROOT)}")
 
     # seasons index
     sip = CONTENT / "seasons" / "index.md"
-    sip.write_text(dash_normalize(gen_seasons_index(all_years, bible)))
+    sip.write_text(dash_normalize(gen_seasons_index(seasons, bible, season_mvps)))
     print(f"  wrote {sip.relative_to(ROOT)}")
 
     # draft index (scoped to real years — avoids broken links to 2018/2019)
     dip = CONTENT / "draft" / "index.md"
-    dip.write_text(dash_normalize(gen_draft_index(all_years, bible)))
+    dip.write_text(dash_normalize(gen_draft_index(seasons, bible, decisive_wins)))
     print(f"  wrote {dip.relative_to(ROOT)}")
 
     # champions + playoffs (NBA-style)
+    ap = CONTENT / "awards.md"
+    ap.write_text(
+        dash_normalize(
+            gen_awards_page(
+                seasons, season_mvps, finals_mvps, newcomers, undrafted_awards,
+                all_league_teams, player_awards, first_captured,
+            )
+        )
+    )
+    print(f"  wrote {ap.relative_to(ROOT)}")
+
+    # The Hall reads the awards and records built above rather than the raw
+    # seasons, so it cannot induct anyone those pages do not credit.
+    hof = CONTENT / "hall-of-fame.md"
+    hof.write_text(
+        dash_normalize(
+            gen_hall_of_fame(
+                hall_of_fame_class(
+                    player_index, player_awards, record_marks, season_position_highs,
+                ),
+                latest_year,
+            )
+        )
+    )
+    print(f"  wrote {hof.relative_to(ROOT)}")
+
+    hp = CONTENT / "history.md"
+    hp.write_text(dash_normalize(gen_history_page(bible, seasons)))
+    print(f"  wrote {hp.relative_to(ROOT)}")
+
+    lp = CONTENT / "lore.md"
+    lp.write_text(dash_normalize(gen_lore_page(bible)))
+    print(f"  wrote {lp.relative_to(ROOT)}")
+
     cp = CONTENT / "champions.md"
-    cp.write_text(dash_normalize(gen_champions_page(all_years, bible)))
+    cp.write_text(dash_normalize(gen_champions_page(seasons, bible, finals_mvps)))
     print(f"  wrote {cp.relative_to(ROOT)}")
     pp = CONTENT / "playoffs.md"
     pp.write_text(dash_normalize(gen_playoffs_page(all_years, bible, matchup_stats, owner_aggregates, owner_game_stats, player_log)))
     print(f"  wrote {pp.relative_to(ROOT)}")
 
-    # root index — rewrite only the champions table, bounded by markers
+    # root index — emit ONLY the champions table, bounded by its markers.
+    #
+    # The home page itself is hand-authored and committed in zensical/docs;
+    # transform.py splices this fragment into it. Writing the fragment
+    # unconditionally is what makes that work: the previous version rewrote
+    # CONTENT/index.md in place "if it exists", and since the stage directory is
+    # built from scratch every run it never did, so the champions table on the
+    # home page was frozen at whatever was last committed.
+    rows = gen_root_index(all_years, bible)
     root = CONTENT / "index.md"
-    if root.exists():
-        rows = gen_root_index(all_years, bible)
-        lines = root.read_text().splitlines()
-        out = []
-        inside = False
-        replaced = False
-        for line in lines:
-            if "<!-- champions-table:start -->" in line:
-                out.append(line)
-                out.extend(rows)
-                inside = True
-                replaced = True
-                continue
-            if "<!-- champions-table:end -->" in line:
-                out.append(line)
-                inside = False
-                continue
-            if inside:
-                continue  # skip old table body between markers
-            out.append(line)
-        if not replaced:
-            # markers missing — fall back to appending before "## Explore"
-            out = []
-            for line in lines:
-                if line.startswith("## 📚 Explore"):
-                    out.extend(rows)
-                    out.append("")
-                out.append(line)
-        root.write_text(dash_normalize("\n".join(out) + "\n"))
-        print(f"  updated {root.relative_to(ROOT)} (champions table)")
+    root.write_text(
+        dash_normalize(
+            "\n".join(["<!-- champions-table:start -->", *rows, "<!-- champions-table:end -->"])
+            + "\n"
+        )
+    )
+    print(f"  wrote {root.relative_to(ROOT)} (champions table fragment)")
+
 
     print("Done generating Markdown.")
 

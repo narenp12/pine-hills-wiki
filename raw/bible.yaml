@@ -1,5 +1,5 @@
 # =============================================================================
-# Pine Hills Fantasy Football League — "League Bible"
+# Pine Hills Fantasy League — "League Bible"
 # -----------------------------------------------------------------------------
 # The single source of truth for HUMAN-ONLY facts that cannot be derived from
 # the captured Yahoo data.
@@ -21,13 +21,45 @@
 #   3. aliases:       if a franchise changed its team name across years, list
 #                     the historical names under one canonical name so its
 #                     history is aggregated correctly.
-#   4. franchise_notes: joined year, status, signature moments, etc.
-#   5. lore:          curses and infamous incidents (community-sourced).
+#   4. player_positions: the position of a player who was drafted and cut before
+#                     the first captured roster, so the data has none anywhere.
+#   5. franchise_notes: joined year, status, signature moments, etc.
+#   6. lore:          curses and infamous incidents (community-sourced).
 # =============================================================================
 
 league:
-  name: Pine Hills Fantasy Football League
+  name: Pine Hills Fantasy League
   established: 2018
+
+# --- Eras --------------------------------------------------------------------
+# The league has not always run on the same platform, and which platform a
+# season ran on decides whether this wiki has data for it at all. Each era is
+# one continuous stretch on one platform, oldest first.
+#
+# Fields: `name` and `platform` are printed; `first_season` is required;
+# `last_season` is omitted while an era is still running; `captured` says
+# whether the seasons in it are in raw/ (leave false until a harvest lands, so
+# the History page never implies data the wiki does not have); `note` is free
+# text for anything worth recording about the move.
+eras:
+  - name: Pine Hills
+    platform: Yahoo Fantasy Football
+    first_season: 2018
+    last_season: 2025
+    captured: true
+    note: >-
+      Eight seasons on Yahoo. Every season, franchise, record and award on this
+      wiki is derived from the Yahoo capture of these years.
+  - name: Pine Hills V2
+    platform: Sleeper
+    first_season: 2026
+    captured: true
+    note: >-
+      The league moved to Sleeper for 2026, as a new ten-team league rather than
+      a continuation of the Yahoo one. Sleeper publishes a free read-only API,
+      so this era needs no browser capture. The draft is captured; the season
+      has not begun, so 2026 carries a roster and a draft board but no record,
+      finish or champion.
 
 # --- Owners -----------------------------------------------------------------
 # team name (as it appears in a season) -> owner name
@@ -35,11 +67,33 @@ owners:
   "Save Me": Naren
 
 # --- Owner aliases (same person, different spelling) -------------------------
-# canonical person -> list of spellings Yahoo has reported for them.
+# canonical person -> list of spellings the data has reported for them.
 # Casing is merged automatically ("lokesh" and "Lokesh" are already one person),
 # so this is only needed for genuinely different spellings or nicknames. The
 # canonical name here is what the owner page is titled and slugged from.
-owner_aliases: {}
+#
+# THIS BLOCK IS WHAT SPANS THE ERAS. Yahoo (2018-2025) reports a manager's first
+# name; Sleeper (2026-) reports the account handle instead, and the two never
+# match on their own. Every handle listed here folds into the person above it,
+# so one manager keeps one owner page across both platforms. A handle left out
+# of this block gets its own page, splitting that manager's history in half.
+owner_aliases:
+# Every 2026 Sleeper manager appears here, so all ten carry their Yahoo history
+# forward. Managers who did not move to Sleeper (Aneesh, Aryan, Jayesh, Jeremy,
+# Om, sahil) need no entry — their Yahoo name is already canonical.
+  # Yahoo reported these two managers under a name that is not their own. The
+  # canonical name is the real person, so that is what titles the owner page,
+  # and every platform spelling folds into it.
+  Abhinav: [Super, silversur4]
+  Lokesh: [lokesh, CurryMan123]
+  Anish: [anishattarde]
+  Kaushal: [kaushpotato]      # team name is "Kaushal's Potatoes"
+  Michael: [micjes71]
+  Naren: [D4rthSi]            # team name "SlidInTheDMs"
+  Pranav: [pranavnar]
+  Sharman: [sharwoman]
+  Tanmay: [bigbootytan]
+  Varun: [vchapa14]           # team name "all hail dallas"
 
 # --- Team images -------------------------------------------------------------
 # team name (as it appears in a season) -> image for that franchise.
@@ -50,6 +104,57 @@ owner_aliases: {}
 # missing from this map simply render without an image.
 #   "Roger That": roger-that.png
 team_images: {}
+
+# --- Player positions (gap-fill only) ----------------------------------------
+# player name (exactly as Yahoo reports it) -> fantasy position.
+#
+# Rosters carry a position for every player; draft boards do not, and
+# backfill_draft_positions() fills the board from the rosters. That leaves the
+# handful of players who were drafted and then cut before the first captured
+# weekly roster with no position anywhere in the data. They are listed here, one
+# per line, with the source that confirms the position.
+#
+# Use Yahoo's fantasy vocabulary (QB / RB / WR / TE / K / DEF), not the NFL's
+# roster designation: the whole site groups and sorts on Yahoo's positions, and
+# a one-player "FB" section would be an artifact of this file rather than of the
+# league. Where the two differ, the note says so.
+player_positions:
+  # nfl.com lists Watt at FB; Yahoo files fullbacks as RB.
+  "Derek Watt": RB           # https://www.nfl.com/players/derek-watt/
+  "Derrius Guice": RB        # https://www.nfl.com/players/derrius-guice/
+  "Doug Baldwin": WR         # https://www.pro-football-reference.com/players/B/BaldDo00.htm
+  "Elijah Arroyo": TE        # https://www.nfl.com/players/elijah-arroyo/
+  "Geronimo Allison": WR     # https://www.nfl.com/players/geronimo-allison/
+  # Drafted as a WR in 2015, moved to RB in 2016 and taken as one in this
+  # league's 2018 draft. nfl.com still lists him WR.
+  "Ty Montgomery II": RB     # https://en.wikipedia.org/wiki/Ty_Montgomery
+
+# --- Player aliases (same player, different spelling) ------------------------
+# canonical player name -> list of spellings the platforms have reported.
+#
+# This is the player-level twin of `owner_aliases`, and it exists for the same
+# reason: Yahoo files a player under his full legal name ("Aaron Jones Sr.")
+# while Sleeper drops the generational suffix ("Aaron Jones"). Without a fold,
+# the platform move in 2026 gives one player two pages and splits his draft and
+# roster history down the middle.
+#
+# The canonical name on the left is what titles the player page, so it should be
+# the fuller, correct form. Every entry below was found by matching a 2026
+# Sleeper name against a 2018-2025 Yahoo name ignoring suffixes; team defenses
+# are handled in the scraper instead, which files them under the nickname the
+# Yahoo era used.
+player_aliases:
+  "Aaron Jones Sr.": ["Aaron Jones"]
+  "Brian Thomas Jr.": ["Brian Thomas"]
+  "Chris Godwin Jr.": ["Chris Godwin"]
+  "Deebo Samuel Sr.": ["Deebo Samuel"]
+  "Harold Fannin Jr.": ["Harold Fannin"]
+  "James Cook III": ["James Cook"]
+  "Kenneth Walker III": ["Kenneth Walker"]
+  "Kyle Pitts Sr.": ["Kyle Pitts"]
+  "Marvin Harrison Jr.": ["Marvin Harrison"]
+  "Michael Pittman Jr.": ["Michael Pittman"]
+  "Travis Etienne Jr.": ["Travis Etienne"]
 
 # --- Champions (playoff winners, NOT regular-season #1) ----------------------
 # All four fields are now DERIVED from the Yahoo v2 API and written into
@@ -78,6 +183,24 @@ aliases: {}
 franchise_notes: {}
 
 # --- Lore --------------------------------------------------------------------
+# Community-sourced league history: the vetoed trades, bad beats, curses and
+# arguments no scoreboard records. This block is the ONLY source for the Lore
+# page - an empty list prints an invitation to fill it in, never an invention.
+#
+# Each entry: `title` and `story` are printed; `year` and `involved` (team or
+# manager names, which become links) are optional. `story` takes a YAML block
+# scalar, so it can run to as many paragraphs as the story needs.
+#
+#   incidents:
+#     - year: 2022
+#       title: The Vetoed Trade
+#       involved: ["Roger That", "Save Me"]
+#       story: |
+#         What happened, and why it is still brought up.
+#   curses:
+#     - title: The Kicker Curse
+#       involved: ["Stroud Boys"]
+#       story: Every kicker they start goes cold the same week.
 lore:
   incidents: []
   curses: []

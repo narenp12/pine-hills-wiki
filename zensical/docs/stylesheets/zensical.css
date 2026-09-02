@@ -11,6 +11,14 @@
   --spacing-sm: 0.75rem;
   --spacing-md: 1rem;
   --border-radius: 6px;
+
+  /* The theme's own font key is off (see zensical.toml): it requested the
+     families with `display=fallback`, whose block period paints text invisible
+     until the webfont arrives. These stacks name a real local fallback, so the
+     first paint is readable whether or not the webfont ever loads. */
+  --md-text-font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --md-code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
 }
 
 /* ---------------------------------------------------------------------------
@@ -44,6 +52,7 @@
   --wiki-border: #d9dbd5;
   --wiki-panel: #f1f2ee;
   --wiki-panel-2: #e6e7e3;
+  --wiki-accent-deep: #0e4529;            /* primary button, hover/focus */
   --wiki-gold: #a67c00;                    /* champion highlight only */
   --wiki-ink: #1b1f1a;
   --wiki-muted: #5b625b;
@@ -82,6 +91,7 @@
   --wiki-border: #2f3431;
   --wiki-panel: #1f2321;
   --wiki-panel-2: #2a2e2c;
+  --wiki-accent-deep: #1e8a53;
   --wiki-gold: #d4af37;
   --wiki-ink: #e6e9e6;
   --wiki-muted: #9aa39a;
@@ -160,9 +170,22 @@
 /* ---------------------------------------------------------------------------
    LINKS / ACCENT
 --------------------------------------------------------------------------- */
-.md-typeset a,
-.md-typeset a:visited { color: var(--md-typeset-a-color); }
-.md-typeset a:hover { color: var(--md-accent-fg-color--light); }
+/* Buttons are excluded from the link colours on purpose.
+
+   A button is an <a>, so it matched `a:visited` - and that selector's
+   specificity (0,2,1) beats `.md-typeset .md-button--primary` (0,2,0), so a
+   visited button took the link colour instead of its own. The link colour is
+   `--md-typeset-a-color`, which is the same pine green as
+   `--md-accent-fg-color`, which is exactly what the primary button paints its
+   background with: green text on a green pill. The label vanished the moment
+   you had been to the page it points at, and came back on hover only because
+   `a:hover` repainted it a lighter green.
+
+   `:not(.md-button)` keeps the link rules off buttons entirely, which leaves
+   the button rules further down to set their own colours in every state. */
+.md-typeset a:not(.md-button),
+.md-typeset a:not(.md-button):visited { color: var(--md-typeset-a-color); }
+.md-typeset a:not(.md-button):hover { color: var(--md-accent-fg-color--light); }
 .md-nav__link--active,
 .md-nav__link--active .md-nav__icon {
   color: var(--md-accent-fg-color) !important;
@@ -460,6 +483,89 @@
   color: var(--md-accent-bg-color);
   background-color: var(--md-accent-fg-color);
   border-color: var(--md-accent-fg-color);
+}
+/* The primary button already wears the accent colour, so the shared :hover rule
+   above repainted it in the colour it was, leaving the site's main call to
+   action with no hover response at all. Deepen it instead. The selector has to
+   out-specify the plain :hover rule, hence the doubled class. */
+.md-typeset .md-button--primary.md-button--primary:hover,
+.md-typeset .md-button--primary.md-button--primary:focus {
+  background-color: var(--wiki-accent-deep);
+  border-color: var(--wiki-accent-deep);
+}
+/* Keyboard users got no focus indicator: the theme's outline was overridden by
+   the rules above and the colour change alone is invisible on the primary
+   button. An offset ring reads on every variant, in both schemes. */
+.md-typeset .md-button:focus-visible {
+  outline: 2px solid var(--wiki-ink);
+  outline-offset: 2px;
+}
+
+/* Stacked hero buttons at phone widths: laid out inline they wrap to a ragged
+   column, each button only as wide as its label. */
+@media screen and (max-width: 44.98em) {
+  .md-content .ph-hero__lead .md-button {
+    display: block;
+    margin: var(--spacing-xs) 0;
+    text-align: center;
+  }
+}
+
+/* "+N more" overflow inside a table cell. The names are in the data; a bare
+   "+4 more" that lists nobody is a dead end, so the rest fold into a
+   disclosure the reader can open in place.
+
+   A browser slots <details> content into a block box whatever the element's
+   own display is, so the revealed names always start a new line. Rather than
+   fight that and lose, the open state is styled as what it is: an indented
+   continuation under a toggle that now reads "show less". */
+.md-typeset details.more {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  font-size: inherit;
+  background: none;
+}
+.md-typeset details.more > summary {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-weight: 500;
+  color: var(--md-accent-fg-color);
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+/* The theme draws its own marker on summary elements; this one is inline text. */
+.md-typeset details.more > summary::marker,
+.md-typeset details.more > summary::-webkit-details-marker {
+  content: "";
+  display: none;
+}
+.md-typeset details.more > summary::before,
+.md-typeset details.more > summary::after {
+  display: none;
+}
+.md-typeset details.more > summary:hover {
+  text-decoration: underline;
+}
+/* One label per state, so the control says what it will do next. */
+.md-typeset details.more > summary .more-hide,
+.md-typeset details.more[open] > summary .more-show {
+  display: none;
+}
+.md-typeset details.more[open] > summary .more-hide {
+  display: inline;
+}
+.md-typeset details.more .more-list {
+  display: block;
+  margin-top: 0.25em;
+  padding-left: 0.6em;
+  border-left: 2px solid var(--wiki-border);
 }
 
 /* Honor reduced motion (no infinite loops are used, but be safe). */

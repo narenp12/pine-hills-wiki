@@ -1,13 +1,13 @@
 ---
 title: "Anish"
-description: "Career record and franchises of Anish in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Anish in the Pine Hills Fantasy League."
 ---
 
-# 🧑 Anish
+# Anish
 
 <div class="infobox">
-  <div class="infobox-title">🧑 Anish</div>
-<div class="infobox-row"><div class="label">Franchises</div><div class="value">4</div></div>
+  <div class="infobox-title">Anish</div>
+<div class="infobox-row"><div class="label">Franchises</div><div class="value"><em class="tbd">TBD</em></div></div>
 <div class="infobox-row"><div class="label">Seasons</div><div class="value">2018-present</div></div>
 <div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
 <div class="infobox-row"><div class="label">All-Time</div><div class="value">56-50 (52.8%)</div></div>
@@ -17,6 +17,7 @@ description: "Career record and franchises of Anish in the Pine Hills Fantasy Fo
 
 
 
+- **Team Names:** 5
 
 ## Career Summary
 
@@ -36,39 +37,43 @@ description: "Career record and franchises of Anish in the Pine Hills Fantasy Fo
 | Average (regular season) | 122.31 |
 | Longest Win Streak | 8 games (2020-2021) |
 
-## Franchises
+## Team Names
+
+5 names across 2018-present.
 
 | Team | Seasons | Record |
 |------|---------|--------|
-| [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 2018-2022 | 31-33 |
-| [Pukakke NaKupp](../teams/pukakke-nakupp.md) | 2023 | 8-6 |
-| [Joe Sheisty](../teams/joe-sheisty.md) | 2024 | 9-5 |
-| [Indiana Jones](../teams/indiana-jones.md) | 2025-present | 8-6 |
+| Anish's Awesome Team | 2018-2022 | 31-33 |
+| Pukakke NaKupp | 2023 | 8-6 |
+| Joe Sheisty | 2024 | 9-5 |
+| Indiana Jones | 2025 | 8-6 |
+| anishattarde | 2026-present | 0-0 |
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than team name, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|
-| [lokesh](lokesh.md) | 8-9 | 0-1 | 2120.14 / 2309.40 | 141.46 - 218.24 (L, 2019 Wk 5) | 128.68 - 123.86 (W, 2020 Wk 13) |
+| [Lokesh](lokesh.md) | 8-9 | 0-1 | 2120.14 / 2309.40 | 141.46 - 218.24 (L, 2019 Wk 5) | 128.68 - 123.86 (W, 2020 Wk 13) |
 | [Naren](naren.md) | 10-7 | - | 2128.38 / 2131.24 | 100.50 - 167.44 (L, 2019 Wk 9) | 119.78 - 121.74 (L, 2024 Wk 16 (consolation)) |
+| [Abhinav](abhinav.md) | 6-10 | 0-2 | 1745.82 / 1940.72 | 103.76 - 185.02 (L, 2022 Wk 2) | 143.48 - 142.58 (W, 2024 Wk 17 (consolation)) |
 | [Pranav](pranav.md) | 8-7-1 | 1-2 | 1982.84 / 2026.30 | 87.96 - 165.74 (L, 2020 Wk 14 (playoffs)) | 143.20 - 143.20 (T, 2018 Wk 8) |
-| [Super](super.md) | 6-10 | 0-2 | 1745.82 / 1940.72 | 103.76 - 185.02 (L, 2022 Wk 2) | 143.48 - 142.58 (W, 2024 Wk 17 (consolation)) |
 | [Sharman](sharman.md) | 8-6 | 1-0 | 1763.62 / 1748.66 | 101.04 - 179.32 (L, 2018 Wk 11) | 119.36 - 117.26 (W, 2019 Wk 13) |
 
 ## Season Log
 
 | Year | Team | W-L | Finish | Playoffs? |
 |------|------|-----|--------|-----------|
-| 2018 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 3-7 | 2 | Yes |
-| 2019 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 7-6 | 6 | Yes |
-| 2020 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 9-4 | 5 | Yes |
-| 2021 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 6-8 | 9 | No |
-| 2022 | [Anish's Awesome Team](../teams/anish-s-awesome-team.md) | 6-8 | 5 | Yes |
-| 2023 | [Pukakke NaKupp](../teams/pukakke-nakupp.md) | 8-6 | 5 | Yes |
-| 2024 | [Joe Sheisty](../teams/joe-sheisty.md) | 9-5 | 7 | Yes |
-| 2025 | [Indiana Jones](../teams/indiana-jones.md) | 8-6 | 5 | Yes |
+| 2018 | Anish's Awesome Team | 3-7 | 2 | Yes |
+| 2019 | Anish's Awesome Team | 7-6 | 6 | Yes |
+| 2020 | Anish's Awesome Team | 9-4 | 5 | Yes |
+| 2021 | Anish's Awesome Team | 6-8 | 9 | No |
+| 2022 | Anish's Awesome Team | 6-8 | 5 | Yes |
+| 2023 | Pukakke NaKupp | 8-6 | 5 | Yes |
+| 2024 | Joe Sheisty | 9-5 | 7 | Yes |
+| 2025 | Indiana Jones | 8-6 | 5 | Yes |
+| 2026 | anishattarde | 0-0 | - | - |
 
 ## Related
 

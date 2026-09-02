@@ -8,9 +8,14 @@ pub mod parse_rendered;
 pub mod parse_v2;
 pub mod scrape;
 pub mod selectors;
+pub mod sleeper;
 
 use clap::{Parser, ValueEnum};
 use std::path::PathBuf;
+
+/// The Sleeper league id for "Pine Hills V2", the 2026 era of this league.
+/// Recorded here so the id lives in the repo rather than in someone's history.
+pub const PINE_HILLS_SLEEPER_LEAGUE: &str = "1393689200049537024";
 
 /// Shared CLI definition (used by the binary and the lib's browser glue).
 #[derive(Parser)]
@@ -82,6 +87,31 @@ pub struct Cli {
     /// preserved.
     #[arg(long)]
     pub from_v2: Option<PathBuf>,
+
+    /// Build raw/<year>.json from the Sleeper API for this league id (no browser,
+    /// no key, no harvest step — Sleeper's read-only API is public).
+    ///
+    /// This is the 2026+ "Pine Hills V2" era. It writes a season file the same
+    /// way the Yahoo paths do; the Yahoo seasons (2018-2025) are untouched.
+    ///
+    /// Pine Hills V2 is league 1393689200049537024, which is what the flag
+    /// defaults to when given no value — the same courtesy `--league-id` does
+    /// for the Yahoo era. A Sleeper league id is stable for one season; a later
+    /// season gets a new id, chained backward by `previous_league_id`.
+    #[arg(long, num_args = 0..=1, default_missing_value = PINE_HILLS_SLEEPER_LEAGUE)]
+    pub sleeper_league: Option<String>,
+
+    /// Last week to treat as played, for `--sleeper-league`. Sleeper publishes
+    /// the whole schedule up front, so without a bound an in-progress season
+    /// would emit unplayed weeks as 0-0 games. Auto-detected from `/state/nfl`
+    /// when omitted.
+    #[arg(long)]
+    pub sleeper_weeks: Option<u32>,
+
+    /// Where to cache Sleeper's ~15 MB player dictionary. Deleting the file
+    /// forces a refresh; Sleeper asks that it be pulled at most once a day.
+    #[arg(long, default_value = ".cache/sleeper-players-nfl.json")]
+    pub sleeper_player_cache: PathBuf,
 
     /// Which datasets to extract. Standings+Draft are proven; Matchups+Roster are
     /// EXPERIMENTAL (unvalidated SPA selectors — may yield empty/mis-attributed data).

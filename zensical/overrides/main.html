@@ -30,6 +30,12 @@
   which, for a league wiki, is the group chat. This block adds the tags every
   unfurler actually reads.
 #}
+{#
+  No font preconnect here on purpose: `extrahead` renders after the stylesheet
+  links, so a preconnect in this block cannot warm a connection the font
+  request has already opened. The fonts are requested from extra_css with
+  `display=swap`, which is what actually keeps first paint readable.
+#}
 {% block extrahead %}
   {% if page.meta and page.meta.description %}
     {% set og_description = page.meta.description %}

@@ -14,7 +14,7 @@ def test_gen_season_basic(tmp_path: pathlib.Path):
     # Minimal aggregates (empty dict is acceptable for this test)
     aggregates = {}
     md = gen_season(2025, season, bible, aggregates)
-    assert "# 🏈 2025 Season" in md
+    assert "# 2025 Season" in md
     assert "**Champion:** _TBD_" in md
     assert "Team X" in md
 

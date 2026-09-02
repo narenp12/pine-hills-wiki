@@ -25,6 +25,15 @@ document$.subscribe(function () {
     var headRow = table.tHead && table.tHead.rows[0];
     if (!headRow || !table.tBodies[0]) return;
 
+    // Record books label a shared record once and leave the continuation rows'
+    // first cell blank, so those rows read as one group. Sorting would scatter
+    // them away from the label that names them, leaving blank-labelled rows
+    // stranded - so a grouped table is left unsorted rather than broken.
+    var grouped = Array.prototype.some.call(table.tBodies[0].rows, function (row) {
+      return row.cells[0] && !row.cells[0].textContent.trim();
+    });
+    if (grouped) return;
+
     Array.prototype.forEach.call(headRow.cells, function (th, index) {
       var label = th.textContent.trim();
       if (!label) return;

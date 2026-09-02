@@ -15,7 +15,7 @@ use anyhow::Result;
 use clap::Parser;
 
 use phf_scraper::model::Season;
-use phf_scraper::{Cli, Dataset, extract, parse_v2, scrape, selectors};
+use phf_scraper::{Cli, Dataset, extract, parse_v2, scrape, selectors, sleeper};
 
 fn parse_seasons(s: &str) -> Vec<u32> {
     let mut out = Vec::new();
@@ -177,6 +177,64 @@ fn build_from_v2(cli: &Cli, dir: &std::path::Path, sel: &selectors::Selectors) -
     Ok(())
 }
 
+/// Build one season's raw/<year>.json from Sleeper's public API.
+///
+/// Unlike the Yahoo paths this writes the file outright rather than merging:
+/// Sleeper serves standings, matchups, rosters, bracket AND the draft from one
+/// league id, so a fresh `Season` is complete and has nothing to preserve.
+async fn build_from_sleeper(cli: &Cli, league_id: &str) -> Result<()> {
+    let client = reqwest::Client::builder()
+        .user_agent(concat!("phf-scraper/", env!("CARGO_PKG_VERSION")))
+        .build()?;
+
+    let league = reqwest::Client::get(
+        &client,
+        format!("{}/league/{league_id}", sleeper::API_BASE),
+    )
+    .send()
+    .await?
+    .json::<serde_json::Value>()
+    .await?;
+
+    let scored = match cli.sleeper_weeks {
+        Some(week) => week,
+        None => sleeper::scored_through(&client, &league).await?,
+    };
+    let name = league["name"].as_str().unwrap_or("");
+    let year = league["season"].as_str().unwrap_or("");
+    println!(">> Sleeper league {league_id} ({name}, {year}), scored through week {scored}");
+
+    // The player dictionary is only needed to name players on weekly rosters.
+    let players = if scored == 0 {
+        Default::default()
+    } else {
+        sleeper::load_players(&client, &cli.sleeper_player_cache).await?
+    };
+
+    let payloads = sleeper::fetch_payloads(&client, league_id, scored, players).await?;
+    let season = sleeper::build_season(&payloads, scored)?;
+
+    std::fs::create_dir_all(&cli.out)?;
+    let dest = cli.out.join(format!("{}.json", season.season));
+    std::fs::write(&dest, serde_json::to_string_pretty(&season)?)?;
+
+    let champ = season
+        .champions
+        .as_ref()
+        .map(|c| c.champion.clone())
+        .unwrap_or_default();
+    println!(
+        "   wrote {}  (teams={}, picks={}, weeks={}, champion={:?})",
+        dest.display(),
+        season.teams.teams.len(),
+        season.draft.draft_results.len(),
+        season.matchups.len(),
+        champ
+    );
+    println!("\n>> done. Next: run scripts/generate.py to build the wiki.");
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
@@ -211,6 +269,11 @@ async fn main() -> Result<()> {
     // Offline build from harvested v2 API payloads (no Yahoo, no browser).
     if let Some(dir) = &cli.from_v2 {
         return build_from_v2(&cli, dir, &sel);
+    }
+
+    // Sleeper era (2026+): straight off the public API, no browser.
+    if let Some(league_id) = &cli.sleeper_league {
+        return build_from_sleeper(&cli, league_id).await;
     }
 
     let seasons = parse_seasons(&cli.seasons);

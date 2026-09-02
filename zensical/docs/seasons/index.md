@@ -1,33 +1,27 @@
 ---
 title: Seasons
-description: Year-by-year history of the Pine Hills Fantasy Football League.
+icon: lucide/calendar
+description: Year-by-year history of the Pine Hills Fantasy League.
 ---
 
-# 📅 Seasons
+# Seasons
 
-Every completed season of the Pine Hills Fantasy Football League. Click a year for the full breakdown - standings, playoff bracket, draft, awards, and the story of the year.
+Every completed season of the league, with its champion and MVP. A season page carries the final
+standings, playoff bracket, draft board, weekly rosters and computed awards. The MVP is defined
+on [Awards](../awards.md).
 
 ## Season Index
 
-| Year | Champion | Notable Story | Page |
-|------|----------|---------------|------|
-| 2025 | Jeremy's Neat Team | _TBD_ | [2025 Season](2025-season.md) |
-| 2024 | Stroud Boys | _TBD_ | [2024 Season](2024-season.md) |
-| 2023 | Super Squirrels | _TBD_ | [2023 Season](2023-season.md) |
-| 2022 | Jeremy's Neat Team | _TBD_ | [2022 Season](2022-season.md) |
-| 2021 | varun’s victorious team | _TBD_ | [2021 Season](2021-season.md) |
-| 2020 | Roger That | _TBD_ | [2020 Season](2020-season.md) |
-| 2019 | Curry’s legit team | _TBD_ | [2019 Season](2019-season.md) |
-| 2018 | Curry’s legit team | _TBD_ | [2018 Season](2018-season.md) |
+| Year | Champion | Most Valuable Player |
+|------|----------|----------------------|
+| [2026](2026-season.md) | _TBD_ | _TBD_ |
+| [2025](2025-season.md) | Jeremy's Neat Team | [Ja'Marr Chase](../players/ja-marr-chase.md) - 6 wins swung |
+| [2024](2024-season.md) | Stroud Boys | [Jalen Hurts](../players/jalen-hurts.md) - 7 wins swung |
+| [2023](2023-season.md) | Super Squirrels | [Josh Allen](../players/josh-allen.md) - 8 wins swung |
+| [2022](2022-season.md) | Jeremy's Neat Team | [Jalen Hurts](../players/jalen-hurts.md) - 6 wins swung |
+| [2021](2021-season.md) | varun's victorious team | [Cooper Kupp](../players/cooper-kupp.md) - 6 wins swung |
+| [2020](2020-season.md) | Roger That | [Kyler Murray](../players/kyler-murray.md) - 9 wins swung |
+| [2019](2019-season.md) | Curry's legit team | [Dalvin Cook](../players/dalvin-cook.md) - 6 wins swung |
+| [2018](2018-season.md) | Curry's legit team | [Adam Thielen](../players/adam-thielen.md) - 6 wins swung |
 
-## How Seasons Are Documented
-
-Each season page follows a standard template:
-
-1. **Final Standings** - regular season record, points for/against, playoff seed.
-2. **Playoff Results** - bracket, champion, consolation winner.
-3. **Draft Recap** - link to that year's [Draft History](../draft/index.md) page.
-4. **Awards** - champion, top scorer, biggest bust, "Poultry Controversy" nominee.
-5. **Lore** - the defining moments worth remembering.
-
-> Want to fill one in? Copy the template from <span class="wiki-new" title="This page has not been written yet">Season Template</span> and edit away.
+*[MVP]: Most Valuable Player

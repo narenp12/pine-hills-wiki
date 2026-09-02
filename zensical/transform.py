@@ -30,6 +30,47 @@ REPO = Path(__file__).resolve().parent.parent
 STAGE = REPO / "zensical" / ".stage"   # raw generated Markdown (gitignored)
 DST = REPO / "zensical" / "docs"        # final Zensical sources
 
+# Shorthand the tables use in column headers and lineup-slot cells. Zensical's
+# default extension set includes `abbr`, and the theme has `content.tooltips`
+# on, so a definition here renders as a hover tooltip wherever the term appears.
+# Defining them per page rather than in the config keeps the whole thing out of
+# zensical.toml, where declaring one markdown_extensions key would silently
+# replace the entire default set.
+GLOSSARY = {
+    "PHFL": "Pine Hills Fantasy League",
+    "PF": "Points For - total points a team scored",
+    "PA": "Points Against - total points scored against a team",
+    "W/R/T": "Flex slot - a receiver, back or tight end may start in it",
+    "BN": "Bench - rostered that week, but not in the starting lineup",
+    "IR": "Injured Reserve",
+    "QB": "Quarterback",
+    "RB": "Running back",
+    "WR": "Wide receiver",
+    "TE": "Tight end",
+    "DEF": "Team defense",
+    "MVP": "Most Valuable Player",
+}
+# Whole-token match: "PA" must not fire inside "PART", and "TE" must not fire
+# inside a player's name. Slashes are excluded on both sides so "W/R/T" matches
+# as one token while "R" and "T" alone never do.
+_GLOSSARY_RES = {
+    term: re.compile(rf"(?<![\w/]){re.escape(term)}(?![\w/])")
+    for term in GLOSSARY
+}
+
+
+def with_glossary(md: str) -> str:
+    """Append `*[TERM]: definition` lines for the shorthand this page uses.
+
+    Only terms the page actually contains are defined, so a player page does not
+    carry a definition of PF it never uses.
+    """
+    used = [term for term, rx in _GLOSSARY_RES.items() if rx.search(md)]
+    if not used:
+        return md
+    defs = "\n".join(f"*[{term}]: {GLOSSARY[term]}" for term in used)
+    return f"{md.rstrip()}\n\n{defs}\n"
+
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 TITLE_CLEAN = re.compile(r"\s+")
 # Headings are authored with a leading emoji ("# 🏈 2025 Season"). Strip any
@@ -38,7 +79,9 @@ TITLE_CLEAN = re.compile(r"\s+")
 LEADING_SYMBOLS = re.compile(r"^[^\w]+", re.UNICODE)
 
 # Pages intentionally forward-referenced (red-links like Starlight wiki-new).
-FORWARD_REFS = {"lore", "roster", "post-draft", "end-of-season"}
+# "lore" is NOT here: generate.py emits lore.md on every run, so the link
+# resolves whether or not the bible has any entries yet.
+FORWARD_REFS = {"roster", "post-draft", "end-of-season"}
 # Per-team/per-year roster pages that generate.py links to but does not yet
 # emit, e.g. "2021 save-me Post-Draft". Matched as a suffix so the whole family
 # is recognised as forward-referenced rather than looking broken.
@@ -252,6 +295,7 @@ def main() -> None:
     title_map = build_title_map(STAGE)
     print(f"[transform] title map size: {len(title_map)}")
     count = 0
+    written: set[str] = set()
     for f in sorted(STAGE.rglob("*.md")):
         rel = f.relative_to(STAGE).as_posix()
         out = transform(f.read_text(), title_map, rel)
@@ -266,11 +310,40 @@ def main() -> None:
             merged = inject_champions_table(dst.read_text(), out)
             out = transform(merged, title_map, rel)
         dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_text(dash_normalize(out))
+        dst.write_text(with_glossary(dash_normalize(out)))
+        written.add(rel)
         count += 1
     print(f"[transform] wrote {count} pages -> {DST}")
+    prune_stale(written)
     print("[transform] NOTE: zensical/docs/stylesheets and zensical/docs/javascripts "
           "are hand-authored skin assets kept in git; this script never touches them.")
+
+
+# Pages in zensical/docs that are hand-authored rather than generated, and so
+# must survive a prune. index.md is the site's hero page; build.mjs documents it
+# as committed chrome that the generator never writes.
+HAND_AUTHORED = {"index.md"}
+
+
+def prune_stale(written: set[str]) -> None:
+    """Delete generated pages that this run did not write.
+
+    Without this the site keeps serving pages for things that no longer exist.
+    Renaming a manager in the bible (Yahoo's "Super" -> the real "Abhinav") adds
+    owners/abhinav.md but leaves owners/super.md behind, so the same person's
+    history is live at two URLs, one of them frozen and wrong.
+    """
+    stale = [
+        f
+        for f in sorted(DST.rglob("*.md"))
+        if f.relative_to(DST).as_posix() not in written
+        and f.relative_to(DST).as_posix() not in HAND_AUTHORED
+    ]
+    for f in stale:
+        f.unlink()
+        print(f"[transform] pruned stale {f.relative_to(DST).as_posix()}")
+    if stale:
+        print(f"[transform] pruned {len(stale)} stale pages")
 
 
 def inject_champions_table(committed: str, generated: str) -> str:

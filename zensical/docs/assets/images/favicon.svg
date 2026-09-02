@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1b1f1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25">
+  <!--
+    The site logo (lucide/tree-pine) as the browser-tab icon. Lucide ships the
+    path with stroke="currentColor", which resolves to nothing in a favicon
+    context, so the stroke is set outright here.
+
+    A favicon is one static file drawn against whatever chrome the browser
+    paints, so the near-black of the light palette disappears on a dark tab
+    strip. The media query swaps in the dark palette's foreground; browsers
+    that ignore CSS inside an SVG favicon keep the light-mode stroke, which is
+    the safer of the two to fall back to.
+  -->
+  <style>
+    @media (prefers-color-scheme: dark) {
+      path { stroke: #e6e9e6; }
+    }
+  </style>
+  <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7zM12 22v-3"/>
+</svg>

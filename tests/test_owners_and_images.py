@@ -96,7 +96,7 @@ def load_transform():
     return module
 
 
-TEAM_PAGE = """# 🏈 Roger That
+TEAM_PAGE = """# Roger That
 
 - **Image:** ![Roger That](../assets/teams/roger-that.png)
 - **Owner:** [Pranav](../owners/pranav.md)
@@ -125,7 +125,7 @@ def test_infobox_lifts_image_and_link_out_of_the_lead():
 
 def test_owner_infobox_uses_its_own_fields():
     transform = load_transform()
-    page = """# 🧑 Naren
+    page = """# Naren
 
 - **Franchises:** 8
 - **Seasons:** 2018-present
@@ -375,9 +375,14 @@ def test_a_shared_record_lists_every_holder():
     assert len(book["nailbiter"]) == 2
     assert {row["team"] for row in book["nailbiter"]} == {"A", "B"}
 
-    rendered = [row for row in single_game_rows(book) if "Closest Game" in row]
-    assert len(rendered) == 2
-    assert all("(tied)" in row for row in rendered)
+    rendered = single_game_rows(book)
+    labelled = [row for row in rendered if "Closest Game" in row]
+    # The label is written once, with the count, and the second holder runs
+    # under it in a row whose label cell is blank.
+    assert len(labelled) == 1
+    assert "Closest Game (2-way tie)" in labelled[0]
+    continuation = rendered[rendered.index(labelled[0]) + 1]
+    assert continuation.startswith("|  |")
 
 
 def test_tie_counts_as_half_a_win_in_totals():

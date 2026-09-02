@@ -1,15 +1,15 @@
 ---
 title: "Jayesh"
-description: "Career record and franchises of Jayesh in the Pine Hills Fantasy Football League."
+description: "Career record and team names of Jayesh in the Pine Hills Fantasy League."
 ---
 
-# 🧑 Jayesh
+# Jayesh
 
 <div class="infobox">
-  <div class="infobox-title">🧑 Jayesh</div>
-<div class="infobox-row"><div class="label">Franchises</div><div class="value">1</div></div>
-<div class="infobox-row"><div class="label">Seasons</div><div class="value">2024-present</div></div>
-<div class="infobox-row"><div class="label">Status</div><div class="value">Active</div></div>
+  <div class="infobox-title">Jayesh</div>
+<div class="infobox-row"><div class="label">Franchises</div><div class="value"><em class="tbd">TBD</em></div></div>
+<div class="infobox-row"><div class="label">Seasons</div><div class="value">2024-2025</div></div>
+<div class="infobox-row"><div class="label">Status</div><div class="value">Former</div></div>
 <div class="infobox-row"><div class="label">All-Time</div><div class="value">12-16 (42.9%)</div></div>
 <div class="infobox-row"><div class="label">Points For/Ag.</div><div class="value">2784.60 / 3129.46</div></div>
 <div class="infobox-row"><div class="label">Championships</div><div class="value">0</div></div>
@@ -17,6 +17,7 @@ description: "Career record and franchises of Jayesh in the Pine Hills Fantasy F
 
 
 
+- **Team Names:** 1
 
 ## Career Summary
 
@@ -36,15 +37,17 @@ description: "Career record and franchises of Jayesh in the Pine Hills Fantasy F
 | Average (regular season) | 99.45 |
 | Longest Win Streak | 3 games (2024) |
 
-## Franchises
+## Team Names
+
+One name throughout.
 
 | Team | Seasons | Record |
 |------|---------|--------|
-| [Jayesh's Great Team](../teams/jayesh-s-great-team.md) | 2024-present | 12-16 |
+| Jayesh's Great Team | 2024-2025 | 12-16 |
 
 ## Rivalries
 
-Head-to-head against the person, not the franchise: both sides can have renamed several times over. Every meeting counts, playoffs included, most-played opponents first.
+Head-to-head by manager rather than team name, since either side may have renamed. Every meeting counts, playoffs included; most-played opponents first.
 
 | Opponent | H2H Record | Playoffs | Points For / Against | Biggest Rout | Closest Meeting |
 |----------|-----------|----------|----------------------|--------------|-----------------|
@@ -58,8 +61,8 @@ Head-to-head against the person, not the franchise: both sides can have renamed 
 
 | Year | Team | W-L | Finish | Playoffs? |
 |------|------|-----|--------|-----------|
-| 2024 | [Jayesh's Great Team](../teams/jayesh-s-great-team.md) | 6-8 | 2 | Yes |
-| 2025 | [Jayesh's Great Team](../teams/jayesh-s-great-team.md) | 6-8 | 10 | No |
+| 2024 | Jayesh's Great Team | 6-8 | 2 | Yes |
+| 2025 | Jayesh's Great Team | 6-8 | 10 | No |
 
 ## Related
 

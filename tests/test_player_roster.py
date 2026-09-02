@@ -372,8 +372,11 @@ def test_regular_player_book_excludes_postseason():
 
     rows = player_book_rows(build_player_log(finals_season()), PHASE_REGULAR)
     # Weeks rostered counts time on a roster regardless of phase, so it lists
-    # postseason players by design; the single-week marks must not.
-    weekly = [r for r in rows if "Most Weeks Rostered" not in r]
+    # postseason players by design; the single-week marks must not. A shared
+    # record labels its first row only, so the block is cut at that label rather
+    # than filtered row by row - the continuation rows carry no label to match.
+    start = next(i for i, row in enumerate(rows) if "Most Weeks Rostered" in row)
+    weekly = rows[:start]
     joined = "\n".join(weekly)
     assert "Regular Guy" in joined
     assert "Semi Guy" not in joined
