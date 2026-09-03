@@ -43,7 +43,9 @@ jobs:
       # join and the champion flags the build then renders, so a capture that
       # broke one of them should fail here rather than deploy a wrong page.
       - name: Run tests
-        run: uv run pytest -q
+        run: |
+          uv run pytest -q
+          node --test tests/js/
 
       - name: Build Zensical site
         run: node zensical/build.mjs
