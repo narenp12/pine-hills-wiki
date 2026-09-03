@@ -38,6 +38,13 @@ def test_a_markdown_link_is_never_split():
     assert any(link in line for line in lines)
 
 
+def test_a_wikilink_is_never_split():
+    """A wikilink holds spaces, so wrapping on them would break the link."""
+    link = "[[2022 Season#Playoff Bracket|quarterfinal]]"
+    lines = wrap_story(f"The Scorpions went 11-3 and lost the {link} 131.46 to 152.22.")
+    assert any(link in line for line in lines)
+
+
 def test_a_list_keeps_its_line_breaks():
     """Joining these would render one run-on sentence instead of three items."""
     lines = wrap_story("- first\n- second\n- third")

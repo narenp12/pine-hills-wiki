@@ -3617,6 +3617,13 @@ LORE_WRAP = 76
 # list items, headings, quotes, tables, code fences. Joining those lines would
 # turn a list into one run-on sentence, so such a block is passed through.
 STRUCTURED_LINE = re.compile(r"^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>|\||```|    \S)")
+# A wikilink is one unit that happens to contain spaces ("[[2022 Season#Playoff
+# Bracket|quarterfinal]]"). textwrap only refuses to split *words*, so without
+# this the wrapper breaks a link across two lines and the raw text renders.
+# Spaces inside a link are swapped for a character no story can contain, wrapped
+# as one word, then swapped back.
+WIKILINK = re.compile(r"\[\[[^\]]*\]\]")
+NBSP_SENTINEL = "\x00"
 
 
 def wrap_story(story: str) -> list:
@@ -3639,9 +3646,12 @@ def wrap_story(story: str) -> list:
             continue
         # Never split a word: a Markdown link is one "word" with no spaces in
         # it, and breaking one mid-URL would render the raw text instead.
+        text = " ".join(" ".join(lines).split())
+        text = WIKILINK.sub(lambda m: m.group(0).replace(" ", NBSP_SENTINEL), text)
         out.extend(
-            textwrap.wrap(
-                " ".join(" ".join(lines).split()),
+            line.replace(NBSP_SENTINEL, " ")
+            for line in textwrap.wrap(
+                text,
                 width=LORE_WRAP,
                 initial_indent="    ",
                 subsequent_indent="    ",
