@@ -12,6 +12,11 @@ from pathlib import Path
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+# Five of these are unused today and are reserved on purpose, so please do not
+# prune them: canonical_owner, slug and standings_teams are needed by the
+# remaining query tables, and load_bible/load_raw by build_all() and main().
+# F401 is suppressed for that reason, E402 because the sys.path line above has
+# to run before this import resolves.
 from scripts.generate import (  # noqa: E402, F401
     canonical_owner,
     get_owners,
