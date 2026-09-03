@@ -1,22 +1,30 @@
 """Build the Stat Search query tables from the captured league data.
 
-Reads through scripts.generate.load_raw() rather than raw/*.json directly, so
-this inherits apostrophe normalization, draft position backfill, and overall
-pick numbering. Stat Search and the generated pages therefore see identical
-data by construction.
+Reads through scripts.generate's own loaders rather than raw/*.json directly.
+load_raw() supplies apostrophe normalization, draft position backfill and
+overall pick numbering; load_league() below adds the four passes generate's
+main() applies on top of it, in the same order. Stat Search and the generated
+pages therefore see identical data by construction -- which is only true while
+load_league() stays in step with main(), so change the two together.
 """
 
+import json
 import os
 import sys
+import tempfile
 from pathlib import Path
+
+import duckdb
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# load_bible and load_raw are unused here but are the entry points build_all()
-# and main() will call. F401 is suppressed for those, E402 because the sys.path
-# line above has to run before this import resolves.
-from scripts.generate import (  # noqa: E402, F401
+# E402: the sys.path line above has to run before this import resolves.
+from scripts.generate import (  # noqa: E402
+    CONTENT,
+    apply_bible_positions,
     apply_derived_champions,
+    apply_derived_owners,
+    apply_player_aliases,
     build_game_log,
     build_owner_map,
     build_player_log,
@@ -30,72 +38,154 @@ from scripts.generate import (  # noqa: E402, F401
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# The DuckDB type of every column, declared rather than inferred. DuckDB would
+# happily guess from the first row it is handed, and the guess is wrong wherever
+# a column is empty in the rows it sampled -- an all-blank `round` reads as
+# VARCHAR either way, but an all-zero `seed` sampled from an unplayed season
+# would type the whole column off ten pre-season rows. Declaring it also keeps
+# schema.json's advertised types stable across a re-capture, which is what the
+# browser's operator menus are built from.
+#
+# `round` is the one name that means two things: the bracket label ("Final") in
+# the game tables and the draft round number in the draft table. Hence a type
+# map per table rather than one shared map.
+
 # One row per team per game, so the 615 captured games become 1,230 rows.
-MATCHUP_COLUMNS = (
-    "year",
-    "week",
-    "phase",
-    "round",
-    "owner",
-    "team",
-    "score",
-    "opp_owner",
-    "opp_team",
-    "opp_score",
-    "margin",
-    "won",
-    "tied",
+MATCHUP_SCHEMA = (
+    ("year", "INTEGER"),
+    ("week", "INTEGER"),
+    ("phase", "VARCHAR"),
+    ("round", "VARCHAR"),
+    ("owner", "VARCHAR"),
+    ("team", "VARCHAR"),
+    ("score", "DOUBLE"),
+    ("opp_owner", "VARCHAR"),
+    ("opp_team", "VARCHAR"),
+    ("opp_score", "DOUBLE"),
+    ("margin", "DOUBLE"),
+    ("won", "BOOLEAN"),
+    ("tied", "BOOLEAN"),
 )
 
 # One row per roster slot per week, bench and IR included, so the whole roster
 # is queryable and not just the starting lineup.
-PLAYER_WEEK_COLUMNS = (
-    "year",
-    "week",
-    "phase",
-    "round",
-    "owner",
-    "team",
-    "player",
-    "player_slug",
-    "position",
-    "slot",
-    "started",
-    "points",
+PLAYER_WEEK_SCHEMA = (
+    ("year", "INTEGER"),
+    ("week", "INTEGER"),
+    ("phase", "VARCHAR"),
+    ("round", "VARCHAR"),
+    ("owner", "VARCHAR"),
+    ("team", "VARCHAR"),
+    ("player", "VARCHAR"),
+    ("player_slug", "VARCHAR"),
+    ("position", "VARCHAR"),
+    ("slot", "VARCHAR"),
+    ("started", "BOOLEAN"),
+    ("points", "DOUBLE"),
 )
 
 # One row per team per season, so the 88 captured team-seasons become 88 rows.
 # The four title columns are booleans rather than a single "result" string: a
 # team can be both runner-up and regular-season top seed in one year, and twice
 # has been.
-TEAM_SEASON_COLUMNS = (
-    "year",
-    "owner",
-    "team",
-    "wins",
-    "losses",
-    "pf",
-    "pa",
-    "rank",
-    "seed",
-    "champion",
-    "runner_up",
-    "top_seed",
-    "toilet",
+TEAM_SEASON_SCHEMA = (
+    ("year", "INTEGER"),
+    ("owner", "VARCHAR"),
+    ("team", "VARCHAR"),
+    ("wins", "INTEGER"),
+    ("losses", "INTEGER"),
+    ("pf", "DOUBLE"),
+    ("pa", "DOUBLE"),
+    ("rank", "INTEGER"),
+    ("seed", "INTEGER"),
+    ("champion", "BOOLEAN"),
+    ("runner_up", "BOOLEAN"),
+    ("top_seed", "BOOLEAN"),
+    ("toilet", "BOOLEAN"),
 )
 
 # One row per draft pick, so the 1,320 captured picks become 1,320 rows.
-DRAFT_COLUMNS = (
-    "year",
-    "round",
-    "pick",
-    "overall",
-    "player",
-    "player_slug",
-    "position",
-    "owner",
-    "team",
+DRAFT_SCHEMA = (
+    ("year", "INTEGER"),
+    ("round", "INTEGER"),
+    ("pick", "INTEGER"),
+    ("overall", "INTEGER"),
+    ("player", "VARCHAR"),
+    ("player_slug", "VARCHAR"),
+    ("position", "VARCHAR"),
+    ("owner", "VARCHAR"),
+    ("team", "VARCHAR"),
 )
+
+# The column names alone, in emit order. Derived from the schemas above rather
+# than typed out a second time, so a column can never be declared with a type
+# and omitted from the name list or the reverse.
+MATCHUP_COLUMNS = tuple(name for name, _ in MATCHUP_SCHEMA)
+PLAYER_WEEK_COLUMNS = tuple(name for name, _ in PLAYER_WEEK_SCHEMA)
+TEAM_SEASON_COLUMNS = tuple(name for name, _ in TEAM_SEASON_SCHEMA)
+DRAFT_COLUMNS = tuple(name for name, _ in DRAFT_SCHEMA)
+
+# Parquet file stem -> its column schema. The browser fetches these four names.
+TABLE_SCHEMAS = {
+    "matchups": MATCHUP_SCHEMA,
+    "player_weeks": PLAYER_WEEK_SCHEMA,
+    "team_seasons": TEAM_SEASON_SCHEMA,
+    "draft": DRAFT_SCHEMA,
+}
+TABLES = tuple(TABLE_SCHEMAS)
+
+# Every column carrying an owner. Named here rather than sniffed by suffix so
+# the emitter's owner check below covers `opp_owner` too: a blank on the
+# opponent side of a matchup row breaks a head-to-head query just as completely.
+OWNER_COLUMNS = ("owner", "opp_owner")
+
+# The columns the UI offers as a dropdown instead of a free-text box, so
+# schema.json ships their distinct values. Low cardinality is the whole test:
+# 16 owners, 9 years, 3 phases, 6 positions, 9 roster slots. `team` is not here
+# on purpose -- 60-odd names, and it is a text search in the UI.
+ENUM_COLUMNS = ("owner", "position", "slot", "phase", "year")
+
+
+def load_league() -> tuple[dict, dict]:
+    """Return (seasons, bible) normalized exactly as generate.main() has them.
+
+    `load_raw` is only half of the pipeline. main() runs four more passes before
+    anything indexes a player, and each one changes a value this module emits,
+    so the builder runs the same four in the same order (generate.py:4729-4735):
+
+    `apply_derived_champions` overlays the scraper's per-season champions block
+    onto the bible. team_season_rows' four title flags are read from there, and
+    the bible's own block is placeholders, so skipping this flags no champion in
+    any season.
+
+    `apply_derived_owners` fills the bible's team-name -> manager map from the
+    data. The owner join here goes through `owner_aliases` rather than that map,
+    so it changes no value today; it is run anyway because a builder whose load
+    path has silently diverged from main()'s is the failure this function
+    exists to prevent.
+
+    `apply_player_aliases` folds the platforms' two spellings of one player onto
+    one name. Without it 11 of the 2026 Sleeper picks keep the short spelling
+    and their `player_slug` points at a page that was never written --
+    "aaron-jones" against the "aaron-jones-sr" the wiki actually holds -- which
+    defeats the only reason the column exists. The weekly rosters escape it
+    solely because 2026 has no captured games yet.
+
+    `apply_bible_positions` fills the draft positions no captured roster could,
+    from the bible's hand-sourced block: 6 more of the 1,320 picks, taking
+    position coverage from 98.11% to 98.56%, matching the wiki's draft board.
+
+    Both passes that take a bible mutate it in place and return it; the seasons
+    passes only mutate. Loading here rather than taking a caller's dicts keeps
+    that mutation inside this function.
+    """
+    seasons = load_raw()
+    bible = load_bible()
+    bible = apply_derived_champions(bible, seasons)
+    bible = apply_derived_owners(bible, seasons)
+    apply_player_aliases(seasons, bible)
+    apply_bible_positions(seasons, bible)
+    return seasons, bible
 
 
 def owner_index(seasons: dict, bible: dict) -> dict:
@@ -227,6 +317,11 @@ def team_season_rows(seasons: dict, bible: dict, owners: dict) -> list[dict]:
     instead would be wrong twice over: 2020's standings carry two teams at rank
     7, and the regular-season top seed is champion only by winning the bracket.
 
+    That overlay is `load_league`'s job, not this function's, and `bible` must
+    arrive already carrying it. It used to run here, which read as a projection
+    while quietly rewriting the caller's dict -- and through a module-scoped
+    test fixture that made the champion flags depend on which test ran first.
+
     Added here: `owner`, joined on (year, team) so a career reads as one
     manager's across a rename, and the four title columns as booleans, so a
     query can filter on them without string-matching a team name.
@@ -236,7 +331,6 @@ def team_season_rows(seasons: dict, bible: dict, owners: dict) -> list[dict]:
     kept with rank 0, seed 0 and no titles. Rank 0 is the scraper's "no finish
     known", and dropping the rows would hide a captured season entirely.
     """
-    bible = apply_derived_champions(bible, seasons)
     rows = []
     for year in sorted(seasons):
         titles = champ_year(bible, year)
@@ -294,12 +388,20 @@ def draft_rows(seasons: dict, owners: dict) -> list[dict]:
     same thing on both platforms -- Sleeper's raw `pick` is the overall number.
     Also `owner`, joined on (year, team), and `player_slug`, the path the player
     pages are written to, so a result row can link to players/<slug>/.
+
+    A pick `annotate_overall_picks` could not number -- a forfeited or
+    auto-skipped slot, which reaches it with no round or no within-round number
+    -- is dropped rather than sorted. Sorting it would place it at 0, ahead of
+    the whole draft, and shift every `pick` in its round by one. The capture
+    holds no such pick today, so the drop is currently a no-op; the per-season
+    pick counts in the tests are what makes it visible if one ever appears.
     """
     rows = []
     for year in sorted(seasons):
         picks = (seasons[year].get("draft") or {}).get("draft_results") or []
+        numbered = [pick for pick in picks if int(pick.get("overall") or 0) > 0]
         within_round: dict[int, int] = {}
-        for pick in sorted(picks, key=lambda p: int(p.get("overall") or 0)):
+        for pick in sorted(numbered, key=lambda p: int(p["overall"])):
             round_number = int(pick.get("round") or 0)
             within_round[round_number] = within_round.get(round_number, 0) + 1
             team = str(pick.get("team") or "").strip()
@@ -318,3 +420,170 @@ def draft_rows(seasons: dict, owners: dict) -> list[dict]:
                 }
             )
     return rows
+
+
+def build_tables(seasons: dict, bible: dict) -> dict:
+    """{table name: rows} for all four tables, off one shared owner index.
+
+    One `owner_index` call, not four: the point of the join key is that every
+    table resolves a manager the same way, and four independent calls is four
+    chances for one of them to be built from a different argument.
+    """
+    owners = owner_index(seasons, bible)
+    return {
+        "matchups": matchup_rows(seasons, bible, owners),
+        "player_weeks": player_week_rows(seasons, owners),
+        "team_seasons": team_season_rows(seasons, bible, owners),
+        "draft": draft_rows(seasons, owners),
+    }
+
+
+def _load_table(con, name: str, rows: list[dict]) -> None:
+    """Create `name` with its declared types and load `rows`, owners checked.
+
+    The owner check is here, in the emitter, rather than only in the tests. Every
+    table is joined on a person, and a blank owner is not a queryable value: it
+    silently drops that row out of every "by owner" grouping the UI can build,
+    and it does so without an error anywhere. Failing the build is the only
+    outcome that cannot ship. A blank reaches this point when the standings
+    block names a team the matchup or draft data does not, so the fix is in the
+    capture, never here.
+
+    The empty-table check is the same argument one level up: all four tables are
+    non-empty in the capture, so an empty one means the load path broke, and a
+    zero-row Parquet file would leave the UI querying nothing at all.
+
+    The rows go in through a temporary newline-delimited JSON file rather than
+    an INSERT, because DuckDB's Python parameter binding converts one value at a
+    time: the 19,881-row roster table takes 23 seconds that way and 0.07 through
+    read_json. JSON rather than CSV because CSV cannot tell an empty string from
+    a NULL, and two of these columns are legitimately blank -- `round` on every
+    non-bracket game, `position` on an unrostered draftee -- which CSV would turn
+    into nulls the UI would then have to special-case. `columns` is passed
+    explicitly so nothing is inferred from the file: the declared type is the
+    type, and a value the declaration cannot hold fails the build rather than
+    widening the column under it.
+    """
+    columns = TABLE_SCHEMAS[name]
+    names = [column for column, _ in columns]
+    if not rows:
+        raise ValueError(f"{name} has no rows; the capture never produces this")
+    # Every row of a table is built from one dict literal, so the first row
+    # settles the key set for all of them. An extra key would otherwise be
+    # dropped from the Parquet file in silence.
+    if set(rows[0]) != set(names):
+        raise ValueError(f"{name} rows carry {sorted(rows[0])}, declared {names}")
+    for column in OWNER_COLUMNS:
+        if column not in names:
+            continue
+        blank = [row for row in rows if not str(row[column] or "").strip()]
+        if blank:
+            raise ValueError(
+                f"{name}: {len(blank)} rows with a blank {column}, "
+                f"first {blank[0]}"
+            )
+    declared = ", ".join(f"'{column}': '{sql_type}'" for column, sql_type in columns)
+    with tempfile.TemporaryDirectory() as work:
+        staged = Path(work) / f"{name}.jsonl"
+        with staged.open("w", encoding="utf-8") as handle:
+            for row in rows:
+                handle.write(json.dumps({column: row[column] for column in names}))
+                handle.write("\n")
+        con.execute(
+            f'CREATE TABLE "{name}" AS SELECT * FROM read_json('
+            f"'{staged.as_posix()}', columns = {{{declared}}}, "
+            f"format = 'newline_delimited')"
+        )
+
+
+def _schema(con) -> dict:
+    """The dict written to schema.json: per-table columns and row counts.
+
+    Read back out of DuckDB with DESCRIBE rather than restated from
+    TABLE_SCHEMAS, so what the file advertises is the table the COPY actually
+    wrote: a column the load dropped or reordered is reported as it is, not as
+    this module declared it.
+
+    `enums` is flat, one entry per column name rather than per (table, column),
+    because the UI's dropdowns are: a `position` filter offers the same list
+    whether the query is over rosters or over draft picks. Blanks are dropped --
+    a blank is "not captured", and an empty dropdown row is unclickable noise.
+    """
+    tables = {}
+    for name in TABLES:
+        described = con.execute(f'DESCRIBE "{name}"').fetchall()
+        row_count = con.execute(f'SELECT count(*) FROM "{name}"').fetchone()[0]
+        tables[name] = {
+            "columns": [
+                {"name": column, "type": sql_type}
+                for column, sql_type, *_ in described
+            ],
+            "row_count": int(row_count),
+        }
+    enums = {}
+    for column in ENUM_COLUMNS:
+        values = set()
+        for name in TABLES:
+            if column not in dict(TABLE_SCHEMAS[name]):
+                continue
+            found = con.execute(
+                f'SELECT DISTINCT "{column}" FROM "{name}" '
+                f'WHERE "{column}" IS NOT NULL'
+            ).fetchall()
+            values.update(row[0] for row in found if str(row[0]).strip())
+        # Sorted, so re-running the build rewrites the same bytes and a diff of
+        # schema.json shows what the capture changed and nothing else.
+        enums[column] = sorted(values)
+    return {"tables": tables, "enums": enums}
+
+
+def build_all(content_dir) -> dict:
+    """Write the four Parquet tables and schema.json under <content>/query/.
+
+    Parquet rather than a shipped DuckDB database file: the browser engine reads
+    Parquet over HTTP range requests, so a query that touches one column of one
+    table fetches roughly that column. ZSTD because the columns are mostly low
+    cardinality strings repeated thousands of times -- the four tables together
+    come to 137 KB against a 1 MB budget, and the roster table is 97 KB of it.
+
+    schema.json is what the UI is built from. It carries every column with its
+    type, so the operator menus can offer numeric comparisons only on numeric
+    columns, and the distinct values of the five low-cardinality columns, so the
+    owner / year / phase / position / slot pickers are populated without the
+    page first downloading a table to find out what is in it.
+
+    Returns the schema dict so a caller that wants to render the query page from
+    the same data does not have to read the file back.
+    """
+    out = Path(content_dir) / "query"
+    out.mkdir(parents=True, exist_ok=True)
+    seasons, bible = load_league()
+    tables = build_tables(seasons, bible)
+    con = duckdb.connect()
+    try:
+        for name, rows in tables.items():
+            _load_table(con, name, rows)
+            target = (out / f"{name}.parquet").as_posix()
+            con.execute(
+                f'COPY "{name}" TO \'{target}\' '
+                f"(FORMAT PARQUET, COMPRESSION ZSTD)"
+            )
+            print(f"  wrote {target} ({len(rows)} rows)")
+        schema = _schema(con)
+    finally:
+        con.close()
+    # sort_keys and the trailing newline are what make a rebuild byte-identical
+    # when the capture has not changed, so the file is diffable in a review.
+    (out / "schema.json").write_text(
+        json.dumps(schema, indent=2, sort_keys=True) + "\n"
+    )
+    print(f"  wrote {(out / 'schema.json').as_posix()}")
+    return schema
+
+
+def main():
+    build_all(CONTENT)
+
+
+if __name__ == "__main__":
+    main()

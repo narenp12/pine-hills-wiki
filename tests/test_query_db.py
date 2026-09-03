@@ -4,19 +4,29 @@ Like tests/test_mvp_curse.py these run on raw/ rather than a fixture, because
 the claims are about the committed data as much as the code: the row count, the
 owner join and the phase tagging are all properties of what was captured.
 """
+import json
 import os
+import pathlib
 import sys
 
+import duckdb
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from scripts.build_query_db import (
     DRAFT_COLUMNS as DECLARED_DRAFT_COLUMNS,
+    ENUM_COLUMNS,
     MATCHUP_COLUMNS as DECLARED_MATCHUP_COLUMNS,
     PLAYER_WEEK_COLUMNS as DECLARED_PLAYER_WEEK_COLUMNS,
+    TABLE_SCHEMAS,
+    TABLES,
     TEAM_SEASON_COLUMNS as DECLARED_TEAM_SEASON_COLUMNS,
+    _load_table,
+    build_all,
+    build_tables,
     draft_rows,
+    load_league,
     matchup_rows,
     owner_index,
     player_week_rows,
@@ -24,6 +34,14 @@ from scripts.build_query_db import (
 )
 from scripts.generate import (
     BENCH_SLOTS,
+    apply_bible_positions,
+    apply_derived_champions,
+    apply_derived_owners,
+    apply_player_aliases,
+    build_owner_map,
+    build_player_alias_map,
+    build_player_index,
+    build_player_log,
     load_bible,
     load_raw,
     season_has_games,
@@ -143,6 +161,12 @@ EXPECTED_CHAMPIONS = {
 # platform spellings together. Joining without that fold reports 26.
 EXPECTED_OWNER_COUNT = 16
 
+# All ten managers who own a 2026 team have run one before, so the Sleeper
+# season adds nobody new. Pinned rather than given slack: a returning manager
+# who failed to fold would drop this by one and nothing else here would notice.
+# Move it deliberately when the league next takes on a new manager.
+EXPECTED_RETURNING_OWNERS = 10
+
 DRAFT_COLUMNS = {
     "year",
     "round",
@@ -178,42 +202,117 @@ EXPECTED_DRAFT_PICKS_BY_YEAR = {
 # blank rather than being guessed at.
 MIN_DRAFT_POSITION_COVERAGE = 0.95
 
+# The picks no roster and no bible entry could fill, pinned exactly. The floor
+# above is the readable claim; this is the one with teeth. Dropping
+# apply_bible_positions from the load path leaves 25 blank and still clears the
+# floor at 98.11%, so a coverage ratio alone cannot see a skipped normalization.
+# This moves when the bible's player_positions block next grows.
+EXPECTED_DRAFT_PICKS_WITHOUT_POSITION = 19
+
 PHASES = {"regular", "playoff", "consolation"}
 
 # Fantasy games can end level and Yahoo drops those from the standings W-L
 # entirely, so a tie must not read as a loss. This is the only one on record.
 TIE_YEAR, TIE_WEEK = 2018, 8
 
+# One players/<slug>.md per player ever rostered or drafted. This rises when
+# 2026 is played and its rosters bring in players nobody has drafted.
+EXPECTED_PLAYER_PAGES = 606
+
+# The five Parquet columns the browser turns into dropdowns.
+EXPECTED_ENUM_COLUMNS = {"owner", "position", "slot", "phase", "year"}
+
+# The whole point of Parquet over a shipped database file: the tables have to
+# stay small enough to fetch over a range request on a phone. The four together
+# are an order of magnitude inside this today.
+MAX_PARQUET_BYTES = 1_000_000
+
 
 @pytest.fixture(scope="module")
 def league():
+    """The builder's own normalized load, not a bare load_raw().
+
+    `load_league` is where the four passes generate.main() applies live, and
+    two of them change values these tests assert on -- the player slugs and the
+    champion flags. Loading raw here instead would test a data shape the
+    emitter never sees.
+    """
+    return load_league()
+
+
+@pytest.fixture(scope="module")
+def owners(league):
+    """The single owner index every table joins through.
+
+    One index, built once and shared, because that is the claim being tested:
+    four tables resolving a manager the same way. Four fixtures each calling
+    `owner_index` again would still pass if the tables disagreed about which
+    arguments to build it from.
+    """
+    seasons, bible = league
+    return owner_index(seasons, bible)
+
+
+@pytest.fixture(scope="module")
+def wiki_player_pages():
+    """The slugs of the players/<slug>.md pages generate.main() actually writes.
+
+    Loaded and normalized here independently of the `league` fixture, in main()'s
+    order, so this is a reference the builder is measured against rather than a
+    restatement of what the builder did. Deriving it from the builder's own
+    seasons would reproduce whatever normalization the builder skipped, and the
+    comparison would hold by construction -- which is precisely how the two
+    `player_slug == slug(player)` assertions this replaces came to prove nothing.
+    """
     seasons = load_raw()
     bible = load_bible()
-    return seasons, bible
+    bible = apply_derived_champions(bible, seasons)
+    bible = apply_derived_owners(bible, seasons)
+    apply_player_aliases(seasons, bible)
+    apply_bible_positions(seasons, bible)
+    index = build_player_index(
+        seasons, build_player_log(seasons), build_owner_map(bible, seasons)
+    )
+    pages = {slug(name) for name in index}
+    assert len(pages) == EXPECTED_PLAYER_PAGES, len(pages)
+    return pages
 
 
 @pytest.fixture(scope="module")
-def rows(league):
+def rows(league, owners):
     seasons, bible = league
-    return matchup_rows(seasons, bible, owner_index(seasons, bible))
+    return matchup_rows(seasons, bible, owners)
 
 
 @pytest.fixture(scope="module")
-def player_rows(league):
-    seasons, bible = league
-    return player_week_rows(seasons, owner_index(seasons, bible))
+def player_rows(league, owners):
+    seasons, _ = league
+    return player_week_rows(seasons, owners)
 
 
 @pytest.fixture(scope="module")
-def team_rows(league):
+def team_rows(league, owners):
     seasons, bible = league
-    return team_season_rows(seasons, bible, owner_index(seasons, bible))
+    return team_season_rows(seasons, bible, owners)
 
 
 @pytest.fixture(scope="module")
-def picks(league):
-    seasons, bible = league
-    return draft_rows(seasons, owner_index(seasons, bible))
+def picks(league, owners):
+    seasons, _ = league
+    return draft_rows(seasons, owners)
+
+
+@pytest.fixture(scope="module")
+def emitted(tmp_path_factory):
+    """build_all() run once into a temp dir, with its schema and output path.
+
+    Module-scoped because it walks the whole capture and writes four Parquet
+    files; the idempotency check below builds its own second copy rather than
+    reusing this one, since that is the thing it is measuring.
+    """
+    out_root = tmp_path_factory.mktemp("query_db")
+    schema = build_all(out_root)
+    return schema, out_root / "query"
 
 
 @pytest.fixture(scope="module")
@@ -253,7 +352,8 @@ def test_the_owner_join_canonicalizes_every_spelling(league, team_rows):
     # the 2026 rows join a second copy of every returning manager.
     latest = {row["owner"] for row in team_rows if row["year"] == max(seasons)}
     assert latest <= joined - {""}
-    assert len(latest & {row["owner"] for row in team_rows if row["year"] < 2026}) >= 9
+    earlier = {row["owner"] for row in team_rows if row["year"] < max(seasons)}
+    assert len(latest & earlier) == EXPECTED_RETURNING_OWNERS
 
 
 def test_every_table_joins_the_same_owner_vocabulary(rows, player_rows, team_rows, picks):
@@ -414,10 +514,18 @@ def test_every_player_week_row_joins_an_owner(player_rows):
         assert row["owner"], f"blank owner in {row}"
 
 
-def test_player_slug_matches_the_player_page_slug(player_rows):
-    """The slug is the link target for players/<slug>/, so it cannot drift."""
+def test_player_slug_resolves_to_a_page_the_wiki_writes(
+    player_rows, wiki_player_pages
+):
+    """The slug is the link target for players/<slug>/, so it must exist.
+
+    Comparing it against `slug(row["player"])` would prove nothing: that is the
+    expression the builder computes it with. The claim worth making is that the
+    page is there, which is a claim about the NAME -- an unfolded spelling slugs
+    perfectly well and links nowhere.
+    """
     for row in player_rows:
-        assert row["player_slug"] == slug(row["player"]), row
+        assert row["player_slug"] in wiki_player_pages, row
 
 
 def test_started_is_false_exactly_on_the_bench(player_rows):
@@ -613,10 +721,34 @@ def test_every_draft_row_names_a_player(picks):
         assert row["player"], row
 
 
-def test_draft_player_slug_matches_the_player_page_slug(picks):
-    """The slug is the link target for players/<slug>/, so it cannot drift."""
+def test_draft_player_slug_resolves_to_a_page_the_wiki_writes(
+    picks, wiki_player_pages
+):
+    """The draft table is where the unfolded names actually landed.
+
+    Eleven 2026 Sleeper picks -- Aaron Jones, Kyle Pitts, Marvin Harrison and
+    eight more -- reach the builder under the short spelling, and each one slugs
+    to a path the wiki never wrote. The weekly rosters escape it only because
+    2026 has no captured games yet, so this is the check that fails first.
+    """
     for row in picks:
-        assert row["player_slug"] == slug(row["player"]), row
+        assert row["player_slug"] in wiki_player_pages, row
+
+
+def test_the_player_page_set_is_a_real_constraint(league, wiki_player_pages):
+    """Guards the two checks above from holding for any spelling at all.
+
+    They are only worth running while an unfolded name genuinely has no page.
+    If every alias variant also got one -- because the fold stopped happening
+    upstream, say -- both would pass on exactly the data they exist to reject.
+    """
+    _, bible = league
+    aliases = build_player_alias_map(bible)
+    assert aliases, "no player aliases; the slug checks would be vacuous"
+    unwritten = {
+        variant for variant in aliases if slug(variant) not in wiki_player_pages
+    }
+    assert unwritten, "every alias variant has a page of its own"
 
 
 def test_draft_overall_is_a_gapless_sequence_per_season(picks):
@@ -674,6 +806,32 @@ def test_draft_positions_are_almost_all_filled(picks):
     coverage = len(filled) / len(picks)
     assert coverage > MIN_DRAFT_POSITION_COVERAGE, f"only {coverage:.1%} filled"
     assert coverage < 1.0, "every position filled; the backfill note is stale"
+    blank = len(picks) - len(filled)
+    assert blank == EXPECTED_DRAFT_PICKS_WITHOUT_POSITION, blank
+
+
+def test_an_unnumbered_pick_is_dropped_rather_than_sorted_to_the_front():
+    """A pick annotate_overall_picks could not number must not reorder a round.
+
+    Synthetic, because the capture holds no such pick: a forfeited or
+    auto-skipped slot reaches the builder with no `overall`, and reading that as
+    0 sorts it ahead of the entire draft and shifts every `pick` in its round by
+    one. Only round 2 shows the damage — the ghost would take pick 1 and push
+    the real first pick of the round to 2.
+    """
+    season = {
+        "draft": {
+            "draft_results": [
+                {"round": 1, "overall": 1, "player": "A", "team": "T"},
+                {"round": 1, "overall": 2, "player": "B", "team": "T"},
+                {"round": 2, "overall": 3, "player": "C", "team": "T"},
+                {"round": 2, "player": "Forfeited", "team": "T"},
+            ]
+        }
+    }
+    rows = draft_rows({2099: season}, {(2099, "T"): "Someone"})
+    assert [row["player"] for row in rows] == ["A", "B", "C"]
+    assert [(row["round"], row["pick"]) for row in rows] == [(1, 1), (1, 2), (2, 1)]
 
 
 def test_draft_teams_are_teams_that_played_that_season(picks, team_rows):
@@ -681,3 +839,244 @@ def test_draft_teams_are_teams_that_played_that_season(picks, team_rows):
     known = {(row["year"], row["team"]) for row in team_rows}
     for row in picks:
         assert (row["year"], row["team"]) in known, row
+
+
+# --------------------------------------------------------------------------- #
+# the emitter: Parquet + schema.json
+# --------------------------------------------------------------------------- #
+def test_build_all_writes_a_parquet_file_per_table(emitted):
+    _, out = emitted
+    for table in TABLES:
+        assert (out / f"{table}.parquet").is_file(), table
+    assert (out / "schema.json").is_file()
+
+
+def test_build_all_returns_the_schema_it_wrote(emitted):
+    """The query page is rendered from the return value, not from a re-read."""
+    schema, out = emitted
+    assert schema == json.loads((out / "schema.json").read_text())
+
+
+def test_the_schema_describes_every_table(emitted):
+    schema, _ = emitted
+    assert set(schema["tables"]) == set(TABLES)
+
+
+def test_the_schema_reports_the_declared_columns_and_types(emitted):
+    """What the file advertises has to be what DuckDB actually typed.
+
+    Read back with DESCRIBE, so a column DuckDB widened or reordered on insert
+    shows up here rather than reaching the browser, which builds its operator
+    menus from these types -- offering a numeric comparison on a column stored
+    as text produces a query that returns nothing and reports no error.
+    """
+    schema, _ = emitted
+    for table, declared in TABLE_SCHEMAS.items():
+        reported = [
+            (column["name"], column["type"])
+            for column in schema["tables"][table]["columns"]
+        ]
+        assert reported == list(declared), table
+
+
+def test_the_schema_types_describe_the_values_the_rows_carry(
+    emitted, rows, player_rows, team_rows, picks
+):
+    """The declaration itself has to be right, not merely self-consistent.
+
+    The check above compares what DuckDB reports against what this module
+    declared, which both move together if the declaration is simply wrong. This
+    one derives the type from the Python values the builders produced, so a
+    `seed` declared VARCHAR — which DuckDB would cast to without complaint, and
+    which would then sort 10 before 2 in the browser — fails here.
+    """
+    from_python = {bool: "BOOLEAN", int: "INTEGER", float: "DOUBLE", str: "VARCHAR"}
+    built = {
+        "matchups": rows,
+        "player_weeks": player_rows,
+        "team_seasons": team_rows,
+        "draft": picks,
+    }
+    schema, _ = emitted
+    for table, table_rows in built.items():
+        reported = {c["name"]: c["type"] for c in schema["tables"][table]["columns"]}
+        for column, sql_type in reported.items():
+            # type(), not isinstance: bool subclasses int, so an isinstance
+            # walk would type every flag column as INTEGER.
+            seen = {type(row[column]) for row in table_rows}
+            assert len(seen) == 1, f"{table}.{column} holds {seen}"
+            assert from_python[seen.pop()] == sql_type, f"{table}.{column}"
+
+
+def test_the_schema_row_counts_match_the_builders(emitted, rows, player_rows,
+                                                  team_rows, picks):
+    schema, _ = emitted
+    counts = {table: schema["tables"][table]["row_count"] for table in TABLES}
+    assert counts == {
+        "matchups": len(rows),
+        "player_weeks": len(player_rows),
+        "team_seasons": len(team_rows),
+        "draft": len(picks),
+    }
+    # The builders are pinned to the capture above; restate the totals here so a
+    # schema that reported a count matching two equally wrong tables still fails.
+    assert counts["matchups"] == EXPECTED_MATCHUP_ROWS
+    assert counts["player_weeks"] == EXPECTED_PLAYER_WEEK_ROWS
+    assert counts["team_seasons"] == EXPECTED_TEAM_SEASON_ROWS
+    assert counts["draft"] == EXPECTED_DRAFT_ROWS
+
+
+def test_the_schema_carries_a_dropdown_list_for_every_enum_column(emitted):
+    schema, _ = emitted
+    assert set(ENUM_COLUMNS) == EXPECTED_ENUM_COLUMNS
+    for column in ENUM_COLUMNS:
+        assert schema["enums"].get(column), f"no distinct values for {column}"
+
+
+def test_the_enum_lists_are_the_values_the_tables_hold(emitted, league, team_rows):
+    """A dropdown built from a stale or truncated list silently hides rows.
+
+    The owner list is the one that matters most: it is 16 people, and a query
+    UI that offers 15 of them makes one manager's career unreachable with no
+    error anywhere.
+    """
+    schema, _ = emitted
+    seasons, _bible = league
+    enums = schema["enums"]
+    assert set(enums["owner"]) == {row["owner"] for row in team_rows}
+    assert len(enums["owner"]) == EXPECTED_OWNER_COUNT
+    assert set(enums["phase"]) == PHASES
+    assert set(enums["year"]) == set(seasons)
+    assert set(enums["slot"]) >= BENCH_SLOTS
+    # Blanks are dropped: an unclickable empty row in a dropdown is not a filter.
+    for column in ENUM_COLUMNS:
+        assert "" not in enums[column], column
+
+
+def test_the_enum_lists_are_sorted(emitted):
+    """Sorted is what makes a rebuild byte-identical and a diff readable."""
+    schema, _ = emitted
+    for column, values in schema["enums"].items():
+        assert values == sorted(values), column
+
+
+def test_the_parquet_tables_fit_the_transfer_budget(emitted):
+    schema, out = emitted
+    sizes = {t: (out / f"{t}.parquet").stat().st_size for t in TABLES}
+    total = sum(sizes.values())
+    assert total < MAX_PARQUET_BYTES, sizes
+    for table, size in sizes.items():
+        assert size > 0, table
+    assert schema  # the sizes above are of the files this schema describes
+
+
+def test_the_parquet_files_hold_the_rows_the_schema_claims(emitted):
+    """Query the written files, not the in-memory tables that produced them.
+
+    Everything above measures the dicts. This is the only check that the COPY
+    actually landed the rows in a file a browser could read back.
+    """
+    schema, out = emitted
+    con = duckdb.connect()
+    try:
+        for table in TABLES:
+            path = (out / f"{table}.parquet").as_posix()
+            count = con.execute(
+                f"SELECT count(*) FROM read_parquet('{path}')"
+            ).fetchone()[0]
+            assert count == schema["tables"][table]["row_count"], table
+    finally:
+        con.close()
+
+
+def test_no_owner_column_reaches_parquet_blank(emitted):
+    """The spec's "no NULL owners in any table", checked on the shipped files.
+
+    A blank owner drops its row out of every group-by the UI can build without
+    raising anywhere, so it is enforced in the emitter; this is the end-to-end
+    confirmation that the enforcement survives the COPY.
+    """
+    _, out = emitted
+    con = duckdb.connect()
+    try:
+        for table, columns in TABLE_SCHEMAS.items():
+            path = (out / f"{table}.parquet").as_posix()
+            for column, _type in columns:
+                if column not in ("owner", "opp_owner"):
+                    continue
+                bad = con.execute(
+                    f"SELECT count(*) FROM read_parquet('{path}') "
+                    f'WHERE "{column}" IS NULL OR trim("{column}") = \'\''
+                ).fetchone()[0]
+                assert bad == 0, f"{table}.{column} has {bad} blank rows"
+    finally:
+        con.close()
+
+
+def test_the_emitter_refuses_a_blank_owner(team_rows):
+    """The structural guard, exercised on a row the capture cannot produce.
+
+    Without this the "no blank owners" rule lives only in the assertions above,
+    which run against today's capture; a future one that lost a standings entry
+    would ship a hole in the owner column instead of failing the build.
+    """
+    doctored = [dict(row) for row in team_rows]
+    doctored[0]["owner"] = ""
+    con = duckdb.connect()
+    try:
+        with pytest.raises(ValueError, match="blank owner"):
+            _load_table(con, "team_seasons", doctored)
+    finally:
+        con.close()
+
+
+def test_the_emitter_refuses_a_blank_opponent_owner(rows):
+    """The opponent side too: a head-to-head query joins on both."""
+    doctored = [dict(row) for row in rows]
+    doctored[0]["opp_owner"] = "   "
+    con = duckdb.connect()
+    try:
+        with pytest.raises(ValueError, match="blank opp_owner"):
+            _load_table(con, "matchups", doctored)
+    finally:
+        con.close()
+
+
+def test_the_emitter_refuses_an_empty_table():
+    """All four tables are non-empty in the capture, so empty means broken."""
+    con = duckdb.connect()
+    try:
+        with pytest.raises(ValueError, match="no rows"):
+            _load_table(con, "draft", [])
+    finally:
+        con.close()
+
+
+def test_the_emitter_refuses_a_row_with_an_undeclared_column(picks):
+    """An extra key would otherwise be dropped from the Parquet file silently."""
+    doctored = [dict(row) for row in picks]
+    for row in doctored:
+        row["keeper"] = False
+    con = duckdb.connect()
+    try:
+        with pytest.raises(ValueError, match="declared"):
+            _load_table(con, "draft", doctored)
+    finally:
+        con.close()
+
+
+def test_build_tables_returns_one_entry_per_declared_table(league):
+    seasons, bible = league
+    tables = build_tables(seasons, bible)
+    assert set(tables) == set(TABLES)
+    for table, table_rows in tables.items():
+        assert table_rows, table
+        assert set(table_rows[0]) == {c for c, _ in TABLE_SCHEMAS[table]}, table
+
+
+def test_rebuilding_rewrites_an_identical_schema(tmp_path: pathlib.Path):
+    """Idempotent, so a rebuild in CI produces no diff to review."""
+    build_all(tmp_path)
+    first = (tmp_path / "query" / "schema.json").read_text()
+    build_all(tmp_path)
+    assert (tmp_path / "query" / "schema.json").read_text() == first
