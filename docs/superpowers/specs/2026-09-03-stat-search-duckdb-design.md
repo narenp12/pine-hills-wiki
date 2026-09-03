@@ -162,10 +162,24 @@ and `apply_bible_positions` (`scripts/generate.py:2335`) covers players who were
 drafted then cut before week one, from `raw/bible.yaml`. Picks that match neither
 stay blank rather than being guessed.
 
-Both normalizations run inside `load_raw()` (`scripts/generate.py:129`), so the
-builder gets them free by calling that function instead of parsing `raw/*.json`
-itself. The builder imports `load_raw`; it writes no draft normalization logic of
-its own.
+`backfill_draft_positions` and `annotate_overall_picks` run inside `load_raw()`
+(`scripts/generate.py:150-152`), so the builder gets both free by calling that
+function instead of parsing `raw/*.json` itself. It writes no draft
+normalization logic of its own.
+
+`apply_bible_positions` does **not** run inside `load_raw()` — it is called from
+`main()` (`scripts/generate.py:4735`). Measured coverage without it is 98.11%
+(1,295 of 1,320 picks), so `draft_rows` does not need the bible. Raise this only
+if the remaining 25 picks matter.
+
+**The owner map is `build_owner_map(bible, seasons)`, not `get_owners(bible)`.**
+`bible["owners"]` is a team-name-to-manager map with a single entry; passing it
+to `team_owners_by_year` makes `canonical_owner` fall through to the raw platform
+spelling. That shipped in Task 1 and survived two reviews, because every
+"non-empty owner" assertion passes either way: it produced 26 distinct owners for
+a 16-person league, with `lokesh` never joining `Lokesh` and 2026's `pranavnar`
+never joining the `Pranav` of eight Yahoo seasons. Every owner-grouped query
+would have been silently wrong. Tests now pin the distinct-owner count.
 
 ## Build pipeline
 

@@ -13,20 +13,22 @@
     {
       "id": 1,
       "subject": "Task 2: The player_weeks table",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         0
       ],
-      "description": "**Goal:** Emit 19,881 player-week rows with points, position, lineup slot, and a started flag.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- player_week_rows() returns exactly 19881 rows\n- started is False exactly when slot is BN or IR\n- Every player_slug matches scripts.generate.slug(player)\n- 2026 contributes zero rows without raising\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests including per-year counts (2018=1252, 2025=3170, 2026=0). Implement player_week_rows walking weeks[week].rosters[team].players. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"19881 player-week rows\", \"started false exactly for BN and IR\", \"player_slug matches generate.slug\", \"2026 yields zero rows without raising\"], \"modelTier\": \"standard\"}\n```"
+      "description": "**Goal:** Emit 19,881 player-week rows with points, position, lineup slot, and a started flag.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- player_week_rows() returns exactly 19881 rows\n- started is False exactly when slot is BN or IR\n- Every player_slug matches scripts.generate.slug(player)\n- 2026 contributes zero rows without raising\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests including per-year counts (2018=1252, 2025=3170, 2026=0). Implement player_week_rows walking weeks[week].rosters[team].players. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"19881 player-week rows\", \"started false exactly for BN and IR\", \"player_slug matches generate.slug\", \"2026 yields zero rows without raising\"], \"modelTier\": \"standard\"}\n```",
+      "completedAs": "ee96d51 (projection over build_player_log; carries phase and round)"
     },
     {
       "id": 2,
       "subject": "Task 3: The team_seasons and draft tables",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         1
       ],
-      "description": "**Goal:** Emit 88 team-season rows with championship flags and 1,320 draft rows using the already-normalized overall and backfilled position.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- team_season_rows() returns 88 rows; exactly one champion per completed season\n- draft_rows() returns 1320 rows\n- pick restarts at 1 in every round, for every season\n- overall is a gapless 1..n sequence per season\n- Draft position coverage exceeds 95% of rows\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write three failing tests. Implement team_season_rows using apply_derived_champions and champ_year, and draft_rows consuming the `overall` field that load_raw already normalized via annotate_overall_picks. Do not reimplement pick numbering or position backfill. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"88 team-season rows\", \"exactly one champion per completed season\", \"1320 draft rows\", \"pick restarts at 1 each round\", \"overall gapless per season\", \"position coverage above 95 percent\"], \"modelTier\": \"standard\"}\n```"
+      "description": "**Goal:** Emit 88 team-season rows with championship flags and 1,320 draft rows using the already-normalized overall and backfilled position.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- team_season_rows() returns 88 rows; exactly one champion per completed season\n- draft_rows() returns 1320 rows\n- pick restarts at 1 in every round, for every season\n- overall is a gapless 1..n sequence per season\n- Draft position coverage exceeds 95% of rows\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write three failing tests. Implement team_season_rows using apply_derived_champions and champ_year, and draft_rows consuming the `overall` field that load_raw already normalized via annotate_overall_picks. Do not reimplement pick numbering or position backfill. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"88 team-season rows\", \"exactly one champion per completed season\", \"1320 draft rows\", \"pick restarts at 1 each round\", \"overall gapless per season\", \"position coverage above 95 percent\"], \"modelTier\": \"standard\"}\n```",
+      "completedAs": "5230866 (also fixed the owner_index alias-map bug from Task 1)"
     },
     {
       "id": 3,
