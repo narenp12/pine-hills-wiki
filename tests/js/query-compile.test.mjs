@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { compileAst, renderSql, MAX_LIMIT } from "../../zensical/site/javascripts/query-compile.mjs";
+import { compileAst, renderSql, MAX_LIMIT } from "../../zensical/docs/javascripts/query-compile.mjs";
 
 const schema = {
   tables: {
