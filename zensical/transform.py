@@ -328,9 +328,46 @@ def main() -> None:
         written.add(rel)
         count += 1
     print(f"[transform] wrote {count} pages -> {DST}")
+    copied = copy_assets(STAGE, DST)
+    if copied:
+        print(f"[transform] copied {copied} generated non-Markdown files -> {DST}")
     prune_stale(written)
     print("[transform] NOTE: zensical/docs/stylesheets and zensical/docs/javascripts "
           "are hand-authored skin assets kept in git; this script never touches them.")
+
+
+def copy_assets(src: Path, dst: Path) -> int:
+    """Pass every generated non-Markdown file through to the docs tree unchanged.
+
+    The page loop above walks `*.md` only, which was the whole of the stage tree
+    until scripts/build_query_db.py started emitting the Stat Search Parquet
+    tables and schema.json beside its page. Those are data, not prose: there is
+    no wikilink or glossary pass to run on them, but a page whose script fetches
+    schema.json is inert without them, and they were silently left behind in
+    zensical/.stage while the page shipped.
+
+    Bytes, not text: three of the five files are compressed Parquet, which a
+    read_text() round trip would corrupt. Written only when they differ, so a
+    rebuild that changed nothing does not restamp mtimes.
+
+    One-way, and no pruning counterpart: zensical/docs also holds hand-authored
+    skin assets (stylesheets, javascripts, assets/images) that were never in the
+    stage tree, so deleting whatever this run did not copy would delete the skin.
+
+    Returns the number of files written.
+    """
+    written = 0
+    for f in sorted(src.rglob("*")):
+        if f.is_dir() or f.suffix == ".md":
+            continue
+        target = dst / f.relative_to(src)
+        data = f.read_bytes()
+        if target.exists() and target.read_bytes() == data:
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        written += 1
+    return written
 
 
 # Pages in zensical/docs that are hand-authored rather than generated, and so

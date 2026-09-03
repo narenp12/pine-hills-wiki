@@ -1,0 +1,267 @@
+{
+  "enums": {
+    "owner": [
+      "Abhinav",
+      "Aneesh",
+      "Anish",
+      "Aryan",
+      "Jayesh",
+      "Jeremy",
+      "Kaushal",
+      "Lokesh",
+      "Michael",
+      "Naren",
+      "Om",
+      "Pranav",
+      "Sharman",
+      "Tanmay",
+      "Varun",
+      "sahil"
+    ],
+    "phase": [
+      "consolation",
+      "playoff",
+      "regular"
+    ],
+    "position": [
+      "DEF",
+      "K",
+      "QB",
+      "RB",
+      "TE",
+      "WR"
+    ],
+    "slot": [
+      "BN",
+      "DEF",
+      "IR",
+      "K",
+      "QB",
+      "RB",
+      "TE",
+      "W/R/T",
+      "WR"
+    ],
+    "year": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ]
+  },
+  "tables": {
+    "draft": {
+      "columns": [
+        {
+          "name": "year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "round",
+          "type": "INTEGER"
+        },
+        {
+          "name": "pick",
+          "type": "INTEGER"
+        },
+        {
+          "name": "overall",
+          "type": "INTEGER"
+        },
+        {
+          "name": "player",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player_slug",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "position",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "team",
+          "type": "VARCHAR"
+        }
+      ],
+      "row_count": 1320
+    },
+    "matchups": {
+      "columns": [
+        {
+          "name": "year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "week",
+          "type": "INTEGER"
+        },
+        {
+          "name": "phase",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "round",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "team",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "score",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "opp_owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "opp_team",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "opp_score",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "margin",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "won",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "tied",
+          "type": "BOOLEAN"
+        }
+      ],
+      "row_count": 1230
+    },
+    "player_weeks": {
+      "columns": [
+        {
+          "name": "year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "week",
+          "type": "INTEGER"
+        },
+        {
+          "name": "phase",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "round",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "team",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player_slug",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "position",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "slot",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "started",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "points",
+          "type": "DOUBLE"
+        }
+      ],
+      "row_count": 19881
+    },
+    "team_seasons": {
+      "columns": [
+        {
+          "name": "year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "team",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "wins",
+          "type": "INTEGER"
+        },
+        {
+          "name": "losses",
+          "type": "INTEGER"
+        },
+        {
+          "name": "pf",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "pa",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "rank",
+          "type": "INTEGER"
+        },
+        {
+          "name": "seed",
+          "type": "INTEGER"
+        },
+        {
+          "name": "champion",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "runner_up",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "top_seed",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "toilet",
+          "type": "BOOLEAN"
+        }
+      ],
+      "row_count": 88
+    }
+  }
+}

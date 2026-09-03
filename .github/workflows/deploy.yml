@@ -39,6 +39,12 @@ jobs:
       - name: Install build environment
         run: uv sync --locked --group dev
 
+      # Before the build, not after: the suite asserts the row counts, the owner
+      # join and the champion flags the build then renders, so a capture that
+      # broke one of them should fail here rather than deploy a wrong page.
+      - name: Run tests
+        run: uv run pytest -q
+
       - name: Build Zensical site
         run: node zensical/build.mjs
 

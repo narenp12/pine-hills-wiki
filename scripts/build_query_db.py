@@ -29,6 +29,7 @@ from scripts.generate import (  # noqa: E402
     build_owner_map,
     build_player_log,
     champ_year,
+    dash_normalize,
     load_bible,
     load_raw,
     slug,
@@ -612,8 +613,75 @@ def build_all(content_dir) -> dict:
     return schema
 
 
+# The Stat Search page itself. Static: every number on it is fetched by
+# query.js from the Parquet files beside it, so nothing here is interpolated
+# from the capture and a rebuild rewrites the same bytes.
+#
+# `data-query-base` is resolved by the browser against the page's own URL.
+# use_directory_urls is on, so this page is served at /query/ and the tables sit
+# in the same directory -- "../query/" and "./" name the same place from there,
+# and the explicit form is the one that survives the page being moved.
+#
+# The fallback markup lives inside the mount rather than beside it, so query.js
+# replaces it when it boots instead of leaving a "this needs JavaScript" notice
+# stacked above a working UI. Its two links are source-relative .md paths:
+# Zensical rewrites href in raw HTML the same way it does in Markdown, so they
+# are checked like any other link on the site.
+QUERY_PAGE = """---
+title: Stat Search
+icon: lucide/search
+description: Query the league's matchups, rosters, team seasons and draft picks in the browser.
+---
+
+# Stat Search
+
+Ad hoc queries over the four captured tables: one row per team per game, one per
+roster slot per week, one per team per season and one per draft pick. The tables
+are downloaded and queried in the browser, so a query is answered on the reader's
+own machine and nothing is sent anywhere.
+
+<div id="phfl-query" data-query-base="../query/">
+  <p>Stat Search runs in the browser and needs JavaScript enabled. The
+  league's standing marks are on <a href="../records/index.md">Records</a>,
+  and the postseason ones on <a href="../playoffs.md">Playoffs</a>.</p>
+</div>
+
+<script type="module" src="../javascripts/query.js"></script>
+"""
+
+
+def write_page(content_dir) -> Path:
+    """Write <content>/query/index.md, the page the four tables are read by.
+
+    Emitted here rather than in generate.py because the page is meaningless
+    without the Parquet files: the two are one build step, and a run that wrote
+    one and not the other would put either an empty UI or four unreachable
+    tables on the site.
+
+    Routed through generate's dash_normalize like every other generated page,
+    so the house no-en/em-dash rule holds by construction rather than by the
+    author of this string having remembered it.
+
+    Returns the path written, so a caller does not rebuild it to check.
+    """
+    out = Path(content_dir) / "query"
+    out.mkdir(parents=True, exist_ok=True)
+    page = out / "index.md"
+    page.write_text(dash_normalize(QUERY_PAGE))
+    print(f"  wrote {page.as_posix()}")
+    return page
+
+
 def main():
-    build_all(CONTENT)
+    """Build the tables, then the page that reads them, under CONTENT.
+
+    CONTENT is generate.py's, so WIKI_CONTENT_DIR redirects this builder and the
+    page generator to the same tree with one variable -- which is how
+    zensical/build.mjs points both at zensical/.stage.
+    """
+    if build_all(CONTENT) is None:
+        return
+    write_page(CONTENT)
 
 
 if __name__ == "__main__":

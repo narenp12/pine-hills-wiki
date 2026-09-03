@@ -7,6 +7,7 @@ owner join and the phase tagging are all properties of what was captured.
 import json
 import os
 import pathlib
+import re
 import sys
 import tempfile
 
@@ -28,10 +29,12 @@ from scripts.build_query_db import (
     build_tables,
     draft_rows,
     load_league,
+    main,
     matchup_rows,
     owner_index,
     player_week_rows,
     team_season_rows,
+    write_page,
 )
 from scripts.generate import (
     BENCH_SLOTS,
@@ -1240,3 +1243,192 @@ def test_rebuilding_rewrites_an_identical_schema(tmp_path: pathlib.Path):
     assert (out / "schema.json").read_text() == first_schema
     for table in TABLES:
         assert (out / f"{table}.parquet").read_bytes() == first_tables[table], table
+
+
+# --------------------------------------------------------------------------- #
+# the page the builder emits alongside the tables
+# --------------------------------------------------------------------------- #
+REPO_DOCS = pathlib.Path(__file__).resolve().parent.parent / "zensical" / "docs"
+
+
+@pytest.fixture(scope="module")
+def page(tmp_path_factory):
+    """write_page() run once, with the Markdown it wrote and its directory."""
+    root = tmp_path_factory.mktemp("query_page")
+    written = write_page(root)
+    return written.read_text(), root
+
+
+def test_write_page_lands_at_the_path_the_nav_points_at(page):
+    """zensical.toml's nav entry is the literal string "query/index.md"."""
+    _, root = page
+    assert (root / "query" / "index.md").is_file()
+
+
+def test_the_page_carries_the_front_matter_the_other_pages_do(page):
+    """Title, icon and description, in the shape generate.py's pages use.
+
+    The title is what the nav and transform.py's title map key on, the icon is
+    what the tab renders, and the description is the page's meta tag and the
+    social card's subtitle -- a page missing it is the one page on the site
+    that shares as a bare URL.
+    """
+    text, _ = page
+    front = text.split("---")[1]
+    fields = dict(
+        line.split(":", 1) for line in front.strip().splitlines() if ":" in line
+    )
+    assert fields["title"].strip() == "Stat Search"
+    assert fields["icon"].strip().startswith("lucide/")
+    assert len(fields["description"].strip()) > 20
+
+
+def test_the_page_declares_the_icon_zensical_actually_ships(page):
+    """An unknown icon name is a build error, not a missing glyph."""
+    text, _ = page
+    icon = re.search(r"(?m)^icon:\s*(\S+)$", text).group(1)
+    import zensical
+
+    icons = pathlib.Path(zensical.__file__).parent / "templates" / ".icons"
+    assert (icons / f"{icon}.svg").is_file(), icon
+
+
+def test_the_page_mounts_the_query_ui_and_loads_its_script(page):
+    """The two hooks query.js needs: an element to attach to and a module tag.
+
+    `data-query-base` is resolved by the browser against the page's own URL, so
+    with use_directory_urls the page at /query/ and the tables in /query/ make
+    it "../query/" and not "./".
+    """
+    text, _ = page
+    assert 'id="phfl-query"' in text
+    assert 'data-query-base="../query/"' in text
+    assert '<script type="module" src="../javascripts/query.js"></script>' in text
+
+
+def test_the_no_script_fallback_lives_inside_the_mount(page):
+    """Inside the div, so query.js replaces it rather than leaving it stacked.
+
+    A fallback outside the mount is still on the page after the UI boots, which
+    reads as the page having failed even when it worked.
+    """
+    text, _ = page
+    mount = text.split('id="phfl-query"', 1)[1].split("</div>", 1)[0]
+    assert "../records/index.md" in mount
+    assert "../playoffs.md" in mount
+
+
+def test_the_fallback_links_point_at_pages_that_exist(page):
+    """The links are relative to query/, and both targets are generated pages.
+
+    Zensical rewrites hrefs in raw HTML the same way it does in Markdown, so a
+    typo here ships as a dead link on the one page whose whole job is to send a
+    reader somewhere else when the script does not run.
+    """
+    text, _ = page
+    targets = re.findall(r'href="([^"]+)"', text)
+    assert targets, "no links in the fallback"
+    for target in targets:
+        # Relative to the page's own directory, which is query/ -- normalized
+        # textually rather than through resolve(), which would anchor "../" to
+        # whatever directory pytest happened to be started from.
+        resolved = os.path.normpath(os.path.join("query", target))
+        assert not resolved.startswith(".."), target
+        assert (REPO_DOCS / resolved).is_file(), target
+
+
+def test_the_page_carries_no_en_or_em_dash(page):
+    """The house rule generate.py enforces with dash_normalize."""
+    text, _ = page
+    assert "—" not in text
+    assert "–" not in text
+
+
+def test_rewriting_the_page_produces_the_same_bytes(tmp_path: pathlib.Path):
+    """Static, so a rebuild puts no diff in front of a reviewer."""
+    first = write_page(tmp_path).read_bytes()
+    assert write_page(tmp_path).read_bytes() == first
+
+
+def test_main_writes_the_tables_and_the_page_together(tmp_path, monkeypatch):
+    """The build step is one command: without the page the tables are unreachable,
+    and without the tables the page renders an empty UI."""
+    monkeypatch.setattr("scripts.build_query_db.CONTENT", tmp_path)
+    main()
+    out = tmp_path / "query"
+    for table in TABLES:
+        assert (out / f"{table}.parquet").is_file(), table
+    assert (out / "schema.json").is_file()
+    assert (out / "index.md").is_file()
+
+
+# --------------------------------------------------------------------------- #
+# the tables surviving zensical/transform.py into the docs tree
+# --------------------------------------------------------------------------- #
+def load_transform():
+    """zensical/transform.py is a script, not a package module."""
+    import importlib.util
+
+    path = pathlib.Path(__file__).resolve().parent.parent / "zensical" / "transform.py"
+    spec = importlib.util.spec_from_file_location("phf_transform_for_query", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_transform_carries_the_query_data_into_the_docs_tree(tmp_path: pathlib.Path):
+    """The build's one non-Markdown payload, and the page is inert without it.
+
+    transform.py walked `*.md` only, which was the whole of the stage tree until
+    this builder started emitting Parquet beside its page: the page shipped and
+    the four tables it fetches stayed behind in zensical/.stage. Bytes are
+    compared, not text -- three of the five files are compressed Parquet.
+    """
+    stage = tmp_path / "stage"
+    docs = tmp_path / "docs"
+    stage.mkdir()
+    docs.mkdir()
+    build_all(stage)
+    write_page(stage)
+    transform = load_transform()
+    assert transform.copy_assets(stage, docs) == len(TABLES) + 1
+    for table in TABLES:
+        rel = f"query/{table}.parquet"
+        assert (docs / rel).read_bytes() == (stage / rel).read_bytes(), rel
+    assert (docs / "query" / "schema.json").read_bytes() == (
+        stage / "query" / "schema.json"
+    ).read_bytes()
+    # Markdown is the page loop's job: copying it here would skip the wikilink,
+    # infobox and glossary passes and overwrite the transformed page with the
+    # staged one.
+    assert not (docs / "query" / "index.md").exists()
+
+
+def test_the_copy_leaves_the_hand_authored_skin_alone(tmp_path: pathlib.Path):
+    """No pruning counterpart, because docs/ holds files the stage never had.
+
+    stylesheets, javascripts and assets/images are committed skin. A copy step
+    that deleted whatever this run did not write would delete all of it.
+    """
+    stage = tmp_path / "stage"
+    docs = tmp_path / "docs"
+    stage.mkdir()
+    (docs / "javascripts").mkdir(parents=True)
+    skin = docs / "javascripts" / "tablesort.js"
+    skin.write_text("// hand-authored\n")
+    build_all(stage)
+    transform = load_transform()
+    transform.copy_assets(stage, docs)
+    assert skin.read_text() == "// hand-authored\n"
+
+
+def test_recopying_unchanged_data_writes_nothing(tmp_path: pathlib.Path):
+    """So a rebuild that changed no data does not restamp four binaries."""
+    stage = tmp_path / "stage"
+    docs = tmp_path / "docs"
+    stage.mkdir()
+    docs.mkdir()
+    build_all(stage)
+    transform = load_transform()
+    assert transform.copy_assets(stage, docs) == len(TABLES) + 1
+    assert transform.copy_assets(stage, docs) == 0

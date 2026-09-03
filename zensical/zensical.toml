@@ -27,6 +27,7 @@ nav = [
   { Owners = "owners/index.md" },
   { Players = "players/index.md" },
   { Records = "records/index.md" },
+  { "Stat Search" = "query/index.md" },
   { Awards = "awards.md" },
   { "Hall of Fame" = "hall-of-fame.md" },
   { "Draft History" = "draft/index.md" },

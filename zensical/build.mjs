@@ -5,14 +5,20 @@
 //
 // Pipeline (when raw/ JSON is present - the normal case, local and CI):
 //   1. scripts/generate.py  (WIKI_CONTENT_DIR -> zensical/.stage)  generates Markdown
-//   2. zensical/transform.py  resolves [[wikilinks]] -> zensical/docs
-//   3. zensical build --clean  -> zensical/site
+//   2. scripts/build_query_db.py  (same WIKI_CONTENT_DIR)  writes the Stat Search
+//      Parquet tables, schema.json and query/index.md into the same stage tree
+//   3. zensical/transform.py  resolves [[wikilinks]] -> zensical/docs
+//   4. zensical build --clean  -> zensical/site
+//
+// Step 2 runs after step 1 and before step 3 because it emits into the stage
+// tree that step 3 copies: the tables have to be staged before transform.py
+// walks it, and its page has to be there for transform.py's title map.
 //
 // raw/*.json and raw/bible.yaml are committed, so CI takes that same path and
 // regenerates zensical/docs on every build. Editing a generated page by hand
 // does not survive: change raw/ instead.
 //
-// The fallback below (skip steps 1-2, build from the committed Markdown) only
+// The fallback below (skip steps 1-3, build from the committed Markdown) only
 // fires in a checkout with no JSON in raw/ at all.
 //
 // The hand-authored skin (zensical/docs/stylesheets, zensical/docs/javascripts)
@@ -59,18 +65,25 @@ function rawHasData() {
 }
 
 if (rawHasData()) {
-  console.log("[build] 1/3 generate.py ->", stage);
+  console.log("[build] 1/4 generate.py ->", stage);
   uvRun(["python", "scripts/generate.py"], {
     cwd: root,
     env: { ...process.env, WIKI_CONTENT_DIR: stage },
   });
-  console.log("[build] 2/3 transform.py -> zensical/docs");
+  console.log("[build] 2/4 build_query_db.py ->", stage + "/query");
+  // Same WIKI_CONTENT_DIR as the generate step: the builder resolves it through
+  // generate.py's own CONTENT, so one variable points both at the stage tree.
+  uvRun(["python", "scripts/build_query_db.py"], {
+    cwd: root,
+    env: { ...process.env, WIKI_CONTENT_DIR: stage },
+  });
+  console.log("[build] 3/4 transform.py -> zensical/docs");
   uvRun(["python", "zensical/transform.py"], { cwd: root });
 } else {
   console.log("[build] raw/ has no JSON - building from committed zensical/docs");
 }
 
-console.log("[build] zensical build --clean -> zensical/site");
+console.log("[build] 4/4 zensical build --clean -> zensical/site");
 // cwd must be zensical/ so the CLI picks up zensical.toml; uv still discovers
 // the project by walking up to the repo-root pyproject.toml.
 uvRun(["zensical", "build", "--clean"], { cwd: resolve(root, "zensical") });
