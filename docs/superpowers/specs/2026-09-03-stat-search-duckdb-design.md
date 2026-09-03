@@ -39,6 +39,18 @@ read-only.
 Four tables, built from `raw/*.json`. Owner is the identity key across all of
 them; team name is carried for display because team names change between seasons.
 
+**The builders project over `scripts/generate.py`'s existing logs; they do not
+re-derive rows.** `build_game_log(seasons, bible)` (`scripts/generate.py:712`)
+already flattens matchups into one row per team per game, and
+`build_player_log(seasons)` (`scripts/generate.py:766`) already flattens weekly
+rosters — both phase-tagged through `season_phases` (`scripts/generate.py:699`),
+which unions the bracket's own weeks into the playoff set rather than trusting
+`playoffs.weeks` to be complete. A parallel implementation was written first and
+diverged on three fields within one task: it trusted Yahoo's `is_winner` without
+the documented score-compare fallback, dropped the `tied` column (turning the
+2018 Wk 8 tie into two phantom losses), and left `margin` unrounded. The Stat
+Search tables are projections: rename columns, join owners, emit.
+
 Row counts are measured from the committed `raw/` data as of 2026-09-03.
 
 ### `matchups` — 1,230 rows
@@ -47,39 +59,57 @@ One row per team per game (each game contributes two rows).
 
 | column | type | source |
 |---|---|---|
-| `year` | INTEGER | `season` |
-| `week` | INTEGER | `matchups` key |
-| `phase` | VARCHAR | derived: see below |
-| `owner` | VARCHAR | resolved from team name via `standings.teams` |
-| `team` | VARCHAR | `matchups[week][i].teams[j].name` |
-| `score` | DOUBLE | `.score` |
-| `opp_owner` | VARCHAR | the other team's owner |
-| `opp_team` | VARCHAR | the other team's name |
-| `opp_score` | DOUBLE | the other team's score |
-| `margin` | DOUBLE | `score - opp_score` |
-| `won` | BOOLEAN | `.is_winner` |
+| `year` | INTEGER | `build_game_log` |
+| `week` | INTEGER | `build_game_log` |
+| `phase` | VARCHAR | `build_game_log`, via `season_phases` |
+| `round` | VARCHAR | `build_game_log` — bracket round label, blank outside the bracket |
+| `owner` | VARCHAR | owner join on `(year, team)` |
+| `team` | VARCHAR | `build_game_log` |
+| `score` | DOUBLE | `build_game_log` |
+| `opp_owner` | VARCHAR | owner join on `(year, opponent)` |
+| `opp_team` | VARCHAR | `build_game_log.opponent` |
+| `opp_score` | DOUBLE | `build_game_log.opponent_score` |
+| `margin` | DOUBLE | `build_game_log`, rounded to 2 |
+| `won` | BOOLEAN | `build_game_log` — `is_winner` or a score compare |
+| `tied` | BOOLEAN | `build_game_log` — one real tie exists, 2018 Wk 8 |
 
-`phase` derivation: a week absent from `playoffs.weeks` is `regular`. Within a
-postseason week, a game whose two team names match a `bracket.games` entry for
-that week is `playoff`; any other postseason game is `consolation`.
+`phase` is `regular`, `playoff` or `consolation`, assigned by `season_phases`:
+postseason starts at the earliest week in `playoffs.weeks` **unioned with the
+bracket's own weeks**, and within the postseason a game is `playoff` only if it
+matches a `bracket.games` entry, otherwise `consolation`. Deriving the playoff
+week set from `playoffs.weeks` alone would relabel a title game as regular
+season on any season whose capture of that key is incomplete.
+
+`tied` is load-bearing, not decoration: Yahoo drops tied games from the
+standings W-L entirely, and without the column both sides of a tie read as
+losses.
 
 ### `player_weeks` — 19,881 rows
 
 One row per rostered player per week, bench and IR included. This is the largest
 and most interesting table, and the one that motivates a real query engine.
 
+Projected over `build_player_log(seasons)` (`scripts/generate.py:766`), which
+already carries `phase` and `round` from the same bracket read. The builder adds
+the owner join and `player_slug`.
+
 | column | type | source |
 |---|---|---|
-| `year` | INTEGER | `season` |
-| `week` | INTEGER | `weeks` key |
-| `owner` | VARCHAR | resolved from team name |
-| `team` | VARCHAR | `weeks[week].rosters` key |
-| `player` | VARCHAR | `.name` |
-| `player_slug` | VARCHAR | same slug function the player pages use |
-| `position` | VARCHAR | `.position` — one of `QB RB WR TE K DEF` |
-| `slot` | VARCHAR | `.slot` — one of `QB RB WR TE K DEF W/R/T BN IR` |
-| `started` | BOOLEAN | `slot NOT IN ('BN','IR')` |
-| `points` | DOUBLE | `.points` |
+| `year` | INTEGER | `build_player_log` |
+| `week` | INTEGER | `build_player_log` |
+| `phase` | VARCHAR | `build_player_log` — same three values as matchups |
+| `round` | VARCHAR | `build_player_log` — bracket round label |
+| `owner` | VARCHAR | owner join on `(year, team)` |
+| `team` | VARCHAR | `build_player_log` |
+| `player` | VARCHAR | `build_player_log` |
+| `player_slug` | VARCHAR | `slug(player)`, matching the player pages |
+| `position` | VARCHAR | `build_player_log` — one of `QB RB WR TE K DEF` |
+| `slot` | VARCHAR | `build_player_log` — one of `QB RB WR TE K DEF W/R/T BN IR` |
+| `started` | BOOLEAN | `build_player_log` — `slot NOT IN ('BN','IR')` |
+| `points` | DOUBLE | `build_player_log` |
+
+`phase` here is not optional polish: without it, "best playoff performances" is
+unanswerable, which is one of the questions the tab exists to answer.
 
 Per-season coverage: 2018 1,252 · 2019 1,895 · 2020 2,415 · 2021 2,676 ·
 2022 2,659 · 2023 2,655 · 2024 3,159 · 2025 3,170 · 2026 0. The 2026 season has

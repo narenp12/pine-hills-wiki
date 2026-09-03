@@ -17,6 +17,19 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-03-stat-search-duckdb-design.md`
 
+> **Correction applied after Task 1's quality review — read before Tasks 2 and 3.**
+> The Task 1 and Task 2 code below re-derives rows that `scripts/generate.py`
+> already produces. Do not follow it literally. `build_game_log(seasons, bible)`
+> (`scripts/generate.py:712`) and `build_player_log(seasons)`
+> (`scripts/generate.py:766`) already emit these rows, phase-tagged via
+> `season_phases` (`scripts/generate.py:699`), and both carry fields the code
+> below drops: `tied`, `round`, and for player weeks `phase` itself. The
+> builders are projections over those logs — rename columns, join owners, emit.
+> Task 1 was reworked accordingly; Task 2 must be written the same way, and
+> Task 3 should be checked against `generate.py` for an existing equivalent
+> before any loop is written. The row schemas in the spec are authoritative over
+> the ones in these task bodies.
+
 **Note on task tracking:** The native task tools (`TaskList`/`TaskCreate`/`TaskUpdate`) are not available in this session, so no native tasks were created. The companion `2026-09-03-stat-search.md.tasks.json` carries the same task bodies for whichever session executes this plan.
 
 ---
