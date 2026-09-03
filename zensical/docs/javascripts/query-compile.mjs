@@ -76,6 +76,11 @@ function compilePredicates(schema, ast, clauses, params, extraNames) {
 
 export function compileAst(ast, schema) {
   if (!ast || typeof ast !== "object") throw new Error("ast must be an object");
+  for (const verb of ["filter", "having", "groupBy", "arrange"]) {
+    if (ast[verb] !== undefined && !Array.isArray(ast[verb])) {
+      throw new Error(`${verb} must be an array`);
+    }
+  }
   const params = [];
   const from = quote(ast.from);
   columnsOf(schema, ast.from);
@@ -102,7 +107,12 @@ export function compileAst(ast, schema) {
   if (ast.join) {
     const joinTable = quote(ast.join.table);
     columnsOf(schema, ast.join.table);
+    const fromColumns = new Set(columnsOf(schema, ast.from));
+    const joinColumns = new Set(columnsOf(schema, ast.join.table));
     const conditions = (ast.join.on ?? []).map((field) => {
+      if (!fromColumns.has(field) || !joinColumns.has(field)) {
+        throw new Error(`unknown column: ${field}`);
+      }
       resolveColumn(schema, ast, field);
       return `${from}.${quote(field)} = ${joinTable}.${quote(field)}`;
     });
@@ -126,7 +136,7 @@ export function compileAst(ast, schema) {
   });
   if (arrange.length) parts.push(`ORDER BY ${arrange.join(", ")}`);
 
-  const limit = Math.min(Number(ast.limit) || 200, MAX_LIMIT);
+  const limit = Math.min(Math.max(Math.trunc(Number(ast.limit)) || 200, 1), MAX_LIMIT);
   parts.push(`LIMIT ${limit}`);
 
   return { sql: parts.join("\n"), params };

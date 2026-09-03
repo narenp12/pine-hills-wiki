@@ -594,21 +594,26 @@ def build_all(content_dir) -> dict:
         # leave no query/ directory rather than an empty one that reads as built.
         out = Path(content_dir) / "query"
         out.mkdir(parents=True, exist_ok=True)
+        staged = []
         for name, rows in tables.items():
+            tmp = out / f"{name}.parquet.tmp"
             target = out / f"{name}.parquet"
             con.execute(
-                f'COPY "{name}" TO \'{_sql_literal(target)}\' '
+                f'COPY "{name}" TO \'{_sql_literal(tmp)}\' '
                 f"(FORMAT PARQUET, COMPRESSION ZSTD)"
             )
             print(f"  wrote {target.as_posix()} ({len(rows)} rows)")
+            staged.append((tmp, target))
         schema = _schema(con)
     finally:
         con.close()
     # sort_keys and the trailing newline are what make a rebuild byte-identical
     # when the capture has not changed, so the file is diffable in a review.
-    (out / "schema.json").write_text(
-        json.dumps(schema, indent=2, sort_keys=True) + "\n"
-    )
+    tmp_schema = out / "schema.json.tmp"
+    tmp_schema.write_text(json.dumps(schema, indent=2, sort_keys=True) + "\n")
+    for tmp, target in staged:
+        tmp.replace(target)
+    tmp_schema.replace(out / "schema.json")
     print(f"  wrote {(out / 'schema.json').as_posix()}")
     return schema
 

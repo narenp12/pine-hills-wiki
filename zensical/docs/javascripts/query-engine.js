@@ -45,20 +45,34 @@ async function boot(base, onProgress) {
     }),
   );
   const worker = new Worker(workerUrl);
-  const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
-  const db = new duckdb.AsyncDuckDB(logger, worker);
-  await db.instantiate(URL.createObjectURL(new Blob([wasm], { type: "application/wasm" })));
-  URL.revokeObjectURL(workerUrl);
+  try {
+    const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
+    const db = new duckdb.AsyncDuckDB(logger, worker);
+    await db.instantiate(URL.createObjectURL(new Blob([wasm], { type: "application/wasm" })));
+    URL.revokeObjectURL(workerUrl);
 
-  const connection = await db.connect();
-  const schema = await (await fetch(`${base}schema.json`)).json();
-  for (const table of Object.keys(schema.tables)) {
-    const url = new URL(`${base}${table}.parquet`, window.location.href).href;
-    await connection.query(
-      `CREATE VIEW "${table}" AS SELECT * FROM read_parquet('${url}')`,
-    );
+    const connection = await db.connect();
+    const response = await fetch(`${base}schema.json`);
+    if (!response.ok) throw new Error(`${response.status} fetching ${base}schema.json`);
+    const schema = await response.json();
+    for (const table of Object.keys(schema.tables)) {
+      const url = new URL(`${base}${table}.parquet`, window.location.href).href;
+      const safeTable = table.replaceAll('"', '""');
+      const safeUrl = url.replaceAll("'", "''");
+      await connection.query(
+        `CREATE VIEW "${safeTable}" AS SELECT * FROM read_parquet('${safeUrl}')`,
+      );
+    }
+    return { db, connection, schema };
+  } catch (error) {
+    try {
+      worker.terminate();
+    } catch {
+      // Ignore termination errors on the failure path.
+    }
+    URL.revokeObjectURL(workerUrl);
+    throw error;
   }
-  return { db, connection, schema };
 }
 
 export function startEngine(base, onProgress = () => {}) {

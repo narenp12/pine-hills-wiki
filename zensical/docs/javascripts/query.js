@@ -16,6 +16,7 @@ const OPERATOR_LABELS = {
   "<=": "at most",
   between: "between",
   in: "any of",
+  not_in: "none of",
   contains: "contains",
   is_null: "is blank",
 };
@@ -342,12 +343,13 @@ class StatSearch {
     const head = document.createElement("tr");
     for (const column of columns) head.append(element("th", null, column));
     table.append(head);
+    const aliases = new Set((this.ast.summarise ?? []).map((s) => s.as));
     for (const row of rows) {
       const tr = document.createElement("tr");
       for (const column of columns) {
         const cell = document.createElement("td");
         const linker = LINKED[column];
-        if (linker && row[column]) {
+        if (linker && !aliases.has(column) && row[column]) {
           const link = element("a", null, String(row[column]));
           link.href = linker(row, column);
           cell.append(link);
@@ -372,7 +374,15 @@ class StatSearch {
     const encoded = new URL(window.location.href).searchParams.get("q");
     if (!encoded) return;
     try {
-      this.ast = JSON.parse(decodeURIComponent(escape(atob(encoded))));
+      const parsed = JSON.parse(decodeURIComponent(escape(atob(encoded))));
+      if (
+        parsed &&
+        typeof parsed === "object" &&
+        !Array.isArray(parsed) &&
+        typeof parsed.from === "string"
+      ) {
+        this.ast = parsed;
+      }
     } catch {
       // A malformed link falls back to the default preset rather than erroring.
     }
@@ -380,7 +390,7 @@ class StatSearch {
 }
 
 function parseValue(raw, op) {
-  if (op === "between" || op === "in") {
+  if (op === "between" || op === "in" || op === "not_in") {
     return raw.split(",").map((part) => coerce(part.trim()));
   }
   return coerce(raw.trim());
