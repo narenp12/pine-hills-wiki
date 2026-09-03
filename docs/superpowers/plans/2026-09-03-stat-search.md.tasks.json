@@ -43,11 +43,12 @@
     {
       "id": 4,
       "subject": "Task 5: Records consistency test",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         3
       ],
-      "description": "**Goal:** Prove SQL over the generated Parquet reproduces the Records page's marquee values, so the two cannot drift apart unnoticed.\n\n**Files:**\n- Create: tests/test_query_records_consistency.py\n\n**Acceptance Criteria:**\n- Highest regular-season score from SQL matches the Records page value\n- Lowest regular-season score matches\n- Biggest blowout margin matches\n- Closest game margin matches\n- Expected values are parsed from the generated Records page, not hardcoded\n\n**Verify:** uv run pytest tests/test_query_records_consistency.py -v\n\n**Steps:** Write four tests that build the tables into a tmp dir, create a DuckDB view over matchups.parquet, generate the Records markdown via gen_records_index, and compare. A failure most likely means phase misclassification, not a bad test. Commit.\n\n```json:metadata\n{\"files\": [\"tests/test_query_records_consistency.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_records_consistency.py -v\", \"acceptanceCriteria\": [\"highest score matches Records\", \"lowest score matches Records\", \"biggest blowout matches Records\", \"closest game matches Records\", \"expected values parsed from the page not hardcoded\"], \"modelTier\": \"standard\"}\n```"
+      "description": "**Goal:** Prove SQL over the generated Parquet reproduces the Records page's marquee values, so the two cannot drift apart unnoticed.\n\n**Files:**\n- Create: tests/test_query_records_consistency.py\n\n**Acceptance Criteria:**\n- Highest regular-season score from SQL matches the Records page value\n- Lowest regular-season score matches\n- Biggest blowout margin matches\n- Closest game margin matches\n- Expected values are parsed from the generated Records page, not hardcoded\n\n**Verify:** uv run pytest tests/test_query_records_consistency.py -v\n\n**Steps:** Write four tests that build the tables into a tmp dir, create a DuckDB view over matchups.parquet, generate the Records markdown via gen_records_index, and compare. A failure most likely means phase misclassification, not a bad test. Commit.\n\n```json:metadata\n{\"files\": [\"tests/test_query_records_consistency.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_records_consistency.py -v\", \"acceptanceCriteria\": [\"highest score matches Records\", \"lowest score matches Records\", \"biggest blowout matches Records\", \"closest game matches Records\", \"expected values parsed from the page not hardcoded\"], \"modelTier\": \"standard\"}\n```",
+      "completedAs": "e847e05 (all four records match; plan had gen_records_index signature wrong)"
     },
     {
       "id": 5,
