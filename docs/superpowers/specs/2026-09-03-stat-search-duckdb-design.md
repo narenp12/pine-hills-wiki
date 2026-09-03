@@ -118,25 +118,33 @@ no weekly rosters yet; queries must degrade to "no rows" rather than error.
 `aef5d2e` which deliberately preserves Sleeper's overall numbering), `pick` is
 already the overall number: round 1 is 1-10 and round 2 is 11-20.
 
-The builder detects which convention a season uses — by testing whether round 2's
-minimum pick exceeds round 1's maximum — and emits both columns normalized:
-`pick` always means pick-within-round, `overall` always means pick-within-draft.
-A test asserts that for every season, `pick` restarts at 1 in each round and
-`overall` is a gapless sequence from 1 to the draft size. Consuming either column
-raw would silently produce wrong answers on exactly one season.
+**This is already solved and must not be reimplemented.**
+`annotate_overall_picks` (`scripts/generate.py:2273`) detects the convention per
+season — a pick number exceeding the round size means the season is already
+overall-numbered — and writes a normalized `overall` field onto each pick in
+place. The builder reads `overall` and leaves `pick` as the within-round number.
 
-**Data-quality note — missing positions.** `draft_results[].position` is empty for every pick from
-2018 through 2025 (1,170 of 1,320 rows); only 2026 carries it. The builder
-backfills `position` by joining `player_slug` against `player_weeks`, and leaves
-it NULL where the player never appears on a roster. The UI labels the draft
-position filter as partial, and the builder emits the backfill hit rate to the
-build log.
+**Data-quality note — missing positions.** `draft_results[].position` is empty
+for every pick from 2018 through 2025 (1,170 of 1,320 rows); only 2026 carries
+it. **Also already solved:** `backfill_draft_positions`
+(`scripts/generate.py:2312`) fills positions from that season's weekly rosters,
+and `apply_bible_positions` (`scripts/generate.py:2335`) covers players who were
+drafted then cut before week one, from `raw/bible.yaml`. Picks that match neither
+stay blank rather than being guessed.
+
+Both normalizations run inside `load_raw()` (`scripts/generate.py:129`), so the
+builder gets them free by calling that function instead of parsing `raw/*.json`
+itself. The builder imports `load_raw`; it writes no draft normalization logic of
+its own.
 
 ## Build pipeline
 
 New `scripts/build_query_db.py`:
 
-1. Read every `raw/*.json` and `raw/bible.yaml`.
+1. Call `scripts.generate.load_raw()` and `load_bible()` rather than reading
+   `raw/` directly. This inherits apostrophe normalization, draft position
+   backfill, and overall-pick numbering, and guarantees Stat Search sees exactly
+   the data the generated pages see.
 2. Build the four tables in an in-memory DuckDB database.
 3. Run integrity assertions as SQL (see Testing).
 4. `COPY ... TO '<stage>/query/<table>.parquet' (FORMAT PARQUET, COMPRESSION ZSTD)`.
@@ -315,8 +323,9 @@ no new dependency):
 | `duckdb-wasm` `latest` tag points at a pre-release | Pin the exact stable version, 1.32.0. Upgrades are deliberate. |
 | jsDelivr outage takes the tab down | Page detects boot failure and falls back to the static message plus links to Records and Playoffs. Vendoring the wasm stays available as a later option. |
 | Stat Search and Records disagree | Consistency test above, run in CI. |
-| Draft position mostly missing | Backfilled from `player_weeks`, hit rate logged, filter labelled partial in the UI. |
-| Two draft pick-numbering conventions in one dataset | Builder detects and normalizes per season; test asserts both `pick` and `overall` are well-formed everywhere. |
+| Draft position mostly missing | Already backfilled by `load_raw()`; unmatched picks stay blank and the UI labels the filter partial. |
+| Two draft pick-numbering conventions in one dataset | Already normalized by `annotate_overall_picks`; builder consumes `overall` and adds a regression test. |
+| Builder drifts from `generate.py` by re-parsing `raw/` | Builder calls `load_raw()`/`load_bible()`, never reads `raw/` itself. |
 | Parquet files bloat the repo | Under 1 MB total, ZSTD-compressed, regenerated from `raw/` on every build like all other generated content. |
 
 ## Out of scope for v1
