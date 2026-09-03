@@ -585,3 +585,53 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Stat Search */
+.phfl-query__presets,
+.phfl-query__datasets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.phfl-query__chip,
+.phfl-query__dataset,
+.phfl-query__run,
+.phfl-query__add,
+.phfl-query__remove {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.25rem 0.7rem;
+}
+
+.phfl-query__dataset:disabled {
+  background: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+  cursor: default;
+}
+
+.phfl-query__verb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.phfl-query__results {
+  overflow-x: auto;
+}
+
+.phfl-query__count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.phfl-query__error {
+  border-left: 3px solid var(--md-accent-fg-color);
+  padding-left: 0.8rem;
+}
