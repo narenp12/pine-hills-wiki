@@ -6,70 +6,89 @@
     {
       "id": 0,
       "subject": "Task 1: Builder skeleton and the matchups table",
-      "status": "pending",
-      "description": "**Goal:** scripts/build_query_db.py produces the 1,230-row matchups table with correct owners and phase classification.\n\n**Files:**\n- Create: scripts/build_query_db.py\n- Create: tests/test_query_db.py\n- Modify: pyproject.toml\n\n**Acceptance Criteria:**\n- matchup_rows() returns exactly 1230 rows from the committed raw/\n- Every row has a non-empty owner and opp_owner\n- margin == score - opp_score on every row\n- Each game yields exactly two rows with mirrored scores\n- phase is one of regular, playoff, consolation\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Add duckdb>=1.5.5 to pyproject dependencies and uv sync. Write the two failing tests. Implement owner_index, _bracket_pairs, _phase, matchup_rows on top of scripts.generate.load_raw. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\", \"pyproject.toml\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"1230 matchup rows\", \"no blank owners\", \"margin equals score minus opp_score\", \"two mirrored rows per game\", \"phase in regular/playoff/consolation\"], \"modelTier\": \"standard\"}\n```"
+      "status": "completed",
+      "description": "**Goal:** scripts/build_query_db.py produces the 1,230-row matchups table with correct owners and phase classification.\n\n**Files:**\n- Create: scripts/build_query_db.py\n- Create: tests/test_query_db.py\n- Modify: pyproject.toml\n\n**Acceptance Criteria:**\n- matchup_rows() returns exactly 1230 rows from the committed raw/\n- Every row has a non-empty owner and opp_owner\n- margin == score - opp_score on every row\n- Each game yields exactly two rows with mirrored scores\n- phase is one of regular, playoff, consolation\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Add duckdb>=1.5.5 to pyproject dependencies and uv sync. Write the two failing tests. Implement owner_index, _bracket_pairs, _phase, matchup_rows on top of scripts.generate.load_raw. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\", \"pyproject.toml\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"1230 matchup rows\", \"no blank owners\", \"margin equals score minus opp_score\", \"two mirrored rows per game\", \"phase in regular/playoff/consolation\"], \"modelTier\": \"standard\"}\n```",
+      "completedAs": "76738f1, 13a3464, edbf396 (reworked as a projection over build_game_log)"
     },
     {
       "id": 1,
       "subject": "Task 2: The player_weeks table",
       "status": "pending",
-      "blockedBy": [0],
+      "blockedBy": [
+        0
+      ],
       "description": "**Goal:** Emit 19,881 player-week rows with points, position, lineup slot, and a started flag.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- player_week_rows() returns exactly 19881 rows\n- started is False exactly when slot is BN or IR\n- Every player_slug matches scripts.generate.slug(player)\n- 2026 contributes zero rows without raising\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests including per-year counts (2018=1252, 2025=3170, 2026=0). Implement player_week_rows walking weeks[week].rosters[team].players. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"19881 player-week rows\", \"started false exactly for BN and IR\", \"player_slug matches generate.slug\", \"2026 yields zero rows without raising\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 2,
       "subject": "Task 3: The team_seasons and draft tables",
       "status": "pending",
-      "blockedBy": [1],
+      "blockedBy": [
+        1
+      ],
       "description": "**Goal:** Emit 88 team-season rows with championship flags and 1,320 draft rows using the already-normalized overall and backfilled position.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- team_season_rows() returns 88 rows; exactly one champion per completed season\n- draft_rows() returns 1320 rows\n- pick restarts at 1 in every round, for every season\n- overall is a gapless 1..n sequence per season\n- Draft position coverage exceeds 95% of rows\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write three failing tests. Implement team_season_rows using apply_derived_champions and champ_year, and draft_rows consuming the `overall` field that load_raw already normalized via annotate_overall_picks. Do not reimplement pick numbering or position backfill. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"88 team-season rows\", \"exactly one champion per completed season\", \"1320 draft rows\", \"pick restarts at 1 each round\", \"overall gapless per season\", \"position coverage above 95 percent\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 3,
       "subject": "Task 4: Emit Parquet and schema.json",
       "status": "pending",
-      "blockedBy": [2],
+      "blockedBy": [
+        2
+      ],
       "description": "**Goal:** Write the four tables to ZSTD Parquet plus a schema.json the UI builds its dropdowns from.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- main() writes four .parquet files and one schema.json under <content dir>/query/\n- schema.json lists every column with its type for all four tables\n- schema.json carries distinct value lists for owner, position, slot, phase, year\n- Total Parquet size is under 1 MB\n- Re-running is idempotent\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests against a tmp_path. Implement build_tables, _register, _schema, build_all using duckdb COPY TO with FORMAT PARQUET and COMPRESSION ZSTD. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"four parquet files plus schema.json emitted\", \"schema lists columns and row counts per table\", \"enum values captured for owner position slot phase year\", \"parquet total under 1 MB\", \"idempotent across runs\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 4,
       "subject": "Task 5: Records consistency test",
       "status": "pending",
-      "blockedBy": [3],
+      "blockedBy": [
+        3
+      ],
       "description": "**Goal:** Prove SQL over the generated Parquet reproduces the Records page's marquee values, so the two cannot drift apart unnoticed.\n\n**Files:**\n- Create: tests/test_query_records_consistency.py\n\n**Acceptance Criteria:**\n- Highest regular-season score from SQL matches the Records page value\n- Lowest regular-season score matches\n- Biggest blowout margin matches\n- Closest game margin matches\n- Expected values are parsed from the generated Records page, not hardcoded\n\n**Verify:** uv run pytest tests/test_query_records_consistency.py -v\n\n**Steps:** Write four tests that build the tables into a tmp dir, create a DuckDB view over matchups.parquet, generate the Records markdown via gen_records_index, and compare. A failure most likely means phase misclassification, not a bad test. Commit.\n\n```json:metadata\n{\"files\": [\"tests/test_query_records_consistency.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_records_consistency.py -v\", \"acceptanceCriteria\": [\"highest score matches Records\", \"lowest score matches Records\", \"biggest blowout matches Records\", \"closest game matches Records\", \"expected values parsed from the page not hardcoded\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 5,
       "subject": "Task 6: Wire the builder into the build and add the nav entry",
       "status": "pending",
-      "blockedBy": [4],
+      "blockedBy": [
+        4
+      ],
       "description": "**Goal:** node zensical/build.mjs produces a Stat Search page with its data, reachable from the nav.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: zensical/build.mjs\n- Modify: zensical/zensical.toml\n- Modify: .github/workflows/deploy.yml\n\n**Acceptance Criteria:**\n- uv run python scripts/build_query_db.py writes into zensical/.stage/query/\n- node zensical/build.mjs completes and produces zensical/site/query/index.html\n- The four Parquet files and schema.json land in zensical/site/query/\n- Stat Search appears in the nav after Records\n- CI runs the test suite before building\n\n**Verify:** node zensical/build.mjs && ls zensical/site/query/\n\n**Steps:** Add the PAGE template, write_page and main to the builder. Insert the build step into build.mjs between generate.py and transform.py, renumbering the log labels to n/4. Add the nav entry. Add a pytest step to CI. Verify the parquet files survive transform.py; if not, extend its copy step. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"zensical/build.mjs\", \"zensical/zensical.toml\", \".github/workflows/deploy.yml\"], \"verifyCommand\": \"node zensical/build.mjs && ls zensical/site/query/\", \"acceptanceCriteria\": [\"builder writes into the stage dir\", \"full build produces query/index.html\", \"parquet and schema.json reach zensical/site/query\", \"Stat Search in nav after Records\", \"CI runs tests before build\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 6,
       "subject": "Task 7: The AST compiler",
       "status": "pending",
-      "blockedBy": [5],
+      "blockedBy": [
+        5
+      ],
       "description": "**Goal:** A pure compileAst(ast, schema) that produces parameterized DuckDB SQL and rejects anything not in the schema.\n\n**Files:**\n- Create: zensical/docs/javascripts/query-compile.js\n- Create: tests/js/query-compile.test.mjs\n\n**Acceptance Criteria:**\n- Compiles filter, group by, summarise, having, arrange, limit, and a two-table join\n- Every literal appears in params, never in sql\n- Unknown table, column, operator, or aggregate throws before any SQL is built\n- limit above 5000 is clamped to 5000\n- The module imports nothing: no DOM, no DuckDB, no network\n\n**Verify:** node --test tests/js/\n\n**Steps:** Write ten failing node:test cases including injection attempts through column names. Implement the compiler with a schema-validated identifier path and prepared-statement parameters for every literal. Add renderSql for display only. Extend the CI test step to run node --test. Commit.\n\n```json:metadata\n{\"files\": [\"zensical/docs/javascripts/query-compile.js\", \"tests/js/query-compile.test.mjs\", \".github/workflows/deploy.yml\"], \"verifyCommand\": \"node --test tests/js/\", \"acceptanceCriteria\": [\"compiles all supported verbs\", \"literals only in params never in sql\", \"unknown identifiers throw before sql is built\", \"limit clamped to 5000\", \"module has zero imports\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 7,
       "subject": "Task 8: DuckDB-WASM engine module",
       "status": "pending",
-      "blockedBy": [6],
+      "blockedBy": [
+        6
+      ],
       "description": "**Goal:** Boot DuckDB-WASM lazily, register the four Parquet files as views, and expose runSql().\n\n**Files:**\n- Create: zensical/docs/javascripts/query-engine.js\n\n**Acceptance Criteria:**\n- Loads @duckdb/duckdb-wasm pinned to exactly 1.32.0, eh bundle\n- Reports download progress so the boot state is determinate\n- Registers all four Parquet files as named views\n- runSql(sql, params) returns {columns, rows}\n- Boots at most once, even under concurrent calls\n- A boot failure rejects with a message the UI can display\n\n**Verify:** Open the built page, run a preset, confirm rows render and duckdb-eh.wasm was fetched exactly once.\n\n**Steps:** Write the module with a single cached bootPromise that clears itself on failure. Fetch the wasm through a reader loop for progress. Convert Arrow BigInt values to Number on the way out. Confirm all three CDN asset URLs return 200 before committing.\n\n```json:metadata\n{\"files\": [\"zensical/docs/javascripts/query-engine.js\"], \"verifyCommand\": \"curl -s -o /dev/null -w '%{http_code}' https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/dist/duckdb-eh.wasm\", \"acceptanceCriteria\": [\"version pinned to 1.32.0 eh bundle\", \"determinate download progress\", \"four parquet views registered\", \"runSql returns columns and rows\", \"boots at most once\", \"boot failure surfaces a displayable message\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 8,
       "subject": "Task 9: Presets and the verb UI",
       "status": "pending",
-      "blockedBy": [7],
+      "blockedBy": [
+        7
+      ],
       "description": "**Goal:** The page renders preset chips, an editable verb stack, a results table, and a Show query panel.\n\n**Files:**\n- Create: zensical/docs/javascripts/query-presets.js\n- Create: zensical/docs/javascripts/query.js\n- Modify: zensical/docs/stylesheets/zensical.css\n\n**Acceptance Criteria:**\n- All twelve presets run and return rows\n- Filter, sort and limit rows can be added, edited, and removed\n- Field and operator dropdowns are built from schema.json, not hardcoded\n- Owner cells link to owners/<slug>; player cells link to players/<slug>\n- Show query displays the compiled SQL\n- A boot failure replaces the results area with a message linking Records and Playoffs\n\n**Verify:** node zensical/build.mjs, serve zensical/site over HTTP, click each preset in turn.\n\n**Steps:** Write the twelve preset ASTs as data. Write the StatSearch class owning DOM and AST, delegating to compileAst and runSql. Add styles. Serve over HTTP (file:// will not work: module imports and parquet fetches need an origin) and exercise every preset. Commit.\n\n```json:metadata\n{\"files\": [\"zensical/docs/javascripts/query-presets.js\", \"zensical/docs/javascripts/query.js\", \"zensical/docs/stylesheets/zensical.css\"], \"verifyCommand\": \"node zensical/build.mjs && uv run python -m http.server 8000 --directory zensical/site\", \"acceptanceCriteria\": [\"all twelve presets return rows\", \"verb rows are editable\", \"dropdowns built from schema.json\", \"owner and player cells link into the wiki\", \"Show query panel renders the SQL\", \"boot failure shows the fallback message\"], \"modelTier\": \"standard\"}\n```"
     },
     {
       "id": 9,
       "subject": "Task 10: Aggregation verbs and shareable links",
       "status": "pending",
-      "blockedBy": [8],
+      "blockedBy": [
+        8
+      ],
       "description": "**Goal:** Group by and summarise are editable in the UI, and a shared URL restores the full verb stack.\n\n**Files:**\n- Modify: zensical/docs/javascripts/query.js\n- Modify: tests/js/query-compile.test.mjs\n\n**Acceptance Criteria:**\n- Group-by columns can be added and removed\n- Summarise rows choose an aggregate, a column, and an alias\n- Sort offers summarise aliases alongside table columns\n- Copying the URL and opening it in a new tab restores the same query and results\n- A malformed q parameter falls back to the default preset without an error\n\n**Verify:** node --test tests/js/ plus a manual copy-URL-into-a-new-window check\n\n**Steps:** Add renderAggregation to StatSearch and call it from renderBuilder. Add two compiler tests covering alias sorting and unknown aliases. Verify link sharing and malformed-q fallback by hand. Commit.\n\n```json:metadata\n{\"files\": [\"zensical/docs/javascripts/query.js\", \"tests/js/query-compile.test.mjs\"], \"verifyCommand\": \"node --test tests/js/\", \"acceptanceCriteria\": [\"group-by columns addable and removable\", \"summarise rows pick aggregate column and alias\", \"sort offers summarise aliases\", \"shared URL restores query and results\", \"malformed q falls back to the default preset\"], \"modelTier\": \"standard\"}\n```"
     }
   ],
