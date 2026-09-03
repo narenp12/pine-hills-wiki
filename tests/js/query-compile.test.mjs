@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { compileAst, MAX_LIMIT } from "../../zensical/docs/javascripts/query-compile.js";
+import { compileAst, renderSql, MAX_LIMIT } from "../../zensical/site/javascripts/query-compile.mjs";
 
 const schema = {
   tables: {
@@ -134,4 +134,9 @@ test("rejects an unknown aggregate", () => {
 test("clamps an oversized limit", () => {
   const { sql } = compileAst({ from: "matchups", limit: 999999 }, schema);
   assert.match(sql, new RegExp(`LIMIT ${MAX_LIMIT}`));
+});
+
+test("renderSql inlines a string parameter with escaped single quotes", () => {
+  const result = renderSql("SELECT * FROM t WHERE name = ?", ["O'Brien"]);
+  assert.equal(result, "SELECT * FROM t WHERE name = 'O''Brien'");
 });
