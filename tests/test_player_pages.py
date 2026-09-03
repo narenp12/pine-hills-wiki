@@ -3,8 +3,12 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from scripts.generate import (
+    FINALS_ROUND,
+    PHASE_PLAYOFF,
+    PHASE_REGULAR,
     apply_bible_positions,
     backfill_draft_positions,
+    build_player_championships,
     build_player_index,
     build_player_log,
     draft_picks_by_player,
@@ -163,6 +167,76 @@ def test_bible_position_reaches_the_player_page():
     apply_bible_positions(seasons, {"player_positions": {"Cut Before Week One": "TE"}})
     index = build_player_index(seasons, build_player_log(seasons), {})
     assert player_positions(index["Cut Before Week One"]) == ["TE"]
+
+
+def title_game_log():
+    """One captured Final: Team A beat Team B in 2024 week 16."""
+    return [
+        {"year": 2024, "week": 16, "round": FINALS_ROUND, "team": "Team A",
+         "won": True},
+        {"year": 2024, "week": 16, "round": FINALS_ROUND, "team": "Team B",
+         "won": False},
+        # A regular-season win is not a title, whoever won it.
+        {"year": 2024, "week": 3, "round": "", "team": "Team B", "won": True},
+    ]
+
+
+def title_player_log():
+    def week(player, team, this_week, started=True, this_round=FINALS_ROUND):
+        return {"year": 2024, "week": this_week, "round": this_round,
+                "team": team, "player": player, "started": started}
+
+    return [
+        week("Starter", "Team A", 16),
+        week("Benched", "Team A", 16, started=False),
+        week("Runner Up", "Team B", 16),
+        # On the winning roster in week 3, gone by the Final.
+        week("Cut in October", "Team A", 3, this_round=""),
+    ]
+
+
+def test_only_the_winning_finals_roster_gets_a_ring():
+    rings = build_player_championships(title_player_log(), title_game_log())
+    assert sorted(rings) == ["Benched", "Starter"]
+    assert rings["Starter"] == [{"year": 2024, "team": "Team A", "started": True}]
+    # A ring is a roster spot, not a start: the bench won the title too, and the
+    # page says which it was.
+    assert rings["Benched"][0]["started"] is False
+
+
+def test_player_page_names_the_championship_and_marks_its_season():
+    index = index_for()
+    page = gen_player_page(
+        "Traded Back", index["Traded Back"], 2025,
+        championships=[{"year": 2024, "team": "Team B", "started": True}],
+    )
+    assert "**Championships:** 1 - 2024 [[Team B]]" in page
+    # The table marks the title season, and only on the team that won it.
+    assert "| 2024 🏆 | [[Team B]]" in page
+    assert "| 2024 | [[Team A]]" in page
+
+
+def test_a_player_without_a_ring_carries_no_championship_bullet():
+    index = index_for()
+    assert "Championships:" not in gen_player_page(
+        "Traded Back", index["Traded Back"], 2025
+    )
+
+
+def test_record_books_stay_apart_on_the_page():
+    index = index_for()
+    page = gen_player_page(
+        "Traded Back", index["Traded Back"], 2025,
+        records={
+            PHASE_REGULAR: ["Highest Week - 57.90 (WR)"],
+            PHASE_PLAYOFF: [],
+            FINALS_ROUND: ["Highest Week - 40.00 (WR)"],
+        },
+    )
+    assert "**League Records:** Highest Week - 57.90 (WR)" in page
+    assert "**Finals Records:** Highest Week - 40.00 (WR)" in page
+    # An empty book is no bullet at all.
+    assert "Playoff Records:" not in page
 
 
 def test_players_index_groups_by_position():

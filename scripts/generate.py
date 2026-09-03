@@ -3179,6 +3179,48 @@ def build_player_awards(
     return awards
 
 
+def build_player_championships(player_log: list, game_log: list) -> dict:
+    """{player: [{"year": 2024, "team": "Stroud Boys", "started": True}]}.
+
+    A ring is a roster spot on the team that won the title game, read from the
+    same captured Final that decides the Finals MVP. The champion is not taken
+    from the standings here: the roster that has to be credited is the one that
+    was on the winning side of that game, and the game log is the only place
+    that says who it was.
+
+    Bench weeks count. A player rostered through the Final won the title with
+    that team whether or not he was started in it, and the page says which it
+    was rather than dropping him.
+    """
+    winners = {
+        (row["year"], row["week"], row["team"])
+        for row in game_log
+        if row.get("round") == FINALS_ROUND and row["won"]
+    }
+    rings = {}
+    for row in player_log:
+        if (row["year"], row["week"], row["team"]) not in winners:
+            continue
+        rings.setdefault(row["player"], []).append(
+            {"year": row["year"], "team": row["team"], "started": row["started"]}
+        )
+    for player in rings:
+        rings[player].sort(key=lambda ring: (ring["year"], ring["team"]))
+    return rings
+
+
+def player_championships_line(rings: list) -> str:
+    """"2 - 2019 [[Curry's legit team]], 2024 [[Stroud Boys]] (benched)"."""
+    if not rings:
+        return ""
+    won = ", ".join(
+        f"{ring['year']} {team_link(ring['team'])}"
+        f"{'' if ring['started'] else ' (benched)'}"
+        for ring in rings
+    )
+    return f"{len(rings)} - {won}"
+
+
 def player_awards_line(awards: dict) -> str:
     """"MVP 2020, 2023 · Finals MVP 2024", or "" when the player has none."""
     parts = []
@@ -3205,12 +3247,41 @@ HALL_MAJOR_AWARDS = [
     ("Undrafted Player of the Year", "undrafted"),
     ("Best Draft Pick", "best_pick"),
 ]
-# Two ways in, the way a Hall of Fame ballot actually reads: sustained
-# decoration, or a league record backed by at least one award. The second
-# clause is what lets a career like Patrick Mahomes' in - one Finals MVP, but
-# he holds a league mark and has more career points than anyone.
-HALL_MAJORS_ALONE = 3
-HALL_MAJORS_WITH_RECORD = 1
+# A ring is a credential. A title is the only thing this league plays for, and
+# a player who started three winning Finals has a case no individual award list
+# can dismiss.
+HALL_CHAMPIONSHIP_LABEL = "Champion"
+# One score rather than a list of routes in, because the credentials are not
+# worth the same. An MVP or a Finals MVP is the league's verdict on a whole
+# season and weighs double; every other award, each ring and each record book
+# entry weighs one. Four is the bar: it admits a Finals MVP who also holds a
+# mark and won a title (Mahomes), and a kicker who started three winning
+# Finals and won an award (Butker), while a two-award season with one ring
+# falls short.
+HALL_BIG_AWARDS = {"mvp", "finals"}
+HALL_WEIGHT_BIG_AWARD = 2
+HALL_WEIGHT_CREDENTIAL = 1
+HALL_SCORE_TO_INDUCT = 4
+# A defense is judged as one season, so it has to reach the bar in that season
+# while a player pools credentials over a whole career. Same credentials, a
+# eighth of the time to collect them, so the bar is one point lower. Not a rule
+# about the position: any unit judged a season at a time gets it.
+HALL_SCORE_SEASON_UNIT = 3
+# A ring and a record are both team-shaped: nine starters share a title, and a
+# record is one week. Neither can carry a career on its own, so a case needs at
+# least one award with the player's own name on it.
+HALL_AWARDS_REQUIRED = 1
+# Class sizes are the Pro Football Hall of Fame's own: "The charter class of
+# seventeen was selected in 1963", and after it "the rules of the committee
+# stipulate that between four and eight individuals are selected each year".
+# A cap is the point -- it is what makes the Hall a queue rather than a list.
+HALL_CHARTER_CLASS_SIZE = 17
+HALL_ANNUAL_CLASS_SIZE = 8
+# The season the Hall opened: the last one played before it existed. Pinned
+# rather than derived from the latest captured season, because a charter class
+# happens once -- next year's build adds a class of eight, it does not move the
+# charter forward and re-shuffle everyone already enshrined.
+HALL_CHARTER_YEAR = 2025
 # A defense is not a person. "Patriots" on a 2019 roster and "Patriots" on a
 # 2023 one are different units that happen to share a name, so a defense is
 # judged one season at a time and inducted as that season: the 2019 Patriots,
@@ -3218,14 +3289,41 @@ HALL_MAJORS_WITH_RECORD = 1
 HALL_SEASON_UNIT_POSITIONS = {"DEF"}
 
 
+def hall_record_marks(player_log: list) -> dict:
+    """{player: [mark, ...]} across every record book, tagged with its book.
+
+    A Finals record is a record, so the Hall reads all three books rather than
+    the regular season alone. The Final is itself a playoff game, so a mark set
+    in it lands in both postseason books: the more specific label wins and the
+    twin is dropped instead of being counted twice toward induction.
+    """
+    marks = {
+        player: [dict(mark) for mark in held]
+        for player, held in player_record_marks(player_log, PHASE_REGULAR).items()
+    }
+    postseason = {}
+    for scope, prefix in ((PHASE_PLAYOFF, "Playoff "), (FINALS_ROUND, "Finals ")):
+        for player, held in player_record_marks(player_log, scope).items():
+            for mark in held:
+                postseason.setdefault(player, {})[(mark["text"], mark["year"])] = {
+                    "text": f"{prefix}{mark['text']}",
+                    "year": mark["year"],
+                }
+    for player, held in postseason.items():
+        marks.setdefault(player, []).extend(held.values())
+    return marks
+
+
 def _hall_candidate(name: str, record: dict, awards: dict, marks: list, highs: dict,
-                    year=None) -> dict:
+                    year=None, rings: list = None) -> dict:
     """One résumé to judge: a whole career, or a defense's single season.
 
     Passing `year` narrows every credential to that season - the awards won in
-    it, the records set in it, and the points scored in it. A career mark like
-    weeks rostered carries no year and so belongs to no single season unit.
+    it, the records set in it, the titles won in it, and the points scored in
+    it. A career mark like weeks rostered carries no year and so belongs to no
+    single season unit.
     """
+    rings = rings or []
     if year is None:
         years = sorted(record["years"])
         points, starts = record["points"], record["starts"]
@@ -3239,18 +3337,44 @@ def _hall_candidate(name: str, record: dict, awards: dict, marks: list, highs: d
         teams = len(stints)
         credential_years = lambda won: [y for y in won if y == year]  # noqa: E731
         marks = [mark for mark in marks if mark["year"] == year]
+        rings = [ring for ring in rings if ring["year"] == year]
         highs = {
             position: [y for y in seasons if y == year]
             for position, seasons in (highs or {}).items()
         }
         highs = {position: seasons for position, seasons in highs.items() if seasons}
 
-    credentials, majors = [], 0
+    # Every credential as (year, weight, is_award), so the score and the season
+    # the case became complete are read off one list.
+    credentials, scored, awards_won = [], [], 0
+    # Titles lead the case: a ring is what the league actually plays for, and
+    # reads first on the plaque for the same reason.
+    if rings:
+        scored.extend(
+            (ring["year"], HALL_WEIGHT_CREDENTIAL, False) for ring in rings
+        )
+        credentials.append(
+            f"{HALL_CHAMPIONSHIP_LABEL} "
+            f"{', '.join(str(ring['year']) for ring in rings)}"
+        )
     for label, key in HALL_MAJOR_AWARDS:
         won = credential_years(awards.get(key) or [])
         if won:
-            majors += len(won)
+            awards_won += len(won)
+            weight = (
+                HALL_WEIGHT_BIG_AWARD if key in HALL_BIG_AWARDS
+                else HALL_WEIGHT_CREDENTIAL
+            )
+            scored.extend((year, weight, True) for year in won)
             credentials.append(f"{label} {', '.join(str(y) for y in won)}")
+    # A career mark like weeks rostered belongs to no single season, so it is
+    # credited to the last one the player played: it was not true before then.
+    last_season = max(years) if years else None
+    scored.extend(
+        (mark["year"] if mark["year"] is not None else last_season,
+         HALL_WEIGHT_CREDENTIAL, False)
+        for mark in marks
+    )
     return {
         "player": name,
         "display": f"{year} {name}" if year is not None else name,
@@ -3259,21 +3383,66 @@ def _hall_candidate(name: str, record: dict, awards: dict, marks: list, highs: d
         "points": points,
         "starts": starts,
         "teams": teams,
-        "majors": majors,
+        "score": sum(weight for _, weight, _ in scored),
+        "awards": awards_won,
+        "championships": rings,
         "credentials": credentials,
         "records": [mark["text"] for mark in marks],
         "season_highs": player_season_high_line(highs),
+        # The season the case became complete, which is what decides how long a
+        # résumé waits for a class with room in it.
+        "qualified": _qualifying_year(
+            scored,
+            HALL_SCORE_SEASON_UNIT if year is not None else HALL_SCORE_TO_INDUCT,
+        ),
     }
+
+
+def _qualifying_year(scored: list, threshold: int = HALL_SCORE_TO_INDUCT):
+    """The season a résumé first met the standard, or None if it never does.
+
+    `scored` is the case as (year, weight, is_award) credentials. Read forward
+    one season at a time rather than judged whole, because a backlogged ballot
+    has to know when each case became complete: a player who reached the bar in
+    2021 was a Hall of Famer waiting for a slot, while one who got there in
+    2025 was not yet a candidate at all.
+    """
+    dated = [entry for entry in scored if entry[0] is not None]
+    for year in sorted({entry[0] for entry in dated}):
+        earned = [entry for entry in dated if entry[0] <= year]
+        awards = sum(1 for _, _, is_award in earned if is_award)
+        if (awards >= HALL_AWARDS_REQUIRED
+                and sum(weight for _, weight, _ in earned) >= threshold):
+            return year
+    return None
+
+
+def hall_ineligible(bible: dict) -> dict:
+    """{player: reason} - the league's permanently ineligible list.
+
+    The one human override on a computed Hall, and the only reason the bible
+    gets a say in it. MLB keeps such a list and Pete Rose is on it; a league
+    that decides a player is out is making a decision, not a calculation, so it
+    is written down by hand rather than derived from anything.
+    """
+    block = (bible or {}).get("hall_of_fame") or {}
+    listed = block.get("ineligible") or {}
+    if isinstance(listed, list):
+        return {str(name): "" for name in listed}
+    return {str(name): value or "" for name, value in listed.items()}
 
 
 def hall_of_fame_class(
     player_index: dict, player_awards: dict, record_marks: dict, season_highs: dict,
+    championships: dict = None, ineligible: dict = None,
 ) -> list:
     """The inductees, best résumé first.
 
-    Computed from the awards and records the rest of the wiki already hands out,
-    so nobody is here on anyone's say-so: the case printed under each name is
-    the same case that got them in.
+    Computed from the awards, records and titles the rest of the wiki already
+    hands out, so nobody is here on anyone's say-so: the case printed under each
+    name is the same case that got them in. The one exception is the league's
+    ineligible list, which is a decision rather than a calculation and is named
+    on the page for that reason.
     """
     members = []
     for name, record in (player_index or {}).items():
@@ -3281,9 +3450,18 @@ def hall_of_fame_class(
         # career that never happened cannot be a Hall of Fame career.
         if not record.get("years"):
             continue
+        if name in (ineligible or {}):
+            continue
         awards = (player_awards or {}).get(name) or {}
         marks = (record_marks or {}).get(name) or []
         highs = (season_highs or {}).get(name) or {}
+        # A ring is a credential only when the player was started in the title
+        # game. Bench weeks are still a championship and the player's own page
+        # says so, but riding four winning rosters is a fact about those
+        # rosters, not a case for a career.
+        rings = [
+            ring for ring in ((championships or {}).get(name) or []) if ring["started"]
+        ]
         positions = set(player_positions(record) or [])
         seasons = (
             sorted(record["years"])
@@ -3291,45 +3469,104 @@ def hall_of_fame_class(
             else [None]
         )
         for year in seasons:
-            candidate = _hall_candidate(name, record, awards, marks, highs, year)
-            if (candidate["majors"] >= HALL_MAJORS_ALONE
-                    or (candidate["records"]
-                        and candidate["majors"] >= HALL_MAJORS_WITH_RECORD)):
+            candidate = _hall_candidate(name, record, awards, marks, highs, year, rings)
+            # A résumé that never met the standard has no qualifying season.
+            if candidate["qualified"] is not None:
                 members.append(candidate)
     # Decoration first, then records, then the points that back them up.
-    members.sort(key=lambda m: (-m["majors"], -len(m["records"]), -m["points"]))
+    members.sort(key=lambda m: (-m["score"], -m["awards"], -m["points"]))
     return members
 
 
+def hall_of_fame_classes(members: list, latest_year) -> tuple:
+    """([{"year": .., "charter": bool, "members": [..]}, ..], still_waiting).
+
+    The Hall fills the way the real one did: a charter class that clears as
+    much of the backlog as its cap allows, then a capped class every season
+    after, admitting the best résumés already qualified. A player whose case
+    was complete years ago but who never made a class is still on the ballot
+    rather than quietly inducted, which is what a cap means.
+    """
+    if latest_year is None or HALL_CHARTER_YEAR > latest_year:
+        return [], list(members)
+
+    charter_year = HALL_CHARTER_YEAR
+    classes, waiting = [], list(members)
+    for year in range(charter_year, latest_year + 1):
+        size = HALL_CHARTER_CLASS_SIZE if year == charter_year else HALL_ANNUAL_CLASS_SIZE
+        # Already sorted by résumé, so taking the front of the queue takes the
+        # best cases the ballot had that season.
+        eligible = [m for m in waiting if m["qualified"] <= year][:size]
+        for member in eligible:
+            member["class_year"] = year
+            waiting.remove(member)
+        classes.append({
+            "year": year, "charter": year == charter_year, "members": eligible,
+        })
+    # A season the league has not played yet inducts nobody, and printing its
+    # empty table would announce a class that has not happened. A gap year in
+    # the middle is a real gap and stays.
+    while len(classes) > 1 and not classes[-1]["members"]:
+        classes.pop()
+    return classes, waiting
+
+
+# The record books a player page prints, in the order the playoffs page reads
+# them. Each is kept as its own bullet: a Finals mark and an October mark are
+# different claims, and merging them into one line would hide which is which.
+PLAYER_RECORD_BOOKS = [
+    ("League Records", PHASE_REGULAR),
+    ("Playoff Records", PHASE_PLAYOFF),
+    ("Finals Records", FINALS_ROUND),
+]
+# The marker on a season a player finished as a champion, in the table and
+# nowhere else -- the header bullet already names the years in full.
+TITLE_MARK = " 🏆"
+
+
 def gen_player_page(
-    name: str, record: dict, latest_year, awards: dict = None, records: list = None,
-    season_highs: dict = None,
+    name: str, record: dict, latest_year, awards: dict = None, records: dict = None,
+    season_highs: dict = None, championships: list = None,
 ) -> str:
     """Generate a player page: every fantasy roster this player has sat on.
 
     The table is the point of the page. A player who spent eight years on one
     roster and one who was churned by six managers look nothing alike here, and
     neither reads that way from a team page.
+
+    `records` is keyed by book scope, so a Finals mark stays labelled as one.
     """
     positions = player_positions(record) or [TBD]
     # Only players who actually won something carry the line; an empty
     # "Awards: -" on 590 pages would be noise.
     won = player_awards_line(awards or {})
     awards_line = f"{chr(10)}- **Awards:** {won}" if won else ""
+    # Rings, same rule: the page of a player who never sat on a winning Final
+    # roster does not carry an empty bullet.
+    rings = championships or []
+    titles = player_championships_line(rings)
+    titles_line = f"{chr(10)}- **Championships:** {titles}" if titles else ""
     # Same rule for records: the handful of pages that hold one say so, and the
-    # rest do not carry an empty bullet. Regular season, matching the book.
-    held = " · ".join(records or [])
-    records_line = f"{chr(10)}- **League Records:** {held}" if held else ""
+    # rest do not carry an empty bullet. One bullet per book that has a mark.
+    records = records or {}
+    records_lines = "".join(
+        f"{chr(10)}- **{label}:** {' · '.join(records.get(scope) or [])}"
+        for label, scope in PLAYER_RECORD_BOOKS
+        if records.get(scope)
+    )
     # The seasons this player's week led his position, which is a smaller claim
     # than a league record and is kept on its own line so it reads as one.
     led = player_season_high_line(season_highs or {})
     season_highs_line = f"{chr(10)}- **Season Position Highs:** {led}" if led else ""
 
+    title_seasons = {(ring["year"], ring["team"]) for ring in rings}
     stints = sorted(
         record["stints"].values(), key=lambda s: (s["year"], -s["weeks"], s["team"])
     )
     stint_rows = [
-        f"| {stint['year']} | {team_link(stint['team'])} "
+        f"| {stint['year']}"
+        f"{TITLE_MARK if (stint['year'], stint['team']) in title_seasons else ''} "
+        f"| {team_link(stint['team'])} "
         f"| {wikilink(stint['owner']) if stint['owner'] else TBD} "
         f"| {'/'.join(player_positions(stint)) or '-'} "
         f"| {stint['weeks']} | {stint['starts']} | {stint['points']:.2f} "
@@ -3373,7 +3610,7 @@ description: "Every Pine Hills fantasy roster {name} has appeared on, season by 
 
 - **Position:** {" / ".join(positions)}
 - **Seasons:** {_year_range(record["years"], latest_year)}
-- **Fantasy Teams:** {len(record["teams"])}{awards_line}
+- **Fantasy Teams:** {len(record["teams"])}{titles_line}{awards_line}
 
 ## Career Summary
 
@@ -3381,12 +3618,13 @@ description: "Every Pine Hills fantasy roster {name} has appeared on, season by 
 - **Points in Lineup:** {record["points"]:.2f}
 - **Points on the Bench:** {record["bench_points"]:.2f}
 - **Best Week:** {player_best_week(record["best"])}
-- **Times Drafted:** {player_draft_line(record["drafts"])}{records_line}{season_highs_line}
+- **Times Drafted:** {player_draft_line(record["drafts"])}{records_lines}{season_highs_line}
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 {team_history}
 
@@ -3745,20 +3983,66 @@ captured data.
 """
 
 
-def gen_hall_of_fame(members: list, latest_year=None) -> str:
-    """Generate the Hall of Fame: the inaugural class, one plaque per member.
-
-    The class is computed from the awards and records the rest of the wiki
-    hands out, so the page can print the case beside the name. No ballot, no
-    committee, and nothing here that a season page does not already say.
-    """
-    summary = [
+def hall_class_table(members: list, latest_year=None) -> str:
+    """One class as a table, or the placeholder row when it inducted nobody."""
+    rows = [
         f"| {wikilink(member['player'], member['display'])} "
         f"| {'/'.join(member['positions'])} "
         f"| {_year_range(member['years'], latest_year)} "
-        f"| {member['points']:.2f} | {member['majors']} |"
+        f"| {member['points']:.2f} | {len(member['championships'])} "
+        f"| {member['awards']} | {member['score']} |"
         for member in members
-    ] or [f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"]
+    ] or [f"| {TBD} | {TBD} | {TBD} | {TBD} | {TBD} | {TBD} | {TBD} |"]
+    return "\n".join(
+        ["| Player | Pos | Seasons | Lineup Points | Titles | Awards | Score |",
+         "|--------|-----|---------|---------------|--------|--------|-------|"]
+        + rows
+    )
+
+
+def hall_class_heading(entry: dict) -> str:
+    """"The Charter Class (2022)" or "Class of 2023"."""
+    if entry["charter"]:
+        return f"The Charter Class ({entry['year']})"
+    return f"Class of {entry['year']}"
+
+
+def gen_hall_of_fame(classes: list, latest_year=None, ineligible: dict = None) -> str:
+    """Generate the Hall of Fame: a class per season, one plaque per member.
+
+    The classes are computed from the awards, records and titles the rest of
+    the wiki hands out, so the page can print the case beside the name. No
+    ballot, no committee, and nothing here that a season page does not already
+    say.
+    """
+    members = [member for entry in classes for member in entry["members"]]
+    headings = {entry["year"]: hall_class_heading(entry) for entry in classes}
+    class_blocks = "\n\n".join(
+        f"### {hall_class_heading(entry)}\n\n"
+        f"{hall_class_table(entry['members'], latest_year)}"
+        for entry in classes
+    ) or "_The league has not played long enough to open the Hall._"
+
+    # Who is next is not knowable yet: a season the league has not played will
+    # mint new candidates and re-order the queue, so printing today's waiting
+    # list as a ballot would promise an induction nobody has earned.
+    # Named rather than quietly dropped: a page that says it computes its
+    # members has to say when it did not.
+    banned = "; ".join(
+        f"{wikilink(name)}{f' ({reason})' if reason else ''}"
+        for name, reason in sorted((ineligible or {}).items())
+    )
+    ineligible_line = (
+        f"{chr(10)}{chr(10)}Permanently ineligible by league decision: {banned}."
+        if banned
+        else ""
+    )
+    next_class = classes[-1]["year"] + 1 if classes else None
+    next_class_line = (
+        f" The next class is chosen after the {next_class} season."
+        if next_class
+        else ""
+    )
 
     plaques = []
     for member in members:
@@ -3772,8 +4056,15 @@ def gen_hall_of_fame(members: list, latest_year=None) -> str:
             f"- **{'Season' if len(member['years']) == 1 else 'Career'} Lineup "
             f"Points:** {member['points']:.2f} over {member['starts']} starts",
             f"- **Fantasy Teams:** {member['teams']}",
+            f"- **Inducted:** {headings.get(member.get('class_year'), TBD)}",
             f"- **The Case:** {' · '.join(member['credentials'])}",
         ]
+        if member["championships"]:
+            lines.insert(
+                -1,
+                f"- **Championships:** "
+                f"{player_championships_line(member['championships'])}",
+            )
         if member["records"]:
             lines.append(f"- **League Records:** {' · '.join(member['records'])}")
         if member["season_highs"]:
@@ -3790,29 +4081,46 @@ description: The Pine Hills Fantasy League Hall of Fame, computed from the leagu
 # Hall of Fame
 
 The most decorated players of the league's captured seasons. Induction is
-computed rather than voted, from the {wikilink('Awards')} and {wikilink('Records')}
-pages, and is recomputed on each build.
+computed rather than voted, from the {wikilink('Awards')}, {wikilink('Records')}
+and {wikilink('Champions')} pages, and is recomputed on each build.
 
 ## Who Gets In
 
-A player is inducted on either of two criteria:
+A career is scored. {HALL_SCORE_TO_INDUCT} gets in.
 
-- **{HALL_MAJORS_ALONE} or more major awards.** MVP, Finals MVP, Team of the Season,
-  Newcomer of the Year, Undrafted Player of the Year and Best Draft Pick each
-  count once per season won. Biggest Bust is excluded.
-- **A league record, plus at least {HALL_MAJORS_WITH_RECORD} major award.** A mark in
-  the {wikilink('Records')} book does not qualify on its own.
+- **{HALL_WEIGHT_BIG_AWARD} points** - MVP, Finals MVP.
+- **{HALL_WEIGHT_CREDENTIAL} point** - Team of the Season, Newcomer of the Year,
+  Undrafted Player of the Year, Best Draft Pick, each championship, each mark
+  in the {wikilink('Records')} book. Biggest Bust is excluded.
 
-Ties in a record are shared, so both holders qualify on it.
+Credentials count once per season won. A case also needs
+at least {HALL_AWARDS_REQUIRED} individual award: titles and records are
+shared, so neither carries a career alone.
 
-Defenses are inducted as a single season - the 2019 Patriots - on that season
-alone. Every other position is inducted on a whole career.
+A championship counts only when the player was started in the title game; a
+bench ring does not. Records are read from all three books - regular season,
+playoffs and Finals - and a mark set in a Final counts once. Tied records are
+shared, and both holders qualify.
 
-## The Inaugural Class
+Defenses are inducted as a single season - the 2019 Patriots - and need
+{HALL_SCORE_SEASON_UNIT} rather than {HALL_SCORE_TO_INDUCT}, having one season
+to collect what a career has eight for. Every other position is inducted on a
+whole career.{ineligible_line}
 
-| Player | Pos | Seasons | Lineup Points | Major Awards |
-|--------|-----|---------|---------------|--------------|
-{chr(10).join(summary)}
+## How the Classes Work
+
+Meeting the standard makes a player a candidate, not a member. Class sizes
+follow the Pro Football Hall of Fame's: a charter class of
+{HALL_CHARTER_CLASS_SIZE}, then no more than {HALL_ANNUAL_CLASS_SIZE} a season.
+The Hall opened in {HALL_CHARTER_YEAR}, so the charter class is drawn from
+every career built to that point.
+
+Each class admits the best remaining résumés whose case was complete that
+season. Whoever the cap leaves out stays a candidate.{next_class_line}
+
+## Classes
+
+{class_blocks}
 
 ## Plaques
 
@@ -4481,13 +4789,16 @@ def main():
 
     # player pages — one per player ever rostered (or drafted and cut)
     warn_slug_collisions("player", player_index)
-    # The record book, keyed by holder, so a page can name the marks it holds.
-    # The Hall needs the year each mark was set; the pages only need the prose.
-    record_marks = player_record_marks(player_log)
+    # The record books, keyed by holder, so a page can name the marks it holds.
+    # Keyed by scope so the page can label a Finals mark as one instead of
+    # filing it with the October records.
     player_records = {
-        player: [mark["text"] for mark in marks] for player, marks in record_marks.items()
+        scope: player_record_lines(player_log, scope)
+        for _, scope in PLAYER_RECORD_BOOKS
     }
     season_position_highs = player_season_highs(player_log)
+    # Rings, read off the captured Final the same way the Finals MVP is.
+    championships = build_player_championships(player_log, matchup_stats["log"])
     for player_name, record in player_index.items():
         pp = CONTENT / "players" / f"{slug(player_name)}.md"
         pp.write_text(
@@ -4495,8 +4806,12 @@ def main():
                 gen_player_page(
                     player_name, record, latest_year,
                     player_awards.get(player_name, {}),
-                    player_records.get(player_name, []),
+                    {
+                        scope: lines.get(player_name, [])
+                        for scope, lines in player_records.items()
+                    },
                     season_position_highs.get(player_name, {}),
+                    championships.get(player_name, []),
                 )
             )
         )
@@ -4539,17 +4854,25 @@ def main():
     print(f"  wrote {ap.relative_to(ROOT)}")
 
     # The Hall reads the awards and records built above rather than the raw
-    # seasons, so it cannot induct anyone those pages do not credit.
+    # seasons, so it cannot induct anyone those pages do not credit. Qualifying
+    # is only half of it: the capped classes decide who is in this year.
+    ineligible = hall_ineligible(bible)
+    qualified = hall_of_fame_class(
+        player_index, player_awards, hall_record_marks(player_log),
+        season_position_highs, championships, ineligible,
+    )
+    # Classes stop at the last season actually played. The upcoming season has
+    # a raw file before a ball is thrown, and inducting a class into it would
+    # enshrine players in a season that has not happened.
+    last_played = max(
+        (year for year in seasons if season_has_games(seasons[year])), default=None
+    )
+    # Whoever the caps left out stays a candidate for a later class; the page
+    # does not print them, because a season not yet played will mint new ones.
+    hall_classes, _ = hall_of_fame_classes(qualified, last_played)
     hof = CONTENT / "hall-of-fame.md"
     hof.write_text(
-        dash_normalize(
-            gen_hall_of_fame(
-                hall_of_fame_class(
-                    player_index, player_awards, record_marks, season_position_highs,
-                ),
-                latest_year,
-            )
-        )
+        dash_normalize(gen_hall_of_fame(hall_classes, latest_year, ineligible))
     )
     print(f"  wrote {hof.relative_to(ROOT)}")
 

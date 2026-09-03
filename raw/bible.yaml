@@ -174,6 +174,17 @@ champions:
   2019: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
   2018: { champion: "", runner_up: "", top_seed: "", toilet_winner: "" }
 
+# --- Hall of Fame ------------------------------------------------------------
+# Induction is computed; this is the one human override. A player listed here is
+# permanently ineligible by league decision, however his record reads -- the
+# same thing MLB's permanently ineligible list does to Pete Rose. The Hall of
+# Fame page names everyone on it, so the exclusion is visible rather than a
+# silent hole in a page that claims to compute its own members.
+# name -> reason (a blank reason prints the name with no explanation)
+hall_of_fame:
+  ineligible:
+    "Deshaun Watson": ""
+
 # --- Franchise aliases (name changes across years) ---------------------------
 # canonical name -> list of names that belong to the same franchise
 aliases: {}
