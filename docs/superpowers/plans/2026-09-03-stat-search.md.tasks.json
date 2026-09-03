@@ -33,11 +33,12 @@
     {
       "id": 3,
       "subject": "Task 4: Emit Parquet and schema.json",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [
         2
       ],
-      "description": "**Goal:** Write the four tables to ZSTD Parquet plus a schema.json the UI builds its dropdowns from.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- main() writes four .parquet files and one schema.json under <content dir>/query/\n- schema.json lists every column with its type for all four tables\n- schema.json carries distinct value lists for owner, position, slot, phase, year\n- Total Parquet size is under 1 MB\n- Re-running is idempotent\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests against a tmp_path. Implement build_tables, _register, _schema, build_all using duckdb COPY TO with FORMAT PARQUET and COMPRESSION ZSTD. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"four parquet files plus schema.json emitted\", \"schema lists columns and row counts per table\", \"enum values captured for owner position slot phase year\", \"parquet total under 1 MB\", \"idempotent across runs\"], \"modelTier\": \"standard\"}\n```"
+      "description": "**Goal:** Write the four tables to ZSTD Parquet plus a schema.json the UI builds its dropdowns from.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- main() writes four .parquet files and one schema.json under <content dir>/query/\n- schema.json lists every column with its type for all four tables\n- schema.json carries distinct value lists for owner, position, slot, phase, year\n- Total Parquet size is under 1 MB\n- Re-running is idempotent\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write the two failing tests against a tmp_path. Implement build_tables, _register, _schema, build_all using duckdb COPY TO with FORMAT PARQUET and COMPRESSION ZSTD. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"four parquet files plus schema.json emitted\", \"schema lists columns and row counts per table\", \"enum values captured for owner position slot phase year\", \"parquet total under 1 MB\", \"idempotent across runs\"], \"modelTier\": \"standard\"}\n```",
+      "completedAs": "0984683 (emitter + load_league entry point; fixed 11 dead player_slug links)"
     },
     {
       "id": 4,
