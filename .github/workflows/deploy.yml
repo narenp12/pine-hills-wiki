@@ -45,7 +45,9 @@ jobs:
       - name: Run tests
         run: |
           uv run pytest -q
-          node --test tests/js/
+          # Node 22's runner treats a positional arg as a test file, not a
+          # directory to walk, so let the shell expand the files instead.
+          node --test tests/js/*.test.mjs
 
       - name: Build Zensical site
         run: node zensical/build.mjs
