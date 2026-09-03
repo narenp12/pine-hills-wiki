@@ -140,3 +140,32 @@ test("renderSql inlines a string parameter with escaped single quotes", () => {
   const result = renderSql("SELECT * FROM t WHERE name = ?", ["O'Brien"]);
   assert.equal(result, "SELECT * FROM t WHERE name = 'O''Brien'");
 });
+
+test("sorting by a summarise alias is allowed", () => {
+  const { sql } = compileAst(
+    {
+      from: "matchups",
+      groupBy: ["owner"],
+      summarise: [{ fn: "sum", field: "score", as: "total" }],
+      arrange: [{ field: "total", dir: "desc" }],
+    },
+    schema,
+  );
+  assert.match(sql, /ORDER BY "total" DESC/);
+});
+
+test("sorting by an unknown alias still throws", () => {
+  assert.throws(
+    () =>
+      compileAst(
+        {
+          from: "matchups",
+          groupBy: ["owner"],
+          summarise: [{ fn: "sum", field: "score", as: "total" }],
+          arrange: [{ field: "nonsense", dir: "desc" }],
+        },
+        schema,
+      ),
+    /unknown column/i,
+  );
+});

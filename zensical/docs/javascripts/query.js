@@ -135,6 +135,7 @@ class StatSearch {
     this.builder.append(datasets);
 
     this.builder.append(this.renderFilters());
+    this.builder.append(this.renderAggregation());
     this.builder.append(this.renderSort());
 
     const run = element("button", "phfl-query__run", "Run query");
@@ -197,6 +198,85 @@ class StatSearch {
         op: "=",
         value: "",
       });
+      this.renderBuilder();
+    });
+    wrapper.append(add);
+    return wrapper;
+  }
+
+  renderAggregation() {
+    const wrapper = element("div", "phfl-query__verbs");
+    wrapper.append(element("h3", null, "Group and summarise"));
+    this.ast.groupBy ??= [];
+    this.ast.summarise ??= [];
+
+    const group = element("div", "phfl-query__verb");
+    for (const name of this.columnsFor(this.ast.from)) {
+      const label = element("label", "phfl-query__group");
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.checked = this.ast.groupBy.includes(name);
+      box.addEventListener("change", () => {
+        if (box.checked) this.ast.groupBy.push(name);
+        else this.ast.groupBy = this.ast.groupBy.filter((n) => n !== name);
+        this.renderBuilder();
+      });
+      label.append(box, document.createTextNode(` ${name}`));
+      group.append(label);
+    }
+    wrapper.append(group);
+
+    this.ast.summarise.forEach((spec, index) => {
+      const row = element("div", "phfl-query__verb");
+
+      const fn = document.createElement("select");
+      for (const name of ["count", "count_distinct", "sum", "avg", "min", "max", "median", "stddev"]) {
+        const option = element("option", null, name);
+        option.value = name;
+        option.selected = name === spec.fn;
+        fn.append(option);
+      }
+      fn.addEventListener("change", () => {
+        spec.fn = fn.value;
+        this.renderBuilder();
+      });
+
+      const field = document.createElement("select");
+      const blank = element("option", null, "(all rows)");
+      blank.value = "";
+      field.append(blank);
+      for (const name of this.columnsFor(this.ast.from)) {
+        const option = element("option", null, name);
+        option.value = name;
+        option.selected = name === spec.field;
+        field.append(option);
+      }
+      field.addEventListener("change", () => {
+        spec.field = field.value || undefined;
+      });
+
+      const alias = document.createElement("input");
+      alias.value = spec.as ?? "";
+      alias.addEventListener("change", () => {
+        spec.as = alias.value.trim() || `${spec.fn}_${spec.field ?? "all"}`;
+        this.renderBuilder();
+      });
+
+      const remove = element("button", "phfl-query__remove", "Remove");
+      remove.type = "button";
+      remove.addEventListener("click", () => {
+        this.ast.summarise.splice(index, 1);
+        this.renderBuilder();
+      });
+
+      row.append(fn, field, alias, remove);
+      wrapper.append(row);
+    });
+
+    const add = element("button", "phfl-query__add", "Add summary");
+    add.type = "button";
+    add.addEventListener("click", () => {
+      this.ast.summarise.push({ fn: "count", as: "rows" });
       this.renderBuilder();
     });
     wrapper.append(add);
