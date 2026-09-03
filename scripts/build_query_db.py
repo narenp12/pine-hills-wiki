@@ -12,12 +12,13 @@ from pathlib import Path
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# slug and standings_teams are unused here but reserved for the remaining query
-# tables (the player and team-season rows); load_bible and load_raw are for
-# build_all() and main(). F401 is suppressed for those, E402 because the
-# sys.path line above has to run before this import resolves.
+# standings_teams is unused here but reserved for the remaining query table
+# (the team-season rows); load_bible and load_raw are for build_all() and
+# main(). F401 is suppressed for those, E402 because the sys.path line above
+# has to run before this import resolves.
 from scripts.generate import (  # noqa: E402, F401
     build_game_log,
+    build_player_log,
     get_owners,
     load_bible,
     load_raw,
@@ -43,6 +44,23 @@ MATCHUP_COLUMNS = (
     "margin",
     "won",
     "tied",
+)
+
+# One row per roster slot per week, bench and IR included, so the whole roster
+# is queryable and not just the starting lineup.
+PLAYER_WEEK_COLUMNS = (
+    "year",
+    "week",
+    "phase",
+    "round",
+    "owner",
+    "team",
+    "player",
+    "player_slug",
+    "position",
+    "slot",
+    "started",
+    "points",
 )
 
 
@@ -98,6 +116,50 @@ def matchup_rows(seasons: dict, bible: dict, owners: dict) -> list[dict]:
                 "margin": game["margin"],
                 "won": game["won"],
                 "tied": game["tied"],
+            }
+        )
+    return rows
+
+
+def player_week_rows(seasons: dict, owners: dict) -> list[dict]:
+    """One row per player per week per roster, owner-joined, for Stat Search.
+
+    A projection over build_player_log rather than a second walk of the weekly
+    rosters, for the same reason matchup_rows projects over build_game_log: the
+    fields that take judgement are already decided there and must not be
+    decided twice. `phase` and `round` come from season_phases, which unions
+    the bracket's own weeks into the playoff weeks and keeps the round label,
+    so a title-game row is distinguishable from any other postseason row.
+    `started` is build_player_log's read of BENCH_SLOTS, so a slot added to the
+    bench set changes the query tables and the generated pages together.
+
+    Added here: `owner`, joined on (year, team) so a query can group by person
+    across a team rename, and `player_slug`, the same slug the player pages are
+    written to, so a result row can link to players/<slug>/ without the browser
+    re-implementing slugification.
+
+    Every slot is kept, bench and IR included; `started` is the filter. Dropping
+    the bench would make "most points left on the bench" unanswerable.
+    """
+    rows = []
+    for entry in build_player_log(seasons):
+        year = entry["year"]
+        team = entry["team"]
+        player = entry["player"]
+        rows.append(
+            {
+                "year": year,
+                "week": entry["week"],
+                "phase": entry["phase"],
+                "round": entry["round"],
+                "owner": owners.get((year, team), ""),
+                "team": team,
+                "player": player,
+                "player_slug": slug(player),
+                "position": entry["position"],
+                "slot": entry["slot"],
+                "started": entry["started"],
+                "points": entry["points"],
             }
         )
     return rows
