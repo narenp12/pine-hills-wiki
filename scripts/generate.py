@@ -930,10 +930,72 @@ def player_book_marks(player_log: list, scope: str = PHASE_REGULAR) -> list[dict
     return marks
 
 
-def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
-    """One phase's player book as table rows, off `player_book_marks`."""
+def career_book_marks(player_index: dict, player_awards: dict = None,
+                      championships: dict = None, latest_year=None) -> list[dict]:
+    """Career marks the roster log alone cannot see: totals, titles, awards.
+
+    `player_book_marks` reads weeks, so it can say who was rostered longest but
+    not who scored the most across those weeks, won the most titles, or was
+    decorated the most often. Those are the marks a career is actually argued
+    on, and they are kept here rather than folded in because they need the
+    player index and the award ledger, not the log.
+
+    Championships count the Finals a player was started in, the same rule the
+    Hall uses: a bench ring is on his own page, but a record for most titles
+    won by riding a roster is a record about the roster.
+    """
+    points_rows, starts_rows = [], []
+    for name, record in (player_index or {}).items():
+        if not record.get("years"):
+            continue
+        years = sorted(record["years"])
+        points_rows.append({"player": name, "points": record["points"], "years": years})
+        starts_rows.append({"player": name, "starts": record["starts"], "years": years})
+
+    ring_rows = [
+        {"player": name, "titles": len(started),
+         "years": [ring["year"] for ring in started]}
+        for name, held in (championships or {}).items()
+        for started in [[ring for ring in held if ring["started"]]]
+        if started
+    ]
+    award_rows = []
+    for name, won in (player_awards or {}).items():
+        # The same six the Hall reads: Biggest Bust is an award this league
+        # hands out, not a decoration, and leading the league in it is not this.
+        years = sorted(year for _, key in HALL_MAJOR_AWARDS for year in (won.get(key) or []))
+        if years:
+            award_rows.append({"player": name, "awards": len(years), "years": years})
+
+    def span_when(row) -> str:
+        # A career mark is not a date, so the column carries the career: seven
+        # franchises listed in full would bury the number the row is about.
+        return _year_range(row["years"], latest_year)
+
+    def years_when(row) -> str:
+        # Two awards in one season is one season, not two entries.
+        return ", ".join(str(year) for year in sorted(set(row["years"])))
+
+    def mark(label, items, key, value, when) -> dict:
+        return {"label": label, "holders": top_holders(items, key),
+                "value": value, "when": when}
+
+    return [
+        mark("Most Career Points", points_rows, lambda r: r["points"],
+             lambda r: f"{r['points']:.2f}", span_when),
+        mark("Most Career Starts", starts_rows, lambda r: r["starts"],
+             lambda r: f"{r['starts']} starts", span_when),
+        mark("Most Championships", ring_rows, lambda r: r["titles"],
+             lambda r: f"{r['titles']}", years_when),
+        mark("Most Awards", award_rows, lambda r: r["awards"],
+             lambda r: f"{r['awards']}", years_when),
+    ]
+
+
+def book_rows(marks: list) -> list[str]:
+    """Any book's marks as table rows: one row per holder, ties labelled."""
     table = []
-    for entry in player_book_marks(player_log, scope):
+    for entry in marks:
         holders = entry["holders"]
         if not holders:
             table.append(f"| {entry['label']} | {TBD} | {TBD} | {TBD} |")
@@ -945,6 +1007,11 @@ def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
             for cell, row in zip(cells, holders)
         )
     return table
+
+
+def player_book_rows(player_log: list, scope: str = PHASE_REGULAR) -> list[str]:
+    """One phase's player book as table rows, off `player_book_marks`."""
+    return book_rows(player_book_marks(player_log, scope))
 
 
 # --------------------------------------------------------------------------- #
@@ -1007,7 +1074,8 @@ def _week_id(row) -> tuple:
     return (row["player"], row["year"], row["week"], row["team"])
 
 
-def player_record_marks(player_log: list, scope: str = PHASE_REGULAR) -> dict:
+def player_record_marks(player_log: list, scope: str = PHASE_REGULAR,
+                        career: list = None) -> dict:
     """{player: [{"text": "Highest Week - 57.90 (WR)", "year": 2020}]}.
 
     The books name the holder of each mark; a player page needs the same fact
@@ -1020,7 +1088,9 @@ def player_record_marks(player_log: list, scope: str = PHASE_REGULAR) -> dict:
     something a single year did.
     """
     marks, league_weeks = {}, set()
-    for entry in player_book_marks(player_log, scope):
+    # The career book belongs to no phase: a career total is not a regular
+    # season fact, so it is passed in rather than derived per scope.
+    for entry in list(player_book_marks(player_log, scope)) + list(career or []):
         for row in entry["holders"]:
             marks.setdefault(row["player"], []).append({
                 "text": f"{entry['label']} - {entry['value'](row)}",
@@ -1041,11 +1111,12 @@ def player_record_marks(player_log: list, scope: str = PHASE_REGULAR) -> dict:
     return marks
 
 
-def player_record_lines(player_log: list, scope: str = PHASE_REGULAR) -> dict:
+def player_record_lines(player_log: list, scope: str = PHASE_REGULAR,
+                        career: list = None) -> dict:
     """{player: ["Highest Week - 57.90 (WR)", ...]}, marks as prose."""
     return {
         player: [mark["text"] for mark in marks]
-        for player, marks in player_record_marks(player_log, scope).items()
+        for player, marks in player_record_marks(player_log, scope, career).items()
     }
 
 
@@ -2742,8 +2813,10 @@ def gen_records_index(
     owner_game_stats: dict,
     player_log: list,
     player_awards: dict = None,
+    career_marks: list = None,
 ) -> str:
     player_rows = player_book_rows(player_log)
+    player_career_rows = book_rows(career_marks or [])
     # Same marks the season pages carry, taken over every captured year.
     position_high_rows = position_week_rows(
         position_week_highs(player_log),
@@ -2912,6 +2985,15 @@ Regular season only; the playoff and Finals player books are on {wikilink('Playo
 | Record | Player | Mark | When |
 |--------|--------|------|------|
 {chr(10).join(player_rows)}
+
+### Career
+
+Whole careers rather than single weeks. Championships count the Finals a player
+was started in; awards count the six the {wikilink('Hall of Fame')} reads.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+{chr(10).join(player_career_rows) if player_career_rows else f"| {TBD} | {TBD} | {TBD} | {TBD} |"}
 
 ### Single-Week Highs by Position
 
@@ -3296,6 +3378,10 @@ def hall_record_marks(player_log: list) -> dict:
     the regular season alone. The Final is itself a playoff game, so a mark set
     in it lands in both postseason books: the more specific label wins and the
     twin is dropped instead of being counted twice toward induction.
+
+    The career book is deliberately not read. Most Championships and Most
+    Awards are counts of the very credentials the Hall already scores, so
+    admitting them would pay the most decorated player twice for one career.
     """
     marks = {
         player: [dict(mark) for mark in held]
@@ -4792,13 +4878,20 @@ def main():
     # The record books, keyed by holder, so a page can name the marks it holds.
     # Keyed by scope so the page can label a Finals mark as one instead of
     # filing it with the October records.
-    player_records = {
-        scope: player_record_lines(player_log, scope)
-        for _, scope in PLAYER_RECORD_BOOKS
-    }
     season_position_highs = player_season_highs(player_log)
     # Rings, read off the captured Final the same way the Finals MVP is.
     championships = build_player_championships(player_log, matchup_stats["log"])
+    # Career totals, titles and decorations: marks that span every phase, so
+    # they ride with the regular-season book rather than being derived per scope.
+    career_marks = career_book_marks(
+        player_index, player_awards, championships, latest_year
+    )
+    player_records = {
+        scope: player_record_lines(
+            player_log, scope, career_marks if scope == PHASE_REGULAR else None
+        )
+        for _, scope in PLAYER_RECORD_BOOKS
+    }
     for player_name, record in player_index.items():
         pp = CONTENT / "players" / f"{slug(player_name)}.md"
         pp.write_text(
@@ -4823,7 +4916,7 @@ def main():
 
     # records index
     rp = CONTENT / "records" / "index.md"
-    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats, player_log, player_awards)))
+    rp.write_text(dash_normalize(gen_records_index(seasons, bible, matchup_stats, season_records, owner_aggregates, owner_game_stats, player_log, player_awards, career_marks)))
     print(f"  wrote {rp.relative_to(ROOT)}")
 
     # teams index

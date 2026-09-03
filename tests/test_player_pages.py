@@ -11,10 +11,13 @@ from scripts.generate import (
     build_player_championships,
     build_player_index,
     build_player_log,
+    career_book_marks,
     draft_picks_by_player,
     gen_player_page,
     gen_players_index,
     player_positions,
+    player_record_lines,
+    player_record_marks,
     team_owners_by_year,
 )
 
@@ -247,3 +250,67 @@ def test_players_index_groups_by_position():
     assert "### QB (1)" in page
     assert "[[Traded Back]]" in page
     assert "[[Cut Before Week One]]" in page
+
+
+def career_index():
+    """Two careers to rank: one long and decorated, one short."""
+    return {
+        "Long": {"years": [2018, 2025], "points": 2000.0, "starts": 100,
+                 "teams": {"Team A": 10}, "positions": {"QB": 10}, "stints": {}},
+        "Short": {"years": [2024], "points": 50.0, "starts": 2,
+                  "teams": {"Team B": 2}, "positions": {"K": 2}, "stints": {}},
+        # A drafted-and-cut player has a record but no career to rank.
+        "Cut": {"years": [], "points": 0.0, "starts": 0, "teams": {},
+                "positions": {}, "stints": {}},
+    }
+
+
+def marks_by_label(marks):
+    return {entry["label"]: entry["holders"] for entry in marks}
+
+
+def test_career_book_ranks_points_and_starts():
+    marks = marks_by_label(career_book_marks(career_index(), {}, {}, 2025))
+    assert [row["player"] for row in marks["Most Career Points"]] == ["Long"]
+    assert [row["player"] for row in marks["Most Career Starts"]] == ["Long"]
+    # A career that never happened is not the shortest career; it is no career.
+    assert all(row["player"] != "Cut"
+               for holders in marks.values() for row in holders)
+
+
+def test_career_titles_count_only_the_finals_a_player_started():
+    rings = {
+        "Long": [{"year": 2019, "team": "Team A", "started": True},
+                 {"year": 2021, "team": "Team A", "started": False}],
+        "Short": [{"year": 2024, "team": "Team B", "started": True}],
+    }
+    marks = marks_by_label(career_book_marks(career_index(), {}, rings, 2025))
+    titles = marks["Most Championships"]
+    # A bench ring is on the player's own page, but riding a roster is not a
+    # record about the player.
+    assert [(row["player"], row["titles"]) for row in titles] == [("Long", 1),
+                                                                 ("Short", 1)]
+
+
+def test_career_awards_exclude_biggest_bust():
+    awards = {
+        "Long": {"mvp": [2020], "all_league": [2021], "bust": [2022, 2023, 2024]},
+        "Short": {"bust": [2024]},
+    }
+    marks = marks_by_label(career_book_marks(career_index(), awards, {}, 2025))
+    assert [(row["player"], row["awards"]) for row in marks["Most Awards"]] == [
+        ("Long", 2)
+    ]
+
+
+def test_a_career_mark_reaches_the_holder_page():
+    log = [{"year": 2024, "week": 1, "phase": "regular", "round": "",
+            "team": "Team A", "player": "Long", "position": "QB", "slot": "QB",
+            "points": 30.0, "started": True}]
+    career = career_book_marks(career_index(), {}, {}, 2025)
+    lines = player_record_lines(log, "regular", career)
+    assert "Most Career Points - 2000.00" in lines["Long"]
+    # The career book spans phases, so it carries no season.
+    marks = player_record_marks(log, "regular", career)
+    assert all(mark["year"] is None for mark in marks["Long"]
+               if mark["text"].startswith("Most Career"))
