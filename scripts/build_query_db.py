@@ -438,6 +438,19 @@ def build_tables(seasons: dict, bible: dict) -> dict:
     }
 
 
+def _sql_literal(path) -> str:
+    """A filesystem path, ready to sit inside a single-quoted SQL string.
+
+    Both statements below name a file rather than bind one, because DuckDB's
+    read_json and COPY take the path as a literal. The paths are not fixed: the
+    content directory is the caller's, and generate.CONTENT honours a
+    $WIKI_CONTENT_DIR env var, so a checkout under a directory with an
+    apostrophe in it -- a name, most often -- would end the literal early and
+    fail as a parser error pointing at the middle of the path.
+    """
+    return Path(path).as_posix().replace("'", "''")
+
+
 def _load_table(con, name: str, rows: list[dict]) -> None:
     """Create `name` with its declared types and load `rows`, owners checked.
 
@@ -491,7 +504,7 @@ def _load_table(con, name: str, rows: list[dict]) -> None:
                 handle.write("\n")
         con.execute(
             f'CREATE TABLE "{name}" AS SELECT * FROM read_json('
-            f"'{staged.as_posix()}', columns = {{{declared}}}, "
+            f"'{_sql_literal(staged)}', columns = {{{declared}}}, "
             f"format = 'newline_delimited')"
         )
 
@@ -553,22 +566,40 @@ def build_all(content_dir) -> dict:
     page first downloading a table to find out what is in it.
 
     Returns the schema dict so a caller that wants to render the query page from
-    the same data does not have to read the file back.
+    the same data does not have to read the file back. Returns None, having said
+    so, when raw/ holds no capture at all: that is a checkout that never ran
+    scripts/extract.py, which generate.main() answers the same way, and the
+    emitter's "matchups has no rows" points at the wrong thing entirely.
     """
-    out = Path(content_dir) / "query"
-    out.mkdir(parents=True, exist_ok=True)
     seasons, bible = load_league()
+    if not seasons:
+        print("No raw JSON found in raw/. Run scripts/extract.py first.")
+        return None
     tables = build_tables(seasons, bible)
     con = duckdb.connect()
     try:
+        # Two passes, load then copy, rather than one interleaved loop. Every
+        # check _load_table makes is a reason to write no files at all, and the
+        # browser reads this directory as a set: schema.json names the tables
+        # and their row counts, and query.js builds its whole UI from it before
+        # fetching a single Parquet file. A loop that copied `matchups` and then
+        # rejected a blank owner in `draft` left the old schema.json describing
+        # three files that had already been replaced, and nothing downstream can
+        # detect that -- the queries simply return the wrong numbers.
         for name, rows in tables.items():
             _load_table(con, name, rows)
-            target = (out / f"{name}.parquet").as_posix()
+        # Everything above can raise; from here on the writes are the only work
+        # left. mkdir waits until now for the same reason: a failed build should
+        # leave no query/ directory rather than an empty one that reads as built.
+        out = Path(content_dir) / "query"
+        out.mkdir(parents=True, exist_ok=True)
+        for name, rows in tables.items():
+            target = out / f"{name}.parquet"
             con.execute(
-                f'COPY "{name}" TO \'{target}\' '
+                f'COPY "{name}" TO \'{_sql_literal(target)}\' '
                 f"(FORMAT PARQUET, COMPRESSION ZSTD)"
             )
-            print(f"  wrote {target} ({len(rows)} rows)")
+            print(f"  wrote {target.as_posix()} ({len(rows)} rows)")
         schema = _schema(con)
     finally:
         con.close()

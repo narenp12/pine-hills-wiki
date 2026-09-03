@@ -8,6 +8,7 @@ import json
 import os
 import pathlib
 import sys
+import tempfile
 
 import duckdb
 import pytest
@@ -967,7 +968,10 @@ def test_the_parquet_tables_fit_the_transfer_budget(emitted):
     assert total < MAX_PARQUET_BYTES, sizes
     for table, size in sizes.items():
         assert size > 0, table
-    assert schema  # the sizes above are of the files this schema describes
+    # The sizes above are of the files this schema describes: a table the
+    # schema advertises but the COPY never wrote would be a KeyError on the
+    # stat() line, and one written but undeclared would show up here.
+    assert set(sizes) == set(schema["tables"])
 
 
 def test_the_parquet_files_hold_the_rows_the_schema_claims(emitted):
@@ -985,6 +989,61 @@ def test_the_parquet_files_hold_the_rows_the_schema_claims(emitted):
                 f"SELECT count(*) FROM read_parquet('{path}')"
             ).fetchone()[0]
             assert count == schema["tables"][table]["row_count"], table
+    finally:
+        con.close()
+
+
+def test_the_parquet_points_column_is_arithmetic(emitted, player_rows):
+    """Pin `points` to a numeric type by doing arithmetic on the shipped file.
+
+    Every other numeric column is held down by a sum or a comparison somewhere
+    above; `points` was not, so declaring it VARCHAR in PLAYER_WEEK_SCHEMA left
+    the whole suite green while every "most points" query the UI can build
+    silently sorted "9.5" above "10.2". Summing and averaging the column out of
+    the Parquet file, against the totals computed from the row dicts, fails on
+    a string column instead.
+    """
+    _, out = emitted
+    path = (out / "player_weeks.parquet").as_posix()
+    expected_total = sum(row["points"] for row in player_rows)
+    assert expected_total > 0, "no points captured; the check would be vacuous"
+    con = duckdb.connect()
+    try:
+        total, mean, high = con.execute(
+            f"SELECT sum(points), avg(points), max(points) "
+            f"FROM read_parquet('{path}')"
+        ).fetchone()
+    finally:
+        con.close()
+    assert isinstance(total, float), type(total)
+    assert total == pytest.approx(expected_total)
+    assert mean == pytest.approx(expected_total / len(player_rows))
+    # max() on a VARCHAR column is lexicographic, so it returns the row that
+    # starts with the highest digit rather than the highest score.
+    assert high == pytest.approx(max(row["points"] for row in player_rows))
+
+
+def test_the_parquet_week_columns_are_numbers_in_range(emitted):
+    """A range check on `week`, in both game tables, off the shipped files.
+
+    `week` is only ever grouped or displayed elsewhere, so it too could be
+    declared VARCHAR with nothing failing. A fantasy season is 17 NFL weeks and
+    the capture never labels one outside 1-17; comparing against those bounds
+    needs the column to be a number, and orders it as one.
+    """
+    _, out = emitted
+    con = duckdb.connect()
+    try:
+        for table in ("matchups", "player_weeks"):
+            path = (out / f"{table}.parquet").as_posix()
+            low, high = con.execute(
+                f"SELECT min(week), max(week) FROM read_parquet('{path}')"
+            ).fetchone()
+            assert isinstance(low, int), (table, type(low))
+            assert isinstance(high, int), (table, type(high))
+            assert 1 <= low <= high <= 17, (table, low, high)
+            # Above 9 is where a string column stops sorting like a number.
+            assert high > 9, (table, high)
     finally:
         con.close()
 
@@ -1074,9 +1133,110 @@ def test_build_tables_returns_one_entry_per_declared_table(league):
         assert set(table_rows[0]) == {c for c, _ in TABLE_SCHEMAS[table]}, table
 
 
+def test_a_rejected_row_leaves_every_shipped_file_untouched(
+    tmp_path: pathlib.Path, monkeypatch
+):
+    """Validation runs on all four tables before the first byte is rewritten.
+
+    The output directory is read as a set: query.js builds its whole UI from
+    schema.json and then queries the Parquet files it names. A build that
+    rewrote three tables and then failed on the fourth left that set
+    inconsistent -- three new files under a schema.json still describing the
+    old ones -- and the failure is invisible until a query returns the wrong
+    count. So the doctored capture here shrinks `matchups` (the first table
+    loaded) as well as blanking an owner in `draft` (the last): the shrunken
+    matchups file surviving byte-identical is what says nothing was written.
+    """
+    build_all(tmp_path)
+    out = tmp_path / "query"
+    before = {t: (out / f"{t}.parquet").read_bytes() for t in TABLES}
+    before_schema = (out / "schema.json").read_bytes()
+
+    real_build_tables = build_tables
+
+    def doctored(seasons, bible):
+        tables = real_build_tables(seasons, bible)
+        tables["matchups"] = tables["matchups"][:100]
+        tables["draft"] = [dict(row) for row in tables["draft"]]
+        tables["draft"][0]["owner"] = ""
+        return tables
+
+    monkeypatch.setattr("scripts.build_query_db.build_tables", doctored)
+    with pytest.raises(ValueError, match="blank owner"):
+        build_all(tmp_path)
+    for table in TABLES:
+        assert (out / f"{table}.parquet").read_bytes() == before[table], table
+    assert (out / "schema.json").read_bytes() == before_schema
+
+
+def test_a_failure_before_the_load_leaves_no_query_directory(
+    tmp_path: pathlib.Path, monkeypatch
+):
+    """mkdir comes after the rows are in hand, so a broken build leaves nothing.
+
+    An empty `query/` is worse than no directory: the page's fetch of
+    schema.json 404s exactly as it would with neither, but the tree looks built.
+    """
+
+    def broken(seasons, bible):
+        raise RuntimeError("capture broke")
+
+    monkeypatch.setattr("scripts.build_query_db.build_tables", broken)
+    with pytest.raises(RuntimeError, match="capture broke"):
+        build_all(tmp_path)
+    assert not (tmp_path / "query").exists()
+
+
+def test_build_all_reports_an_empty_capture_the_way_generate_does(
+    tmp_path: pathlib.Path, monkeypatch, capsys
+):
+    """No raw/ JSON is a setup mistake, not a corrupt table.
+
+    generate.main() answers it with "Run scripts/extract.py first" and returns;
+    without the same guard here the first checkout of the repo gets
+    "ValueError: matchups has no rows", which points at the emitter rather than
+    at the missing capture.
+    """
+    monkeypatch.setattr("scripts.build_query_db.load_league", lambda: ({}, {}))
+    assert build_all(tmp_path) is None
+    assert "scripts/extract.py" in capsys.readouterr().out
+    assert not (tmp_path / "query").exists()
+
+
+def test_build_all_survives_an_apostrophe_in_its_paths(
+    tmp_path: pathlib.Path, monkeypatch
+):
+    """Paths reach DuckDB as SQL string literals, so they must be escaped.
+
+    Both the content directory (caller-supplied, and $CONTENT is an env var) and
+    the staging directory the rows are written through are interpolated into a
+    statement. An apostrophe in either is a directory name, not the end of the
+    literal: unescaped it is a parser error a long way from its cause.
+    """
+    content = tmp_path / "o'brien's wiki"
+    content.mkdir()
+    work = tmp_path / "o'brien's tmp"
+    work.mkdir()
+    monkeypatch.setattr(tempfile, "tempdir", str(work))
+    schema = build_all(content)
+    assert schema["tables"]["matchups"]["row_count"] > 0
+    for table in TABLES:
+        assert (content / "query" / f"{table}.parquet").stat().st_size > 0
+
+
 def test_rebuilding_rewrites_an_identical_schema(tmp_path: pathlib.Path):
-    """Idempotent, so a rebuild in CI produces no diff to review."""
+    """Idempotent, so a rebuild in CI produces no diff to review.
+
+    The Parquet files too, not only schema.json: they are the bulk of what a
+    rebuild commits, and a builder whose row order wandered between runs would
+    put four changed binaries in front of every reviewer while the schema they
+    also compare stayed still.
+    """
+    out = tmp_path / "query"
     build_all(tmp_path)
-    first = (tmp_path / "query" / "schema.json").read_text()
+    first_schema = (out / "schema.json").read_text()
+    first_tables = {t: (out / f"{t}.parquet").read_bytes() for t in TABLES}
     build_all(tmp_path)
-    assert (tmp_path / "query" / "schema.json").read_text() == first
+    assert (out / "schema.json").read_text() == first_schema
+    for table in TABLES:
+        assert (out / f"{table}.parquet").read_bytes() == first_tables[table], table
