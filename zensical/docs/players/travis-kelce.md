@@ -17,13 +17,14 @@ description: "Every Pine Hills fantasy roster Travis Kelce has appeared on, seas
 - **Points on the Bench:** 23.40
 - **Best Week:** 41.10 - 2021 Wk 15 (Quarterfinal), [Roger That](../owners/pranav.md)
 - **Times Drafted:** 9 (first: 2018 R2 P10)
-- **League Records:** Most Weeks Rostered - 131 weeks
+- **League Records:** Most Weeks Rostered - 131 weeks · Most Career Starts - 119 starts · Most Awards - 4
 - **Season Position Highs:** TE 2023
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

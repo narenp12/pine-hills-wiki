@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Travis Etienne Jr. has appeared on
 - **Position:** RB
 - **Seasons:** 2022-2025
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md)
 - **Awards:** Team of the Season 2025
 
 ## Career Summary
@@ -21,14 +22,15 @@ description: "Every Pine Hills fantasy roster Travis Etienne Jr. has appeared on
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 17 | 7 | 97.40 | 26.60 - 2022 Wk 9 |
 | 2023 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 17 | 16 | 268.70 | 36.40 - 2023 Wk 5 |
 | 2024 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 17 | 11 | 74.70 | 14.80 - 2024 Wk 2 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 13 | 202.00 | 31.50 - 2025 Wk 15 (Quarterfinal) |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 13 | 202.00 | 31.50 - 2025 Wk 15 (Quarterfinal) |
 
 ## Draft History
 

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Chase McLaughlin has appeared on, 
 - **Position:** K
 - **Seasons:** 2022-2025
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md)
 - **Awards:** Team of the Season 2024 · Undrafted Player of the Year 2024
 
 ## Career Summary
@@ -21,13 +22,14 @@ description: "Every Pine Hills fantasy roster Chase McLaughlin has appeared on, 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | K | 1 | 1 | 4.00 | 4.00 - 2022 Wk 16 (consolation) |
 | 2024 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | K | 5 | 5 | 37.00 | 9.00 - 2024 Wk 6 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | K | 5 | 5 | 57.00 | 18.00 - 2024 Wk 15 (Quarterfinal) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | K | 5 | 5 | 57.00 | 18.00 - 2024 Wk 15 (Quarterfinal) |
 | 2025 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | K | 17 | 17 | 145.00 | 21.00 - 2025 Wk 3 |
 
 ## Draft History

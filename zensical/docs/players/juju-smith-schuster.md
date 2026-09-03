@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster JuJu Smith-Schuster has appeared o
 - **Position:** WR
 - **Seasons:** 2018-2024
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md)
 
 ## Career Summary
 
@@ -20,13 +21,14 @@ description: "Every Pine Hills fantasy roster JuJu Smith-Schuster has appeared o
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 14 | 13 | 234.20 | 37.90 - 2018 Wk 12 |
 | 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 13 | 6 | 74.70 | 21.30 - 2019 Wk 8 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 16 | 12 | 181.80 | 24.90 - 2020 Wk 1 |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 16 | 12 | 181.80 | 24.90 - 2020 Wk 1 |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 5 | 0 | 0.00 | 16.40 (benched) - 2021 Wk 2 |
 | 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 17 | 5 | 46.80 | 25.40 (benched) - 2022 Wk 7 |
 | 2023 | [Pukakke NaKupp](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 7.30 (benched) - 2023 Wk 1 |

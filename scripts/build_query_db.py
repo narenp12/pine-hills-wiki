@@ -25,8 +25,10 @@ from scripts.generate import (  # noqa: E402
     apply_derived_champions,
     apply_derived_owners,
     apply_player_aliases,
+    build_award_book,
     build_game_log,
     build_owner_map,
+    build_player_index,
     build_player_log,
     champ_year,
     dash_normalize,
@@ -70,6 +72,13 @@ MATCHUP_SCHEMA = (
 
 # One row per roster slot per week, bench and IR included, so the whole roster
 # is queryable and not just the starting lineup.
+#
+# `swung` is the one derived column in the query tables. It carries the measure
+# four of the seven awards are defined by -- see docs/awards.md -- which is
+# otherwise unanswerable here: a reader can already ask for a week's top score,
+# but not for the wins that score decided. It is a BOOLEAN per row rather than a
+# per-season count so it stays at this table's grain; `sum(swung)` in the UI is
+# the count, and grouping it by owner, position or year costs nothing extra.
 PLAYER_WEEK_SCHEMA = (
     ("year", "INTEGER"),
     ("week", "INTEGER"),
@@ -83,6 +92,7 @@ PLAYER_WEEK_SCHEMA = (
     ("slot", "VARCHAR"),
     ("started", "BOOLEAN"),
     ("points", "DOUBLE"),
+    ("swung", "BOOLEAN"),
 )
 
 # One row per team per season, so the 88 captured team-seasons become 88 rows.
@@ -118,6 +128,45 @@ DRAFT_SCHEMA = (
     ("team", "VARCHAR"),
 )
 
+# One row per award won, per holder. A tie is two rows, not one row naming two
+# people, because a query that groups by player has to be able to count a shared
+# award once for each of them.
+#
+# `wins_swung` is NULL rather than 0 on a Finals MVP: that award is decided by
+# the title game's top score, so the player has no swung-wins figure at all, and
+# a zero would sort them below every other winner as though they had one.
+AWARD_SCHEMA = (
+    ("year", "INTEGER"),
+    ("award", "VARCHAR"),
+    ("slot", "VARCHAR"),
+    ("player", "VARCHAR"),
+    ("player_slug", "VARCHAR"),
+    ("position", "VARCHAR"),
+    ("owner", "VARCHAR"),
+    ("team", "VARCHAR"),
+    ("wins_swung", "INTEGER"),
+    ("points", "DOUBLE"),
+)
+
+# One row per inductee per class. `season_unit` is the year for the defenses and
+# kickers the Hall admits on a single season rather than a career, and NULL for
+# everyone admitted on the whole body of work -- the same split the page prints.
+HALL_OF_FAME_SCHEMA = (
+    ("class_year", "INTEGER"),
+    ("charter", "BOOLEAN"),
+    ("player", "VARCHAR"),
+    ("player_slug", "VARCHAR"),
+    ("season_unit", "INTEGER"),
+    ("position", "VARCHAR"),
+    ("qualified", "INTEGER"),
+    ("score", "INTEGER"),
+    ("awards", "INTEGER"),
+    ("championships", "INTEGER"),
+    ("points", "DOUBLE"),
+    ("starts", "INTEGER"),
+    ("teams", "INTEGER"),
+)
+
 # The column names alone, in emit order. Derived from the schemas above rather
 # than typed out a second time, so a column can never be declared with a type
 # and omitted from the name list or the reverse.
@@ -125,26 +174,37 @@ MATCHUP_COLUMNS = tuple(name for name, _ in MATCHUP_SCHEMA)
 PLAYER_WEEK_COLUMNS = tuple(name for name, _ in PLAYER_WEEK_SCHEMA)
 TEAM_SEASON_COLUMNS = tuple(name for name, _ in TEAM_SEASON_SCHEMA)
 DRAFT_COLUMNS = tuple(name for name, _ in DRAFT_SCHEMA)
+AWARD_COLUMNS = tuple(name for name, _ in AWARD_SCHEMA)
+HALL_OF_FAME_COLUMNS = tuple(name for name, _ in HALL_OF_FAME_SCHEMA)
 
-# Parquet file stem -> its column schema. The browser fetches these four names.
+# Parquet file stem -> its column schema. The browser fetches these six names.
 TABLE_SCHEMAS = {
     "matchups": MATCHUP_SCHEMA,
     "player_weeks": PLAYER_WEEK_SCHEMA,
     "team_seasons": TEAM_SEASON_SCHEMA,
     "draft": DRAFT_SCHEMA,
+    "awards": AWARD_SCHEMA,
+    "hall_of_fame": HALL_OF_FAME_SCHEMA,
 }
 TABLES = tuple(TABLE_SCHEMAS)
 
 # Every column carrying an owner. Named here rather than sniffed by suffix so
 # the emitter's owner check below covers `opp_owner` too: a blank on the
 # opponent side of a matchup row breaks a head-to-head query just as completely.
+#
+# `hall_of_fame` carries no owner at all: the Hall inducts players, and a career
+# spanning six rosters has no single manager to name.
 OWNER_COLUMNS = ("owner", "opp_owner")
 
 # The columns the UI offers as a dropdown instead of a free-text box, so
 # schema.json ships their distinct values. Low cardinality is the whole test:
-# 16 owners, 9 years, 3 phases, 6 positions, 9 roster slots. `team` is not here
-# on purpose -- 60-odd names, and it is a text search in the UI.
-ENUM_COLUMNS = ("owner", "position", "slot", "phase", "year")
+# 16 owners, 9 years, 3 phases, 6 positions, 9 roster slots, 5 awards. `team` is
+# not here on purpose -- 60-odd names, and it is a text search in the UI.
+#
+# `slot` is shared: the roster table's bench and flex labels and the Team of the
+# Season slots come from the same vocabulary, which is why the enum list is per
+# column name rather than per (table, column).
+ENUM_COLUMNS = ("owner", "position", "slot", "phase", "year", "award")
 
 
 def load_league() -> tuple[dict, dict]:
@@ -255,7 +315,26 @@ def matchup_rows(seasons: dict, bible: dict, owners: dict) -> list[dict]:
     return rows
 
 
-def player_week_rows(seasons: dict, owners: dict) -> list[dict]:
+def winning_margins(matchups: list[dict]) -> dict:
+    """{(year, week, team): margin} for games a team won outright.
+
+    Built from the finished matchup rows rather than from build_game_log again,
+    so `won`, `tied` and `margin` reach the swung-win test as the matchups table
+    reports them. A row that disagrees with the matchups table is then not
+    reachable: the two are the same numbers by construction.
+
+    Ties are excluded rather than given a zero margin. Nothing was won, so
+    nothing can have swung it, and a zero margin would otherwise mark every
+    starter in a tie as decisive.
+    """
+    return {
+        (row["year"], row["week"], row["team"]): row["margin"]
+        for row in matchups
+        if row["won"] and not row["tied"]
+    }
+
+
+def player_week_rows(seasons: dict, owners: dict, margins: dict) -> list[dict]:
     """One row per player per week per roster, owner-joined, for Stat Search.
 
     A projection over build_player_log rather than a second walk of the weekly
@@ -274,12 +353,21 @@ def player_week_rows(seasons: dict, owners: dict) -> list[dict]:
 
     Every slot is kept, bench and IR included; `started` is the filter. Dropping
     the bench would make "most points left on the bench" unanswerable.
+
+    `swung` applies generate.build_decisive_wins' rule one row at a time: the
+    player started, their team won that game outright, and they outscored the
+    margin of victory, so taking them out of the lineup flips the result. Stated
+    here rather than imported because that function returns a per-season roll-up
+    keyed by (year, player) -- the opposite grain to this table -- while the rule
+    it rolls up is a per-row test. `margins` is the shared input that keeps the
+    two readings of a win from drifting apart.
     """
     rows = []
     for entry in build_player_log(seasons):
         year = entry["year"]
         team = entry["team"]
         player = entry["player"]
+        margin = margins.get((year, entry["week"], team))
         rows.append(
             {
                 "year": year,
@@ -294,6 +382,9 @@ def player_week_rows(seasons: dict, owners: dict) -> list[dict]:
                 "slot": entry["slot"],
                 "started": entry["started"],
                 "points": entry["points"],
+                "swung": bool(
+                    entry["started"] and margin is not None and entry["points"] > margin
+                ),
             }
         )
     return rows
@@ -423,19 +514,154 @@ def draft_rows(seasons: dict, owners: dict) -> list[dict]:
     return rows
 
 
+def award_book(seasons: dict, bible: dict) -> dict:
+    """generate's own award assembly, fed the inputs main() feeds it.
+
+    Every argument is one call to a generate function, and the assembly itself
+    is generate's, so the awards these tables carry are the objects the Awards
+    and Hall of Fame pages render rather than a second reading of the same rule.
+    """
+    player_log = build_player_log(seasons)
+    game_log = build_game_log(seasons, bible)
+    player_index = build_player_index(seasons, player_log, build_owner_map(bible, seasons))
+    return build_award_book(
+        seasons, bible, player_log, game_log, player_index, min(seasons),
+    )
+
+
+def _award_home(record: dict, owners: dict, year: int) -> tuple[str, str]:
+    """(owner, team) for an award record, by the roster it was won on.
+
+    A decisive-wins record carries `teams` as {team: swung wins there}, because a
+    player traded mid-season swings wins for two managers. The award goes to the
+    roster it was mostly won on rather than to both, so one award is one row per
+    holder and a count by owner still totals the awards handed out.
+    """
+    teams = record.get("teams")
+    if isinstance(teams, dict) and teams:
+        team = max(sorted(teams), key=lambda name: teams[name])
+    else:
+        team = record.get("team") or ""
+    return owners.get((year, team), ""), team
+
+
+def award_rows(seasons: dict, owners: dict, book: dict) -> list[dict]:
+    """One row per award per holder, over every computed award.
+
+    Read out of generate.build_award_book rather than recomputed, so Stat Search
+    cannot hand out an award the Awards page does not: the five season awards
+    here are the same objects those pages render.
+
+    Ties become one row each. The pages print "A, B - 7 wins swung" in a single
+    cell, which reads correctly as prose and would be unusable as data -- nothing
+    could count Bob's MVPs without splitting that string back apart.
+    """
+    rows = []
+
+    def add(year, award, record, slot=""):
+        player = record.get("player") or ""
+        if not player:
+            return
+        owner, team = _award_home(record, owners, year)
+        positions = record.get("positions")
+        if isinstance(positions, dict):
+            position = max(sorted(positions), key=lambda name: positions[name])
+        else:
+            position = record.get("position") or ""
+        rows.append(
+            {
+                "year": year,
+                "award": award,
+                "slot": slot,
+                "player": player,
+                "player_slug": slug(player),
+                "position": position,
+                "owner": owner,
+                "team": team,
+                # NULL for any award whose record carries no swung-wins count.
+                # The record shape decides this, not the caller: a Finals MVP is
+                # a player_log row, which has no `wins` key at all.
+                "wins_swung": record.get("wins"),
+                "points": float(record.get("points", 0.0)),
+            }
+        )
+
+    for year in sorted(seasons):
+        for record in book["season_mvps"].get(year) or []:
+            add(year, "Most Valuable Player", record)
+        for record in book["finals_mvps"].get(year) or []:
+            # A player_log row rather than a decisive record, so it carries no
+            # `wins` key and `wins_swung` comes out NULL. See add().
+            add(year, "Finals MVP", record)
+        for record in book["newcomers"].get(year) or []:
+            add(year, "Newcomer of the Year", record)
+        for record in book["undrafted"].get(year) or []:
+            add(year, "Undrafted Player of the Year", record)
+        for entry in book["all_league_teams"].get(year) or []:
+            for record in entry["holders"]:
+                add(year, "Team of the Season", record, slot=entry["slot"])
+    return rows
+
+
+def hall_of_fame_rows(book: dict) -> list[dict]:
+    """One row per inductee per class, in induction order.
+
+    `hall_classes` is the page's own list, so this table cannot induct anyone the
+    Hall of Fame page does not, or leave anyone out that it names. The candidates
+    the class caps left waiting are deliberately absent for the same reason: the
+    page does not print them either.
+    """
+    rows = []
+    for entry in book["hall_classes"]:
+        for member in entry["members"]:
+            years = member.get("years") or []
+            # The Hall admits defenses and kickers on one season rather than a
+            # career; `display` carries the year for those and the bare name for
+            # everyone else, which is what tells the two apart.
+            season_unit = years[0] if member["display"] != member["player"] else None
+            positions = member.get("positions") or []
+            rows.append(
+                {
+                    "class_year": entry["year"],
+                    "charter": bool(entry.get("charter")),
+                    "player": member["player"],
+                    "player_slug": slug(member["player"]),
+                    "season_unit": season_unit,
+                    "position": positions[0] if positions else "",
+                    "qualified": member["qualified"],
+                    "score": int(member["score"]),
+                    "awards": int(member["awards"]),
+                    "championships": len(member.get("championships") or []),
+                    "points": float(member["points"]),
+                    "starts": int(member["starts"]),
+                    "teams": int(member["teams"]),
+                }
+            )
+    return rows
+
+
 def build_tables(seasons: dict, bible: dict) -> dict:
     """{table name: rows} for all four tables, off one shared owner index.
 
     One `owner_index` call, not four: the point of the join key is that every
     table resolves a manager the same way, and four independent calls is four
     chances for one of them to be built from a different argument.
+
+    The matchup rows are built first and handed to the player-week rows, for the
+    same reason: `swung` is decided by a margin the matchups table also reports,
+    and reading it from the built rows is what makes the two agree by
+    construction rather than by coincidence.
     """
     owners = owner_index(seasons, bible)
+    matchups = matchup_rows(seasons, bible, owners)
+    book = award_book(seasons, bible)
     return {
-        "matchups": matchup_rows(seasons, bible, owners),
-        "player_weeks": player_week_rows(seasons, owners),
+        "matchups": matchups,
+        "player_weeks": player_week_rows(seasons, owners, winning_margins(matchups)),
         "team_seasons": team_season_rows(seasons, bible, owners),
         "draft": draft_rows(seasons, owners),
+        "awards": award_rows(seasons, owners, book),
+        "hall_of_fame": hall_of_fame_rows(book),
     }
 
 
@@ -632,18 +858,36 @@ def build_all(content_dir) -> dict:
 # stacked above a working UI. Its two links are source-relative .md paths:
 # Zensical rewrites href in raw HTML the same way it does in Markdown, so they
 # are checked like any other link on the site.
+#
+# No per-page importmap here on purpose: Zensical strips
+# <script type="importmap"> from Markdown, so the map for DuckDB-WASM's bare
+# "apache-arrow" import lives once in zensical/overrides/main.html instead.
 QUERY_PAGE = """---
 title: Stat Search
 icon: lucide/search
 description: Query the league's matchups, rosters, team seasons and draft picks in the browser.
+hide:
+  - toc
 ---
 
 # Stat Search
 
-Ad hoc queries over the four captured tables: one row per team per game, one per
-roster slot per week, one per team per season and one per draft pick. The tables
-are downloaded and queried in the browser, so a query is answered on the reader's
-own machine and nothing is sent anywhere.
+Ad hoc queries over six tables. Four are the capture itself: one row per team per
+game, one per roster slot per week, one per team per season and one per draft
+pick. Two are computed the same way the rest of the wiki computes them: every
+[award](../awards.md) handed out, and every [Hall of Fame](../hall-of-fame.md)
+inductee. The tables are downloaded and queried in the browser, so a query is
+answered on the reader's own machine and nothing is sent anywhere.
+
+!!! tip "Start from a preset"
+
+    Pick a preset chip, then adjust filters. Click a column header to sort.
+    Use Copy link to share the exact query.
+
+The roster table carries one derived column, `swung`: the player started, their
+team won that game outright, and they outscored the margin of victory, so taking
+them out of the lineup flips the result. It is the measure four of the seven
+awards rank by, and `sum(swung)` over any grouping reproduces their numbers.
 
 <div id="phfl-query" data-query-base="../query/">
   <p>Stat Search runs in the browser and needs JavaScript enabled. The

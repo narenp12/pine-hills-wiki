@@ -586,52 +586,557 @@
   }
 }
 
-/* Stat Search */
-.phfl-query__presets,
+/* ---------------------------------------------------------------------------
+   STAT SEARCH
+
+   A control panel and a data table, not an article section, so it opts out of
+   the serif body face and sits on its own surface. Everything below is built
+   from the tokens declared at the top of this file rather than from new values:
+   this component had grown its own 999px radius, its own 0.35/0.4/0.6/0.9rem
+   spacing and no dark-scheme rules at all, which is how a panel ends up looking
+   bolted on to the page it lives in.
+
+   SHAPE: one radius, `--border-radius`. The chips used to be 999px pills sitting
+   in the same row as unstyled 0px select boxes, which is two shape systems in
+   one control.
+
+   MOTION: hover and active states only. A query builder is used, not admired,
+   and the results table redraws on every edit - anything that animates on that
+   redraw would flicker on each keystroke.
+--------------------------------------------------------------------------- */
+#phfl-query {
+  container-type: inline-size;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Keyed off the mount's own width, not the viewport's. The theme caps the
+   article at about 757px with both sidebars showing, so a viewport media query
+   split a column that had no room to split: at a 1920px viewport the results
+   still only got 262px, narrower than the single column it replaced. The page
+   hides its table of contents (front matter) to buy the width back, and the
+   split waits until the container actually has it. */
+.phfl-query__panels {
+  display: grid;
+  gap: var(--spacing-md);
+  /* Both explicit: a grid item's automatic minimum size is its MIN-CONTENT, so
+     the default track let the builder push itself to 1358px inside a 375px
+     phone and scrolled the whole page sideways. `minmax(0, …)` on the track and
+     `min-width: 0` on the items is the pair that lets them shrink. */
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.phfl-query__panels > * {
+  min-width: 0;
+}
+
+/* Rows first on a narrow screen. Stacked in source order the reader met the
+   prose, then six dataset chips, then five verb sections, and reached the first
+   row 1,678px down an 812px phone - two full screens of controls before any
+   answer. The builder is what you touch second, having seen what the preset
+   already returned. */
+.phfl-query__output {
+  order: -1;
+}
+
+@container (min-width: 58em) {
+  .phfl-query__panels {
+    /* 19rem left the results 538px for a table that wants ~700. The builder's
+       widest row is a select, a joiner and an input, which fits 15rem; the
+       260px that buys is three or four more columns on screen. */
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* Side by side, the builder is genuinely first: it is the left column. */
+  .phfl-query__output {
+    order: 0;
+  }
+
+  .phfl-query__output {
+    position: sticky;
+    top: 3rem;
+    max-height: calc(100vh - 5rem);
+    overflow: auto;
+  }
+}
+
+/* The builder reads as one instrument rather than a run of loose controls
+   dropped into the prose. */
+.phfl-query__builder {
+  background: var(--wiki-panel);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm);
+}
+
+/* --- chips: presets and datasets ---------------------------------------- */
+/* The two rows do different jobs and must not look alike. Scoping the presets
+   to the selected dataset left them as a second row of chips styled exactly
+   like the first - identical background, border, radius, size and weight, 8px
+   apart - so the pair read as one undifferentiated wall.
+
+   The dataset row is STATE: one of six, always one selected, so it is a
+   segmented control with a filled active segment. The presets are ACTIONS:
+   momentary jumps to a starting question, so they are text buttons. Different
+   affordance, no extra label needed to tell them apart.
+
+   The appearance rules for both live AFTER the shared button block below, not
+   here: at equal specificity the later rule wins, and putting them here left
+   the chips looking exactly like the segments they were meant to differ from. */
 .phfl-query__datasets {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.8rem;
+  gap: 2px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.phfl-query__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.7rem;
+  margin-bottom: var(--spacing-sm);
 }
 
 .phfl-query__chip,
 .phfl-query__dataset,
 .phfl-query__run,
 .phfl-query__add,
-.phfl-query__remove {
-  border: 1px solid var(--md-default-fg-color--lighter);
-  border-radius: 999px;
-  background: transparent;
+.phfl-query__remove,
+.phfl-query__copy {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--border-radius);
   color: inherit;
   cursor: pointer;
   font: inherit;
-  padding: 0.25rem 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  padding: 0.3rem 0.55rem;
+  transition: background-color 120ms ease, border-color 120ms ease;
 }
 
+.phfl-query__dataset:hover:not(:disabled),
+.phfl-query__add:hover,
+.phfl-query__remove:hover,
+.phfl-query__copy:hover {
+  background: var(--wiki-panel-2);
+  border-color: var(--md-default-fg-color--lighter);
+}
+
+/* Physical push on press, the one piece of motion in the component. */
+.phfl-query__chip:active,
+.phfl-query__dataset:active:not(:disabled),
+.phfl-query__run:active,
+.phfl-query__add:active,
+.phfl-query__remove:active,
+.phfl-query__copy:active {
+  transform: translateY(1px);
+}
+
+/* The selected dataset. `:disabled` because it is the current one and clicking
+   it again would do nothing; `aria-pressed` carries the state for a reader. */
 .phfl-query__dataset:disabled {
   background: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
   color: var(--md-accent-bg-color);
   cursor: default;
+  font-weight: 600;
+}
+
+.phfl-query__run {
+  background: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+  font-weight: 600;
+}
+
+.phfl-query__run:hover {
+  background: var(--wiki-accent-deep);
+  border-color: var(--wiki-accent-deep);
+}
+
+.phfl-query__add {
+  border-style: dashed;
+}
+
+.phfl-query__add:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.phfl-query__chip:focus-visible,
+.phfl-query__dataset:focus-visible,
+.phfl-query__run:focus-visible,
+.phfl-query__add:focus-visible,
+.phfl-query__remove:focus-visible,
+.phfl-query__copy:focus-visible,
+.phfl-query__sort:focus-visible,
+.phfl-query__verb select:focus-visible,
+.phfl-query__verb input:focus-visible,
+.phfl-query__groupbox > summary:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* --- verb stack ---------------------------------------------------------- */
+.phfl-query__verbs {
+  border-top: 1px solid var(--wiki-border);
+  padding-top: var(--spacing-sm);
+}
+
+.phfl-query__verbs[hidden] {
+  display: none;
+}
+
+/* Sentence case, not the uppercase wide-tracking label this had before. Five
+   of those stacked down a narrow column is a rhythm, and a rhythm is the only
+   thing the reader sees before the words. */
+.phfl-query__verbs h3 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0 0 var(--spacing-xs);
+  text-transform: none;
 }
 
 .phfl-query__verb {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.4rem;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+/* The fields carry the same border, radius and height as the buttons beside
+   them. Left unstyled they rendered as raw browser chrome next to designed
+   controls, which is the single loudest unfinished-looking thing here. */
+.phfl-query__verb select,
+.phfl-query__verb input {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--border-radius);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0.3rem 0.4rem;
+}
+
+.phfl-query__verb select:hover,
+.phfl-query__verb input:hover {
+  border-color: var(--md-default-fg-color--lighter);
+}
+
+.phfl-query__verb input {
+  flex: 1 1 6rem;
+}
+
+.phfl-query__limit {
+  flex: 0 0 5rem;
+}
+
+/* The connective words that make a row read as a sentence: `points more than
+   20`, `sum of points as bench_points`. They are what labels the alias box,
+   which otherwise sat unlabelled between two menus. */
+.phfl-query__joiner {
+  color: var(--wiki-muted);
+  font-size: 0.7rem;
+}
+
+.phfl-query__novalue {
+  color: var(--wiki-muted);
+  font-size: 0.7rem;
+}
+
+.phfl-query__groupbox > summary {
+  cursor: pointer;
+  font-size: 0.72rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.phfl-query__group {
+  align-items: center;
+  display: inline-flex;
+  font-size: 0.72rem;
+  gap: 0.2rem;
+  white-space: nowrap;
+}
+
+.phfl-query__actions {
+  border-top: 1px solid var(--wiki-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+}
+
+/* --- output -------------------------------------------------------------- */
+
+/* The row count, the engine's loading line and every query error share this
+   element, because they share an aria-live region: a reader on a screen reader
+   is told the query is running and what came back, in one place. */
+.phfl-query__status {
+  color: var(--wiki-muted);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--spacing-xs);
+  min-height: 1.4em;
 }
 
 .phfl-query__results {
   overflow-x: auto;
 }
 
-.phfl-query__count {
+.phfl-query__results table {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
-  opacity: 0.7;
+}
+
+/* Zensical's main.min.css dresses every classless table as prose, and three of
+   its rules are wrong for a twelve-column result set:
+
+   `display: inline-block; overflow: auto` on the TABLE makes the table its own
+   scroll box. That is how a wide prose table is kept off the page gutter, but
+   it moves the scrollport off the wrapper this component owns - `.phfl-query__
+   results` measured scrollWidth === clientWidth and setting its scrollLeft did
+   nothing, so nothing could scroll a column into view. Back to `table`, and the
+   wrapper's own `overflow-x: auto` becomes the scroller.
+
+   `min-width: 5rem` put a 100px floor under every column, so `won` and `tied`
+   were as wide as `opp_score` and four columns spent 400px saying yes and no.
+
+   `padding: .9375em 1.25em` is 27.75px of vertical padding per row at the
+   14.8px cell font, and wrapping cells made a two-line team name set the whole
+   row to 78px - 25 rows ran 2,500px down the page.
+
+   The `table` in these selectors is load-bearing. `:not([class])` contributes
+   an attribute selector, so `.md-typeset table:not([class]) th` is (0,2,2) and
+   the obvious `.md-typeset .phfl-query__results th` is only (0,2,1) - it loses
+   outright, whatever the load order. Naming `table` here matches at (0,2,2),
+   and this file loads after main.min.css, so the tie falls this way. */
+.md-typeset .phfl-query__results table {
+  display: table;
+  overflow: visible;
+}
+
+.md-typeset .phfl-query__results table th,
+.md-typeset .phfl-query__results table td {
+  line-height: 1.5;
+  max-width: 9rem;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0.28rem 0.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phfl-query__results thead th {
+  background: var(--md-default-bg-color);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.phfl-query__caption {
+  caption-side: top;
+  color: var(--wiki-muted);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.phfl-query__sort {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+}
+
+.phfl-query__sort:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
+/* The sorted column, so the header says which order the rows are in without
+   the reader opening the query panel. */
+.phfl-query__results th[aria-sort="ascending"] .phfl-query__sort::after {
+  content: " \2191";
+}
+
+.phfl-query__results th[aria-sort="descending"] .phfl-query__sort::after {
+  content: " \2193";
+}
+
+.phfl-query__results th[aria-sort]:not([aria-sort="none"]) {
+  color: var(--md-accent-fg-color);
+}
+
+.phfl-query__empty {
+  color: var(--wiki-muted);
+}
+
+.phfl-query__sql {
+  margin-top: var(--spacing-sm);
+}
+
+.phfl-query__sql > summary {
+  color: var(--wiki-muted);
+  cursor: pointer;
+  font-size: 0.72rem;
+}
+
+.phfl-query__sql pre {
+  font-family: var(--md-code-font-family);
+  font-size: 0.68rem;
+  overflow-x: auto;
 }
 
 .phfl-query__error {
   border-left: 3px solid var(--md-accent-fg-color);
-  padding-left: 0.8rem;
+  padding-left: var(--spacing-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phfl-query__chip,
+  .phfl-query__dataset,
+  .phfl-query__run,
+  .phfl-query__add,
+  .phfl-query__remove,
+  .phfl-query__copy {
+    transition: none;
+  }
+}
+
+/* The theme styles a bare <details> as an admonition: a blue-tinted box
+   (rgba(68,138,255,.1)), a 1.6rem left pad reserving room for an icon that is
+   not there, and a bold summary. Both disclosures here are plain controls
+   inside a pine-green panel, so a blue box is the one colour on the page that
+   belongs to nothing. Opting out also fixes the muted summary text, which was
+   sitting at 1.89:1 against that tint. */
+/* `.md-typeset details` is (0,1,1), so a bare `.phfl-query__sql` at (0,1,0)
+   loses to it and the blue stayed. */
+.md-typeset .phfl-query__sql,
+.md-typeset .phfl-query__groupbox {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  font-size: inherit;
+  margin: 0;
+}
+
+.md-typeset .phfl-query__sql > summary,
+.md-typeset .phfl-query__groupbox > summary {
+  background: none;
+  border: 0;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  margin: 0 0 var(--spacing-xs);
+  padding: 0.1rem 0 0.1rem 0.9rem;
+}
+
+/* The theme's admonition marker is an absolutely-positioned pseudo-element; a
+   disclosure triangle is what these should use instead. `::before` is not
+   cancelled here - it is rebuilt as that triangle further down. */
+.md-typeset .phfl-query__sql > summary::after,
+.md-typeset .phfl-query__groupbox > summary::after {
+  content: none;
+}
+
+.phfl-query__sql > summary::marker,
+.phfl-query__groupbox > summary::marker {
+  content: "";
+}
+
+.md-typeset .phfl-query__sql > summary,
+.md-typeset .phfl-query__groupbox > summary {
+  list-style: none;
+  position: relative;
+}
+
+/* This element already exists as the theme's note icon: a 1rem square filled
+   #448AFF and punched out by `mask-image: var(--md-admonition-icon--note)`.
+   Setting borders on it did not replace that, it drew a triangle on top of it,
+   and the blue icon showed through underneath the words "Group by (none)".
+   Resetting the paint is what actually removes it - and a border triangle needs
+   a zero-sized box, which the theme's 1rem square was not. */
+.md-typeset .phfl-query__sql > summary::before,
+.md-typeset .phfl-query__groupbox > summary::before {
+  background: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  width: 0;
+  height: 0;
+  border-left: 0.3rem solid currentColor;
+  border-top: 0.22rem solid transparent;
+  border-bottom: 0.22rem solid transparent;
+  content: "";
+  left: 0.1rem;
+  position: absolute;
+  top: 0.42rem;
+  transition: transform 120ms ease;
+}
+
+.md-typeset .phfl-query__sql[open] > summary::before,
+.md-typeset .phfl-query__groupbox[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.md-typeset .phfl-query__sql > summary:hover,
+.md-typeset .phfl-query__groupbox > summary:hover {
+  color: var(--md-accent-fg-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-typeset .phfl-query__sql > summary::before,
+  .md-typeset .phfl-query__groupbox > summary::before {
+    transition: none;
+  }
+}
+
+/* --- dataset segments vs preset actions ----------------------------------
+   Placed after the shared button block on purpose: same specificity, so the
+   later rule is the one that lands. See the note at .phfl-query__datasets. */
+.phfl-query__datasets {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--border-radius);
+  padding: 2px;
+}
+
+.phfl-query__dataset {
+  background: transparent;
+  border: 0;
+  border-radius: calc(var(--border-radius) - 2px);
+  flex: 1 1 auto;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.phfl-query__dataset:hover:not(:disabled) {
+  background: var(--wiki-panel-2);
+  border: 0;
+}
+
+/* The presets are momentary jumps, not a selected state, so they carry a
+   link's affordance rather than a segment's. */
+.phfl-query__chip {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: var(--md-typeset-a-color);
+  padding: 0.1rem 0;
+  text-align: left;
+}
+
+.phfl-query__chip:hover {
+  background: none;
+  border: 0;
+  text-decoration: underline;
 }

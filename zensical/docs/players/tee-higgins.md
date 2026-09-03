@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tee Higgins has appeared on, seaso
 - **Position:** WR
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md)
 - **Awards:** Finals MVP 2024
 
 ## Career Summary
@@ -21,7 +22,8 @@ description: "Every Pine Hills fantasy roster Tee Higgins has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -30,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | WR | 8 | 7 | 129.00 | 43.40 - 2021 Wk 16 (consolation) |
 | 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 15 | 208.50 | 26.80 - 2022 Wk 16 (consolation) |
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 6 | 59.90 | 28.90 - 2023 Wk 2 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 8 | 164.10 | 40.10 - 2024 Wk 17 (Final) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 8 | 164.10 | 40.10 - 2024 Wk 17 (Final) |
 | 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 4 | 56.20 | 33.10 (benched) - 2025 Wk 9 |
 
 ## Draft History

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Juwan Johnson has appeared on, sea
 - **Position:** TE / WR
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Juwan Johnson has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -30,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2024 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | TE | 16 | 10 | 54.10 | 15.00 (benched) - 2024 Wk 14 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 7 | 6 | 47.90 | 11.10 - 2025 Wk 3 |
 | 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 2 | 1 | 19.20 | 19.20 - 2025 Wk 10 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | TE | 1 | 1 | 13.50 | 13.50 - 2025 Wk 17 (Final) |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | TE | 1 | 1 | 13.50 | 13.50 - 2025 Wk 17 (Final) |
 
 ## Draft History
 

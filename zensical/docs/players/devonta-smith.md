@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster DeVonta Smith has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 5
+- **Championships:** 2 - 2023 [Super Squirrels](../owners/abhinav.md), 2024 [Stroud Boys](../owners/tanmay.md) (benched)
 - **Awards:** Best Draft Pick 2022
 
 ## Career Summary
@@ -21,14 +22,15 @@ description: "Every Pine Hills fantasy roster DeVonta Smith has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2021 | [Tanmay's Top-Notch Team](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 5 | 34.70 | 22.60 (benched) - 2021 Wk 9 |
 | 2022 | [Tanmay's Hospital](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 4 | 39.50 | 32.10 (benched) - 2022 Wk 3 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 16 | 227.60 | 24.60 - 2023 Wk 13 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 8 | 100.40 | 30.00 (benched) - 2024 Wk 17 (Final) |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 16 | 227.60 | 24.60 - 2023 Wk 13 |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 8 | 100.40 | 30.00 (benched) - 2024 Wk 17 (Final) |
 | 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 11 | 135.90 | 33.30 - 2025 Wk 7 |
 
 ## Draft History

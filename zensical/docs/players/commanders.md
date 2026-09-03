@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Commanders has appeared on, season
 - **Position:** DEF
 - **Seasons:** 2019-2024
 - **Fantasy Teams:** 9
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Commanders has appeared on, season
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -35,7 +37,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 3 | 3 | 14.00 | 9.00 - 2023 Wk 7 |
 | 2023 | [Ken Keenan Kum](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 2 | 2 | 8.00 | 9.00 - 2023 Wk 11 |
 | 2024 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | DEF | 8 | 8 | 54.00 | 16.00 - 2024 Wk 7 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | DEF | 6 | 5 | 24.00 | 7.00 - 2024 Wk 13 |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | DEF | 6 | 5 | 24.00 | 7.00 - 2024 Wk 13 |
 
 ## Draft History
 

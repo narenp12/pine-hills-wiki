@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jahan Dotson has appeared on, seas
 - **Position:** WR
 - **Seasons:** 2022-2023
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2022 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Jahan Dotson has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 1 | 0 | 0.00 | 6.70 (benched) - 2022 Wk 17 (Final) |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 1 | 0 | 0.00 | 6.70 (benched) - 2022 Wk 17 (Final) |
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 3.00 (benched) - 2022 Wk 3 |
 | 2023 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 1 | 4.10 | 24.80 (benched) - 2023 Wk 8 |
 

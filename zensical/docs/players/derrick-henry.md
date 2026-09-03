@@ -17,11 +17,14 @@ description: "Every Pine Hills fantasy roster Derrick Henry has appeared on, sea
 - **Points on the Bench:** 148.50
 - **Best Week:** 47.70 - 2021 Wk 2, [The Johnson and Johnson team](../owners/lokesh.md)
 - **Times Drafted:** 8 (first: 2019 R6 P43)
+- **Playoff Records:** Highest RB Week - 45.60
+- **Finals Records:** Highest RB Week - 45.60
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

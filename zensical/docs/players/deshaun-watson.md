@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Deshaun Watson has appeared on, se
 - **Position:** QB
 - **Seasons:** 2018-2024
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md)
 - **Awards:** Finals MVP 2018
 
 ## Career Summary
@@ -17,16 +18,18 @@ description: "Every Pine Hills fantasy roster Deshaun Watson has appeared on, se
 - **Points on the Bench:** 329.96
 - **Best Week:** 41.74 - 2019 Wk 5, [Kaushal's Potatoes](../owners/kaushal.md)
 - **Times Drafted:** 5 (first: 2018 R5 P25)
+- **Finals Records:** Highest QB Week - 36.46
 - **Season Position Highs:** QB 2019
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 9 | 4 | 110.10 | 36.46 - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 9 | 4 | 110.10 | 36.46 - 2018 Wk 16 (Final) |
 | 2018 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 5 | 5 | 98.24 | 32.10 - 2018 Wk 4 |
 | 2019 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 16 | 11 | 261.72 | 41.74 - 2019 Wk 5 |
 | 2020 | [Imagine Losing](../owners/om.md) | [Om](../owners/om.md) | QB | 16 | 12 | 284.40 | 33.12 - 2020 Wk 12 |

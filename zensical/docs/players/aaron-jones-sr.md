@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Aaron Jones Sr. has appeared on, s
 - **Position:** RB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 9
+- **Championships:** 2 - 2019 [Curry's legit team](../owners/lokesh.md), 2025 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 - **Awards:** Team of the Season 2020
 
 ## Career Summary
@@ -22,12 +23,13 @@ description: "Every Pine Hills fantasy roster Aaron Jones Sr. has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 6 | 5 | 112.60 | 32.20 - 2018 Wk 10 |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 16 | 15 | 298.50 | 49.20 - 2019 Wk 5 |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 16 | 15 | 298.50 | 49.20 - 2019 Wk 5 |
 | 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 16 | 13 | 240.40 | 45.60 - 2020 Wk 2 |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 14 | 11 | 151.70 | 24.00 - 2021 Wk 8 |
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | RB | 3 | 3 | 63.30 | 41.50 - 2021 Wk 2 |
@@ -36,7 +38,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 4 | 4 | 62.80 | 32.00 - 2022 Wk 2 |
 | 2023 | [Pukakke NaKupp](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 17 | 6 | 49.10 | 26.70 - 2023 Wk 1 |
 | 2024 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | RB | 17 | 14 | 203.90 | 25.80 - 2024 Wk 3 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 4 | 37.80 | 15.90 (benched) - 2025 Wk 10 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 4 | 37.80 | 15.90 (benched) - 2025 Wk 10 |
 
 ## Draft History
 

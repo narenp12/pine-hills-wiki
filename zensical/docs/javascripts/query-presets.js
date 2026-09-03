@@ -93,6 +93,50 @@ export const PRESETS = [
       limit: 25,
     },
   },
+  // The two presets built on `swung`, the column that carries the measure four
+  // of the seven awards are defined by. Deliberately the ranking the Awards
+  // pages print, so a reader can start from a number they have already seen and
+  // then change the grouping -- by owner, by position, by year -- to ask the
+  // questions those pages do not answer.
+  {
+    id: "swung-seasons",
+    label: "Wins swung, by season",
+    ast: {
+      from: "player_weeks",
+      filter: [{ field: "swung", op: "=", value: true }],
+      groupBy: ["year", "player"],
+      summarise: [{ fn: "count", as: "wins_swung" }],
+      arrange: [{ field: "wins_swung", dir: "desc" }],
+      limit: 50,
+    },
+  },
+  {
+    id: "swung-careers",
+    label: "Wins swung, career",
+    ast: {
+      from: "player_weeks",
+      filter: [{ field: "swung", op: "=", value: true }],
+      groupBy: ["player"],
+      summarise: [
+        { fn: "count", as: "wins_swung" },
+        { fn: "count_distinct", field: "owner", as: "owners" },
+      ],
+      arrange: [{ field: "wins_swung", dir: "desc" }],
+      limit: 50,
+    },
+  },
+  {
+    id: "swung-by-owner",
+    label: "Wins swung, by owner",
+    ast: {
+      from: "player_weeks",
+      filter: [{ field: "swung", op: "=", value: true }],
+      groupBy: ["owner"],
+      summarise: [{ fn: "count", as: "wins_swung" }],
+      arrange: [{ field: "wins_swung", dir: "desc" }],
+      limit: 25,
+    },
+  },
   {
     id: "best-records",
     label: "Best regular-season records",
@@ -125,6 +169,54 @@ export const PRESETS = [
       ],
       arrange: [{ field: "wins", dir: "desc" }],
       limit: 25,
+    },
+  },
+  // The two derived tables. Every award the Awards and Hall of Fame pages hand
+  // out is a row here, so the questions those pages cannot ask -- who won most,
+  // which manager's roster collected them, which position the Hall favours --
+  // are one grouping away.
+  {
+    id: "most-decorated",
+    label: "Most decorated players",
+    ast: {
+      from: "awards",
+      groupBy: ["player"],
+      summarise: [
+        { fn: "count", as: "awards" },
+        { fn: "count_distinct", field: "year", as: "seasons" },
+      ],
+      arrange: [{ field: "awards", dir: "desc" }],
+      limit: 50,
+    },
+  },
+  {
+    id: "award-winners",
+    label: "Every award winner",
+    ast: {
+      from: "awards",
+      filter: [{ field: "award", op: "!=", value: "Team of the Season" }],
+      arrange: [{ field: "year", dir: "desc" }],
+      limit: 100,
+    },
+  },
+  {
+    id: "awards-by-owner",
+    label: "Awards collected, by owner",
+    ast: {
+      from: "awards",
+      groupBy: ["owner"],
+      summarise: [{ fn: "count", as: "awards" }],
+      arrange: [{ field: "awards", dir: "desc" }],
+      limit: 25,
+    },
+  },
+  {
+    id: "hall-of-fame",
+    label: "The Hall of Fame",
+    ast: {
+      from: "hall_of_fame",
+      arrange: [{ field: "score", dir: "desc" }],
+      limit: 50,
     },
   },
   {

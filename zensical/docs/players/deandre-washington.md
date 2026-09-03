@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster DeAndre Washington has appeared on
 - **Position:** RB
 - **Seasons:** 2019-2020
 - **Fantasy Teams:** 2
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster DeAndre Washington has appeared on
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 18.60 (benched) - 2019 Wk 16 (Final) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 18.60 (benched) - 2019 Wk 16 (Final) |
 | 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 1 | 7.20 | 7.20 - 2020 Wk 14 (Quarterfinal) |
 
 ## Draft History

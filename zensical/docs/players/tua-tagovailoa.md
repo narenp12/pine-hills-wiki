@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tua Tagovailoa has appeared on, se
 - **Position:** QB
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 9
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Tua Tagovailoa has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -29,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 9 | 1 | 29.18 | 29.18 - 2022 Wk 8 |
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 1 | 1 | 15.94 | 15.94 - 2022 Wk 7 |
 | 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 9 | 8 | 144.52 | 28.36 - 2023 Wk 3 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 7 | 3 | 46.90 | 19.20 - 2023 Wk 13 |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 7 | 3 | 46.90 | 19.20 - 2023 Wk 13 |
 | 2024 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | QB | 6 | 5 | 96.56 | 28.48 - 2024 Wk 12 |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 1 | 0 | 0.00 | 18.62 (benched) - 2024 Wk 1 |
 | 2025 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | QB | 14 | 14 | 135.00 | 24.20 - 2025 Wk 8 |

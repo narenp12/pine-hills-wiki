@@ -155,6 +155,21 @@ Regular season only; the playoff and Finals player books are on [Playoffs](../pl
 |  | [Tyreek Hill](../players/tyreek-hill.md) | 131 weeks | <span class="wiki-new" title="This page has not been written yet">Tanmay's Top-Notch Team</span>, <span class="wiki-new" title="This page has not been written yet">Hill We Go… Again (feat Kyler)</span> <details class="more"><summary><span class="more-show">+6 more</span><span class="more-hide">show less</span></summary><span class="more-list"><span class="wiki-new" title="This page has not been written yet">Pukakke NaKupp</span>, <span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span>, <span class="wiki-new" title="This page has not been written yet">Big black big back</span>, <span class="wiki-new" title="This page has not been written yet">CHOPSTIX</span>, <span class="wiki-new" title="This page has not been written yet">My team is Koo(l)</span>, <span class="wiki-new" title="This page has not been written yet">Roger That</span></span></details> |
 |  | [Patrick Mahomes](../players/patrick-mahomes.md) | 131 weeks | <span class="wiki-new" title="This page has not been written yet">Sharman's Scorpions</span>, <span class="wiki-new" title="This page has not been written yet">Anish's Awesome Team</span> <details class="more"><summary><span class="more-show">+5 more</span><span class="more-hide">show less</span></summary><span class="more-list"><span class="wiki-new" title="This page has not been written yet">Jeremy's Neat Team</span>, <span class="wiki-new" title="This page has not been written yet">Ken Keenan Kum</span>, <span class="wiki-new" title="This page has not been written yet">Kaushal's Potatoes</span>, <span class="wiki-new" title="This page has not been written yet">Ju Let The Dogs Out</span>, <span class="wiki-new" title="This page has not been written yet">Super Squirrels</span></span></details> |
 
+### Career
+
+Whole careers rather than single weeks. Championships count the Finals a player
+was started in; awards count the six the [Hall of Fame](../hall-of-fame.md) reads.
+
+| Record | Player | Mark | When |
+|--------|--------|------|------|
+| Most Career Points | [Patrick Mahomes](../players/patrick-mahomes.md) | 2511.46 | 2018-2025 |
+| Most Career Starts | [Travis Kelce](../players/travis-kelce.md) | 119 starts | 2018-2025 |
+| Most Championships (2-way tie) | [Harrison Butker](../players/harrison-butker.md) | 3 | 2018, 2021, 2022 |
+|  | [Saquon Barkley](../players/saquon-barkley.md) | 3 | 2021, 2024, 2025 |
+| Most Awards (3-way tie) | [Jalen Hurts](../players/jalen-hurts.md) | 4 | 2022, 2024 |
+|  | [Davante Adams](../players/davante-adams.md) | 4 | 2018, 2021, 2022, 2025 |
+|  | [Travis Kelce](../players/travis-kelce.md) | 4 | 2019, 2020, 2021, 2022 |
+
 ### Single-Week Highs by Position
 
 Highest single week at each position. Regular season, starters only.

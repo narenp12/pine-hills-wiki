@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tre Tucker has appeared on, season
 - **Position:** WR
 - **Seasons:** 2024-2025
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Tre Tucker has appeared on, season
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 6 | 1 | 15.20 | 15.20 - 2024 Wk 12 |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 6 | 1 | 15.20 | 15.20 - 2024 Wk 12 |
 | 2024 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 1 | 4.60 | 4.60 - 2024 Wk 5 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 1 | 0 | 0.00 | 5.80 (benched) - 2025 Wk 12 |
 

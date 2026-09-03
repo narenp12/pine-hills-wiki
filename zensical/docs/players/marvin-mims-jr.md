@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Marvin Mims Jr. has appeared on, s
 - **Position:** WR
 - **Seasons:** 2025
 - **Fantasy Teams:** 2
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Marvin Mims Jr. has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 14 | 1 | 14.20 | 22.90 (benched) - 2025 Wk 4 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 14 | 1 | 14.20 | 22.90 (benched) - 2025 Wk 4 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 15.10 (benched) - 2025 Wk 1 |
 
 ## Draft History

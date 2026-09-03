@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster George Pickens has appeared on, se
 - **Position:** WR
 - **Seasons:** 2022-2025
 - **Fantasy Teams:** 5
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster George Pickens has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -29,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 13 | 3 | 37.70 | 35.50 (benched) - 2023 Wk 16 (consolation) |
 | 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 4 | 0 | 0.00 | 22.70 (benched) - 2023 Wk 2 |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 17 | 10 | 128.10 | 22.10 (benched) - 2024 Wk 7 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 16 | 290.00 | 33.40 - 2025 Wk 4 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 16 | 290.00 | 33.40 - 2025 Wk 4 |
 
 ## Draft History
 

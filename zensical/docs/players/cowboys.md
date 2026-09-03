@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Cowboys has appeared on, season by
 - **Position:** DEF
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 10
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md)
 - **Awards:** Team of the Season 2022
 
 ## Career Summary
@@ -23,7 +24,8 @@ description: "Every Pine Hills fantasy roster Cowboys has appeared on, season by
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -34,7 +36,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 1 | 1 | 4.00 | 4.00 - 2019 Wk 6 |
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | DEF | 1 | 1 | 9.00 | 9.00 - 2020 Wk 5 |
 | 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 1 | 1 | 18.00 | 18.00 - 2020 Wk 14 (Quarterfinal) |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | DEF | 7 | 6 | 76.00 | 24.00 - 2021 Wk 16 (Semifinal) |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | DEF | 7 | 6 | 76.00 | 24.00 - 2021 Wk 16 (Semifinal) |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 2 | 1 | 13.00 | 13.00 - 2021 Wk 6 |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 1 | 1 | 11.00 | 11.00 - 2021 Wk 5 |
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | DEF | 1 | 1 | 3.00 | 3.00 - 2021 Wk 9 |

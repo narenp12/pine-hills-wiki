@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jamaal Williams has appeared on, s
 - **Position:** RB
 - **Seasons:** 2018-2023
 - **Fantasy Teams:** 8
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Jamaal Williams has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 27.60 (benched) - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 0 | 0.00 | 27.60 (benched) - 2018 Wk 16 (Final) |
 | 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 9 | 1 | 18.60 | 18.60 - 2019 Wk 8 |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | RB | 10 | 2 | 39.60 | 21.40 - 2020 Wk 7 |
 | 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 11 | 0 | 0.00 | 25.00 (benched) - 2021 Wk 1 |

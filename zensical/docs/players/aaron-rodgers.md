@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Aaron Rodgers has appeared on, sea
 - **Position:** QB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 9
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -16,15 +17,18 @@ description: "Every Pine Hills fantasy roster Aaron Rodgers has appeared on, sea
 - **Points on the Bench:** 891.26
 - **Best Week:** 43.76 (benched) - 2019 Wk 7, [Curry's legit team](../owners/lokesh.md)
 - **Times Drafted:** 7 (first: 2018 R1 P4)
+- **Playoff Records:** Highest-Scoring Benched Player - 42.88 (QB)
+- **Finals Records:** Highest-Scoring Benched Player - 42.88 (QB)
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 14 | 9 | 180.12 | 42.88 (benched) - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 14 | 9 | 180.12 | 42.88 (benched) - 2018 Wk 16 (Final) |
 | 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 15 | 2 | 40.04 | 43.76 (benched) - 2019 Wk 7 |
 | 2020 | [Imagine Losing](../owners/om.md) | [Om](../owners/om.md) | QB | 10 | 3 | 66.26 | 30.76 (benched) - 2020 Wk 1 |
 | 2020 | [Aryan's Amazing Team](../owners/aryan.md) | [Aryan](../owners/aryan.md) | QB | 6 | 1 | 22.74 | 30.90 (benched) - 2020 Wk 14 (consolation) |

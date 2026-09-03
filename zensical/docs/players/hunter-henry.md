@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Hunter Henry has appeared on, seas
 - **Position:** TE
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 12
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md) (benched)
 
 ## Career Summary
 
@@ -20,13 +21,14 @@ description: "Every Pine Hills fantasy roster Hunter Henry has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 10 | 8 | 92.00 | 15.70 - 2019 Wk 7 |
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | TE | 1 | 1 | 10.00 | 10.00 - 2019 Wk 1 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | TE | 13 | 10 | 106.80 | 17.50 - 2020 Wk 15 (Semifinal) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | TE | 13 | 10 | 106.80 | 17.50 - 2020 Wk 15 (Semifinal) |
 | 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 2 | 0 | 0.00 | 12.30 (benched) - 2020 Wk 5 |
 | 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | TE | 1 | 0 | 0.00 | 5.90 (benched) - 2020 Wk 4 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | TE | 9 | 5 | 48.50 | 19.70 (benched) - 2021 Wk 10 |

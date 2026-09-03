@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Rams has appeared on, season by se
 - **Position:** DEF
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 9
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Rams has appeared on, season by se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -29,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 10 | 3 | 17.00 | 21.00 (benched) - 2019 Wk 7 |
 | 2020 | [Aryan's Amazing Team](../owners/aryan.md) | [Aryan](../owners/aryan.md) | DEF | 10 | 7 | 75.00 | 21.00 - 2020 Wk 14 (consolation) |
 | 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 3 | 3 | 23.00 | 12.00 - 2020 Wk 5 |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | DEF | 17 | 8 | 62.00 | 16.00 - 2021 Wk 6 |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | DEF | 17 | 8 | 62.00 | 16.00 - 2021 Wk 6 |
 | 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | DEF | 4 | 0 | 0.00 | 9.00 (benched) - 2022 Wk 1 |
 | 2022 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | DEF | 1 | 1 | 11.00 | 11.00 - 2022 Wk 6 |
 | 2023 | [Ken Keenan Kum](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 2.00 | 2.00 - 2023 Wk 7 |

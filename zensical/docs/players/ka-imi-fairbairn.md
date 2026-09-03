@@ -16,11 +16,13 @@ description: "Every Pine Hills fantasy roster Ka'imi Fairbairn has appeared on, 
 - **Points on the Bench:** 8.00
 - **Best Week:** 22.00 - 2018 Wk 15 (Semifinal), [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** 5 (first: 2019 R12 P91)
+- **Playoff Records:** Highest K Week - 22.00
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

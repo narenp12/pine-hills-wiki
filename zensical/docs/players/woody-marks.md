@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Woody Marks has appeared on, seaso
 - **Position:** RB
 - **Seasons:** 2025
 - **Fantasy Teams:** 2
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Woody Marks has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 11 | 3 | 28.60 | 16.10 (benched) - 2025 Wk 10 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 11 | 3 | 28.60 | 16.10 (benched) - 2025 Wk 10 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 2 | 1 | 2.40 | 2.40 - 2025 Wk 5 |
 
 ## Draft History

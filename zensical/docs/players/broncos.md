@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Broncos has appeared on, season by
 - **Position:** DEF
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 13
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md)
 - **Awards:** Team of the Season 2025
 
 ## Career Summary
@@ -21,14 +22,15 @@ description: "Every Pine Hills fantasy roster Broncos has appeared on, season by
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 4 | 4 | 28.00 | 14.00 - 2018 Wk 13 |
 | 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 0 | 0.00 | 6.00 (benched) - 2018 Wk 3 |
 | 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 1 | 1 | 5.00 | 5.00 - 2018 Wk 9 |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 5.00 | 5.00 - 2019 Wk 16 (Final) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 5.00 | 5.00 - 2019 Wk 16 (Final) |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | DEF | 11 | 0 | 0.00 | 14.00 (benched) - 2020 Wk 6 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | DEF | 5 | 5 | 42.00 | 19.00 - 2021 Wk 3 |
 | 2021 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 2 | 2 | 5.00 | 4.00 - 2021 Wk 7 |

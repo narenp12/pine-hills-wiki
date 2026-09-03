@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Evan Engram has appeared on, seaso
 - **Position:** TE
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 11
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Evan Engram has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | TE | 1 | 1 | 17.30 | 17.30 - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | TE | 1 | 1 | 17.30 | 17.30 - 2018 Wk 16 (Final) |
 | 2018 | [D4rthSi Dragons](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 1 | 1 | 2.90 | 2.90 - 2018 Wk 3 |
 | 2018 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | TE | 1 | 0 | 0.00 | 4.60 (benched) - 2018 Wk 7 |
 | 2019 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | TE | 16 | 16 | 109.40 | 28.60 - 2019 Wk 1 |

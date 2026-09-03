@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster John Brown has appeared on, season
 - **Position:** WR
 - **Seasons:** 2018-2020
 - **Fantasy Teams:** 2
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster John Brown has appeared on, season
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 1 | 0 | 0.00 | 4.50 (benched) - 2018 Wk 9 |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 9 | 1 | 34.70 | 34.70 - 2019 Wk 11 |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 9 | 1 | 34.70 | 34.70 - 2019 Wk 11 |
 | 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 4 | 0 | 0.00 | 19.00 (benched) - 2020 Wk 1 |
 
 ## Draft History

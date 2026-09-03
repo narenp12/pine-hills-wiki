@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Miles Sanders has appeared on, sea
 - **Position:** RB
 - **Seasons:** 2019-2023
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md)
 
 ## Career Summary
 
@@ -20,13 +21,14 @@ description: "Every Pine Hills fantasy roster Miles Sanders has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 3 | 0 | 0.00 | 35.20 (benched) - 2019 Wk 15 (Semifinal) |
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 1 | 0 | 0.00 | 3.70 (benched) - 2019 Wk 1 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 16 | 12 | 170.40 | 29.60 - 2020 Wk 14 (Quarterfinal) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 16 | 12 | 170.40 | 29.60 - 2020 Wk 14 (Quarterfinal) |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 11 | 4 | 38.40 | 17.20 (benched) - 2021 Wk 13 |
 | 2021 | [The Herbs](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 5 | 4 | 40.40 | 17.30 - 2021 Wk 1 |
 | 2022 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 17 | 4 | 46.10 | 31.00 (benched) - 2022 Wk 12 |

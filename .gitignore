@@ -30,3 +30,7 @@ htmlcov/
 # Zensical build artifacts (sources in zensical/docs are committed)
 zensical/.stage/
 zensical/site/
+
+# Claude Code: machine-local permission grants (absolute paths, per-session
+# scratchpad dirs). launch.json is shared config and is committed.
+.claude/settings.local.json

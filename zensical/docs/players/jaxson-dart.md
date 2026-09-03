@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jaxson Dart has appeared on, seaso
 - **Position:** QB
 - **Seasons:** 2025
 - **Fantasy Teams:** 1
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Jaxson Dart has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 10 | 1 | 19.42 | 27.24 (benched) - 2025 Wk 9 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 10 | 1 | 19.42 | 27.24 (benched) - 2025 Wk 9 |
 
 ## Draft History
 

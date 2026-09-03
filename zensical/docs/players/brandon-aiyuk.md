@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Brandon Aiyuk has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 8
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 - **Awards:** Team of the Season 2023
 
 ## Career Summary
@@ -21,7 +22,8 @@ description: "Every Pine Hills fantasy roster Brandon Aiyuk has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -30,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | WR | 8 | 4 | 50.10 | 21.60 (benched) - 2021 Wk 11 |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 5 | 1 | 0.70 | 16.80 (benched) - 2021 Wk 3 |
 | 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 15 | 209.10 | 28.30 - 2022 Wk 6 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 15 | 243.70 | 32.90 - 2023 Wk 1 |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 15 | 243.70 | 32.90 - 2023 Wk 1 |
 | 2024 | [Jayesh's Great Team](../owners/jayesh.md) | [Jayesh](../owners/jayesh.md) | WR | 17 | 9 | 62.40 | 22.70 - 2024 Wk 5 |
 | 2025 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 17 | 0 | 0.00 | 0.00 (benched) - 2025 Wk 1 |
 

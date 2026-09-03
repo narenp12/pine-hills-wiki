@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Kai Forbath has appeared on, seaso
 - **Position:** K
 - **Seasons:** 2019
 - **Fantasy Teams:** 1
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Kai Forbath has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | K | 2 | 2 | 29.00 | 18.00 - 2019 Wk 15 (Semifinal) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | K | 2 | 2 | 29.00 | 18.00 - 2019 Wk 15 (Semifinal) |
 
 ## Draft History
 

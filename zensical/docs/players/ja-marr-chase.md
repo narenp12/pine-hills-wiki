@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Ja'Marr Chase has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md)
 - **Awards:** MVP 2025 · Finals MVP 2021 · Team of the Season 2025
 
 ## Career Summary
@@ -17,16 +18,19 @@ description: "Every Pine Hills fantasy roster Ja'Marr Chase has appeared on, sea
 - **Points on the Bench:** 28.00
 - **Best Week:** 55.60 - 2021 Wk 17 (Final), [varun's victorious team](../owners/varun.md)
 - **Times Drafted:** 6 (first: 2021 R10 P92)
+- **Playoff Records:** Highest Week - 55.60 (WR)
+- **Finals Records:** Highest Week - 55.60 (WR)
 - **Season Position Highs:** WR 2023, 2024
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 15 | 279.10 | 55.60 - 2021 Wk 17 (Final) |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 15 | 279.10 | 55.60 - 2021 Wk 17 (Final) |
 | 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 9 | 5 | 78.10 | 28.50 - 2022 Wk 14 |
 | 2022 | [Tanmay's Hospital](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 7 | 6 | 112.80 | 33.00 - 2022 Wk 7 |
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 1 | 28.90 | 28.90 - 2022 Wk 1 |

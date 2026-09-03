@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Cooper Kupp has appeared on, seaso
 - **Position:** WR
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 - **Awards:** MVP 2021 · Team of the Season 2021
 
 ## Career Summary
@@ -21,7 +22,8 @@ description: "Every Pine Hills fantasy roster Cooper Kupp has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -30,7 +32,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | WR | 16 | 14 | 201.80 | 25.70 - 2020 Wk 3 |
 | 2021 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 16 | 415.70 | 37.60 - 2021 Wk 7 |
 | 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 9 | 201.40 | 31.80 - 2022 Wk 1 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 11 | 138.90 | 27.80 - 2023 Wk 6 |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 11 | 138.90 | 27.80 - 2023 Wk 6 |
 | 2024 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 12 | 175.00 | 32.00 - 2024 Wk 1 |
 | 2025 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | WR | 17 | 4 | 39.60 | 16.00 - 2025 Wk 2 |
 

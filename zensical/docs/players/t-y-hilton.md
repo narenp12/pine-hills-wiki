@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster T.Y. Hilton has appeared on, seaso
 - **Position:** WR
 - **Seasons:** 2018-2021
 - **Fantasy Teams:** 5
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster T.Y. Hilton has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 11 | 6 | 123.60 | 36.50 - 2018 Wk 11 |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 11 | 6 | 123.60 | 36.50 - 2018 Wk 11 |
 | 2018 | [D4rthSi Dragons](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 2 | 0 | 0.00 | 15.50 (benched) - 2018 Wk 4 |
 | 2018 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 1 | 0 | 0.00 | 10.00 (benched) - 2018 Wk 3 |
 | 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 12 | 5 | 66.40 | 28.70 (benched) - 2019 Wk 1 |

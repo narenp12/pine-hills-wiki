@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Robbie Chosen has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2018-2021
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Robbie Chosen has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 29.00 (benched) - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 1 | 0 | 0.00 | 29.00 (benched) - 2018 Wk 16 (Final) |
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | WR | 15 | 13 | 173.80 | 19.50 - 2020 Wk 5 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 4 | 0 | 0.00 | 12.70 (benched) - 2021 Wk 1 |
 

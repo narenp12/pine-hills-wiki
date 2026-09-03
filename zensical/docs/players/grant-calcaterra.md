@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Grant Calcaterra has appeared on, 
 - **Position:** TE
 - **Seasons:** 2024
 - **Fantasy Teams:** 1
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Grant Calcaterra has appeared on, 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | TE | 3 | 3 | 7.60 | 4.40 - 2024 Wk 17 (Final) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | TE | 3 | 3 | 7.60 | 4.40 - 2024 Wk 17 (Final) |
 
 ## Draft History
 

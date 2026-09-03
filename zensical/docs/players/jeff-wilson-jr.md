@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jeff Wilson Jr. has appeared on, s
 - **Position:** RB
 - **Seasons:** 2018-2023
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md) (benched)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster Jeff Wilson Jr. has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 2 | 2 | 13.20 | 10.60 - 2018 Wk 14 (Quarterfinal) |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 27.40 (benched) - 2020 Wk 16 (Final) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 1 | 0 | 0.00 | 27.40 (benched) - 2020 Wk 16 (Final) |
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | RB | 4 | 1 | 5.60 | 19.90 (benched) - 2021 Wk 15 (Quarterfinal) |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 2 | 0 | 0.00 | 6.80 (benched) - 2021 Wk 11 |
 | 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 7 | 1 | 12.20 | 22.30 (benched) - 2022 Wk 10 |

@@ -3564,6 +3564,74 @@ def hall_of_fame_class(
     return members
 
 
+def build_award_book(
+    seasons: dict, bible: dict, player_log: list, game_log: list,
+    player_index: dict, first_captured,
+) -> dict:
+    """Every computed award and the Hall it feeds, assembled once.
+
+    Extracted from main() so build_query_db.py can put the same awards into the
+    Stat Search tables without restating the order they are built in. That order
+    is not incidental: the Hall reads `player_awards`, which reads the five
+    season awards, which all read the one `build_decisive_wins` pass. Two call
+    sites each doing that by hand is two chances to feed the Hall a different
+    set of awards than the Awards page prints, and the failure would be silent -
+    both pages would render, and disagree.
+
+    Everything the caller needs is returned rather than kept, so main() reads
+    the same dict Stat Search does instead of recomputing any part of it.
+    """
+    decisive = build_decisive_wins(player_log, game_log)
+    season_mvps = {year: season_mvp(year, decisive) for year in seasons}
+    finals_mvps = {year: finals_mvp(year, player_log, game_log) for year in seasons}
+    all_league_teams = {
+        year: team_of_the_season(year, seasons[year], decisive) for year in seasons
+    }
+    debuts = league_debut_years(player_log)
+    newcomers = {
+        year: newcomer_of_the_year(year, decisive, debuts, first_captured)
+        for year in seasons
+    }
+    undrafted_awards = {
+        year: undrafted_player_of_the_year(year, seasons[year], decisive)
+        for year in seasons
+    }
+    player_awards = build_player_awards(
+        season_mvps, finals_mvps, all_league_teams, newcomers, undrafted_awards, seasons
+    )
+    season_position_highs = player_season_highs(player_log)
+    championships = build_player_championships(player_log, game_log)
+    ineligible = hall_ineligible(bible)
+    qualified = hall_of_fame_class(
+        player_index, player_awards, hall_record_marks(player_log),
+        season_position_highs, championships, ineligible,
+    )
+    # Classes stop at the last season actually played. The upcoming season has a
+    # raw file before a ball is thrown, and inducting a class into it would
+    # enshrine players in a season that has not happened.
+    last_played = max(
+        (year for year in seasons if season_has_games(seasons[year])), default=None
+    )
+    hall_classes, still_waiting = hall_of_fame_classes(qualified, last_played)
+    return {
+        "decisive": decisive,
+        "season_mvps": season_mvps,
+        "finals_mvps": finals_mvps,
+        "all_league_teams": all_league_teams,
+        "debuts": debuts,
+        "newcomers": newcomers,
+        "undrafted": undrafted_awards,
+        "player_awards": player_awards,
+        "season_position_highs": season_position_highs,
+        "championships": championships,
+        "ineligible": ineligible,
+        "qualified": qualified,
+        "hall_classes": hall_classes,
+        "still_waiting": still_waiting,
+        "last_played": last_played,
+    }
+
+
 def hall_of_fame_classes(members: list, latest_year) -> tuple:
     """([{"year": .., "charter": bool, "members": [..]}, ..], still_waiting).
 
@@ -4772,28 +4840,20 @@ def main():
     # One pass over every roster row, shared by the Records and Playoffs books.
     player_log = build_player_log(seasons)
     player_index = build_player_index(seasons, player_log, owner_map)
-    # MVP awards: one pass over the roster weeks joined to the matchup log, then
-    # sliced per season for the pages that name a winner.
-    decisive_wins = build_decisive_wins(player_log, matchup_stats["log"])
-    season_mvps = {year: season_mvp(year, decisive_wins) for year in seasons}
-    finals_mvps = {
-        year: finals_mvp(year, player_log, matchup_stats["log"]) for year in seasons
-    }
-    all_league_teams = {
-        year: team_of_the_season(year, seasons[year], decisive_wins) for year in seasons
-    }
-    debuts = league_debut_years(player_log)
-    newcomers = {
-        year: newcomer_of_the_year(year, decisive_wins, debuts, first_captured)
-        for year in seasons
-    }
-    undrafted_awards = {
-        year: undrafted_player_of_the_year(year, seasons[year], decisive_wins)
-        for year in seasons
-    }
-    player_awards = build_player_awards(
-        season_mvps, finals_mvps, all_league_teams, newcomers, undrafted_awards, seasons
+    # Every computed award, and the Hall they feed, in one assembly. Shared with
+    # scripts/build_query_db.py so Stat Search hands out the same awards these
+    # pages print; see build_award_book for why the order matters.
+    award_book = build_award_book(
+        seasons, bible, player_log, matchup_stats["log"], player_index,
+        first_captured,
     )
+    decisive_wins = award_book["decisive"]
+    season_mvps = award_book["season_mvps"]
+    finals_mvps = award_book["finals_mvps"]
+    all_league_teams = award_book["all_league_teams"]
+    newcomers = award_book["newcomers"]
+    undrafted_awards = award_book["undrafted"]
+    player_awards = award_book["player_awards"]
     owner_game_stats = build_owner_game_stats(seasons, owner_map, matchup_stats)
     print(f"  scanned {len(matchup_stats['log']) // 2} matchups")
 
@@ -4878,9 +4938,9 @@ def main():
     # The record books, keyed by holder, so a page can name the marks it holds.
     # Keyed by scope so the page can label a Finals mark as one instead of
     # filing it with the October records.
-    season_position_highs = player_season_highs(player_log)
+    season_position_highs = award_book["season_position_highs"]
     # Rings, read off the captured Final the same way the Finals MVP is.
-    championships = build_player_championships(player_log, matchup_stats["log"])
+    championships = award_book["championships"]
     # Career totals, titles and decorations: marks that span every phase, so
     # they ride with the regular-season book rather than being derived per scope.
     career_marks = career_book_marks(
@@ -4949,20 +5009,10 @@ def main():
     # The Hall reads the awards and records built above rather than the raw
     # seasons, so it cannot induct anyone those pages do not credit. Qualifying
     # is only half of it: the capped classes decide who is in this year.
-    ineligible = hall_ineligible(bible)
-    qualified = hall_of_fame_class(
-        player_index, player_awards, hall_record_marks(player_log),
-        season_position_highs, championships, ineligible,
-    )
-    # Classes stop at the last season actually played. The upcoming season has
-    # a raw file before a ball is thrown, and inducting a class into it would
-    # enshrine players in a season that has not happened.
-    last_played = max(
-        (year for year in seasons if season_has_games(seasons[year])), default=None
-    )
+    ineligible = award_book["ineligible"]
     # Whoever the caps left out stays a candidate for a later class; the page
     # does not print them, because a season not yet played will mint new ones.
-    hall_classes, _ = hall_of_fame_classes(qualified, last_played)
+    hall_classes = award_book["hall_classes"]
     hof = CONTENT / "hall-of-fame.md"
     hof.write_text(
         dash_normalize(gen_hall_of_fame(hall_classes, latest_year, ineligible))

@@ -1,5 +1,12 @@
 {
   "enums": {
+    "award": [
+      "Finals MVP",
+      "Most Valuable Player",
+      "Newcomer of the Year",
+      "Team of the Season",
+      "Undrafted Player of the Year"
+    ],
     "owner": [
       "Abhinav",
       "Aneesh",
@@ -55,6 +62,51 @@
     ]
   },
   "tables": {
+    "awards": {
+      "columns": [
+        {
+          "name": "year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "award",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "slot",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player_slug",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "position",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "owner",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "team",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "wins_swung",
+          "type": "INTEGER"
+        },
+        {
+          "name": "points",
+          "type": "DOUBLE"
+        }
+      ],
+      "row_count": 105
+    },
     "draft": {
       "columns": [
         {
@@ -95,6 +147,63 @@
         }
       ],
       "row_count": 1320
+    },
+    "hall_of_fame": {
+      "columns": [
+        {
+          "name": "class_year",
+          "type": "INTEGER"
+        },
+        {
+          "name": "charter",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "player",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "player_slug",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "season_unit",
+          "type": "INTEGER"
+        },
+        {
+          "name": "position",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "qualified",
+          "type": "INTEGER"
+        },
+        {
+          "name": "score",
+          "type": "INTEGER"
+        },
+        {
+          "name": "awards",
+          "type": "INTEGER"
+        },
+        {
+          "name": "championships",
+          "type": "INTEGER"
+        },
+        {
+          "name": "points",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "starts",
+          "type": "INTEGER"
+        },
+        {
+          "name": "teams",
+          "type": "INTEGER"
+        }
+      ],
+      "row_count": 15
     },
     "matchups": {
       "columns": [
@@ -202,6 +311,10 @@
         {
           "name": "points",
           "type": "DOUBLE"
+        },
+        {
+          "name": "swung",
+          "type": "BOOLEAN"
         }
       ],
       "row_count": 19881

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster T.J. Hockenson has appeared on, se
 - **Position:** TE
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 8
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md) (benched)
 - **Awards:** Team of the Season 2023
 
 ## Career Summary
@@ -22,7 +23,8 @@ description: "Every Pine Hills fantasy roster T.J. Hockenson has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -31,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 16 | 9 | 96.20 | 16.90 (benched) - 2020 Wk 7 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | TE | 17 | 8 | 100.30 | 25.70 - 2021 Wk 1 |
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | TE | 17 | 15 | 204.00 | 39.90 - 2022 Wk 4 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 17 | 15 | 219.00 | 30.40 - 2023 Wk 10 |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 17 | 15 | 219.00 | 30.40 - 2023 Wk 10 |
 | 2024 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 15 | 1 | 3.30 | 18.40 (benched) - 2024 Wk 12 |
 | 2024 | [Jayesh's Great Team](../owners/jayesh.md) | [Jayesh](../owners/jayesh.md) | TE | 1 | 1 | 11.80 | 11.80 - 2024 Wk 17 (Final) |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 1 | 0 | 0.00 | 0.00 (benched) - 2024 Wk 1 |

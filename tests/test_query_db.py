@@ -33,7 +33,13 @@ from scripts.build_query_db import (
     matchup_rows,
     owner_index,
     player_week_rows,
+    AWARD_COLUMNS as DECLARED_AWARD_COLUMNS,
+    HALL_OF_FAME_COLUMNS as DECLARED_HALL_OF_FAME_COLUMNS,
+    award_book,
+    award_rows,
+    hall_of_fame_rows,
     team_season_rows,
+    winning_margins,
     write_page,
 )
 from scripts.generate import (
@@ -42,6 +48,8 @@ from scripts.generate import (
     apply_derived_champions,
     apply_derived_owners,
     apply_player_aliases,
+    build_decisive_wins,
+    build_game_log,
     build_owner_map,
     build_player_alias_map,
     build_player_index,
@@ -91,6 +99,7 @@ PLAYER_WEEK_COLUMNS = {
     "slot",
     "started",
     "points",
+    "swung",
 }
 
 # Every roster slot, bench included, of every captured week. This rises when
@@ -223,11 +232,19 @@ TIE_YEAR, TIE_WEEK = 2018, 8
 # 2026 is played and its rosters bring in players nobody has drafted.
 EXPECTED_PLAYER_PAGES = 606
 
-# The five Parquet columns the browser turns into dropdowns.
-EXPECTED_ENUM_COLUMNS = {"owner", "position", "slot", "phase", "year"}
+# The six Parquet columns the browser turns into dropdowns.
+EXPECTED_ENUM_COLUMNS = {"owner", "position", "slot", "phase", "year", "award"}
+
+# One row per award per holder: five season awards over eight captured seasons,
+# plus a full Team of the Season each year. Raise it deliberately when 2026 is
+# played rather than relaxing the assertion.
+EXPECTED_AWARD_ROWS = 105
+
+# The charter class. Raise it deliberately when a later class inducts.
+EXPECTED_HALL_OF_FAME_ROWS = 15
 
 # The whole point of Parquet over a shipped database file: the tables have to
-# stay small enough to fetch over a range request on a phone. The four together
+# stay small enough to fetch over a range request on a phone. The six together
 # are an order of magnitude inside this today.
 MAX_PARQUET_BYTES = 1_000_000
 
@@ -289,9 +306,26 @@ def rows(league, owners):
 
 
 @pytest.fixture(scope="module")
-def player_rows(league, owners):
+def player_rows(league, owners, rows):
     seasons, _ = league
-    return player_week_rows(seasons, owners)
+    return player_week_rows(seasons, owners, winning_margins(rows))
+
+
+@pytest.fixture(scope="module")
+def book(league):
+    seasons, bible = league
+    return award_book(seasons, bible)
+
+
+@pytest.fixture(scope="module")
+def award_table(league, owners, book):
+    seasons, _ = league
+    return award_rows(seasons, owners, book)
+
+
+@pytest.fixture(scope="module")
+def hall_table(book):
+    return hall_of_fame_rows(book)
 
 
 @pytest.fixture(scope="module")
@@ -489,6 +523,109 @@ def test_matchup_rows_are_mirrored(rows):
 def test_player_week_rows_have_the_declared_columns(player_rows):
     for row in player_rows:
         assert set(row) == PLAYER_WEEK_COLUMNS
+
+
+def test_award_rows_have_the_declared_columns(award_table):
+    for row in award_table:
+        assert set(row) == set(DECLARED_AWARD_COLUMNS)
+
+
+def test_hall_of_fame_rows_have_the_declared_columns(hall_table):
+    for row in hall_table:
+        assert set(row) == set(DECLARED_HALL_OF_FAME_COLUMNS)
+
+
+def test_every_captured_season_hands_out_the_five_season_awards(award_table, league):
+    """One MVP, one Finals MVP and one Undrafted winner per season played.
+
+    Newcomer is the exception the Awards page names: the first captured season
+    has no award, because every player in it is new to the league.
+    """
+    seasons, _ = league
+    played = {year for year in seasons if season_has_games(seasons[year])}
+    for award in ("Most Valuable Player", "Finals MVP", "Undrafted Player of the Year"):
+        years = {row["year"] for row in award_table if row["award"] == award}
+        assert years == played, award
+    newcomer = {row["year"] for row in award_table if row["award"] == "Newcomer of the Year"}
+    assert newcomer == played - {min(seasons)}
+
+
+def test_award_rows_are_one_per_holder_not_one_per_award(award_table):
+    """A tie is two rows. Without that a group-by-player count loses a winner."""
+    for row in award_table:
+        assert "," not in row["player"], row
+
+
+def test_finals_mvp_carries_no_swung_wins(award_table):
+    """The title game is one game; there is nothing for wins swung to rank."""
+    for row in award_table:
+        if row["award"] == "Finals MVP":
+            assert row["wins_swung"] is None, row
+        else:
+            assert isinstance(row["wins_swung"], int), row
+
+
+def test_award_and_hall_rows_name_players_the_wiki_has_pages_for(
+    award_table, hall_table, wiki_player_pages,
+):
+    """A result row links to players/<slug>/, so the slug has to be a real page."""
+    for row in [*award_table, *hall_table]:
+        assert row["player_slug"] in wiki_player_pages, row["player"]
+
+
+def test_hall_of_fame_rows_are_the_pages_own_inductees(hall_table, league):
+    """The table cannot induct anyone the Hall of Fame page leaves out.
+
+    Both read `hall_classes` off the same award book, so this pins the join
+    rather than the rule: a member dropped between the book and these rows, or
+    a season unit collapsed into its career, shows up here.
+    """
+    seasons, bible = league
+    book = award_book(seasons, bible)
+    expected = [
+        (entry["year"], member["display"])
+        for entry in book["hall_classes"]
+        for member in entry["members"]
+    ]
+    actual = [
+        (
+            row["class_year"],
+            f"{row['season_unit']} {row['player']}"
+            if row["season_unit"] is not None
+            else row["player"],
+        )
+        for row in hall_table
+    ]
+    assert actual == expected
+
+
+def test_swung_rows_reproduce_the_awards_pages_decisive_wins(player_rows, league):
+    """`swung` per row must roll up to exactly generate's per-season counts.
+
+    The awards pages rank players by wins swung through build_decisive_wins, and
+    Stat Search now answers the same question through `sum(swung)`. A reader who
+    gets a different MVP out of the query builder than the Awards page prints has
+    been told the league's own records contradict each other, so the two readings
+    are pinned to each other here rather than each to its own fixture.
+    """
+    seasons, bible = league
+    expected = {
+        key: record["wins"]
+        for key, record in build_decisive_wins(
+            build_player_log(seasons), build_game_log(seasons, bible)
+        ).items()
+    }
+    counted = {}
+    for row in player_rows:
+        if row["swung"]:
+            key = (row["year"], row["player"])
+            counted[key] = counted.get(key, 0) + 1
+    assert counted == expected
+
+
+def test_swung_is_never_set_on_a_benched_row(player_rows):
+    """A bench row cannot swing a win: it was not in the lineup to be removed."""
+    assert not [row for row in player_rows if row["swung"] and not row["started"]]
 
 
 def test_player_week_rows_cover_every_captured_roster_slot(player_rows):
@@ -913,7 +1050,8 @@ def test_the_schema_types_describe_the_values_the_rows_carry(
 
 
 def test_the_schema_row_counts_match_the_builders(emitted, rows, player_rows,
-                                                  team_rows, picks):
+                                                  team_rows, picks, award_table,
+                                                  hall_table):
     schema, _ = emitted
     counts = {table: schema["tables"][table]["row_count"] for table in TABLES}
     assert counts == {
@@ -921,6 +1059,8 @@ def test_the_schema_row_counts_match_the_builders(emitted, rows, player_rows,
         "player_weeks": len(player_rows),
         "team_seasons": len(team_rows),
         "draft": len(picks),
+        "awards": len(award_table),
+        "hall_of_fame": len(hall_table),
     }
     # The builders are pinned to the capture above; restate the totals here so a
     # schema that reported a count matching two equally wrong tables still fails.
@@ -928,6 +1068,8 @@ def test_the_schema_row_counts_match_the_builders(emitted, rows, player_rows,
     assert counts["player_weeks"] == EXPECTED_PLAYER_WEEK_ROWS
     assert counts["team_seasons"] == EXPECTED_TEAM_SEASON_ROWS
     assert counts["draft"] == EXPECTED_DRAFT_ROWS
+    assert counts["awards"] == EXPECTED_AWARD_ROWS
+    assert counts["hall_of_fame"] == EXPECTED_HALL_OF_FAME_ROWS
 
 
 def test_the_schema_carries_a_dropdown_list_for_every_enum_column(emitted):

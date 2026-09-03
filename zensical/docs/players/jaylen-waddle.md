@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jaylen Waddle has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2022 [Jeremy's Neat Team](../owners/jeremy.md)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster Jaylen Waddle has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2021 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 15 | 3 | 56.30 | 32.80 (benched) - 2021 Wk 6 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 16 | 248.90 | 40.10 - 2022 Wk 2 |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 16 | 248.90 | 40.10 - 2022 Wk 2 |
 | 2023 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | WR | 17 | 14 | 186.80 | 28.20 - 2023 Wk 15 (consolation) |
 | 2024 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 4 | 31.30 | 28.40 (benched) - 2024 Wk 12 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 17 | 15 | 187.12 | 23.00 - 2025 Wk 5 |

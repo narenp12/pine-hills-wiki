@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Keenan Allen has appeared on, seas
 - **Position:** WR
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 12
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Keenan Allen has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -32,7 +34,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 7 | 110.80 | 21.40 - 2022 Wk 16 (Semifinal) |
 | 2022 | [Tanmay's Hospital](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 1 | 1 | 10.60 | 10.60 - 2022 Wk 1 |
 | 2023 | [Ken Keenan Kum](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 17 | 13 | 278.86 | 45.46 - 2023 Wk 3 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 6 | 1 | 23.60 | 29.10 (benched) - 2024 Wk 16 (Semifinal) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | WR | 6 | 1 | 23.60 | 29.10 (benched) - 2024 Wk 16 (Semifinal) |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 5 | 0 | 0.00 | 6.90 (benched) - 2024 Wk 1 |
 | 2024 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 3 | 0 | 0.00 | 21.10 (benched) - 2024 Wk 6 |
 | 2025 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 14 | 8 | 106.20 | 28.90 - 2025 Wk 7 |

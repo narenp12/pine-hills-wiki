@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Matthew Stafford has appeared on, 
 - **Position:** QB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 - **Awards:** Team of the Season 2021
 
 ## Career Summary
@@ -21,7 +22,8 @@ description: "Every Pine Hills fantasy roster Matthew Stafford has appeared on, 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -31,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 3 | 2 | 29.64 | 15.28 - 2020 Wk 15 (Semifinal) |
 | 2021 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 17 | 16 | 327.22 | 29.52 - 2021 Wk 3 |
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 6 | 0 | 0.00 | 20.88 (benched) - 2022 Wk 2 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 3 | 3 | 53.82 | 20.72 - 2023 Wk 16 (Semifinal) |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 3 | 3 | 53.82 | 20.72 - 2023 Wk 16 (Semifinal) |
 | 2024 | [Jayesh's Great Team](../owners/jayesh.md) | [Jayesh](../owners/jayesh.md) | QB | 17 | 0 | 0.00 | 27.80 (benched) - 2024 Wk 11 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 9 | 9 | 195.28 | 30.88 - 2025 Wk 16 (Semifinal) |
 | 2025 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 7 | 2 | 42.24 | 27.40 - 2025 Wk 4 |

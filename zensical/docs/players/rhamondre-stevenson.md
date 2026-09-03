@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Rhamondre Stevenson has appeared o
 - **Position:** RB
 - **Seasons:** 2021-2025
 - **Fantasy Teams:** 6
+- **Championships:** 2 - 2022 [Jeremy's Neat Team](../owners/jeremy.md) (benched), 2025 [Jeremy's Neat Team](../owners/jeremy.md)
 - **Awards:** Finals MVP 2025
 
 ## Career Summary
@@ -21,17 +22,18 @@ description: "Every Pine Hills fantasy roster Rhamondre Stevenson has appeared o
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | RB | 2 | 2 | 35.90 | 27.40 - 2021 Wk 10 |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 1 | 1 | 5.00 | 5.00 - 2021 Wk 15 (Quarterfinal) |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 11 | 185.00 | 25.10 - 2022 Wk 6 |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 11 | 185.00 | 25.10 - 2022 Wk 6 |
 | 2023 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 17 | 10 | 121.10 | 22.90 - 2023 Wk 9 |
 | 2024 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 17 | 11 | 149.50 | 23.50 - 2024 Wk 8 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 14 | 0 | 0.00 | 21.20 (benched) - 2025 Wk 2 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 2 | 1 | 27.20 | 27.20 - 2025 Wk 17 (Final) |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 2 | 1 | 27.20 | 27.20 - 2025 Wk 17 (Final) |
 
 ## Draft History
 

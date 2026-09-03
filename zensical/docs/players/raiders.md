@@ -16,11 +16,13 @@ description: "Every Pine Hills fantasy roster Raiders has appeared on, season by
 - **Points on the Bench:** 13.00
 - **Best Week:** 25.00 - 2023 Wk 15 (Quarterfinal), [Ken Keenan Kum](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
+- **Playoff Records:** Highest DEF Week - 25.00
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Clyde Edwards-Helaire has appeared
 - **Position:** RB
 - **Seasons:** 2020-2023
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md) (benched)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster Clyde Edwards-Helaire has appeared
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 16 | 12 | 152.60 | 20.90 - 2020 Wk 6 |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 17 | 5 | 54.80 | 19.40 - 2021 Wk 4 |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 17 | 5 | 54.80 | 19.40 - 2021 Wk 4 |
 | 2022 | [Tanmay's Hospital](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 17 | 6 | 84.90 | 22.40 - 2022 Wk 1 |
 | 2023 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 3 | 0 | 0.00 | 20.10 (benched) - 2023 Wk 15 (Quarterfinal) |
 

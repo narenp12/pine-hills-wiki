@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster De'Von Achane has appeared on, sea
 - **Position:** RB
 - **Seasons:** 2023-2025
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster De'Von Achane has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 14 | 4 | 62.10 | 27.00 - 2023 Wk 4 |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 14 | 4 | 62.10 | 27.00 - 2023 Wk 4 |
 | 2024 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 17 | 16 | 285.00 | 32.10 - 2024 Wk 9 |
 | 2025 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 17 | 16 | 322.80 | 40.50 - 2025 Wk 10 |
 

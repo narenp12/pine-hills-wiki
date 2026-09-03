@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Michael Thomas has appeared on, se
 - **Position:** WR
 - **Seasons:** 2018-2023
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md)
 - **Awards:** Finals MVP 2019
 
 ## Career Summary
@@ -21,12 +22,13 @@ description: "Every Pine Hills fantasy roster Michael Thomas has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 14 | 13 | 238.70 | 39.10 - 2018 Wk 9 |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 15 | 366.90 | 41.20 - 2019 Wk 5 |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 15 | 366.90 | 41.20 - 2019 Wk 5 |
 | 2020 | [Imagine Losing](../owners/om.md) | [Om](../owners/om.md) | WR | 16 | 6 | 73.80 | 19.50 - 2020 Wk 13 |
 | 2021 | [The Herbs](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 8 | 0 | 0.00 | 0.00 (benched) - 2021 Wk 1 |
 | 2022 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 17 | 4 | 28.40 | 22.70 (benched) - 2022 Wk 1 |

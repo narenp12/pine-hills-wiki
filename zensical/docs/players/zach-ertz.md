@@ -16,12 +16,14 @@ description: "Every Pine Hills fantasy roster Zach Ertz has appeared on, season 
 - **Points on the Bench:** 105.40
 - **Best Week:** 40.50 - 2018 Wk 10, [Anish's Awesome Team](../owners/anish.md)
 - **Times Drafted:** 5 (first: 2018 R2 P7)
+- **Finals Records:** Highest TE Week - 35.00
 - **Season Position Highs:** TE 2018
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

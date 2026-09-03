@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster CeeDee Lamb has appeared on, seaso
 - **Position:** WR
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md) (benched)
 - **Awards:** Team of the Season 2021, 2023
 
 ## Career Summary
@@ -21,12 +22,13 @@ description: "Every Pine Hills fantasy roster CeeDee Lamb has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 5 | 4 | 62.10 | 27.80 - 2020 Wk 4 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 5 | 0 | 0.00 | 25.80 (benched) - 2020 Wk 15 (Semifinal) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 5 | 0 | 0.00 | 25.80 (benched) - 2020 Wk 15 (Semifinal) |
 | 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 1 | 0 | 0.00 | 14.80 (benched) - 2020 Wk 3 |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 17 | 14 | 229.50 | 36.10 - 2021 Wk 6 |
 | 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 17 | 16 | 285.40 | 38.00 - 2022 Wk 10 |

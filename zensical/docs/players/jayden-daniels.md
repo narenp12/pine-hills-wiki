@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jayden Daniels has appeared on, se
 - **Position:** QB
 - **Seasons:** 2024-2025
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md)
 - **Awards:** Newcomer of the Year 2024
 
 ## Career Summary
@@ -21,11 +22,12 @@ description: "Every Pine Hills fantasy roster Jayden Daniels has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | QB | 17 | 17 | 360.60 | 36.42 - 2024 Wk 16 (Semifinal) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | QB | 17 | 17 | 360.60 | 36.42 - 2024 Wk 16 (Semifinal) |
 | 2025 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 9 | 6 | 113.56 | 22.64 - 2025 Wk 6 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 1 | 1 | 3.72 | 3.72 - 2025 Wk 14 |
 

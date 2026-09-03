@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster James Conner has appeared on, seas
 - **Position:** RB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 7
+- **Championships:** 2 - 2022 [Jeremy's Neat Team](../owners/jeremy.md), 2024 [Stroud Boys](../owners/tanmay.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster James Conner has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -28,10 +30,10 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 16 | 7 | 106.00 | 30.90 - 2019 Wk 6 |
 | 2020 | [Imagine Losing](../owners/om.md) | [Om](../owners/om.md) | RB | 16 | 10 | 115.70 | 24.90 - 2020 Wk 3 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 17 | 9 | 116.70 | 40.30 (benched) - 2021 Wk 9 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 12 | 188.80 | 25.00 - 2022 Wk 16 (Semifinal) |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 17 | 12 | 188.80 | 25.00 - 2022 Wk 16 (Semifinal) |
 | 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 9 | 4 | 47.40 | 19.60 - 2023 Wk 3 |
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 8 | 3 | 38.00 | 26.30 (benched) - 2023 Wk 17 (consolation) |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 17 | 15 | 232.30 | 30.80 - 2024 Wk 15 (Quarterfinal) |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 17 | 15 | 232.30 | 30.80 - 2024 Wk 15 (Quarterfinal) |
 | 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | RB | 3 | 3 | 33.30 | 14.40 - 2025 Wk 1 |
 
 ## Draft History

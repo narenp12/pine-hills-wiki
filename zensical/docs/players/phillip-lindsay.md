@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Phillip Lindsay has appeared on, s
 - **Position:** RB
 - **Seasons:** 2018-2021
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Phillip Lindsay has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 5 | 4 | 60.10 | 28.90 - 2018 Wk 13 |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 5 | 4 | 60.10 | 28.90 - 2018 Wk 13 |
 | 2018 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 2 | 1 | 10.40 | 10.40 - 2018 Wk 9 |
 | 2018 | [D4rthSi Dragons](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 1 | 0 | 0.00 | 20.20 (benched) - 2018 Wk 8 |
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 15 | 2 | 19.40 | 29.00 (benched) - 2019 Wk 3 |

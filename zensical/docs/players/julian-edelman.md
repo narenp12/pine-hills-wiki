@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Julian Edelman has appeared on, se
 - **Position:** WR
 - **Seasons:** 2018-2020
 - **Fantasy Teams:** 2
+- **Championships:** 2 - 2018 [Curry's legit team](../owners/lokesh.md), 2019 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster Julian Edelman has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 11 | 8 | 130.12 | 23.60 (benched) - 2018 Wk 14 (Quarterfinal) |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 12 | 210.00 | 27.50 - 2019 Wk 8 |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 11 | 8 | 130.12 | 23.60 (benched) - 2018 Wk 14 (Quarterfinal) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 12 | 210.00 | 27.50 - 2019 Wk 8 |
 | 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 5 | 1 | 13.00 | 25.90 (benched) - 2020 Wk 2 |
 
 ## Draft History

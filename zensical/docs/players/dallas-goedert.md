@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Dallas Goedert has appeared on, se
 - **Position:** TE
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 8
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Dallas Goedert has appeared on, se
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -31,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | [most likely injured](../owners/aneesh.md) | [Aneesh](../owners/aneesh.md) | TE | 1 | 1 | 4.80 | 4.80 - 2021 Wk 5 |
 | 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 17 | 9 | 113.40 | 24.00 - 2022 Wk 9 |
 | 2023 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 17 | 13 | 134.90 | 25.70 - 2023 Wk 5 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | TE | 17 | 11 | 94.10 | 27.00 - 2024 Wk 3 |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | TE | 17 | 11 | 94.10 | 27.00 - 2024 Wk 3 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | TE | 17 | 0 | 0.00 | 26.00 (benched) - 2025 Wk 6 |
 
 ## Draft History

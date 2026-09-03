@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Lamar Jackson has appeared on, sea
 - **Position:** QB
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md)
 - **Awards:** Team of the Season 2019, 2025 · Newcomer of the Year 2019 · Biggest Bust 2020
 
 ## Career Summary
@@ -22,11 +23,12 @@ description: "Every Pine Hills fantasy roster Lamar Jackson has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 16 | 14 | 393.06 | 37.08 - 2019 Wk 15 (Semifinal) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 16 | 14 | 393.06 | 37.08 - 2019 Wk 15 (Semifinal) |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | QB | 16 | 13 | 289.88 | 34.92 - 2020 Wk 14 (Quarterfinal) |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 17 | 13 | 252.98 | 41.88 - 2021 Wk 5 |
 | 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 17 | 12 | 243.08 | 42.62 - 2022 Wk 2 |

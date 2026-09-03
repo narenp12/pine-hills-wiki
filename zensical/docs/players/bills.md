@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Bills has appeared on, season by s
 - **Position:** DEF
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 12
+- **Championships:** 1 - 2024 [Stroud Boys](../owners/tanmay.md)
 - **Awards:** Team of the Season 2021
 
 ## Career Summary
@@ -21,7 +22,8 @@ description: "Every Pine Hills fantasy roster Bills has appeared on, season by s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -38,7 +40,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 17 | 15 | 128.00 | 20.00 - 2022 Wk 2 |
 | 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 9 | 9 | 81.00 | 32.00 - 2023 Wk 3 |
 | 2023 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | DEF | 7 | 7 | 60.00 | 21.00 - 2023 Wk 11 |
-| 2024 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | DEF | 17 | 2 | 18.00 | 19.00 (benched) - 2024 Wk 10 |
+| 2024 🏆 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | DEF | 17 | 2 | 18.00 | 19.00 (benched) - 2024 Wk 10 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | DEF | 10 | 9 | 48.00 | 17.00 - 2025 Wk 8 |
 | 2025 | [Save Me](../owners/naren.md) | [Naren](../owners/naren.md) | DEF | 3 | 1 | 8.00 | 8.00 - 2025 Wk 16 (Semifinal) |
 

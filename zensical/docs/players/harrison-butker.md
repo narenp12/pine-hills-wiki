@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Harrison Butker has appeared on, s
 - **Position:** K
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 9
+- **Championships:** 3 - 2018 [Curry's legit team](../owners/lokesh.md), 2021 [varun's victorious team](../owners/varun.md), 2022 [Jeremy's Neat Team](../owners/jeremy.md)
 - **Awards:** Team of the Season 2018
 
 ## Career Summary
@@ -17,21 +18,23 @@ description: "Every Pine Hills fantasy roster Harrison Butker has appeared on, s
 - **Points on the Bench:** 8.00
 - **Best Week:** 24.00 - 2023 Wk 17 (consolation), [Jeremy's Neat Team](../owners/jeremy.md)
 - **Times Drafted:** 7 (first: 2019 R11 P81)
+- **League Records:** Most Championships - 3
 - **Season Position Highs:** K 2019
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | K | 8 | 8 | 81.00 | 18.00 - 2018 Wk 6 |
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | K | 5 | 4 | 38.00 | 13.00 - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | K | 5 | 4 | 38.00 | 13.00 - 2018 Wk 16 (Final) |
 | 2019 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | K | 16 | 16 | 158.00 | 18.00 - 2019 Wk 9 |
 | 2020 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | K | 16 | 14 | 123.00 | 17.00 - 2020 Wk 13 |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | K | 17 | 15 | 130.00 | 14.00 - 2021 Wk 14 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | K | 8 | 8 | 62.00 | 14.00 - 2022 Wk 11 |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | K | 17 | 15 | 130.00 | 14.00 - 2021 Wk 14 |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | K | 8 | 8 | 62.00 | 14.00 - 2022 Wk 11 |
 | 2022 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | K | 7 | 3 | 26.00 | 11.00 - 2022 Wk 6 |
 | 2022 | [Hill We Go… Again (feat Kyler)](../owners/naren.md) | [Naren](../owners/naren.md) | K | 2 | 1 | 6.00 | 6.00 - 2022 Wk 9 |
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | K | 17 | 16 | 146.00 | 24.00 - 2023 Wk 17 (consolation) |

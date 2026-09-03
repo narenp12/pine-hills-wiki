@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tom Brady has appeared on, season 
 - **Position:** QB
 - **Seasons:** 2018-2022
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Tom Brady has appeared on, season 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -28,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2018 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | QB | 1 | 1 | 14.16 | 14.16 - 2018 Wk 15 (Semifinal) |
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 16 | 6 | 111.74 | 25.64 - 2019 Wk 1 |
 | 2020 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | QB | 16 | 8 | 163.56 | 36.86 (benched) - 2020 Wk 7 |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | QB | 17 | 16 | 361.70 | 37.74 - 2021 Wk 5 |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | QB | 17 | 16 | 361.70 | 37.74 - 2021 Wk 5 |
 | 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | QB | 17 | 2 | 28.48 | 37.68 (benched) - 2022 Wk 17 (consolation) |
 
 ## Draft History

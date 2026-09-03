@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Giants has appeared on, season by 
 - **Position:** DEF
 - **Seasons:** 2020-2024
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2022 [Jeremy's Neat Team](../owners/jeremy.md)
 
 ## Career Summary
 
@@ -16,11 +17,13 @@ description: "Every Pine Hills fantasy roster Giants has appeared on, season by 
 - **Points on the Bench:** 5.00
 - **Best Week:** 14.00 - 2020 Wk 6, [My team is Koo(l)](../owners/lokesh.md)
 - **Times Drafted:** Never drafted (added in-season)
+- **Finals Records:** Highest DEF Week - 14.00
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -28,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2020 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 2 | 2 | 17.00 | 13.00 - 2020 Wk 9 |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | DEF | 1 | 1 | 9.00 | 9.00 - 2020 Wk 12 |
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 2 | 2 | 8.00 | 9.00 - 2022 Wk 10 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | DEF | 1 | 1 | 14.00 | 14.00 - 2022 Wk 17 (Final) |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | DEF | 1 | 1 | 14.00 | 14.00 - 2022 Wk 17 (Final) |
 | 2023 | [Stroud Boys](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | DEF | 1 | 1 | -1.00 | -1.00 - 2023 Wk 2 |
 | 2024 | [Big black big back](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 4 | 1 | 4.00 | 4.00 - 2024 Wk 10 |
 

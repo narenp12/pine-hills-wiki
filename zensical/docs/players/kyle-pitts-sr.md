@@ -16,11 +16,13 @@ description: "Every Pine Hills fantasy roster Kyle Pitts Sr. has appeared on, se
 - **Points on the Bench:** 191.50
 - **Best Week:** 45.60 - 2025 Wk 15 (Quarterfinal), [Big black big back](../owners/lokesh.md)
 - **Times Drafted:** 6 (first: 2021 R5 P41)
+- **Playoff Records:** Highest TE Week - 45.60
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|

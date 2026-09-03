@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Breece Hall has appeared on, seaso
 - **Position:** RB
 - **Seasons:** 2022-2025
 - **Fantasy Teams:** 3
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 - **Awards:** Finals MVP 2023 · Team of the Season 2023
 
 ## Career Summary
@@ -21,12 +22,13 @@ description: "Every Pine Hills fantasy roster Breece Hall has appeared on, seaso
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2022 | [Tanmay's Hospital](../owners/tanmay.md) | [Tanmay](../owners/tanmay.md) | RB | 11 | 2 | 33.30 | 27.70 (benched) - 2022 Wk 5 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 17 | 14 | 247.90 | 43.10 - 2023 Wk 16 (Semifinal) |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 17 | 14 | 247.90 | 43.10 - 2023 Wk 16 (Semifinal) |
 | 2024 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 17 | 17 | 222.70 | 31.10 - 2024 Wk 11 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 17 | 16 | 207.66 | 32.86 - 2025 Wk 8 |
 

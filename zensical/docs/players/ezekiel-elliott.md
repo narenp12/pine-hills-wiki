@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Ezekiel Elliott has appeared on, s
 - **Position:** RB
 - **Seasons:** 2018-2024
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md) (benched)
 - **Awards:** Team of the Season 2018, 2021
 
 ## Career Summary
@@ -21,14 +22,15 @@ description: "Every Pine Hills fantasy roster Ezekiel Elliott has appeared on, s
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 14 | 13 | 291.80 | 36.70 - 2018 Wk 10 |
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 16 | 15 | 284.30 | 31.00 - 2019 Wk 15 (consolation) |
 | 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 11 | 8 | 138.10 | 27.70 - 2020 Wk 1 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 4 | 2 | 21.40 | 17.90 (benched) - 2020 Wk 16 (Final) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 4 | 2 | 21.40 | 17.90 (benched) - 2020 Wk 16 (Final) |
 | 2021 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 17 | 16 | 242.06 | 26.60 - 2021 Wk 3 |
 | 2022 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 9 | 6 | 69.70 | 17.70 - 2022 Wk 7 |
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 8 | 6 | 89.60 | 18.10 - 2022 Wk 13 |

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Patrick Mahomes has appeared on, s
 - **Position:** QB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2022 [Jeremy's Neat Team](../owners/jeremy.md)
 - **Awards:** Finals MVP 2022
 
 ## Career Summary
@@ -17,13 +18,14 @@ description: "Every Pine Hills fantasy roster Patrick Mahomes has appeared on, s
 - **Points on the Bench:** 139.68
 - **Best Week:** 40.00 - 2020 Wk 3, [Sharman's Scorpions](../owners/sharman.md)
 - **Times Drafted:** 9 (first: 2018 R12 P67)
-- **League Records:** Most Weeks Rostered - 131 weeks
+- **League Records:** Most Weeks Rostered - 131 weeks · Most Career Points - 2511.46
 - **Season Position Highs:** QB 2020
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -31,7 +33,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | QB | 16 | 11 | 235.22 | 31.62 - 2019 Wk 2 |
 | 2020 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 16 | 14 | 359.56 | 40.00 - 2020 Wk 3 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | QB | 17 | 16 | 348.46 | 36.24 - 2021 Wk 10 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 17 | 16 | 414.42 | 35.14 - 2022 Wk 9 |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 17 | 16 | 414.42 | 35.14 - 2022 Wk 9 |
 | 2023 | [Ken Keenan Kum](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 17 | 14 | 261.30 | 34.86 - 2023 Wk 7 |
 | 2024 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | QB | 17 | 14 | 252.26 | 28.76 - 2024 Wk 12 |
 | 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | QB | 17 | 14 | 296.68 | 31.48 - 2025 Wk 6 |

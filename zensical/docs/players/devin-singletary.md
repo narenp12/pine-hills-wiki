@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Devin Singletary has appeared on, 
 - **Position:** RB
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 12
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Devin Singletary has appeared on, 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 7 | 2 | 16.90 | 19.10 (benched) - 2019 Wk 13 |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 7 | 2 | 16.90 | 19.10 (benched) - 2019 Wk 13 |
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | RB | 15 | 6 | 64.40 | 18.70 - 2020 Wk 4 |
 | 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 1 | 0 | 0.00 | 10.30 (benched) - 2020 Wk 1 |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 3 | 1 | 3.60 | 17.10 (benched) - 2021 Wk 2 |

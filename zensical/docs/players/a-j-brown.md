@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster A.J. Brown has appeared on, season
 - **Position:** WR
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 5
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md)
 
 ## Career Summary
 
@@ -20,12 +21,13 @@ description: "Every Pine Hills fantasy roster A.J. Brown has appeared on, season
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2019 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | WR | 2 | 2 | 40.70 | 25.40 - 2019 Wk 15 (Semifinal) |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 14 | 11 | 190.30 | 30.00 - 2020 Wk 12 |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 14 | 11 | 190.30 | 30.00 - 2020 Wk 12 |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | WR | 2 | 2 | 8.90 | 8.90 - 2020 Wk 1 |
 | 2021 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 9 | 110.40 | 31.50 - 2021 Wk 8 |
 | 2022 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 17 | 16 | 286.10 | 39.60 - 2022 Wk 8 |

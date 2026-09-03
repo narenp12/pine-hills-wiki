@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Mike Davis has appeared on, season
 - **Position:** RB
 - **Seasons:** 2020-2021
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Mike Davis has appeared on, season
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 6 | 5 | 70.00 | 26.30 - 2020 Wk 14 (Quarterfinal) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 6 | 5 | 70.00 | 26.30 - 2020 Wk 14 (Quarterfinal) |
 | 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 5 | 5 | 80.80 | 29.90 - 2020 Wk 5 |
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | RB | 8 | 4 | 34.30 | 13.30 (benched) - 2021 Wk 2 |
 | 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | RB | 2 | 2 | 4.60 | 2.80 - 2021 Wk 9 |

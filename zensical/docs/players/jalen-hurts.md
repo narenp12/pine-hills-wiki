@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Jalen Hurts has appeared on, seaso
 - **Position:** QB
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md)
 - **Awards:** MVP 2022, 2024 · Team of the Season 2022, 2024
 
 ## Career Summary
@@ -17,16 +18,18 @@ description: "Every Pine Hills fantasy roster Jalen Hurts has appeared on, seaso
 - **Points on the Bench:** 304.44
 - **Best Week:** 37.82 (benched) - 2020 Wk 15 (Semifinal), [Roger That](../owners/pranav.md)
 - **Times Drafted:** 6 (first: 2021 R8 P76)
+- **League Records:** Most Awards - 4
 - **Season Position Highs:** QB 2024
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 2 | 1 | 20.58 | 37.82 (benched) - 2020 Wk 15 (Semifinal) |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | QB | 2 | 1 | 20.58 | 37.82 (benched) - 2020 Wk 15 (Semifinal) |
 | 2021 | [The Johnson and Johnson team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 17 | 4 | 96.64 | 30.78 (benched) - 2021 Wk 11 |
 | 2022 | [L takes only](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | QB | 17 | 14 | 374.58 | 36.70 - 2022 Wk 15 (Quarterfinal) |
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | QB | 17 | 16 | 370.22 | 35.50 - 2023 Wk 12 |

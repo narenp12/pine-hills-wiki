@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Michael Pittman Jr. has appeared o
 - **Position:** WR
 - **Seasons:** 2020-2025
 - **Fantasy Teams:** 5
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Michael Pittman Jr. has appeared o
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -29,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 15 | 204.50 | 27.10 - 2022 Wk 1 |
 | 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 17 | 8 | 130.10 | 27.50 - 2023 Wk 13 |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 17 | 2 | 12.20 | 25.90 (benched) - 2024 Wk 17 (consolation) |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 10 | 135.60 | 23.50 - 2025 Wk 8 |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 10 | 135.60 | 23.50 - 2025 Wk 8 |
 
 ## Draft History
 

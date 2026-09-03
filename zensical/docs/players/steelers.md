@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Steelers has appeared on, season b
 - **Position:** DEF
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 12
+- **Championships:** 1 - 2025 [Jeremy's Neat Team](../owners/jeremy.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Steelers has appeared on, season b
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -42,7 +44,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2024 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 17 | 6 | 60.00 | 15.00 (benched) - 2024 Wk 8 |
 | 2025 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 7 | 7 | 44.00 | 16.00 - 2025 Wk 3 |
 | 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 5 | 3 | 36.00 | 21.00 - 2025 Wk 11 |
-| 2025 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | DEF | 1 | 1 | 10.00 | 10.00 - 2025 Wk 17 (Final) |
+| 2025 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | DEF | 1 | 1 | 10.00 | 10.00 - 2025 Wk 17 (Final) |
 
 ## Draft History
 

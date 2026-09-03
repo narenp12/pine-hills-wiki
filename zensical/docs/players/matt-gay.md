@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Matt Gay has appeared on, season b
 - **Position:** K
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Matt Gay has appeared on, season b
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -29,7 +31,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2021 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | K | 5 | 5 | 53.00 | 15.00 - 2021 Wk 13 |
 | 2022 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | K | 6 | 6 | 41.00 | 9.00 - 2022 Wk 3 |
 | 2022 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | K | 1 | 1 | 5.00 | 5.00 - 2022 Wk 10 |
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | K | 3 | 3 | 16.00 | 12.00 - 2023 Wk 17 (Final) |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | K | 3 | 3 | 16.00 | 12.00 - 2023 Wk 17 (Final) |
 | 2024 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | K | 17 | 17 | 123.00 | 14.00 - 2024 Wk 11 |
 | 2025 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | K | 2 | 1 | 0.00 | 2.00 (benched) - 2025 Wk 9 |
 | 2025 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | K | 2 | 2 | 10.00 | 8.00 - 2025 Wk 6 |

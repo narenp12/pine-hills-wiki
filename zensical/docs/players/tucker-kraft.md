@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tucker Kraft has appeared on, seas
 - **Position:** TE
 - **Seasons:** 2023-2025
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2023 [Super Squirrels](../owners/abhinav.md)
 
 ## Career Summary
 
@@ -21,11 +22,12 @@ description: "Every Pine Hills fantasy roster Tucker Kraft has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2023 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 1 | 1 | 10.80 | 10.80 - 2023 Wk 17 (Final) |
+| 2023 🏆 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | TE | 1 | 1 | 10.80 | 10.80 - 2023 Wk 17 (Final) |
 | 2024 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | TE | 8 | 8 | 75.60 | 24.80 - 2024 Wk 5 |
 | 2024 | [Kamara's a b*tch](../owners/naren.md) | [Naren](../owners/naren.md) | TE | 3 | 3 | 22.20 | 9.50 - 2024 Wk 16 (consolation) |
 | 2025 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | TE | 9 | 7 | 104.90 | 33.30 - 2025 Wk 8 |

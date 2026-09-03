@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Curtis Samuel has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2018-2022
 - **Fantasy Teams:** 4
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Curtis Samuel has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 3 | 0 | 0.00 | 12.00 (benched) - 2018 Wk 14 (Quarterfinal) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 3 | 0 | 0.00 | 12.00 (benched) - 2018 Wk 14 (Quarterfinal) |
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 5 | 0 | 0.00 | 16.30 (benched) - 2019 Wk 3 |
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | WR | 1 | 1 | 6.50 | 6.50 - 2019 Wk 11 |
 | 2020 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | WR | 6 | 1 | 16.00 | 20.80 (benched) - 2020 Wk 16 (consolation) |

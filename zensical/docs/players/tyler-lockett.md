@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Tyler Lockett has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2018-2024
 - **Fantasy Teams:** 6
+- **Championships:** 1 - 2022 [Jeremy's Neat Team](../owners/jeremy.md) (benched)
 
 ## Career Summary
 
@@ -20,7 +21,8 @@ description: "Every Pine Hills fantasy roster Tyler Lockett has appeared on, sea
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
@@ -28,7 +30,7 @@ played; lineup points exclude weeks spent on the bench.
 | 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 16 | 12 | 194.60 | 41.70 - 2019 Wk 9 |
 | 2020 | [I have Hop(e)](../owners/naren.md) | [Naren](../owners/naren.md) | WR | 16 | 12 | 208.30 | 53.90 - 2020 Wk 7 |
 | 2021 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 14 | 188.50 | 31.80 - 2021 Wk 2 |
-| 2022 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 3 | 58.60 | 27.80 - 2022 Wk 13 |
+| 2022 🏆 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 3 | 58.60 | 27.80 - 2022 Wk 13 |
 | 2023 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | WR | 17 | 11 | 92.50 | 25.90 (benched) - 2023 Wk 2 |
 | 2024 | [Jayesh's Great Team](../owners/jayesh.md) | [Jayesh](../owners/jayesh.md) | WR | 17 | 1 | 5.00 | 16.50 (benched) - 2024 Wk 6 |
 

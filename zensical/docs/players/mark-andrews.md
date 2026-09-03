@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Mark Andrews has appeared on, seas
 - **Position:** TE
 - **Seasons:** 2019-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2021 [varun's victorious team](../owners/varun.md)
 
 ## Career Summary
 
@@ -21,13 +22,14 @@ description: "Every Pine Hills fantasy roster Mark Andrews has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2019 | [Anish's Awesome Team](../owners/anish.md) | [Anish](../owners/anish.md) | TE | 15 | 14 | 182.40 | 27.30 - 2019 Wk 16 (consolation) |
 | 2020 | [Aryan's Amazing Team](../owners/aryan.md) | [Aryan](../owners/aryan.md) | TE | 16 | 8 | 92.60 | 22.80 - 2020 Wk 1 |
-| 2021 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 17 | 16 | 284.60 | 41.70 - 2021 Wk 5 |
+| 2021 🏆 | [varun's victorious team](../owners/varun.md) | [Varun](../owners/varun.md) | TE | 17 | 16 | 284.60 | 41.70 - 2021 Wk 5 |
 | 2022 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | TE | 17 | 12 | 145.60 | 28.90 - 2022 Wk 3 |
 | 2023 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | TE | 11 | 10 | 135.40 | 25.00 - 2023 Wk 4 |
 | 2024 | [Jeremy's Neat Team](../owners/jeremy.md) | [Jeremy](../owners/jeremy.md) | TE | 5 | 4 | 12.50 | 9.50 (benched) - 2024 Wk 5 |

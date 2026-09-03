@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Christian McCaffrey has appeared o
 - **Position:** RB
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2020 [Roger That](../owners/pranav.md) (benched)
 - **Awards:** Team of the Season 2022 · Best Draft Pick 2018
 
 ## Career Summary
@@ -23,13 +24,14 @@ description: "Every Pine Hills fantasy roster Christian McCaffrey has appeared o
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 14 | 12 | 317.70 | 46.70 - 2018 Wk 12 |
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | RB | 16 | 15 | 448.40 | 47.70 - 2019 Wk 5 |
-| 2020 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 16 | 3 | 90.40 | 37.10 - 2020 Wk 9 |
+| 2020 🏆 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | RB | 16 | 3 | 90.40 | 37.10 - 2020 Wk 9 |
 | 2021 | [The Herbs](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 17 | 7 | 127.50 | 27.70 - 2021 Wk 1 |
 | 2022 | [Michael's Marvelous Team](../owners/michael.md) | [Michael](../owners/michael.md) | RB | 17 | 17 | 339.46 | 40.26 - 2022 Wk 8 |
 | 2023 | [BBigg MACKS](../owners/naren.md) | [Naren](../owners/naren.md) | RB | 17 | 16 | 391.30 | 48.70 - 2023 Wk 4 |

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Ronald Jones has appeared on, seas
 - **Position:** RB
 - **Seasons:** 2019-2021
 - **Fantasy Teams:** 7
+- **Championships:** 1 - 2019 [Curry's legit team](../owners/lokesh.md) (benched)
 
 ## Career Summary
 
@@ -20,11 +21,12 @@ description: "Every Pine Hills fantasy roster Ronald Jones has appeared on, seas
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 4 | 1 | 0.80 | 19.90 (benched) - 2019 Wk 16 (Final) |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 4 | 1 | 0.80 | 19.90 (benched) - 2019 Wk 16 (Final) |
 | 2019 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | RB | 1 | 1 | 22.60 | 22.60 - 2019 Wk 10 |
 | 2020 | [CHOPSTIX](../owners/sahil.md) | [sahil](../owners/sahil.md) | RB | 6 | 2 | 19.70 | 17.30 - 2020 Wk 12 |
 | 2020 | [My team is Koo(l)](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | RB | 6 | 4 | 58.80 | 26.10 - 2020 Wk 6 |

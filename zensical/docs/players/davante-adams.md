@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Davante Adams has appeared on, sea
 - **Position:** WR
 - **Seasons:** 2018-2025
 - **Fantasy Teams:** 5
+- **Championships:** 2 - 2018 [Curry's legit team](../owners/lokesh.md), 2019 [Curry's legit team](../owners/lokesh.md)
 - **Awards:** Team of the Season 2018, 2021, 2022, 2025
 
 ## Career Summary
@@ -17,17 +18,18 @@ description: "Every Pine Hills fantasy roster Davante Adams has appeared on, sea
 - **Points on the Bench:** 53.20
 - **Best Week:** 44.60 - 2020 Wk 7, [Kaushal's Potatoes](../owners/kaushal.md)
 - **Times Drafted:** 9 (first: 2018 R2 P9)
-- **League Records:** Most Weeks Rostered - 131 weeks
+- **League Records:** Most Weeks Rostered - 131 weeks · Most Awards - 4
 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 14 | 13 | 289.40 | 35.20 - 2018 Wk 6 |
-| 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 11 | 190.40 | 28.00 - 2019 Wk 4 |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 14 | 13 | 289.40 | 35.20 - 2018 Wk 6 |
+| 2019 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | WR | 16 | 11 | 190.40 | 28.00 - 2019 Wk 4 |
 | 2020 | [Kaushal's Potatoes](../owners/kaushal.md) | [Kaushal](../owners/kaushal.md) | WR | 16 | 14 | 341.80 | 44.60 - 2020 Wk 7 |
 | 2021 | [Roger That](../owners/pranav.md) | [Pranav](../owners/pranav.md) | WR | 17 | 14 | 302.20 | 37.60 - 2021 Wk 5 |
 | 2022 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | WR | 17 | 16 | 323.20 | 37.70 - 2022 Wk 13 |

@@ -8,6 +8,7 @@ description: "Every Pine Hills fantasy roster Titans has appeared on, season by 
 - **Position:** DEF
 - **Seasons:** 2018-2023
 - **Fantasy Teams:** 11
+- **Championships:** 1 - 2018 [Curry's legit team](../owners/lokesh.md)
 
 ## Career Summary
 
@@ -20,13 +21,14 @@ description: "Every Pine Hills fantasy roster Titans has appeared on, season by 
 ## Team History
 
 One row per team per season. Weeks counts roster spots rather than games
-played; lineup points exclude weeks spent on the bench.
+played; lineup points exclude weeks spent on the bench. A 🏆 marks a title
+season: the player was on the roster that won the Final.
 
 | Season | Team | Owner | Pos | Weeks | Starts | Lineup Points | Best Week |
 |--------|------|-------|-----|-------|--------|---------------|-----------|
 | 2018 | [Sharman's Scorpions](../owners/sharman.md) | [Sharman](../owners/sharman.md) | DEF | 4 | 1 | 7.00 | 7.00 - 2018 Wk 5 |
 | 2018 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 2 | 2 | 15.00 | 10.00 - 2018 Wk 14 (Quarterfinal) |
-| 2018 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 13.00 | 13.00 - 2018 Wk 16 (Final) |
+| 2018 🏆 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 13.00 | 13.00 - 2018 Wk 16 (Final) |
 | 2019 | [Super Squirrels](../owners/abhinav.md) | [Abhinav](../owners/abhinav.md) | DEF | 3 | 3 | 14.00 | 10.00 - 2019 Wk 14 (Quarterfinal) |
 | 2019 | [Ju Let The Dogs Out](../owners/naren.md) | [Naren](../owners/naren.md) | DEF | 2 | 2 | 8.00 | 7.00 - 2019 Wk 5 |
 | 2019 | [Curry's legit team](../owners/lokesh.md) | [Lokesh](../owners/lokesh.md) | DEF | 1 | 1 | 4.00 | 4.00 - 2019 Wk 7 |
