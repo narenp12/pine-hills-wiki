@@ -167,10 +167,21 @@ stay blank rather than being guessed.
 function instead of parsing `raw/*.json` itself. It writes no draft
 normalization logic of its own.
 
-`apply_bible_positions` does **not** run inside `load_raw()` — it is called from
-`main()` (`scripts/generate.py:4735`). Measured coverage without it is 98.11%
-(1,295 of 1,320 picks), so `draft_rows` does not need the bible. Raise this only
-if the remaining 25 picks matter.
+**Two normalizations run in `generate.py`'s `main()`, not in `load_raw()`, and
+the builder's entry point must call them itself:** `apply_player_aliases`
+(`scripts/generate.py:4733`) and `apply_bible_positions`
+(`scripts/generate.py:4735`).
+
+Skipping `apply_player_aliases` is not cosmetic. Eleven draft picks keep an
+un-folded player name, so `player_slug` becomes a dead link — `aaron-jones`
+against a page written at `aaron-jones-sr`, and the same for Brian Thomas Jr.,
+Marvin Harrison Jr., Kenneth Walker III and seven others. Linking results back
+into the wiki is the whole reason the column exists. `player_weeks` escapes today
+only because all eleven come from the 2026 Sleeper draft and 2026 has no captured
+rosters yet; it breaks the moment 2026 games land.
+
+Skipping `apply_bible_positions` costs six draft picks their position (98.11%
+coverage against the wiki's 98.56%).
 
 **The owner map is `build_owner_map(bible, seasons)`, not `get_owners(bible)`.**
 `bible["owners"]` is a team-name-to-manager map with a single entry; passing it

@@ -28,7 +28,7 @@
         1
       ],
       "description": "**Goal:** Emit 88 team-season rows with championship flags and 1,320 draft rows using the already-normalized overall and backfilled position.\n\n**Files:**\n- Modify: scripts/build_query_db.py\n- Modify: tests/test_query_db.py\n\n**Acceptance Criteria:**\n- team_season_rows() returns 88 rows; exactly one champion per completed season\n- draft_rows() returns 1320 rows\n- pick restarts at 1 in every round, for every season\n- overall is a gapless 1..n sequence per season\n- Draft position coverage exceeds 95% of rows\n\n**Verify:** uv run pytest tests/test_query_db.py -v\n\n**Steps:** Write three failing tests. Implement team_season_rows using apply_derived_champions and champ_year, and draft_rows consuming the `overall` field that load_raw already normalized via annotate_overall_picks. Do not reimplement pick numbering or position backfill. Run tests. Commit.\n\n```json:metadata\n{\"files\": [\"scripts/build_query_db.py\", \"tests/test_query_db.py\"], \"verifyCommand\": \"uv run pytest tests/test_query_db.py -v\", \"acceptanceCriteria\": [\"88 team-season rows\", \"exactly one champion per completed season\", \"1320 draft rows\", \"pick restarts at 1 each round\", \"overall gapless per season\", \"position coverage above 95 percent\"], \"modelTier\": \"standard\"}\n```",
-      "completedAs": "5230866 (also fixed the owner_index alias-map bug from Task 1)"
+      "completedAs": "5230866 (+ owner_index fix); review defects folded into Task 4"
     },
     {
       "id": 3,
