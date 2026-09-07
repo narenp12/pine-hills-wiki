@@ -31,7 +31,7 @@ season: the player was on the roster that won the Final.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 7 | 66 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 7 | 66 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

@@ -17,7 +17,7 @@ description: "Career record and team names of Pranav in the Pine Hills Fantasy L
 
 
 
-- **Team Names:** 2
+- **Team Names:** 1
 
 ## Career Summary
 
@@ -39,12 +39,11 @@ description: "Career record and team names of Pranav in the Pine Hills Fantasy L
 
 ## Team Names
 
-2 names across 2018-present.
+One name throughout.
 
 | Team | Seasons | Record |
 |------|---------|--------|
-| Roger That | 2018-2025 | 46-60 |
-| pranavnar | 2026-present | 0-0 |
+| Roger That | 2018-present | 46-60 |
 
 ## Rivalries
 
@@ -70,7 +69,7 @@ Head-to-head by manager rather than team name, since either side may have rename
 | 2023 | Roger That | 5-9 | 7 | Yes |
 | 2024 | Roger That | 2-12 | 12 | No |
 | 2025 | Roger That | 10-4 | 3 | Yes |
-| 2026 | pranavnar | 0-0 | - | - |
+| 2026 | Roger That | 0-0 | - | - |
 
 ## Related
 

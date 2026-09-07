@@ -49,7 +49,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 2 | 15 | [Pukakke NaKupp](../owners/anish.md) |
 | 2024 | 1 | 12 | [Super Squirrels](../owners/abhinav.md) |
 | 2025 | 1 | 10 | [Big black big back](../owners/lokesh.md) |
-| 2026 | 3 | 26 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 3 | 26 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

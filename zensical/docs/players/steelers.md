@@ -55,7 +55,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 15 | 147 | [Roger That](../owners/pranav.md) |
 | 2024 | 9 | 97 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 14 | 158 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 15 | 146 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 15 | 146 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

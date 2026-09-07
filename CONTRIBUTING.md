@@ -81,6 +81,10 @@ node zensical/build.mjs
 That runs `generate.py` -> `zensical/.stage`, `transform.py` -> `zensical/docs`,
 then `zensical build --clean` -> `zensical/site`.
 
+> Always invoke Python through `uv run` (never bare `python3`): the system
+> interpreter lacks PyYAML, and `generate.py` refuses to build without the
+> league bible rather than emit handle-named owners and missing lore.
+
 Preview with live reload at `localhost:7860`:
 
 ```bash

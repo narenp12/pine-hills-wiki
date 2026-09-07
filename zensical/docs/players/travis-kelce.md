@@ -50,7 +50,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 1 | 8 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 3 | 31 | [Joe Sheisty](../owners/anish.md) |
 | 2025 | 6 | 65 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 10 | 95 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 10 | 95 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

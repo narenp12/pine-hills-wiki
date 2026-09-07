@@ -34,7 +34,7 @@ season: the player was on the roster that won the Final.
 |------|-------|---------|------------|
 | 2024 | 10 | 111 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 9 | 107 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 7 | 70 | [pranavnar](../owners/pranav.md) |
+| 2026 | 7 | 70 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

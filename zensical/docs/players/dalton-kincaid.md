@@ -39,7 +39,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 14 | 134 | [Roger That](../owners/pranav.md) |
 | 2024 | 6 | 67 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2025 | 11 | 123 | [Jeremy's Neat Team](../owners/jeremy.md) |
-| 2026 | 9 | 90 | [pranavnar](../owners/pranav.md) |
+| 2026 | 9 | 90 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

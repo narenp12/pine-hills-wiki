@@ -50,7 +50,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 3 | 28 | [Ken Keenan Kum](../owners/lokesh.md) |
 | 2024 | 4 | 39 | [Kaushal's Potatoes](../owners/kaushal.md) |
 | 2025 | 6 | 69 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 11 | 110 | [pranavnar](../owners/pranav.md) |
+| 2026 | 11 | 110 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

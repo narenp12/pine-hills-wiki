@@ -6,7 +6,7 @@ description: Every team name in Pine Hills Fantasy League history and the manage
 
 # Teams
 
-Every team name used in the league. A name is not a franchise here: 29 of 42 names (69%) were used for a single season and then dropped.
+Every team name used in the league. A name is not a franchise here: 28 of 41 names (68%) were used for a single season and then dropped.
 
 Each name is listed against the manager who used it, whose page carries the season log, head-to-head records and career totals.
 
@@ -41,19 +41,18 @@ Each name is listed against the manager who used it, whose page carries the seas
 | micjes71 | [Michael](../owners/michael.md) | 2026-present | 1 | 0 |
 | most likely injured | [Aneesh](../owners/aneesh.md) | 2021 | 1 | 0 |
 | My team is Koo(l) | [Lokesh](../owners/lokesh.md) | 2020 | 1 | 0 |
-| pranavnar | [Pranav](../owners/pranav.md) | 2026-present | 1 | 0 |
 | Pukakke NaKupp | [Anish](../owners/anish.md) | 2023 | 1 | 0 |
-| Roger That | [Pranav](../owners/pranav.md) | 2018-2025 | 8 | 1 |
+| Roger That | [Pranav](../owners/pranav.md) | 2018-present | 9 | 1 |
 | Save Me | [Naren](../owners/naren.md) | 2025 | 1 | 0 |
 | Sharman's Scorpions | [Sharman](../owners/sharman.md) | 2018-2025 | 8 | 0 |
 | sharwoman | [Sharman](../owners/sharman.md) | 2026-present | 1 | 0 |
 | silversur4 | [Abhinav](../owners/abhinav.md) | 2026-present | 1 | 0 |
-| SlidInTheDMs | [Naren](../owners/naren.md) | 2026-present | 1 | 0 |
 | Stroud Boys | [Tanmay](../owners/tanmay.md) | 2023-2025 | 3 | 1 |
 | Super Squirrels | [Abhinav](../owners/abhinav.md) | 2018-2025 | 8 | 1 |
 | Tanmay's Hospital | [Tanmay](../owners/tanmay.md) | 2022 | 1 | 0 |
 | Tanmay's Top-Notch Team | [Tanmay](../owners/tanmay.md) | 2021 | 1 | 0 |
 | The Herbs | [Naren](../owners/naren.md) | 2021 | 1 | 0 |
 | The Johnson and Johnson team | [Lokesh](../owners/lokesh.md) | 2021 | 1 | 0 |
+| UC Barkley | [Naren](../owners/naren.md) | 2026-present | 1 | 0 |
 | varun's victorious team | [Varun](../owners/varun.md) | 2021-2025 | 5 | 1 |
 

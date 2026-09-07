@@ -35,7 +35,7 @@ season: the player was on the roster that won the Final.
 |------|-------|---------|------------|
 | 2024 | 10 | 116 | [Jayesh's Great Team](../owners/jayesh.md) |
 | 2025 | 2 | 14 | [Super Squirrels](../owners/abhinav.md) |
-| 2026 | 8 | 71 | [pranavnar](../owners/pranav.md) |
+| 2026 | 8 | 71 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

@@ -37,7 +37,7 @@ season: the player was on the roster that won the Final.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 7 | 76 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 6 | 51 | [pranavnar](../owners/pranav.md) |
+| 2026 | 6 | 51 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

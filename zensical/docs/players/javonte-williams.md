@@ -42,7 +42,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 7 | 69 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 7 | 75 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2025 | 10 | 120 | [Roger That](../owners/pranav.md) |
-| 2026 | 4 | 35 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 4 | 35 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

@@ -34,7 +34,7 @@ season: the player was on the roster that won the Final.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 8 | 88 | [Indiana Jones](../owners/anish.md) |
-| 2026 | 12 | 111 | [pranavnar](../owners/pranav.md) |
+| 2026 | 12 | 111 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

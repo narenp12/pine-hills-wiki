@@ -51,7 +51,7 @@ A different name in each season: 9 names in 9 seasons, none of them repeated.
 | BBigg MACKS | 2023 | 11-3 |
 | Kamara's a b*tch | 2024 | 11-3 |
 | Save Me | 2025 | 7-7 |
-| SlidInTheDMs | 2026-present | 0-0 |
+| UC Barkley | 2026-present | 0-0 |
 
 ## Rivalries
 
@@ -77,7 +77,7 @@ Head-to-head by manager rather than team name, since either side may have rename
 | 2023 | BBigg MACKS | 11-3 | 2 | Yes |
 | 2024 | Kamara's a b*tch | 11-3 | 6 | Yes |
 | 2025 | Save Me | 7-7 | 4 | Yes |
-| 2026 | SlidInTheDMs | 0-0 | - | - |
+| 2026 | UC Barkley | 0-0 | - | - |
 
 ## Related
 

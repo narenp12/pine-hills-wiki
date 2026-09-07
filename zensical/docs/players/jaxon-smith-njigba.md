@@ -36,7 +36,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 8 | 72 | [Michael's Marvelous Team](../owners/michael.md) |
 | 2024 | 9 | 103 | [Joe Sheisty](../owners/anish.md) |
 | 2025 | 3 | 26 | [Michael's Marvelous Team](../owners/michael.md) |
-| 2026 | 1 | 6 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 1 | 6 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

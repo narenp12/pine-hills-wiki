@@ -32,7 +32,7 @@ season: the player was on the roster that won the Final.
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 15 | 150 | [pranavnar](../owners/pranav.md) |
+| 2026 | 15 | 150 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

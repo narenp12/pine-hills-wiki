@@ -58,7 +58,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 8 | 75 | [Pukakke NaKupp](../owners/anish.md) |
 | 2024 | 15 | 169 | [Sharman's Scorpions](../owners/sharman.md) |
 | 2025 | 14 | 157 | [Save Me](../owners/naren.md) |
-| 2026 | 14 | 131 | [pranavnar](../owners/pranav.md) |
+| 2026 | 14 | 131 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

@@ -44,7 +44,7 @@ season: the player was on the roster that won the Final.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2021 | 15 | 150 | [Tanmay's Top-Notch Team](../owners/tanmay.md) |
-| 2026 | 13 | 126 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 13 | 126 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

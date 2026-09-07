@@ -10,9 +10,9 @@ cd "$(dirname "$0")/.."
 
 EXPORTS="${1:-exports}"
 echo ">> adapting Fantasy Helper exports from $EXPORTS ..."
-python scripts/import_export.py "$EXPORTS"
+uv run python scripts/import_export.py "$EXPORTS"
 
 echo ">> generating markdown..."
-python scripts/generate.py
+uv run python scripts/generate.py
 
 echo ">> done. Preview with: npx quartz build --serve"

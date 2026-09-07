@@ -29,7 +29,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 8 | 75 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 8 | 75 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

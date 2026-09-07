@@ -157,11 +157,16 @@ def load_bible():
     if not BIBLE_PATH.exists():
         return {}
     if yaml is None:
+        # Fatal, not a warning: without the bible every owner resolves to a raw
+        # handle, aliases/champions/lore go missing, and the build still exits 0
+        # on plausible-looking but wrong output. Run through `uv run` (or install
+        # pyyaml) so this never fires.
         print(
-            "  ! PyYAML not installed — skipping league bible (owners/champions will be _TBD_). Install pyyaml for full data.",
+            "  ! PyYAML not installed — refusing to build without the league bible. "
+            "Run with `uv run` (e.g. `uv run python scripts/generate.py`).",
             file=sys.stderr,
         )
-        return {}
+        sys.exit(1)
     try:
         return yaml.safe_load(BIBLE_PATH.read_text()) or {}
     except yaml.YAMLError as e:

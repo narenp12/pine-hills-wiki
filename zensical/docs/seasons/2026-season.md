@@ -21,12 +21,12 @@ The season has not begun. The league and its draft are on record; no game has be
 |--------|------|-------|-----|----|----|--------------|
 | - | CurryMan123 | Lokesh | 0-0 | 0.0 | 0.0 | - |
 | - | Kaushal's Potatoes | Kaushal | 0-0 | 0.0 | 0.0 | - |
-| - | SlidInTheDMs | Naren | 0-0 | 0.0 | 0.0 | - |
+| - | Roger That | Pranav | 0-0 | 0.0 | 0.0 | - |
+| - | UC Barkley | Naren | 0-0 | 0.0 | 0.0 | - |
 | - | all hail dallas | Varun | 0-0 | 0.0 | 0.0 | - |
 | - | anishattarde | Anish | 0-0 | 0.0 | 0.0 | - |
 | - | bigbootytan | Tanmay | 0-0 | 0.0 | 0.0 | - |
 | - | micjes71 | Michael | 0-0 | 0.0 | 0.0 | - |
-| - | pranavnar | Pranav | 0-0 | 0.0 | 0.0 | - |
 | - | sharwoman | Sharman | 0-0 | 0.0 | 0.0 | - |
 | - | silversur4 | Abhinav | 0-0 | 0.0 | 0.0 | - |
 

@@ -44,7 +44,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 1 | 1 | [varun's victorious team](../owners/varun.md) |
 | 2024 | 1 | 8 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 1 | 5 | [Jayesh's Great Team](../owners/jayesh.md) |
-| 2026 | 1 | 10 | [pranavnar](../owners/pranav.md) |
+| 2026 | 1 | 10 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

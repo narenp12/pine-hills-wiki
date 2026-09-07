@@ -32,7 +32,7 @@ season: the player was on the roster that won the Final.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2025 | 9 | 104 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 6 | 55 | [SlidInTheDMs](../owners/naren.md) |
+| 2026 | 6 | 55 | [UC Barkley](../owners/naren.md) |
 
 ## Related
 

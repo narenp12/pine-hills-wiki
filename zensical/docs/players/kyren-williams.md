@@ -36,7 +36,7 @@ season: the player was on the roster that won the Final.
 |------|-------|---------|------------|
 | 2024 | 2 | 17 | [Big black big back](../owners/lokesh.md) |
 | 2025 | 3 | 28 | [Sharman's Scorpions](../owners/sharman.md) |
-| 2026 | 3 | 30 | [pranavnar](../owners/pranav.md) |
+| 2026 | 3 | 30 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

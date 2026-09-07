@@ -44,7 +44,7 @@ season: the player was on the roster that won the Final.
 | 2023 | 4 | 31 | [Jeremy's Neat Team](../owners/jeremy.md) |
 | 2024 | 5 | 57 | [Stroud Boys](../owners/tanmay.md) |
 | 2025 | 3 | 32 | [varun's victorious team](../owners/varun.md) |
-| 2026 | 4 | 31 | [pranavnar](../owners/pranav.md) |
+| 2026 | 4 | 31 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

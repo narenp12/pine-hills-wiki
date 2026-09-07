@@ -37,7 +37,7 @@ season: the player was on the roster that won the Final.
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
 | 2024 | 13 | 151 | [Joe Sheisty](../owners/anish.md) |
-| 2026 | 13 | 130 | [pranavnar](../owners/pranav.md) |
+| 2026 | 13 | 130 | [Roger That](../owners/pranav.md) |
 
 ## Related
 

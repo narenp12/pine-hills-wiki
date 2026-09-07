@@ -29,7 +29,7 @@ _Drafted, but never appeared on a captured weekly roster._
 
 | Year | Round | Overall | Drafted By |
 |------|-------|---------|------------|
-| 2026 | 5 | 50 | [pranavnar](../owners/pranav.md) |
+| 2026 | 5 | 50 | [Roger That](../owners/pranav.md) |
 
 ## Related
 
